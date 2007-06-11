@@ -101,7 +101,11 @@ To update your installation, go to the [http://code.google.com/p/plosxom/downloa
 
 = Problems =
 
-If you encounter problems, file a [http://code.google.com/p/plosxom/issues/list Bugreport] if you think it is a bug. Send me an email if you need help installing or configuring plosxom: *nobrain AT bk DOT ru*.
+If you encounter problems, file a [http://code.google.com/p/plosxom/issues/list Bugreport] if you think it is a bug.
+
+Send me an email if you need help installing or configuring plosxom: *nobrain AT bk DOT ru*.
+
+Or post questions or suggestions to the [http://groups.google.com/group/plosxom-discuss Forum].
 
 = Thanks =
 
