@@ -1,0 +1,6 @@
+#summary Directory of plosxom templates
+#labels Featured,Templates
+
+= Introduction =
+
+This is a list of official plosxom templates.
