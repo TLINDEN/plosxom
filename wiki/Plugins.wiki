@@ -3,4 +3,7 @@
 
 = Introduction =
 
-This is a list of official plosxom plugins.
+This is a list of official plosxom plugins. If you wrote a plugin you find useful for others, post it to the [http://groups.google.com/group/plosxom-discuss Forum]. I will review every plugin submission and verify if it functions properly and as documented. If this is the case, I'll add it here to the list and put the plugin tarball to the download directory.
+
+= Content Modification =
+
