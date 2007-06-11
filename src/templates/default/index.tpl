@@ -15,8 +15,8 @@
    <div class="blogposting">
    {$post.text}
    </div>
-   <p class="blogmeta"> Geschrieben von <a title='email an den Autor {$config.author}' href="{$config.autor_link}">{$config.author}</a>
-                        at {$post.mtime|date_format:"%A, %B %e, %Y"}
+   <p class="blogmeta">[ Geschrieben von <a title='email an den Autor {$config.author}' href="{$config.autor_link}">{$config.author}</a>
+                        at {$post.mtime|date_format:"%A, %B %e, %Y"} ]<br/>
     [ <a title='Beitr&auml;ge in Kategorie {$post.category} Lesen' href="{$config.whoami}/category/{$post.category}">{$post.category}</a> |
       <a title=permalink href="{$config.whoami}/{$post.category}/{$post.id}">#</a> | 
       <a href="javascript:HaloScan('{$post.category|upper}{$post.id|upper}');" target="_self"><script
@@ -46,8 +46,8 @@
    <div class="blogposting">
    {$posts[id].text}
    </div>
-   <p class="blogmeta"> Geschrieben von <a title='email an den Autor {$config.author}' href="{$config.autor_link}">{$config.author}</a>
-                        at {$posts[id].mtime|date_format:"%A, %B %e, %Y"}
+   <p class="blogmeta">[ Geschrieben von <a title='email an den Autor {$config.author}' href="{$config.autor_link}">{$config.author}</a>
+                        at {$posts[id].mtime|date_format:"%A, %B %e, %Y"} ]<br/>
     [ <a title='Beitr&auml;ge in Kategorie {$posts[id].category} Lesen' href="{$config.whoami}/category/{$posts[id].category}">{$posts[id].category}</a> |
       <a title=permalink href="{$config.whoami}/{$posts[id].category}/{$posts[id].id}">#</a> | 
       <a href="javascript:HaloScan('{$posts[id].category|upper}{$posts[id].id|upper}');" target="_self"><script

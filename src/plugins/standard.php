@@ -107,26 +107,22 @@ class standard extends Plugin {
     }
   }
 
+
   function fetch_file($file, $dir="") {
-    
     # fetch info about file (not the content of, this
     # will be done later, after sorting of it)
-    $filename = $this->config["data_path"] . "/" . $dir . "/" . $file;
-
-    if(is_readable($filename) and ereg('\.txt$', $file)) {
-      $mtime = filemtime($filename);
-      $human_mtime = date("Ymd", $mtime);
-      $id = preg_replace("/\.txt$/", "", $file);
-      $entry = array("filename" => $filename, "mtime" => $mtime, "category" => $dir, "file" => $file, "id" => $id);
+    $entry = getfile($this->config["data_path"], $file, $dir);
+    if($entry) {
       if( $this->archive ) {
-        if( $human_mtime == $this->archivestamp ) {
+        if( $entry["htime"] == $this->archivestamp ) {
           # add it to the array, we'll sort it recursively later
           $this->files[] = $entry;
 	}
       }
       else if($this->archivelist) {
         # we store the unix timestamp of 00:00:00 of the posting date
-        $this->archivedates[mktime(0, 0, 0, date("m", $mtime), date("d", $mtime), date("Y", $mtime))] = 1;
+        $this->archivedates[mktime(0, 0, 0, date("m", $entry["mtime"]),
+	                    date("d", $entry["mtime"]), date("Y", $entry["mtime"]))] = 1;
       }
       else {
         $this->files[] = $entry;
@@ -135,13 +131,9 @@ class standard extends Plugin {
   }
 
   function hook_storage_fetch($category, $id) {
-    $file = $id . ".txt";
-    $this->fetch_file($file, $category);
-    $post          = $this->files[0];
-    $lines         = file($post["filename"]);
-    $post["title"] = trim(array_shift($lines));
-    $post["text"]  = $this->paragraph(implode('', $lines));
-    return $post;
+    #
+    # fetch a single posting
+    return getfile($this->config["data_path"], $id . ".txt", $dir);
   }
 
   function hook_storage_fetchall() {
@@ -204,9 +196,11 @@ class standard extends Plugin {
           if(array_key_exists($pos, $this->files)) {
 	    $lines                         = file($this->files[$pos]["filename"]);
 	    $this->files[$pos]["title"]    = trim(array_shift($lines));
-	    $this->files[$pos]["text"]     = $this->paragraph(implode('', $lines));
+	    $this->files[$pos]["text"]     = paragraph(implode('', $lines));
 
-	    $blogdate = mktime(0, 0, 0, date("m", $this->files[$pos]["mtime"]), date("d", $this->files[$pos]["mtime"]), date("Y", $this->files[$pos]["mtime"]));
+	    $blogdate = mktime(0, 0, 0,    date("m", $this->files[$pos]["mtime"]),
+					   date("d", $this->files[$pos]["mtime"]),
+					   date("Y", $this->files[$pos]["mtime"]));
 	   if($blogdate != $lastdate) {
 	      # only save blogdate, if it has changed prior to previous posts
 	      $this->files[$pos]["blogdate"] = $blogdate;
@@ -227,9 +221,39 @@ class standard extends Plugin {
     }
   }
 
-  function paragraph(&$text) {
-    $text = preg_replace("/(\r\n\r\n|\n\n)/", "</p><p class=\"blogparagraph\">", $text);
-    return '<p class="blogparagraph">' . $text . '</p>';
+
+}
+
+
+function getfile($datadir, $file, $dir="") {
+  #
+  # actual open and read the file content and
+  # place it into an array
+  $filename = $datadir . "/" . $dir . "/" . $file;
+  if(is_readable($filename) and ereg('\.txt$', $file)) {
+    $mtime         = filemtime($filename);
+    $human_mtime   = date("Ymd", $mtime);
+    $id            = preg_replace("/\.txt$/", "", $file);
+    $lines         = file($filename);
+    $entry         = array(
+                       "filename" => $filename,
+		       "mtime"    => $mtime,
+		       "htime"    => $human_time,
+		       "category" => $dir,
+		       "file"     => $file,
+		       "id"       => $id,
+		       "title"    => trim(array_shift($lines)),
+		       "text"     => paragraph(implode('', $lines))
+		     );
+    return $entry;
+  }
+  else {
+    report_error("$datadir/$dir/$file - not readable");
+    return null;
   }
 }
 
+function paragraph(&$text) {
+  $text = preg_replace("/(\r\n\r\n|\n\n)/", "</p><p class=\"blogparagraph\">", $text);
+  return '<p class="blogparagraph">' . $text . '</p>';
+}
