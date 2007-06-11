@@ -8,38 +8,28 @@
  #   of and  agree to be  bound  by the  conditions  described below
  #   in this notice:
  #
- #   This software product, Plosxom,  is developed by  Thomas Linden
- #   and   copyrighted  (C) 2007-2007   by  Thomas Linden,  with all
- #   rights reserved.
+ #   This software product, Plosxom, is developed  by Pali Dhar  and
+ #   copyrighted (C) 2007  by  Pali Dhar,  with all rights reserved.
  #
  #   There is  no charge for  Plosxom software. You can redistribute
- #   it and/or modify it under  the terms of the  GNU General Public
- #   License, which is incorporated by reference herein.
+ #   it and/or modify it under the terms of the Artistic License 2.0
+ #   which is incorporated by reference herein.
  #
- #   Plosxom is distributed WITHOUT ANY WARRANTY,IMPLIED OR EXPRESS,
- #   OF  MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE or that
- #   the  use of it will not infringe on any third party's intellec-
- #   tual property rights.
+ #   PLOSXOM IS PROVIDED "AS IS" AND WITHOUT  ANY EXPRESS OR IMPLIED
+ #   WARRANTIES,   INCLUDING,   WITHOUT  LIMITATION,   THE   IMPLIED 
+ #   WARRANTIES  OF  MERCHANTIBILITY  AND  FITNESS  FOR A PARTICULAR
+ #   PURPOSE.
  #
- #   You  should  have  received a  copy  of  the GNU General Public
- #   License along with Plosxom.  Copies  can also be obtained from:
+ #   You   should  have  received a  copy  of  the  artistic license
+ #   along with Plosxom.  You may download a copy of the license at:
  #
- #     http://www.gnu.org/copyleft/gpl.html
- #
- #   or by writing to:
- #
- #     Free Software Foundation, Inc.
- #     59 Temple Place, Suite 330
- #     Boston, MA 02111-1307
- #     USA
+ #     http://dev.perl.org/licenses/artistic.html
  #
  #   Or contact:
  #
- #    "Thomas Linden" <tom@daemon.de>
+ #    "Pali Dhar" <nobrain@bk.ru>
  #
- #   Additional Copyrights:
- #
- #
+
 
  #
  # based on phpblosxom by Robert Daeley <robert@celsius1414.com>
