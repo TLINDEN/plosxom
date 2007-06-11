@@ -1,0 +1,208 @@
+=== Introduction
+
+Plosxom is a blogsoftware written in PHP. It is a rewrite of phposxom.
+Blogposts are stored in textfiles, categories are simple directories.
+Plosxom has a comprehensive plugin api, which allows to add almost any
+functionality or to replace existing functionality.
+
+=== Details
+
+Phposxom were itself a php rewrite of blosxom, but the developer has
+abandoned the project. I am using it, because I cannot run perl where
+my site is hosted and because it is small. However, the sourcecode of
+phposxom were nearly unmaintanable, inefficient and bad styled (sorry
+Robert). Since I use it on an every day basis, I decided to completely
+rewrite it. Plosxom was born.
+
+Many of the blosxom forks out there have been abandoned too, especially
+the php ports (there are lots of it). None of them seemed to be a
+usefull base for me. Most of them justify their decision that if it
+were developed further it would become too far to existing projects
+like wordpress and they didn't want to re-invent the wheel.
+
+While I share this view in general, I also see a lot of disadvantages
+with wordpress: its storage backend can't be replaced. It depends on
+MySQL, which is the worst database system on the planet. With plosxom
+you could write a sqlite backend or whatever you like, even a mysql
+backend. Wordpress is also a "large biest", it contains a lot of
+source code and thus a lot of problems, especially from the security
+point of view.
+
+Speaking of security - plosxom were developed with strong security in
+mind. Since there is almost no cgi input being used in the software,
+this goal were not difficult to achive. Everything which gets into
+the script will be filtered for bogus characters. Future attacks are
+hopefully prevented using this technique.
+
+There is no administration backend delivered with plosxom, because
+you write textfiles (or upload them) - that's all. Without admin
+backend, the blog can't be hijacked like most other blogs could be.
+
+The plosxom core engine is very small. In fact, I wrote it in just
+two days. This sounds like a hell of a crap, but it isn't. Much
+functionality is provided by plugins, even core functions, such as
+text file management, is coded as a plugin. Since we are using smarty
+as our template engine there are endless possibilities to enhance
+plosxom. You can write a simple plugin along with a simple smarty
+function and that's it.
+
+For now, plosxom doesn't provide built-in comment support due to
+security reasons. Instead comments can be outsourced to Haloscan.
+However, perhaps someone will write a comment plugin some day,
+who knows.
+
+
+
+=== Installation
+
+Download the latest tarball of plosxom. Copy it to your webspace
+and unpack it:
+
+% tar xvfz plosxom-core-x.xx.tar.gz
+
+Make sure your webserver is able to access all the files. Read
+permissions are sufficient.
+
+
+
+=== Configuration
+
+Next, edit the plosxom configuration file etc/plosxom.conf. Here
+is an explanation of the variables.
+
+This is the physical location of the plosxom installation on the
+filesystem.
+
+lib_path = /path/to/webspace/plosxom/lib
+
+Where are the templates located. This directory must be visible
+to the webserver, because templates provide css stylesheets, which
+are required.
+
+template_path = //path/to/webspaceplosxom/templates
+
+The directory where pre-compiled templates can be stored. Must
+be writable for the webserver.
+
+tmp_path = /tmp
+
+Here are the postings stored. You can create subdirectories, which
+will then considered as categories. Only files with a .txt extension
+will be indexed. To hide a file from the blog, change its permissions
+so that the webserver can't read it anymore. Consider this as
+"draft posting" feature.
+
+data_path = /path/to/webspaceplosxom/data
+
+Where plugins are located.
+
+plugin_path = /path/to/webspace/plosxom/plugins
+
+The name of the template. Each template is a directory beneath
+the template_path.
+
+template = default
+
+The overall name of your blog.
+
+blog_name = BLOGNAME
+
+Add a short description, a oneliner is far enogh.
+
+blog_title = BLOGDESCRIPTION
+
+The number of postings to be displayed on the blog front page.
+
+postings = 10
+
+Your name.
+
+author = yourname
+
+Add a link to your homepage or something which will be used to
+underline the author name.
+
+author_link = http://yourpage/
+
+This is the http url of the plosxom blog.
+
+whoami = http://yourpage/plosxom/plosxom.php
+
+This is the base url of the blog, without the plosxom.php file.
+Will be used to create image or stylesheet links.
+
+baseurl = http://yourpage/plosxom/
+
+=== Posting
+
+Now you are done. Start blogging by creating txt files under the
+data_path directory. The first line will be used as the posting
+title.
+
+
+=== Plugins
+
+To install a plugin, download it from the Plugin page:
+
+http://code.google.com/p/plosxom/wiki/Plugins
+
+Copy the .php file to the plugin_path directory. If the plugin
+contains further installation instructions follow it precisely.
+That's it. Plugin will be loaded automatically by plosxom.
+
+In most cases you'll have to add some code snippet to your template.
+How to do this will be documented in the plugin.
+
+
+
+=== Templates
+
+To install a template, download it from the Templates page:
+
+http://code.google.com/p/plosxom/wiki/Templates
+
+Uninstall the .zip file inside the template_path directory. This
+will create a new directory with the name of the template. Add
+this name to your configfile by replacing the variable template
+with it.
+
+
+
+=== Update
+
+To update your installation, go to the Download page and download
+the latest patch file. Unpack this patch in your plosxom directory.
+A patch tarball only contains the changed files and will not
+overwrite any configuration files or templates. If the default
+template has changed, a .updated file will be installed instead.
+You may then adjust your current template with the changes or
+just replace it with the new version.
+
+
+
+=== Problems
+
+If you encounter problems, file a Bugreport if you think it is a
+bug:
+
+http://code.google.com/p/plosxom/issues/list
+
+Send me an email if you need help installing or configuring
+plosxom: <nobrain AT bk DOT ru>.
+
+
+
+=== Thanks
+
+Thanks for using plosxom and keeping the opensource movement alive!
+
+
+=== Copyright & License
+
+Plosxom is copyright (c) 2007 Pali Dhar <nobrain@bk.ru>
+Licensed under the terms of the "Artistic License" (see LICENSE).
+
+
+Smarty is copyright (c) 2001-2005 New Digital Group, Inc.
+Licensed under the terms of the GNU Lesser General Public License 2.1
+For more details see: http://smarty.php.net/
