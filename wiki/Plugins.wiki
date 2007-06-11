@@ -1,0 +1,6 @@
+#summary Directory of plosxom plugins
+#labels Featured,Plugins
+
+= Introduction =
+
+This is a list of official plosxom plugins.
