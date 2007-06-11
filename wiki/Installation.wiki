@@ -1,0 +1,6 @@
+#summary Installation documentation
+#labels Featured
+
+= Installation =
+
+FIXME
