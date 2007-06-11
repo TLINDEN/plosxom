@@ -19,18 +19,18 @@ Next, edit the plosxom configuration file *etc/plosxom.conf*. Here is an explana
 This is the physical location of the plosxom installation on the
 filesystem.
 
-lib_path = /path/to/webspace/plosxom/lib
+*lib_path = /path/to/webspace/plosxom/lib*
 
 Where are the templates located. This directory must be visible
 to the webserver, because templates provide css stylesheets, which
 are required.
 
-template_path = //path/to/webspaceplosxom/templates
+*template_path = //path/to/webspaceplosxom/templates*
 
 The directory where pre-compiled templates can be stored. Must
 be writable for the webserver.
 
-tmp_path = /tmp
+*tmp_path = /tmp*
 
 Here are the postings stored. You can create subdirectories, which
 will then considered as categories. Only files with a .txt extension
@@ -38,46 +38,46 @@ will be indexed. To hide a file from the blog, change its permissions
 so that the webserver can't read it anymore. Consider this as
 "draft posting" feature.
 
-data_path = /path/to/webspaceplosxom/data
+*data_path = /path/to/webspaceplosxom/data*
 
 Where plugins are located.
 
-plugin_path = /path/to/webspace/plosxom/plugins
+*plugin_path = /path/to/webspace/plosxom/plugins*
 
 The name of the template. Each template is a directory beneath
 the template_path.
 
-template = default
+*template = default*
 
 The overall name of your blog.
 
-blog_name = BLOGNAME
+*blog_name = BLOGNAME*
 
 Add a short description, a oneliner is far enogh.
 
-blog_title = BLOGDESCRIPTION
+*blog_title = BLOGDESCRIPTION*
 
 The number of postings to be displayed on the blog front page.
 
-postings = 10
+*postings = 10*
 
 Your name.
 
-author = yourname
+*author = yourname*
 
 Add a link to your homepage or something which will be used to
 underline the author name.
 
-author_link = http://yourpage/
+*author_link = http://yourpage/*
 
 This is the http url of the plosxom blog.
 
-whoami = http://yourpage/plosxom/plosxom.php
+*whoami = http://yourpage/plosxom/plosxom.php*
 
 This is the base url of the blog, without the plosxom.php file.
 Will be used to create image or stylesheet links.
 
-baseurl = http://yourpage/plosxom/
+*baseurl = http://yourpage/plosxom/*
 }}}
 
 
