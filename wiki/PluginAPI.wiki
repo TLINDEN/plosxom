@@ -1,0 +1,6 @@
+#summary Plugin API for plosxom
+#labels Featured
+
+= API =
+
+FIXME
