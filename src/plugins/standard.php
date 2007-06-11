@@ -111,7 +111,7 @@ class standard extends Plugin {
   function fetch_file($file, $dir="") {
     # fetch info about file (not the content of, this
     # will be done later, after sorting of it)
-    $entry = getfile($this->config["data_path"], $file, $dir);
+    $entry = getfile($this->config["data_path"], $file, $dir, false);
     if($entry) {
       if( $this->archive ) {
         if( $entry["htime"] == $this->archivestamp ) {
@@ -184,7 +184,7 @@ class standard extends Plugin {
         # now look if there is a content filter registered
         # if yes, then let it now filter the content
         if($this->filter_plugin and !$this->category and !$this->archivelist and !$this->archive) {
-          return $this->filter_plugin->hook_content_filter();
+          return $this->filter_plugin->hook_content_filter($this->files);
         }
 
         $posts = array();
@@ -194,10 +194,13 @@ class standard extends Plugin {
 	$maxfiles = $this->input["past"] + $this->config["postings"];
         for($pos = $this->input["past"]; $pos < $maxfiles; $pos++) {
           if(array_key_exists($pos, $this->files)) {
-	    $lines                         = file($this->files[$pos]["filename"]);
-	    $this->files[$pos]["title"]    = trim(array_shift($lines));
-	    $this->files[$pos]["text"]     = paragraph(implode('', $lines));
-
+            $entry = getfile($this->config["data_path"], $this->files[$pos]["file"], $this->files[$pos]["category"]);
+	    if($entry) {
+	      $this->files[$pos] = $entry;
+	    }
+	    else {
+	      continue;
+	    }
 	    $blogdate = mktime(0, 0, 0,    date("m", $this->files[$pos]["mtime"]),
 					   date("d", $this->files[$pos]["mtime"]),
 					   date("Y", $this->files[$pos]["mtime"]));
@@ -225,16 +228,18 @@ class standard extends Plugin {
 }
 
 
-function getfile($datadir, $file, $dir="") {
+function getfile($datadir, $file, $dir="", $read=true) {
   #
   # actual open and read the file content and
   # place it into an array
+  # if $read == true(default), the file content will be read.
+  # set it to true to save runtime if you only need file attributes
   $filename = $datadir . "/" . $dir . "/" . $file;
   if(is_readable($filename) and ereg('\.txt$', $file)) {
     $mtime         = filemtime($filename);
     $human_mtime   = date("Ymd", $mtime);
     $id            = preg_replace("/\.txt$/", "", $file);
-    $lines         = file($filename);
+
     $entry         = array(
                        "filename" => $filename,
 		       "mtime"    => $mtime,
@@ -242,12 +247,18 @@ function getfile($datadir, $file, $dir="") {
 		       "category" => $dir,
 		       "file"     => $file,
 		       "id"       => $id,
-		       "title"    => trim(array_shift($lines)),
-		       "text"     => paragraph(implode('', $lines))
+
 		     );
+    if($read) {
+       $lines          = file($filename);
+       $entry["text"]  = paragraph(implode('', $lines));
+       $entry["title"] = trim(array_shift($lines));
+    }
+
     return $entry;
   }
   else {
+    print "$datadir/$dir/$file - not readable<br/>";
     report_error("$datadir/$dir/$file - not readable");
     return null;
   }

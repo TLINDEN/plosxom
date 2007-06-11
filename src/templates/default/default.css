@@ -40,11 +40,8 @@ pre {
 }
 
 .tag {
-  margin-left: 20px;
   color: #c0c0c0;
   font-size: 70%;
-  padding-left: 20px;
-  background: url("/~palidhar/bubble.png") no-repeat 0 1px;
 }
 
 .blogmeta {

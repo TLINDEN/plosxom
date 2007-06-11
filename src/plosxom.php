@@ -186,7 +186,6 @@ class Plosxom {
         $posts[$pos]["text"] = $this->plugins[$handler]->hook_content($entry["text"]);
       }
     }
-    
     if ( $this->posting ) {
       $this->smarty->assign('post', $post);
     }
@@ -199,6 +198,7 @@ class Plosxom {
 	  $newer = "null";
 	}
 	$this->smarty->assign('newer', $newer);
+
 	$this->smarty->assign('past', $this->input["past"] + $this->config["postings"]);
       }
       $this->smarty->assign('posts', $posts);
