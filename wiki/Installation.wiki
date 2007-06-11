@@ -69,7 +69,7 @@ This is the base url of the blog, without the plosxom.php file. Will be used to 
 
 = Posting =
 
-Now you are done. Start blogging by creating txt files under the *data_path* directory.
+Now you are done. Start blogging by creating txt files under the *data_path* directory. The first line will be used as the posting title.
 
 = Plugins =
 
