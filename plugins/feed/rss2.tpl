@@ -6,13 +6,16 @@
    <description>{$config.blog_title}</description>
    <language>{$config.lang}-{$config.lang}</language>
    <copyright>Copyright 2007</copyright>
-   <pubDate>{$lastmodified}</<pubDate>
+   <pubDate>{$lastmodified|date_format:"%a, %d %b %Y %T EST"}</pubDate>
    {section name=id loop=$posts}
    <item>
-     <title><![CDATA[{$posts[id].title}]]</title>
-     <description><![CDATA[{$posts[id].text}]]></description>
-     <author>{$config.author}</author>
-     <guid>{$posts[id].id}</guid>
+     <title><![CDATA[{$posts[id].title}]]></title>
+     <description>
+     <![CDATA[
+     {$posts[id].text}
+     ]]></description>
+     <author>{$config.author} &lt;{$config.author_email}&gt;</author>
+     <guid isPermaLink="false">{$posts[id].id}</guid>
      <link>{$config.whoami}/{$posts[id].category}/{$posts[id].id}</link>
    </item>
    {/section} 

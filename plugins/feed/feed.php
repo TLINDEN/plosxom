@@ -44,9 +44,6 @@ class feed extends Plugin {
   }
 
   function hook_send_header() {
-    if($this->version) {
-      $this->config["contenttype"] = 'application/rss+xml';
-    }
   }
 
   function hook_content(&$text) {
@@ -66,21 +63,21 @@ class feed extends Plugin {
       $this->version  = "rss";
       $this->template = "rss.tpl";
       $this->smarty->assign("feed", $this->version);
-      $this->smarty->assign("lastmodified", $this->posts[0]);
+      $this->config["contenttype"] = 'application/rss+xml';
       return true;
     }
-    if(preg_match("/^\/feed/rss2$/", $path)) {
+    if(preg_match("/^\/feed\/rss2$/", $path)) {
       $this->version  = "rss2";
       $this->template = "rss2.tpl";
       $this->smarty->assign("feed", $this->version);
-      $this->smarty->assign("lastmodified", $this->posts[0]);
+      $this->config["contenttype"] = 'application/rss+xml';
       return true;
     }
-    if(preg_match("/^\/feed/atom$/", $path)) {
+    if(preg_match("/^\/feed\/atom$/", $path)) {
       $this->version  = "atom";
       $this->template = "atom.tpl";
       $this->smarty->assign("feed", $this->version);
-      $this->smarty->assign("lastmodified", $this->posts[0]);
+      $this->config["contenttype"] = 'application/atom+xml';
       return true;
     } 
     return false;
