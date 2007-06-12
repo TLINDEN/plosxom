@@ -1,0 +1,25 @@
+#summary RSS feed plugin - syndication
+
+= Introduction =
+
+Add rss feed (rss/rss2/atom) feature to the blog.
+
+= Install =
+
+copy feed.php to your plugin dir
+
+copy the *.tpl files to your template dir
+
+somewhere in your header template add the following code:
+
+{{{
+{if $feedmeta}
+  {$feedmeta}
+{/if}
+}}}
+
+you may add a html link to a feed like this:
+
+{{{
+<a href="{$config.whoami}/feed/rss">RSS Feed</a>
+}}}
