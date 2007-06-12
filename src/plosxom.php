@@ -80,11 +80,11 @@ class Plosxom {
     # load available plugins
     $this->load_plugins();
 
-    # parse input coming from GET or POST
-    $this->parse_input();
-
     # initialize runtime variables
     $this->init_runtime();
+
+    # parse input coming from GET or POST
+    $this->parse_input();
   }
 
   function load_plugins() {
@@ -124,7 +124,7 @@ class Plosxom {
 	  # add the first matching url_filter plugin as filter
 	  # as only one filter can be in effect in the same time,
 	  # we skip the next installed handlers for this hook
-	  $this->filter_plugin = $this->plugins[$handler];
+	  # plugins define this themselfes! # $this->filter_plugin = $this->plugins[$handler];
 	  $gotfilter = 1;
 	  break;
 	}
@@ -157,7 +157,7 @@ class Plosxom {
     }
 
     # finaly send the type of content, may have been modified by some plugin
-    header("Content-type: " . $this->config["contenttype"]);
+    header("Content-Type: " . $this->config["contenttype"]);
   }
 
   function init_runtime() {
@@ -200,6 +200,7 @@ class Plosxom {
 
     if ( $this->posting ) {
       $this->smarty->assign('post', $post);
+      $this->smarty->assign('lastmodified', $post["mtime"]);
       $this->posts = array($post);
     }
     else {
@@ -215,6 +216,7 @@ class Plosxom {
 	$this->smarty->assign('past', $this->input["past"] + $this->config["postings"]);
       }
       $this->smarty->assign('posts', $posts);
+      $this->smarty->assign('lastmodified', $posts[0]["mtime"]);
       $this->posts = $posts;
     }
 
