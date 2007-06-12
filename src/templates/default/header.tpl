@@ -1,9 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="de">
+<html lang="{$config.lang}">
 <head>
 <link rel="stylesheet" type="text/css" href="{$config.baseurl}/templates/default/default.css">
-<link rel="alternate" type="application/rss+xml" title="Text-Feed" href="http://users.phoenix-network.org/~palidhar/index.php?flav=rss"><meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-<script type="text/javascript" src="http://www.haloscan.com/load/palidhar/"> </script><meta name="generator" content="PHPosxom 0.6b">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<link rel="alternate"  type="application/x.atom+xml" title="atom feed" href="{$config.whoami}/feed/atom"/>
+<link rel="alternate"  type="application/rss+xml"    title="rss feed"  href="{$config.whoami}/feed/rss"/>
+<link rel="alternate"  type="application/rss+xml"    title="rss2 feed" href="{$config.whoami}/feed/rss2"/>
+<script type="text/javascript" src="http://www.haloscan.com/load/REPLACEWITHYOURNAME/"> </script>
+<meta name="generator" content="plosxom 1.02">
 
 <title>
 {if $singlepost}
