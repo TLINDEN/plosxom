@@ -3,10 +3,11 @@
 <head>
 <link rel="stylesheet" type="text/css" href="{$config.baseurl}/templates/default/default.css">
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-<link rel="alternate"  type="application/x.atom+xml" title="atom feed" href="{$config.whoami}/feed/atom"/>
-<link rel="alternate"  type="application/rss+xml"    title="rss feed"  href="{$config.whoami}/feed/rss"/>
-<link rel="alternate"  type="application/rss+xml"    title="rss2 feed" href="{$config.whoami}/feed/rss2"/>
-<script type="text/javascript" src="http://www.haloscan.com/load/REPLACEWITHYOURNAME/"> </script>
+
+{if $feedmeta}
+{$feedmeta}
+{/if}
+
 <meta name="generator" content="plosxom 1.02">
 
 <title>

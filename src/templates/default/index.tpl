@@ -9,7 +9,7 @@
 <h3 class="filtertitle">Category: <a href="{$config.whoami}/category/{$category}">{$category}</a></h3>
 {/if}
 
-{if $singleposting}
+{if $post}
 
    <h2 class="blogtitle"><a href="{$config.whoami}/{$post.category}/{$post.id}">{$post.title}</a></h2>
    <div class="blogposting">
@@ -36,7 +36,7 @@
  {/foreach}
  </ul>
 
-{else}
+{elseif $posts}
 
  {section name=id loop=$posts}
    {if $posts[id].blogdate}
@@ -59,6 +59,13 @@
    </p>
    <br/><br/>
    {/section}
+
+{else}
+
+   <h2 class="blogtitle">Nichts gefunden</h2>
+   <div class="blogposting">
+   Es gibt keine Postings, die auf die Suchkriterien!
+   </div>
 
 {/if}
 
