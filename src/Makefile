@@ -22,6 +22,7 @@ dist: manifest
 	cd .. && tar cpzf $(pkg)-$(version).tar.gz $(pkg)-$(version)
 	rm -rf ../$(pkg)-$(version)-patch
 	./diff.pl
+	cd .. && tar cpzf $(pkg)-$(version)-patch.tar.gz $(pkg)-$(version)-patch
 	@echo
 	@echo Building done:
 	@md5sum ../$(pkg)-$(version).tar.gz

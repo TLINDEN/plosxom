@@ -79,4 +79,7 @@ MANIFEST
 LICENSE
 VERSION
 README
+CHANGELOG
 Makefile
+diff.pl
+stresstest.pl
