@@ -78,15 +78,13 @@ class standard extends Plugin {
       return true;
     }
     else if(preg_match("/^\/archive\/(\d{4})(\d{2})(\d{2})$/", $path, $match)) {
-      $this->archive = mktime(0, 0, 0, $match[2], $match[3], $match[1]);
-      $this->archivestamp = $match[1] . $match[2] . $match[3];
+      $this->archtime($match[1], $match[2], $match[3]);
       $this->smarty->assign("archive", $this->archive);
       $this->smarty->assign("archivestamp", $this->archivestamp);
       return true;
     }
     else if(preg_match("/^\/archive\/(\d{4})(\d{2})(\d{2})\/past\/(\d*)$/", $path, $match)) {
-      $this->archive = mktime(0, 0, 0, $match[2], $match[3], $match[1]);
-      $this->archivestamp = $match[1] . $match[2] . $match[3];
+      $this->archtime($match[1], $match[2], $match[3]);
       $this->smarty->assign("archive", $this->archive);
       $this->smarty->assign("archivestamp", $this->archivestamp);
       $this->input["past"] = $match[4];
@@ -95,6 +93,11 @@ class standard extends Plugin {
     else {
       return false;
     }
+  }
+
+  function archtime ($year, $mon, $day) {
+    $this->archive = mktime(0, 0, 0, $mon, $day, $year);
+    $this->archivestamp = $year . $mon . $day;
   }
 
   function fetch_dir($dir) {
@@ -133,7 +136,8 @@ class standard extends Plugin {
   function hook_storage_fetch($category, $id) {
     #
     # fetch a single posting
-    return getfile($this->config["data_path"], $id . ".txt", $dir);
+    $post = getfile($this->config["data_path"], $id . '.txt', $category);
+    return ($post);
   }
 
   function hook_storage_fetchall() {
@@ -239,11 +243,10 @@ function getfile($datadir, $file, $dir="", $read=true) {
     $mtime         = filemtime($filename);
     $human_mtime   = date("Ymd", $mtime);
     $id            = preg_replace("/\.txt$/", "", $file);
-
     $entry         = array(
                        "filename" => $filename,
 		       "mtime"    => $mtime,
-		       "htime"    => $human_time,
+		       "htime"    => $human_mtime,
 		       "category" => $dir,
 		       "file"     => $file,
 		       "id"       => $id,
@@ -258,8 +261,8 @@ function getfile($datadir, $file, $dir="", $read=true) {
     return $entry;
   }
   else {
-    print "$datadir/$dir/$file - not readable<br/>";
-    report_error("$datadir/$dir/$file - not readable");
+    #print "$datadir/$dir/$file.txt is not readable\n";
+    report_error("$datadir/$dir/$file.txt is not readable");
     return null;
   }
 }
