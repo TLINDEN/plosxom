@@ -63,18 +63,24 @@ class feed extends Plugin {
     #
     # we look for category and archive
     if(preg_match("/^\/feed\/rss$/", $path)) {
-      $this->version = "rss";
+      $this->version  = "rss";
+      $this->template = "rss.tpl";
       $this->smarty->assign("feed", $this->version);
+      $this->smarty->assign("lastmodified", $this->posts[0]);
       return true;
     }
     if(preg_match("/^\/feed/rss2$/", $path)) {
-      $this->version = "rss2";
+      $this->version  = "rss2";
+      $this->template = "rss2.tpl";
       $this->smarty->assign("feed", $this->version);
+      $this->smarty->assign("lastmodified", $this->posts[0]);
       return true;
     }
     if(preg_match("/^\/feed/atom$/", $path)) {
-      $this->version = "atom";
+      $this->version  = "atom";
+      $this->template = "atom.tpl";
       $this->smarty->assign("feed", $this->version);
+      $this->smarty->assign("lastmodified", $this->posts[0]);
       return true;
     } 
     return false;
