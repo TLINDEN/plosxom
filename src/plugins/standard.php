@@ -54,9 +54,9 @@ class standard extends Plugin {
   }
 
   function hook_send_header() {
-    header('Content-type: text/html');
-    # if $this->lastmodified, had be set in fetchall()
-    # header("Last-modified: " . date('r', $usedates[0]));
+    if($this->posts[0]) {
+      header("Last-modified: " . date('r', $this->posts[0]["mtime"]));
+    }
   }
 
   function hook_url_filter($path) {

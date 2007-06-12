@@ -67,7 +67,7 @@ $plosxom->engine();
 class Plosxom {
 
   var $config, $smarty, $plugins, $handler, $template, $filter_plugin;
-  var $posting, $category, $input;
+  var $posting, $category, $input, $posts;
 
   function Plosxom(&$conf, &$smart) {
     $this->config = &$conf;
@@ -102,7 +102,8 @@ class Plosxom {
 					   $this->input,
 					   $this->template,
 					   $this->filter_plugin,
-					   $this->smarty         );
+					   $this->smarty,
+					   $this->posts ); 
             $this->plugins[$plugin_name]->register();
 	}
       }
@@ -154,15 +155,22 @@ class Plosxom {
     foreach ($this->get_handlers("hook_send_header") as $handler) {
       $this->plugins[$handler]->hook_send_header($filter, $params);
     }
+
+    # finaly send the type of content, may have been modified by some plugin
+    header("Content-type: " . $this->config["contenttype"]);
   }
 
   function init_runtime() {
     # kinda global stuff has to be defined here
+    
+    # set default content type, there can be only one
+    # so if a plugin wants its own content type it has
+    # to overwrite it
+    $this->config["contenttype"] = 'text/html';
   }
 
   function engine() {
     # go rendering
-    $this->send_headers();
 
     # get list of postings or set single posting
     $posts = array();
@@ -185,9 +193,14 @@ class Plosxom {
       foreach ($posts as $pos => $entry) {
         $posts[$pos]["text"] = $this->plugins[$handler]->hook_content($entry["text"]);
       }
+      if ( $this->posting ) {
+        $post["text"] = $this->plugins[$handler]->hook_content($post["text"]);
+      }
     }
+
     if ( $this->posting ) {
       $this->smarty->assign('post', $post);
+      $this->posts = array($post);
     }
     else {
       if($this->input["past"]) {
@@ -202,6 +215,7 @@ class Plosxom {
 	$this->smarty->assign('past', $this->input["past"] + $this->config["postings"]);
       }
       $this->smarty->assign('posts', $posts);
+      $this->posts = $posts;
     }
 
     $this->smarty->assign('config', $this->config);
@@ -213,6 +227,8 @@ class Plosxom {
       # some plugin has overwritten the default template filename
       $tpl = $this->template;
     }
+
+    $this->send_headers();
     $this->smarty->display($this->config["template"] . "/" . $tpl);
   }
 
@@ -266,14 +282,16 @@ class Plugin {
   var $config;
   var $input;
   var $smarty;
+  var $posts;
 
-  function Plugin (&$H, &$C, &$I, &$T, &$F, &$S) {
+  function Plugin (&$H, &$C, &$I, &$T, &$F, &$S, &$P) {
     $this->handler       = &$H;
     $this->config        = &$C;
     $this->input         = &$I;
     $this->template      = &$T;
     $this->filter_plugin = &$F;
     $this->smarty        = &$S;
+    $this->posts         = &$P;
   }
 
   function add_handler($type, $hdl) {
