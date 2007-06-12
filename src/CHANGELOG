@@ -1,0 +1,172 @@
+------------------------------------------------------------------------
+r34 | palidhar | 2007-06-12 17:36:24 +0200 (Tue, 12 Jun 2007) | 4 lines
+Changed paths:
+   M /src/etc/plosxom.conf
+   M /src/plosxom.php
+
+- define lastmodified here now
+- moved the runinit() before parse_input so that content-type can be overwritten
+- added new config variable author_email (required for rss2 feed)
+
+------------------------------------------------------------------------
+r31 | palidhar | 2007-06-12 16:34:11 +0200 (Tue, 12 Jun 2007) | 4 lines
+Changed paths:
+   M /src/VERSION
+   M /src/etc/plosxom.conf
+   M /src/templates/default/header.tpl
+
+- incremented version
+- added lang config variable
+- removed hardcoded urls left in the header template
+
+------------------------------------------------------------------------
+r29 | palidhar | 2007-06-12 15:39:55 +0200 (Tue, 12 Jun 2007) | 3 lines
+Changed paths:
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+
+- added $this->posts to Plugin class, so plugins can access the parsed posts anytime
+- added "contenttype" internal config variable, plugins may change it to overwrite it
+
+------------------------------------------------------------------------
+r23 | palidhar | 2007-06-12 01:52:27 +0200 (Tue, 12 Jun 2007) | 2 lines
+Changed paths:
+   M /src/VERSION
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+   M /src/templates/default/default.css
+
+- standard plugin: fixed getfile() function
+
+------------------------------------------------------------------------
+r20 | palidhar | 2007-06-11 23:09:19 +0200 (Mon, 11 Jun 2007) | 3 lines
+Changed paths:
+   A /src/LICENSE
+   A /src/MANIFEST
+   A /src/README
+   A /src/VERSION
+
+- added manifest
+- forgot license and readme file at last commit
+
+------------------------------------------------------------------------
+r19 | palidhar | 2007-06-11 23:00:56 +0200 (Mon, 11 Jun 2007) | 8 lines
+Changed paths:
+   M /src/etc/plosxom.conf
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+   M /src/templates/default/index.tpl
+
+- added Id keyword
+- outsourced file reading in plugin/standard.php into standalone functions,
+  so that they can also be used outside of the standard plugin by other file
+  based plugins, which have to read in a posting file.
+- added Makefile for building tarball
+- added comments to plosxom.php
+- added README
+
+------------------------------------------------------------------------
+r10 | palidhar | 2007-06-11 21:03:46 +0200 (Mon, 11 Jun 2007) | 2 lines
+Changed paths:
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+   D /src/svn-commit.2.tmp
+   D /src/svn-commit.tmp
+
+fixed license, removes old logs
+
+------------------------------------------------------------------------
+r9 | palidhar | 2007-06-11 20:54:14 +0200 (Mon, 11 Jun 2007) | 2 lines
+Changed paths:
+   A /src
+   A /src/data
+   A /src/etc
+   A /src/etc/plosxom.conf
+   A /src/lib
+   A /src/lib/Config_File.class.php
+   A /src/lib/Smarty.class.php
+   A /src/lib/Smarty_Compiler.class.php
+   A /src/lib/debug.tpl
+   A /src/lib/internals
+   A /src/lib/internals/core.assemble_plugin_filepath.php
+   A /src/lib/internals/core.assign_smarty_interface.php
+   A /src/lib/internals/core.create_dir_structure.php
+   A /src/lib/internals/core.display_debug_console.php
+   A /src/lib/internals/core.get_include_path.php
+   A /src/lib/internals/core.get_microtime.php
+   A /src/lib/internals/core.get_php_resource.php
+   A /src/lib/internals/core.is_secure.php
+   A /src/lib/internals/core.is_trusted.php
+   A /src/lib/internals/core.load_plugins.php
+   A /src/lib/internals/core.load_resource_plugin.php
+   A /src/lib/internals/core.process_cached_inserts.php
+   A /src/lib/internals/core.process_compiled_include.php
+   A /src/lib/internals/core.read_cache_file.php
+   A /src/lib/internals/core.rm_auto.php
+   A /src/lib/internals/core.rmdir.php
+   A /src/lib/internals/core.run_insert_handler.php
+   A /src/lib/internals/core.smarty_include_php.php
+   A /src/lib/internals/core.write_cache_file.php
+   A /src/lib/internals/core.write_compiled_include.php
+   A /src/lib/internals/core.write_compiled_resource.php
+   A /src/lib/internals/core.write_file.php
+   A /src/lib/plugins
+   A /src/lib/plugins/block.textformat.php
+   A /src/lib/plugins/compiler.assign.php
+   A /src/lib/plugins/function.assign_debug_info.php
+   A /src/lib/plugins/function.config_load.php
+   A /src/lib/plugins/function.counter.php
+   A /src/lib/plugins/function.cycle.php
+   A /src/lib/plugins/function.debug.php
+   A /src/lib/plugins/function.eval.php
+   A /src/lib/plugins/function.fetch.php
+   A /src/lib/plugins/function.html_checkboxes.php
+   A /src/lib/plugins/function.html_image.php
+   A /src/lib/plugins/function.html_options.php
+   A /src/lib/plugins/function.html_radios.php
+   A /src/lib/plugins/function.html_select_date.php
+   A /src/lib/plugins/function.html_select_time.php
+   A /src/lib/plugins/function.html_table.php
+   A /src/lib/plugins/function.mailto.php
+   A /src/lib/plugins/function.math.php
+   A /src/lib/plugins/function.popup.php
+   A /src/lib/plugins/function.popup_init.php
+   A /src/lib/plugins/modifier.capitalize.php
+   A /src/lib/plugins/modifier.cat.php
+   A /src/lib/plugins/modifier.count_characters.php
+   A /src/lib/plugins/modifier.count_paragraphs.php
+   A /src/lib/plugins/modifier.count_sentences.php
+   A /src/lib/plugins/modifier.count_words.php
+   A /src/lib/plugins/modifier.date_format.php
+   A /src/lib/plugins/modifier.debug_print_var.php
+   A /src/lib/plugins/modifier.default.php
+   A /src/lib/plugins/modifier.escape.php
+   A /src/lib/plugins/modifier.indent.php
+   A /src/lib/plugins/modifier.lower.php
+   A /src/lib/plugins/modifier.nl2br.php
+   A /src/lib/plugins/modifier.regex_replace.php
+   A /src/lib/plugins/modifier.replace.php
+   A /src/lib/plugins/modifier.spacify.php
+   A /src/lib/plugins/modifier.string_format.php
+   A /src/lib/plugins/modifier.strip.php
+   A /src/lib/plugins/modifier.strip_tags.php
+   A /src/lib/plugins/modifier.truncate.php
+   A /src/lib/plugins/modifier.upper.php
+   A /src/lib/plugins/modifier.wordwrap.php
+   A /src/lib/plugins/outputfilter.trimwhitespace.php
+   A /src/lib/plugins/shared.escape_special_chars.php
+   A /src/lib/plugins/shared.make_timestamp.php
+   A /src/plosxom.php
+   A /src/plugins
+   A /src/plugins/standard.php
+   A /src/svn-commit.2.tmp
+   A /src/svn-commit.tmp
+   A /src/templates
+   A /src/templates/default
+   A /src/templates/default/default.css
+   A /src/templates/default/header.tpl
+   A /src/templates/default/index.tpl
+
+Initial Import
+
+------------------------------------------------------------------------
