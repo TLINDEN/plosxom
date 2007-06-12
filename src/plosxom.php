@@ -222,7 +222,7 @@ class Plosxom {
 
     $this->smarty->assign('config', $this->config);
 
-    # $this->smarty->debugging = true;
+    #$this->smarty->debugging = true;
 
     $tpl = "index.tpl";
     if($this->template) {
