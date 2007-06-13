@@ -254,8 +254,8 @@ function getfile($datadir, $file, $dir="", $read=true) {
 		     );
     if($read) {
        $lines          = file($filename);
-       $entry["text"]  = paragraph(implode('', $lines));
        $entry["title"] = trim(array_shift($lines));
+       $entry["text"]  = paragraph(implode('', $lines));
     }
 
     return $entry;
