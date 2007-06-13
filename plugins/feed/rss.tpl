@@ -8,7 +8,7 @@
    <copyright>Copyright 2007</copyright>
    {section name=id loop=$posts}
    <item>
-     <title><![CDATA[{$posts[id].title}]]</title>
+     <title><![CDATA[{$posts[id].title}]]></title>
      <description><![CDATA[{$posts[id].text}]]></description>
      <link>{$config.whoami}/{$posts[id].category}/{$posts[id].id}</link>
    </item>

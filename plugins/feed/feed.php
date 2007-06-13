@@ -30,30 +30,33 @@
 
  #
  # This is the feed plugin for plosxom.
+ # It supports RSS, RSS2 and ATOM style feeds.
  #
  # To install:
  #
-
+ # copy feed.php to your plugin dir
+ # copy the *.tpl files to your template dir
+ #
+ # somewhere in your header template add the following code:
+ #
+ # {if $feedmeta}
+ #  {$feedmeta}
+ # {/if}
+ #
+ # you may add a html link to a feed like this:
+ #
+ # <a href="{$config.whoami}/feed/rss">RSS Feed</a>
+ #
 
 class feed extends Plugin {
   var $version;
 
   function register() {
     $this->add_handler("hook_url_filter", "feed");
-    #$this->add_handler("hook_content", "feed");
-  }
-
-  function hook_send_header() {
-  }
-
-  function hook_content(&$text) {
-    #
-    # only for 0.91
-    # we use 0.92, where we can use cdata
-    #if($this->version == "rss") {
-    #  # clean out html and stuff, rss 1.0 doesnt support it
-    #  return htmlspecialchars(preg_replace('/<a href="(.*?)">(.*?)<.a>/si', '$2($1)', strip_tags($text)));
-    #}
+    $meta =  '<link rel="alternate"  type="application/x.atom+xml" title="atom feed" href="' . $this->config["whoami"] . '/feed/atom"/>' . "\n";
+    $meta .= '<link rel="alternate"  type="application/rss+xml"    title="rss feed"  href="' . $this->config["whoami"] . '/feed/rss"/>'  . "\n";
+    $meta .= '<link rel="alternate"  type="application/rss+xml"    title="rss2 feed" href="' . $this->config["whoami"] . '/feed/rss2"/>' . "\n";
+    $this->smarty->assign("feedmeta", $meta);
   }
 
   function hook_url_filter($path) {
@@ -64,23 +67,26 @@ class feed extends Plugin {
       $this->template = "rss.tpl";
       $this->smarty->assign("feed", $this->version);
       $this->config["contenttype"] = 'application/rss+xml';
-      return true;
     }
     if(preg_match("/^\/feed\/rss2$/", $path)) {
       $this->version  = "rss2";
       $this->template = "rss2.tpl";
       $this->smarty->assign("feed", $this->version);
       $this->config["contenttype"] = 'application/rss+xml';
-      return true;
     }
     if(preg_match("/^\/feed\/atom$/", $path)) {
       $this->version  = "atom";
       $this->template = "atom.tpl";
       $this->smarty->assign("feed", $this->version);
       $this->config["contenttype"] = 'application/atom+xml';
-      return true;
     } 
-    return false;
+    if($this->version) {
+      $this->smarty->assign("feed", $this->version);
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 }
