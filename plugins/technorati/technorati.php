@@ -100,24 +100,23 @@ class technorati extends Plugin {
         $posts = array();
 	$filtered = array();
 	$numfiles = count($files);
-        for($pos = 0; $pos < $numfiles; $pos++) {
-          if(array_key_exists($pos, $files)) {
-            $entry = getfile($this->config["data_path"], $files[$pos]["file"], $files[$pos]["category"]);
-	    if($entry) {
-	      if(ereg('tag:' . $this->tag . '[^a-zA-Z0-9]', $entry["text"])) {
-		# file content matches current tag
-		$filtered[] = $entry;
-	      }
-	    }
-	    else {
-	      break;
-	    }
-	  }
-        }
+	$maxfiles = $this->input["past"] + $this->config["postings"];
 
+        for($pos = 0; $pos < $numfiles; $pos++) {
+          $entry = getfile($this->config["data_path"], $files[$pos]["file"], $files[$pos]["category"]);
+	  if($entry) {
+	    if(ereg('tag:' . $this->tag . '[^a-zA-Z0-9]', $entry["text"])) {
+	      #  file content matches current tag
+              $filtered[] = $entry;
+	     }
+	  }
+          if(count($filtered) > $maxfiles) {
+            # don't read more files as neccessary
+            break;
+          }
+        }
 	$numfiles = count($filtered);
 	$this->input["numfiles"] = $numfiles;
-	$maxfiles = $this->input["past"] + $this->config["postings"];
 	for($pos = $this->input["past"]; $pos < $maxfiles; $pos++) {
 	  $posts[] = $filtered[$pos];
 	}
