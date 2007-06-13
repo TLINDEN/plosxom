@@ -50,7 +50,9 @@ include(SMARTY_DIR . 'Smarty.class.php');
 # initialize the smarty engine
 $smarty = new Smarty;
 $smarty->template_dir = $config["template_path"];
-$smarty->compile_dir = $config["tmp_path"];
+$smarty->config_dir   = "$pwd/etc";
+$smarty->compile_dir  = $config["tmp_path"];
+
 # initialize plosxom
 $plosxom = new Plosxom($config, $smarty);
 
@@ -221,6 +223,7 @@ class Plosxom {
     }
 
     $this->smarty->assign('config', $this->config);
+    $this->smarty->assign('lang', $this->config["lang"]);
 
     #$this->smarty->debugging = true;
 
