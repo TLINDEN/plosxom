@@ -26,4 +26,6 @@ dist: manifest
 	@echo
 	@echo Building done:
 	@md5sum ../$(pkg)-$(version).tar.gz
+	@echo building plugin packs
+	./plugpack.sh
 
