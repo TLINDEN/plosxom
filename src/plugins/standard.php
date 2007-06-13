@@ -239,20 +239,24 @@ function getfile($datadir, $file, $dir="", $read=true) {
   # if $read == true(default), the file content will be read.
   # set it to true to save runtime if you only need file attributes
   $filename = $datadir . "/" . $dir . "/" . $file;
+  $entry = array();
   if(is_readable($filename) and ereg('\.txt$', $file)) {
+    # dont stat() the file if this has already been done
     $mtime         = filemtime($filename);
     $human_mtime   = date("Ymd", $mtime);
     $id            = preg_replace("/\.txt$/", "", $file);
     $entry         = array(
-                       "filename" => $filename,
-		       "mtime"    => $mtime,
-		       "htime"    => $human_mtime,
-		       "category" => $dir,
-		       "file"     => $file,
-		       "id"       => $id,
+                           "filename" => $filename,
+		           "mtime"    => $mtime,
+		           "htime"    => $human_mtime,
+		           "category" => $dir,
+		           "file"     => $file,
+		           "id"       => $id,
+    );
 
-		     );
     if($read) {
+       # also read the file content
+       # circumvent reading file content twice
        $lines          = file($filename);
        $entry["title"] = trim(array_shift($lines));
        $entry["text"]  = paragraph(implode('', $lines));
