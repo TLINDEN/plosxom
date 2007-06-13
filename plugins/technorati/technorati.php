@@ -82,7 +82,7 @@ class technorati extends Plugin {
       $this->tag = $match[1];
       $this->smarty->assign("technoratitag", $this->tag);
       $this->add_handler("hook_content_filter", "technorati");
-      $this->filter_plugin = "technorati";
+      $this->filter_plugin = $this;
       return true;
     }
     if(preg_match("/^\/tag\/([a-zA-Z0-9\_\-]*)\/past\/(\d*)$/", $path, $match)) {
