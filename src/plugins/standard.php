@@ -114,7 +114,7 @@ class standard extends Plugin {
   function fetch_file($file, $dir="") {
     # fetch info about file (not the content of, this
     # will be done later, after sorting of it)
-    $entry = getfile($this->config["data_path"], $file, $dir, false);
+    $entry = $this->getfile($this->config["data_path"], $file, $dir, false);
     if($entry) {
       if( $this->archive ) {
         if( $entry["htime"] == $this->archivestamp ) {
@@ -136,7 +136,7 @@ class standard extends Plugin {
   function hook_storage_fetch($category, $id) {
     #
     # fetch a single posting
-    $post = getfile($this->config["data_path"], $id . '.txt', $category);
+    $post = $this->getfile($this->config["data_path"], $id . '.txt', $category);
     return ($post);
   }
 
@@ -198,7 +198,7 @@ class standard extends Plugin {
 	$maxfiles = $this->input["past"] + $this->config["postings"];
         for($pos = $this->input["past"]; $pos < $maxfiles; $pos++) {
           if(array_key_exists($pos, $this->files)) {
-            $entry = getfile($this->config["data_path"], $this->files[$pos]["file"], $this->files[$pos]["category"]);
+            $entry = $this->getfile($this->config["data_path"], $this->files[$pos]["file"], $this->files[$pos]["category"]);
 	    if($entry) {
 	      $this->files[$pos] = $entry;
 	    }
@@ -229,47 +229,46 @@ class standard extends Plugin {
   }
 
 
-}
-
-
-function getfile($datadir, $file, $dir="", $read=true) {
-  #
-  # actual open and read the file content and
-  # place it into an array
-  # if $read == true(default), the file content will be read.
-  # set it to true to save runtime if you only need file attributes
-  $filename = $datadir . "/" . $dir . "/" . $file;
-  $entry = array();
-  if(is_readable($filename) and ereg('\.txt$', $file)) {
-    # dont stat() the file if this has already been done
-    $mtime         = filemtime($filename);
-    $human_mtime   = date("Ymd", $mtime);
-    $id            = preg_replace("/\.txt$/", "", $file);
-    $entry         = array(
-                           "filename" => $filename,
-		           "mtime"    => $mtime,
-		           "htime"    => $human_mtime,
-		           "category" => $dir,
-		           "file"     => $file,
-		           "id"       => $id,
-    );
-
-    if($read) {
-       # also read the file content
-       # circumvent reading file content twice
-       $lines          = file($filename);
-       $entry["title"] = trim(array_shift($lines));
-       $entry["text"]  = paragraph(implode('', $lines));
+  function getfile($datadir, $file, $dir="", $read=true) {
+    #
+    # actual open and read the file content and
+    # place it into an array
+    # if $read == true(default), the file content will be read.
+    # set it to true to save runtime if you only need file attributes
+    $filename = $datadir . "/" . $dir . "/" . $file;
+    $entry = array();
+    if(is_readable($filename) and ereg('\.txt$', $file)) {
+      # dont stat() the file if this has already been done
+      $mtime         = filemtime($filename);
+      $human_mtime   = date("Ymd", $mtime);
+      $id            = preg_replace("/\.txt$/", "", $file);
+      $entry         = array(
+                             "filename" => $filename,
+		             "mtime"    => $mtime,
+		             "htime"    => $human_mtime,
+		             "category" => $dir,
+		             "file"     => $file,
+		             "id"       => $id,
+      );
+  
+      if($read) {
+         # also read the file content
+         # circumvent reading file content twice
+         $lines          = file($filename);
+         $entry["title"] = trim(array_shift($lines));
+         $entry["text"]  = paragraph(implode('', $lines));
+      }
+  
+      return $entry;
     }
-
-    return $entry;
-  }
-  else {
-    #print "$datadir/$dir/$file.txt is not readable\n";
-    report_error("$datadir/$dir/$file.txt is not readable");
-    return null;
+    else {
+      #print "$datadir/$dir/$file.txt is not readable\n";
+      report_error("$datadir/$dir/$file.txt is not readable");
+      return null;
+    }
   }
 }
+
 
 function paragraph(&$text) {
   $text = preg_replace("/(\r\n\r\n|\n\n)/", "</p><p class=\"blogparagraph\">", $text);

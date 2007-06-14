@@ -40,8 +40,9 @@
 
 # load configuration
 $stderr = "";
-$pwd    = dirname($_SERVER["SCRIPT_FILENAME"]);
-$config = parse_config($pwd . "/etc/plosxom.conf");
+$config_path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/etc";
+$config = parse_config($config_path . "/plosxom.conf");
+$config["config_path"] = $config_path;
 
 # load smarty template engine
 define('SMARTY_DIR', $config["lib_path"] . "/"); 
@@ -191,13 +192,29 @@ class Plosxom {
     }
 
     # manipulate postings, if any
-    foreach ($this->get_handlers("hook_content") as $handler) {
-      foreach ($posts as $pos => $entry) {
-        $posts[$pos]["text"] = $this->plugins[$handler]->hook_content($entry["text"]);
+    if($posts) {
+      foreach ($this->get_handlers("hook_content") as $handler) {
+        foreach ($posts as $pos => $entry) {
+          $posts[$pos]["text"] = $this->plugins[$handler]->hook_content($entry["text"]);
+        }
+        if ( $this->posting ) {
+          $post["text"] = $this->plugins[$handler]->hook_content($post["text"]);
+        }
       }
-      if ( $this->posting ) {
-        $post["text"] = $this->plugins[$handler]->hook_content($post["text"]);
-      }
+      if($this->input["past"]) {
+          if($this->input["past"] > $this->config["postings"]) {
+            $newer = $this->input["past"] - $this->config["postings"];
+          }
+          else {
+            $newer = "null";
+          }
+          $this->smarty->assign('newer', $newer);
+ 
+          $this->smarty->assign('past', $this->input["past"] + $this->config["postings"]);
+        }
+      $this->smarty->assign('posts', $posts);
+      $this->smarty->assign('lastmodified', $posts[0]["mtime"]);
+      $this->posts = $posts;
     }
 
     if ( $this->posting ) {
@@ -205,27 +222,11 @@ class Plosxom {
       $this->smarty->assign('lastmodified', $post["mtime"]);
       $this->posts = array($post);
     }
-    else {
-      if($this->input["past"]) {
-        if($this->input["past"] > $this->config["postings"]) {
-	  $newer = $this->input["past"] - $this->config["postings"];
-	}
-	else {
-	  $newer = "null";
-	}
-	$this->smarty->assign('newer', $newer);
-
-	$this->smarty->assign('past', $this->input["past"] + $this->config["postings"]);
-      }
-      $this->smarty->assign('posts', $posts);
-      $this->smarty->assign('lastmodified', $posts[0]["mtime"]);
-      $this->posts = $posts;
-    }
 
     $this->smarty->assign('config', $this->config);
     $this->smarty->assign('lang', $this->config["lang"]);
 
-    #$this->smarty->debugging = true;
+    # $this->smarty->debugging = true;
 
     $tpl = "index.tpl";
     if($this->template) {
@@ -318,7 +319,11 @@ class Plugin {
 
 
 function parse_config($file) {
-  global $pwd;
+  global $config_path;
+  if(! ereg("^\/", $file)) {
+    # add config dir
+    $file = $config_path . "/$file";
+  }
   if (file_exists($file)) {
     $config = array();
     foreach (file($file) as $line) {
