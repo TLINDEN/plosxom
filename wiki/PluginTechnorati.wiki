@@ -49,4 +49,4 @@ tag:technorati, tag:plosxom, tag:php, ...
 }}}
 
 
-[http://plosxom.googlecode.com/files/technorati.php Download]
+[http://plosxom.googlecode.com/files/technorati-1.01.zip Download versoin 1.01]
