@@ -1,5 +1,5 @@
 #summary Static Page Plugin - Content
-#labels Featured,Plugin
+#labels Plugin
 
 = Introduction =
 
