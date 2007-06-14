@@ -1,0 +1,29 @@
+#summary Categories Plugin - Content
+#labels Plugin
+
+= Introduction =
+
+Generates a list of categories.
+
+
+= Install =
+
+
+1. copy categories.php to your plugin directory.
+
+2. add the following code somewhere to your template:
+
+{{{
+{if $categories}
+  <ul class="catlist">
+  {foreach item=cat from=$categories}
+    <li><a href="{$config.whoami}/category/{$cat}">{$cat}</a></li>
+  {/foreach}
+  </ul>
+{/if}
+}}}
+
+
+You max add a stylesheet for the class "catlist".
+
+That's it.
