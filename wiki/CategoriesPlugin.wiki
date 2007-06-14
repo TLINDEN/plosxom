@@ -27,3 +27,5 @@ Generates a list of categories.
 You max add a stylesheet for the class "catlist".
 
 That's it.
+
+[http://plosxom.googlecode.com/files/categories-1.00.zip Download 1.00]
