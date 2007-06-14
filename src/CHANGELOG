@@ -1,4 +1,30 @@
 ------------------------------------------------------------------------
+r60 | palidhar | 2007-06-14 18:17:27 +0200 (Thu, 14 Jun 2007) | 2 lines
+Changed paths:
+   M /src/templates/default/index.tpl
+
+fixed blogdate spec, added link to archive of blogdate
+
+------------------------------------------------------------------------
+r56 | palidhar | 2007-06-14 17:25:30 +0200 (Thu, 14 Jun 2007) | 3 lines
+Changed paths:
+   M /src/VERSION
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+
+- getfile() in standard plugin moved into the class
+- minor bugfixes
+
+------------------------------------------------------------------------
+r52 | palidhar | 2007-06-13 20:47:37 +0200 (Wed, 13 Jun 2007) | 2 lines
+Changed paths:
+   M /src/CHANGELOG
+   M /src/Makefile
+   M /src/VERSION
+
+-
+
+------------------------------------------------------------------------
 r51 | palidhar | 2007-06-13 15:28:59 +0200 (Wed, 13 Jun 2007) | 2 lines
 Changed paths:
    M /src/plugins/standard.php

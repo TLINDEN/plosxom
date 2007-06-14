@@ -111,6 +111,21 @@ class standard extends Plugin {
   }
 
 
+  function fetch_categories() {
+    # return a list of all directories (categories)
+    $dirs = array();
+    $dh = opendir($this->config["data_path"]);
+    while ( $file = readdir($dh) ) {
+      if($file == "." or $file == "..") { continue; }
+      if(is_dir($this->config["data_path"] . "/" . $file) and is_readable($this->config["data_path"] . "/" . $file)) {
+        $dirs[] = $file;
+      }
+    }
+    sort($dirs);
+    return $dirs;
+  }
+
+
   function fetch_file($file, $dir="") {
     # fetch info about file (not the content of, this
     # will be done later, after sorting of it)

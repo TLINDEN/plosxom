@@ -71,10 +71,13 @@ lib/debug.tpl
 lib/Smarty.class.php
 lib/Config_File.class.php
 etc/plosxom.conf
+etc/lang.conf
 plosxom.php
+templates/default/footer.tpl
 templates/default/index.tpl
 templates/default/header.tpl
 templates/default/default.css
+templates/default/post.tpl
 MANIFEST
 LICENSE
 VERSION
@@ -82,4 +85,6 @@ README
 CHANGELOG
 Makefile
 diff.pl
+plugpack.sh
 stresstest.pl
+RELEASENOTES
