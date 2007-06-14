@@ -32,8 +32,10 @@
 
   {* multiple postings, list them *}
   {foreach item=post from=$posts}
-     {if $posts[id].blogdate}
-       <p class="blogdate">{$posts[id].blogdate|date_format}</p>
+     {if $post.blogdate}
+       <div class="blogdate">
+        <a href="{$config.whoami}/archive/{$post.blogdate|date_format:'%Y%m%d'}">{$post.blogdate|date_format:'%d.%m.%Y'}</a>
+       </div>
      {/if}
      {include file="default/post.tpl" post="`$post`" }
   {/foreach}
