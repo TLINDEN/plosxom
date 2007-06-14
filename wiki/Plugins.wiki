@@ -12,3 +12,7 @@ This is a list of official plosxom plugins. If you wrote a plugin you find usefu
 = Syndication =
 
 * [PluginFeed RSS Feed Plugin]
+
+= Content =
+
+* [PluginStaticPage Static Page Plugin]
