@@ -218,6 +218,9 @@ class Plosxom {
     }
 
     if ( $this->posting ) {
+      foreach ($this->get_handlers("hook_content") as $handler) {
+	$post["text"] = $this->plugins[$handler]->hook_content($post["text"]);
+      }
       $this->smarty->assign('post', $post);
       $this->smarty->assign('lastmodified', $post["mtime"]);
       $this->posts = array($post);
