@@ -4,3 +4,12 @@
 = Introduction =
 
 This is a list of official plosxom templates.
+
+== blog.txt ==
+
+This is a port of the [http://www.plaintxt.org/themes/blogtxt/ blog.txt] template by [http://scottwallick.com/ Scott Wallick] (shouts and thanks!). The original blog.txt template were written for wordpress. It consisted of a number of PHP files, which were practically not portable it smarty. So I took the theme output on some wordpress blog using this theme and ported this to smarty. Of course all of the wordpress specific stuff has been removed.
+
+To install the template, download the zip file below and unpack it into your template directory. Make sure the webserver has read permssions to the newly created directory "blogtxt".
+
+[http://plosxom.googlecode.com/files/blogtxt-screenshot.png Screenshot]
+[http://plosxom.googlecode.com/files/blogtxt.zip Download blogtxt.zip]
