@@ -1,0 +1,11 @@
+#
+# allow stylesheets
+<Files ~ "\.(css)$">
+  Order allow, deny
+  Allow from all
+</Files>
+
+#
+# deny the rest
+Order allow,deny
+Deny from all
