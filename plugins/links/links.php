@@ -19,6 +19,7 @@ class links extends Plugin {
     }
     
     $links = parse_config($cfg);
+    ksort($links);
 
     $out = "";
     foreach ($links as $name => $link) {
