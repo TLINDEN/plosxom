@@ -38,6 +38,10 @@
  # were re-used at all.
  #
 
+# turn on error output, some installations of php
+# have it turned off, for some obscure reason
+ini_set("display_errors", "on");
+
 # load configuration
 $stderr = "";
 $config_path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/etc";
