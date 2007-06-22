@@ -10,7 +10,7 @@
 
 {* add filter criteria title, if filter in use *}
 {if $archive}
-   <h2 class="post-title">{#archtitle#}: <a href="{$config.whoami}/archive/{$archive|date_format:'%Y%m%d'}"">{$archive|date_format}</a></h2>
+   <h2 class="post-title">{#archtitle#}: <a href="{$config.whoami}/archive/{$archive|date_format:'%Y%m%d'}">{$archive|date_format}</a></h2>
 {elseif $category}
    <h2 class="post-title">{#cattitle#}: <a href="{$config.whoami}/category/{$category}">{$category}</a></h2>
 {/if}
@@ -42,7 +42,7 @@
   {* output a list of archive links *}
   <ul>
     {foreach from=$archivedates item=date}
-      <li><a href="{$config.whoami}/archive/{$date|date_format:'%Y%m%d'}"">{$date|date_format}</a></li>
+      <li><a href="{$config.whoami}/archive/{$date|date_format:'%Y%m%d'}">{$date|date_format}</a></li>
     {/foreach}
   </ul>
 

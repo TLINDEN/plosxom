@@ -19,12 +19,13 @@
     {foreach item=cat from=$categories}
      <li><a href="{$config.whoami}/category/{$cat}">{$cat}</a></li>
     {/foreach}
+   </ul>
   </li>
  {/if}
 
 {if $feedmeta}
  <li id="rss-links">
-  <h2></h2>
+  <h2>Feeds</h2>
   <ul>
     <li class="rss-link"><a href="{$config.whoami}/feed/rss"  type="application/rss+xml">rss</a></li>
     <li class="rss-link"><a href="{$config.whoami}/feed/rss2" type="application/rss+xml">rss2</a></li>
@@ -37,7 +38,7 @@
   <h2>{$config.blog_name}</h2>
   <ul>
     <li>&copy; 2007 {$config.author}</li>
-    <li>Powered by <a href="http://code.google.com/p/plosxom/">Plosxom</a>
+    <li><a href="http://code.google.com/p/plosxom/">Powered by Plosxom</a>
   </ul>
  </li>
 
