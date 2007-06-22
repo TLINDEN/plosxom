@@ -118,7 +118,9 @@ class technorati extends Plugin {
 	$numfiles = count($filtered);
 	$this->input["numfiles"] = $numfiles;
 	for($pos = $this->input["past"]; $pos < $maxfiles; $pos++) {
-	  $posts[] = $filtered[$pos];
+	    if($filtered[$pos]) {
+	      $posts[] = $filtered[$pos];
+	    }
 	}
 
         return $posts;
