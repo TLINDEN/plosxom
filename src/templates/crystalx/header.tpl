@@ -38,7 +38,18 @@
     <div id="header">
 
         <!-- Logotyp -->
-        <h3 id="logo">{$config.blog_name} - {$config.blog_title}</h3>
+        <h3 id="logo">{$config.blog_name} - {$config.blog_title}
+	
+	{* add filter criteria title, if filter in use *}
+	{if $archive}
+	  - {#archtitle#}: {$archive|date_format}
+	{elseif $category}
+         - {#cattitle#}: {$category}
+       {elseif $technoratitag}
+         - Tag: {$technoratitag}
+       {/if}
+	
+	</h3>
         <hr class="noscreen" />          
 
 <!-- Search -->
@@ -78,14 +89,6 @@ deactivated. If there is a search plugin someday, you can enable it here
 		<li><a href="{$config.whoami}/archive">{#linkarch#}</a></li>
 		<li><a href="{$config.whoami}/page/aboout">About</a></li>
             </ul>
-
-{* add filter criteria title, if filter in use *}
-{if $archive}
-   {#archtitle#}: <a href="{$config.whoami}/archive/{$archive|date_format:'%Y%m%d'}">{$archive|date_format}</a>
-{elseif $category}
-   {#cattitle#}: <a href="{$config.whoami}/category/{$category}">{$category}</a>
-{/if}
-
 
         <hr class="noscreen" />
      </div> <!-- /tabs -->
