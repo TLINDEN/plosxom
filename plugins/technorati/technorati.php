@@ -70,7 +70,8 @@ class technorati extends Plugin {
   }
 
   function hook_content(&$text) {
-    $text = preg_replace("/tag:([^\.]*)$/m", "<div class=\"tag\">[Tags: tag:\\1]</div>", $text, 1);
+    //$text = preg_replace("/tag:([^\.]*)$/m", "<div class=\"tag\">[Tags: tag:\\1]</div>", $text, 1);
+    $text = preg_replace("/<p class=\"blogparagraph\">(tag:[^\.]*)<\/p>/", "<div class=\"tag\"><p class=\"blogparagraph\">[Tags: \\1]</p></div>", $text, 1);
     $text = preg_replace("/tag:([a-zA-Z0-9]+)/", '<a href="' . $this->config["whoami"] . "/tag/\\1\" rel=\"tag\">\\1</a>", $text);
     return $text;
   }
