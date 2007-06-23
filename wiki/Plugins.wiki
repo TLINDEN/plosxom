@@ -9,6 +9,12 @@ This is a list of official plosxom plugins. If you wrote a plugin you find usefu
 
 * [PluginTechnorati Technorati Plugin]
 
+= Content Generation =
+
+* [PluginTagCloud Tagcloud Plugin]
+* [PluginLinks Links Plugin]
+* [CategoriesPlugin Categories Plugin]
+
 = Syndication =
 
 * [PluginFeed RSS Feed Plugin]
@@ -16,4 +22,8 @@ This is a list of official plosxom plugins. If you wrote a plugin you find usefu
 = Content =
 
 * [PluginStaticPage Static Page Plugin]
-* [CategoriesPlugin Categories Plugin]
+
+= Maintenance =
+
+* [PluginLog Logging Plugin]
+* [PluginAccess IP Access Plugin]
