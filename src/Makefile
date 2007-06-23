@@ -19,7 +19,7 @@ dist: manifest
 	rm -rf ../$(pkg)-$(version)
 	mkdir -p ../$(pkg)-$(version)
 	cp -R * ../$(pkg)-$(version)/
-	cd ../$(pkg)-$(version)/ && rm -rf .svn */.svn */*/.svn */*/*.svn Makefile *.pl
+	cd ../$(pkg)-$(version)/ && rm -rf .svn */.svn */*/.svn */*/*.svn Makefile *.pl plugpack.sh
 	cd .. && tar cpzf $(pkg)-$(version).tar.gz $(pkg)-$(version)
 	rm -rf ../$(pkg)-$(version)-patch
 	./diff.pl
