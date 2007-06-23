@@ -1,0 +1,61 @@
+Release 1.05 fixes and new plugins
+-----------------------------------
+
+Some of the previously plugins have been added
+to the core plosxom distribution. This makes
+things for newbies easier.
+
+Also two new templates were added, try them out!
+
+
+
+Release 1.04 - bug fixes
+-----------------------------------
+
+Plugin interface has been cleaned up. The
+standard plugin has a new function fetch_categories(),
+which can be used to create category listings.
+
+A new plugin "categories" does this exactly.
+
+A couple of minor typos and bugs have been
+fixed too.
+
+
+
+
+Release 1.03 - bug fixes
+-----------------------------------
+
+Posting title extraction has been fixed.
+
+The default template now has language support,
+english is the standard language from now on,
+but german is also available. See lang.conf
+in the etc/ directory.
+
+Archiving fixed, there were lots of bugs.
+
+The default template has a nuew sub template
+just for postings which is shared for single
+postings and post listings.
+
+A new config variable 'author_email' has
+been added.
+
+Content-type can be overwritten by plugins.
+
+The template class ($smarty) contains a
+reference of the postings array, which makes
+it possible for plugins to access it.
+
+
+
+
+
+
+Release 1.02 - first public release
+-----------------------------------
+
+The core has been written from scratch.
+Most things do mostly as they should.

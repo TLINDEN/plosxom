@@ -1,4 +1,104 @@
 ------------------------------------------------------------------------
+r81 | palidhar | 2007-06-22 23:38:13 +0200 (Fri, 22 Jun 2007) | 2 lines
+Changed paths:
+   A /src/templates/crystalx
+   A /src/templates/crystalx/footer.tpl
+   A /src/templates/crystalx/header.tpl
+   A /src/templates/crystalx/images
+   A /src/templates/crystalx/images/bg.gif
+   A /src/templates/crystalx/images/bg_page.gif
+   A /src/templates/crystalx/images/bg_page_in.jpg
+   A /src/templates/crystalx/images/btn_more.gif
+   A /src/templates/crystalx/images/btn_morehover.gif
+   A /src/templates/crystalx/images/col_bg.gif
+   A /src/templates/crystalx/images/col_title_bg.gif
+   A /src/templates/crystalx/images/col_top.gif
+   A /src/templates/crystalx/images/content_article_bg.jpg
+   A /src/templates/crystalx/images/content_title_bg.gif
+   A /src/templates/crystalx/images/footer.jpg
+   A /src/templates/crystalx/images/header.jpg
+   A /src/templates/crystalx/images/ico_archive.gif
+   A /src/templates/crystalx/images/ico_cat.gif
+   A /src/templates/crystalx/images/ico_date.gif
+   A /src/templates/crystalx/images/ico_top.gif
+   A /src/templates/crystalx/images/ico_user.gif
+   A /src/templates/crystalx/images/search_input.gif
+   A /src/templates/crystalx/images/search_submit_blue.gif
+   A /src/templates/crystalx/images/tab_link.gif
+   A /src/templates/crystalx/index.tpl
+   A /src/templates/crystalx/nav.tpl
+   A /src/templates/crystalx/post.tpl
+   A /src/templates/crystalx/style.css
+
+added new template crystalx
+
+------------------------------------------------------------------------
+r80 | palidhar | 2007-06-22 23:37:01 +0200 (Fri, 22 Jun 2007) | 2 lines
+Changed paths:
+   M /src/templates/blogtxt/index.tpl
+   M /src/templates/blogtxt/sidebar.tpl
+
+fixed various typos
+
+------------------------------------------------------------------------
+r72 | palidhar | 2007-06-20 12:46:31 +0200 (Wed, 20 Jun 2007) | 2 lines
+Changed paths:
+   M /src/plosxom.php
+
+added ini_set("display_errors", "on"); so that errors will be displayed not suppressed.
+
+------------------------------------------------------------------------
+r71 | palidhar | 2007-06-19 20:44:13 +0200 (Tue, 19 Jun 2007) | 2 lines
+Changed paths:
+   A /src/etc/.htaccess
+   A /src/lib/.htaccess
+   A /src/plugins/.htaccess
+   A /src/templates/default/.htaccess
+
+added .htaccess files to protect backend directories
+
+------------------------------------------------------------------------
+r69 | palidhar | 2007-06-16 23:35:32 +0200 (Sat, 16 Jun 2007) | 2 lines
+Changed paths:
+   M /src/plosxom.php
+
+- fixed: hook_content were not called on single post display
+
+------------------------------------------------------------------------
+r67 | palidhar | 2007-06-16 03:04:12 +0200 (Sat, 16 Jun 2007) | 2 lines
+Changed paths:
+   A /src/templates/blogtxt
+   A /src/templates/blogtxt/footer.tpl
+   A /src/templates/blogtxt/header.tpl
+   A /src/templates/blogtxt/images
+   A /src/templates/blogtxt/images/blockquote.png
+   A /src/templates/blogtxt/images/comments.png
+   A /src/templates/blogtxt/images/current.png
+   A /src/templates/blogtxt/images/feed.png
+   A /src/templates/blogtxt/images/file-download.png
+   A /src/templates/blogtxt/images/file-html.png
+   A /src/templates/blogtxt/images/file-pdf.png
+   A /src/templates/blogtxt/images/file-zip.png
+   A /src/templates/blogtxt/images/important.png
+   A /src/templates/blogtxt/images/trackbacks.png
+   A /src/templates/blogtxt/index.tpl
+   A /src/templates/blogtxt/post.tpl
+   A /src/templates/blogtxt/print.css
+   A /src/templates/blogtxt/sidebar.tpl
+   A /src/templates/blogtxt/style.css
+
+added new template "blog.txt"
+
+------------------------------------------------------------------------
+r61 | palidhar | 2007-06-14 23:40:34 +0200 (Thu, 14 Jun 2007) | 2 lines
+Changed paths:
+   M /src/CHANGELOG
+   M /src/MANIFEST
+   M /src/plugins/standard.php
+
+ added fetch_categories()
+
+------------------------------------------------------------------------
 r60 | palidhar | 2007-06-14 18:17:27 +0200 (Thu, 14 Jun 2007) | 2 lines
 Changed paths:
    M /src/templates/default/index.tpl
