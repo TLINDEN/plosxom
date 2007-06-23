@@ -7,7 +7,8 @@
 {* add a basic menu *}
 <p><a href="{$config.whoami}">{#linkhome#}</a> -
 <a href="{$config.whoami}/archive">{#linkarch#}</a> -
-<a href="{$config.whoami}/feed/rss">{#linkfeed#}</a>
+<a href="{$config.whoami}/feed/rss">{#linkfeed#}</a> -
+<a href="{$config.whoami}/page/about">About</a>
 
 {* prepare url snippet for later use in paging generation below *}
 {if $archive}

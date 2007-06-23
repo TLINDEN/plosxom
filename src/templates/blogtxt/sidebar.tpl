@@ -8,6 +8,7 @@
   <ul>
     <li><a href="{$config.whoami}">{#linkhome#}</a></li>
     <li><a href="{$config.whoami}/archive">{#linkarch#}</a></li>
+    <li><a href="{$config.whoami}/page/about">About</a></li>
   </ul>
  </li>
 
@@ -22,6 +23,13 @@
    </ul>
   </li>
  {/if}
+
+<li id="category-links">
+ <h2>Blogroll</h2>
+  <ul>
+   {links config="blogroll.conf" template="<li><a href='%1'>%2</a></li>"}
+  </ul>
+</li>
 
 {if $feedmeta}
  <li id="rss-links">

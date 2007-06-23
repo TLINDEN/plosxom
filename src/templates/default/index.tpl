@@ -40,6 +40,10 @@
      {include file="default/post.tpl" post="`$post`" }
   {/foreach}
 
+{elseif $page}
+
+  {include file="default/page.tpl" post="`$page`" }
+
 {else}
 
    {* oops, no data? *}

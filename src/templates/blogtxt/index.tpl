@@ -53,6 +53,10 @@
      {include file="blogtxt/post.tpl" post="`$post`" }
   {/foreach}
 
+{elseif $page}
+
+  {include file="blogtxt/page.tpl" post="`$page`" }
+
 {else}
 
    {* oops, no data? *}

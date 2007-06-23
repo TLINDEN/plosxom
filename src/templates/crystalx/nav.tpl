@@ -21,6 +21,12 @@
     {/foreach}
    </ul>
 
+<h2>Blogroll:</h2>
+  <ul>
+    {links config="links.conf" template="<li><a href='%1'>%2</a></li>"}
+  </ul>
+<br/>
+
 {if $feedmeta}
 <h2>Feeds</h2>
   <ul>

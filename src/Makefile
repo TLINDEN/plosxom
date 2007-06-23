@@ -13,6 +13,7 @@ clean:
 	rm -f *~ */*~ */*/*~
 
 
+
 dist: manifest
 	@echo packageing $(pkg)-$(version)
 	rm -rf ../$(pkg)-$(version)

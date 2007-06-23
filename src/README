@@ -133,6 +133,25 @@ Will be used to create image or stylesheet links.
 
 baseurl = http://yourpage/plosxom/
 
+
+=== Preinstalled Plugins
+
+The following plugins are preinstalled with plosxom:
+
+  page plugin:   edit etc/page.conf, add the path to the data path
+                 where static pages have to stored. A sample pages
+	         directory is supplied with plosxom.
+
+  links plugin:  edit etc/blogroll.txt.
+
+  categories:    nothing to do.
+ 
+  feed plugin:   nothing to do.
+
+  technorati:    nothing to do, just add tags to your posts on the
+                 last line like tag:blog, tag:test, etc...
+
+
 === Posting
 
 Now you are done. Start blogging by creating txt files under the

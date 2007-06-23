@@ -42,6 +42,10 @@
      {include file="crystalx/post.tpl" post="`$post`" }
   {/foreach}
 
+{elseif $page}
+
+  {include file="crystalx/page.tpl" post="`$page`" }
+
 {else}
 
    {* oops, no data? *}
