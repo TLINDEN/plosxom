@@ -13,3 +13,11 @@ To install the template, download the zip file below and unpack it into your tem
 
 [http://plosxom.googlecode.com/files/blogtxt-screenshot.png Screenshot]
 [http://plosxom.googlecode.com/files/blogtxt.zip Download blogtxt.zip]
+
+
+== crystalx ==
+
+This is a port of the [http://www.headsetoptions.org/2007/03/12/wordpress-theme-crystalx-released/ Crystalx] worpress theme by [http://www.headsetoptions.org/ headsetoptions]. To install, unpack the zip file to your templates directory and change your config variable "template" to "crystalx".
+
+[http://plosxom.googlecode.com/files/screenshot-crystalx.png Screenshot]
+[http://plosxom.googlecode.com/files/crystalx.zip Download crystalx.zip]
