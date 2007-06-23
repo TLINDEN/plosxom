@@ -1,0 +1,22 @@
+#summary Tagcloud Plugin
+
+= Introduction =
+
+Add a tagcloud to your blog.
+
+= Install =
+
+1. Copy tagcloud.php to your plugin directory.
+
+2. add something like this to your template, eg. sidebar:
+
+{{{
+ <h2>Tags:</h2>
+ <ul>
+    {cloud config="tags.conf" template="<a rel='tag' href='/index.php/tag/%1'>%1</a> "}
+ </ul>
+}}}
+
+3. Install the supplied tags.pl Script as cronjob. It takes the data directory location as argument and outputs a config which will be used by the tagcloud plugin then to generate the cloud. That means tagcloud will not generated live.
+
+[http://plosxom.googlecode.com/files/tagcloud-1.00.zip Download version 1.00]
