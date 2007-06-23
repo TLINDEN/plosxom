@@ -23,7 +23,7 @@
 
 <h2>Blogroll:</h2>
   <ul>
-    {links config="links.conf" template="<li><a href='%1'>%2</a></li>"}
+    {links config="blogroll.conf" template="<li><a href='%1'>%2</a></li>"}
   </ul>
 <br/>
 
