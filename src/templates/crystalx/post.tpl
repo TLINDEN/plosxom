@@ -10,7 +10,7 @@
 </span><span class="noscreen"></span>
 </p>
 
- {$post.text}
+ {eval var=$post.text}
 
 <p class="btn-more box noprint"><small>
 <!-- haloscan comment -->

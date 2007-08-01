@@ -77,7 +77,7 @@ lib/Smarty_Compiler.class.php
 lib/debug.tpl
 lib/Smarty.class.php
 lib/Config_File.class.php
-data/example.txt
+data/testing/example.txt
 etc/plosxom.conf
 etc/lang.conf
 etc/.htaccess
@@ -93,6 +93,7 @@ templates/default/atom.tpl
 templates/default/.htaccess
 templates/default/rss.tpl
 templates/default/rss2.tpl
+templates/default/.htaccess~
 templates/default/page.tpl
 templates/crystalx/atom.tpl
 templates/crystalx/images/bg.gif
@@ -122,6 +123,7 @@ templates/crystalx/nav.tpl
 templates/crystalx/rss.tpl
 templates/crystalx/footer.tpl
 templates/crystalx/rss2.tpl
+templates/crystalx/.htaccess
 templates/crystalx/post.tpl
 templates/crystalx/page.tpl
 templates/blogtxt/footer.tpl
@@ -143,6 +145,7 @@ templates/blogtxt/images/important.png
 templates/blogtxt/images/trackbacks.png
 templates/blogtxt/rss.tpl
 templates/blogtxt/rss2.tpl
+templates/blogtxt/.htaccess
 templates/blogtxt/print.css
 templates/blogtxt/page.tpl
 MANIFEST

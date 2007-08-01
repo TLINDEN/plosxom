@@ -5,7 +5,7 @@
  </h2>
 
  <div class="post-entry">
- {$post.text}
+ {eval var=$post.text}
  </div><!-- END POST-ENTRY -->
  
 </div><!-- END POST -->
