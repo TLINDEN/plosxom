@@ -31,10 +31,14 @@
 /*
 
 This is the youtube plugin which allows you to
-post youtube or google videos to your blog by just
-entering the video id without the hassle of digging
-through youtube html source to find the player embed
-code.
+post youtube videos to your blog by just entering
+the video id without the hassle of digging through
+youtube html source to find the player embed code.
+
+This plugin also supports google videos and
+sevenload videos to be posted. Usage is identical
+for all of them. Sevenload doesn't support image
+preview mode so far.
 
 This plugin requires version 1.06 of plosxom whose
 templates are using the smarty eval() function for
@@ -48,20 +52,6 @@ with
 
   {eval var=$post.text}
 
-The plugin generates code which is a little bit
-userfriendly than youtube and google video. In case
-of google video if you choose the preview image
-link mode (mode="image") the plugin connects to
-video.google.com to retrieve the prober image uri.
-If that fails, it falls back to ascii mode and just
-prints a link to the video - so don't wonder.
-
-You may of course change the provided template for
-the plugin, however make sure all if's and tweaks
-required by the plugin remain.
-
-To install:
-
 1. copy youtube.php to your plugins directory.
 
 2. copy youtube.tpl to your current template directory.
@@ -70,15 +60,10 @@ That's all about it.
 
 To include a youtube video in a blog post, do the following:
 
-- visit the youtube or google video page you want to post
-
-- retrieve the video id.
-  Youtube:
+- visit the youtube video page you want to post
+- retrieve the video id, example:
   http://youtube.com/watch?v=OEXt9qb0zBI
-                             ^^^^^^^^^^^
-  Google Video:
-  http://video.google.com/videoplay?docid=-8151365470057210599
-                                          ^^^^^^^^^^^^^^^^^^^^
+                             ^^^^^^^^^^^  this is the video id
 - in a new blog post add one of the following versions:
 
   o plain ascii html link to the youtube page:
@@ -121,11 +106,18 @@ class youtube extends Plugin {
     if (ereg('^\-?[0-9]*$', $id)) {
       $yvideoid = "google";
     }
+    elseif (strlen($id < 10)) {
+      $yvideoid = "sevenload";
+    }
 
     if ($yvideoid == "google") {
       /* adjust defaults */
       $width  = 400;
       $height = 326;
+    }
+    elseif ($yvideoid == "sevenload") {
+      $width  = 380;
+      $height = 313;
     }
 
     if( $params["width"]) {
