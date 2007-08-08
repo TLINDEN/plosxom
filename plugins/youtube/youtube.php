@@ -82,16 +82,12 @@ To include a youtube video in a blog post, do the following:
 
     {youtube width="320" height="240" id="jt4XH65rOxA"}
 
-Instead of the function name {youtube ...} you can
-also use the alias {video ...}.
-
 */
 
 class youtube extends Plugin {
 
   function register() {
     $this->smarty->register_function("youtube", array(&$this, "getyoutube"));
-    $this->smarty->register_function("video",   array(&$this, "getyoutube"));
   }
   
   function getyoutube($params, &$smarty) {
@@ -110,7 +106,7 @@ class youtube extends Plugin {
     if (ereg('^\-?[0-9]*$', $id)) {
       $yvideoid = "google";
     }
-    elseif (strlen($id < 10)) {
+    elseif (strlen($id) < 10) {
       $yvideoid = "sevenload";
     }
 
