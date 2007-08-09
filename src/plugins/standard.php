@@ -272,6 +272,7 @@ class standard extends Plugin {
          $lines          = file($filename);
          $entry["title"] = trim(array_shift($lines));
          $entry["text"]  = paragraph(implode('', $lines));
+         $entry["raw"]   = implode('', $lines);
       }
   
       return $entry;
