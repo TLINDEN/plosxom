@@ -1,4 +1,16 @@
 <html>
+<head>
+<title>{$config.blog_name} - Blog Administration</title>
+<script type="text/javascript" src="{$config.baseurl}/templates/{$config.template}/admin_dhtml.js"></script>
+<script type="text/javascript">
+{literal}
+function setCat(showcat) {
+  document.edit.newcategory.value = showcat;
+}
+{/literal}
+</script>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+</head>
 <body>
 
 {config_load file='lang.conf' section="$lang"}
@@ -12,21 +24,40 @@
 <br/>
 <br/>
 
-{if $admin_mode == "edit"}
-
-   <h4>Edit {$post.category}/{$post.id}</h4>
-    <form method=postname=edit action="{$config.whoami}/admin">
-      <input type=hidden name=mode value=save>
-      <input type=hidden name=file value="{$post.file}">
-      <input type=hidden name=category value="{$post.category}">
-      Category: <input type=text name=newcategory size=40 value="{$post.category}"><br/>
-    Available categories: <b>FIXME</b><br/>
-     Title: <input type=text name=title size=40 value="{$post.title}"><br/>
-     <textarea name=content cols=80 rows=30>{$post.raw}</textarea>
-    <br/>
-      <input type=submit name=submit value="Save">
+{if $admin_mode == "edit" or $admin_mode == "create"}
+   {if $admin_mode == "create"}
+     {assign var="title" value="Create new posting"}
+   {else}
+     {assign var="title" value="Edit `$post.category`/`$post.id`"}
+   {/if}
+   
+   <h4>{$title}</h4>
+    <form method="post" name="edit" action="{$config.whoami}/admin">
+      <input type="hidden" name="mode" value="save">
+      <input type="hidden" name="workpage" value="{$post.file}">
+      <input type="hidden" name="category" value="{$post.category}">
+      Category: <input type="text" name="newcategory" value="{$post.category}" id="cat">
+      Title: <input type="text" name="title" size="40" value="{$post.title}"><br/>
+      Available categories:
+       {foreach item=cat from=$categories}
+	 {if $post.category == $cat}
+	   {assign var="showcat" value="<font style='background: limegreen;'>`$cat`</font>"}
+	 {else}
+	   {assign var="showcat" value="`$cat`} 
+	 {/if}</a>
+         <!-- <a href="JavaScript:setCat('{$cat}')">{$showcat}</a> -->
+	 <a href="#" onclick="setCat('{$cat}')">{$showcat}</a>
+       {/foreach}
+      <br/>
+      <textarea name="content" cols="80" rows="30">{$post.raw}</textarea>
+      <br/>
+      <input type="submit" name="submit" value="Save">
 
 {else}
+
+  {if $admin_msg}
+    <div style="background: limegreen; display: box;">{$admin_msg}</div>
+  {/if}
 
   {* multiple postings, list them *}
   {foreach item=post from=$posts}

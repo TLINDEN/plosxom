@@ -33,6 +33,7 @@ class admin extends Plugin {
   var $workpage;
   var $title;
   var $category;
+  var $newcategory;
 
   function register() {
     $this->add_handler("hook_url_filter", "admin");
@@ -59,10 +60,12 @@ class admin extends Plugin {
     }
     elseif (preg_match("/^\/admin$/", $path)) {
       // index oder save
-      $this->mode     = $_POST["mode"];
-      $this->workpage = $_POST["workpage"];
-      $this->title    = $_POST["title"];
-      $this->category = $_POST["category"];
+      $this->mode        = $_POST["mode"];
+      $this->workpage    = $_POST["workpage"];
+      $this->title       = $_POST["title"];
+      $this->category    = $_POST["category"];
+      $this->newcategory = $_POST["newcategory"];
+      $this->content     = $_POST["content"];
       if(! $this->mode ) {
 	  $this->mode = "index";
       }
@@ -75,23 +78,70 @@ class admin extends Plugin {
       $this->template = "admin.tpl";
       $this->config["postings"] = 30;
 
-      if($this->mode == "edit") {
-	/*
-	FIXME: make it possible to access the storage plugin the OOP way!
-        $handler = $this->handler["hook_storage_fetch"][0];
-	$post    = $this->plugins[$handler]->hook_storage_fetch($this->category, $this->posting);
-        //$post = standard::hook_storage_fetch($this->category, $this->workpage);
-	*/
-	$post = standard::getfile($this->config["data_path"], $this->workpage . ".txt", $this->category);
-	$this->smarty->assign("post", $post);
-      }
-
       $this->smarty->assign("admin_mode", $this->mode);
+
+      switch($this->mode) {
+        case "edit":   $this->edit();   break;
+        case "save":   $this->save();   break;
+        case "delete": $this->delete(); break;
+      }
       
       return true;
     }
   }
 
+  function edit() {
+    $post = standard::getfile($this->config["data_path"], $this->workpage . ".txt", $this->category);
+    $categories = standard::fetch_categories();
+    $this->smarty->assign("post", $post);
+    $this->smarty->assign("categories", $categories);
+  }
+
+  function save() {
+    $base        = $this->config["data_path"];
+    $file        = $this->workpage;
+    $category    = $this->category;
+    $newcategory = $this->newcategory;
+    $content     = $this->title . "\n\n" . $this->content . "\n";
+
+    if(! $file ) {
+      $file = preg_replace("/[^a-z0-9A-Z\s\_\-\.]/", "", $this->title);
+    }
+
+    $file = preg_replace("/[\s\-_\/\\\(\)]+/", "_", $file);
+    if (! preg_match("/\.txt$/", $file)) {
+      $file .= ".txt";
+    }
+
+    if($category != $newcategory) {
+      if (! is_dir("$base/$newcategory")) {
+        mkdir("$base/$newcategory");
+        chmod("$base/$newcategory", 0775);
+      }
+      if($category) {
+        unlink("$base/$category/$file");
+      }
+      $file = "$base/$newcategory/$file";
+    }
+    else { 
+      $file = "$base/$category/$file";
+    }
+
+    if(! file_exists($file) ) {
+      $ping = 1;
+    }
+
+    $fd = fopen($file, 'w');
+    fwrite($fd, stripslashes($content));
+    fclose($fd); 
+    chmod($file, 0777);
+
+    $this->smarty->assign("admin_msg", $this->workpage . " written successfully.");
+  }
+
+  function delete() {
+    unlink($this->config["data_path"] . '/' . $this->category . '/' . $this->workpage . '.txt');
+    $this->smarty->assign("admin_msg", $this->workpage . " removed successfully.");
+  }
+
 }
-
-
