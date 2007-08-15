@@ -1,0 +1,3 @@
+- RPC Ping
+- Template auswählen
+- save() edit() Systemfehler abfangen (is_writable() usw)
