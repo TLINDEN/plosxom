@@ -73,3 +73,11 @@ textarea {
 input {
     border: 1px solid #6DA6E2;
 }
+
+.f-left {
+    float:left;
+}
+
+.f-right {
+    float:right;
+}
