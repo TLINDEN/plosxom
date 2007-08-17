@@ -32,6 +32,7 @@ class admin extends Plugin {
   var $mode;
   var $workpage;
   var $workuser;
+  var $workplugin;
   var $title;
   var $category;
   var $newcategory;
@@ -128,6 +129,21 @@ class admin extends Plugin {
     elseif(preg_match("/^\/admin\/users\/create$/", $path)) {
       $this->mode = "users_create";
     }
+    elseif(preg_match("/^\/admin\/plugins$/", $path)) {
+      $this->mode = "plugins";
+      if($_POST["mode"]) {
+	  $this->mode = $_POST["mode"];
+      }
+      $this->workplugin = $_POST["plugin"];
+      $this->pluginlist();
+    }
+    elseif(preg_match("/^\/admin\/plugins\/install$/", $path)) {
+      $this->mode = "plugins_install";
+    }
+    elseif(preg_match("/^\/admin\/plugins\/delete\/(.+?)$/", $path, $match)) {
+      $this->workplugin = $match[1];
+      $this->mode = "plugins_delete";
+    }
     else {
       return false;
     }
@@ -139,10 +155,13 @@ class admin extends Plugin {
       $this->smarty->assign("admin_mode", $this->mode);
 
       switch($this->mode) {
-        case "edit":   $this->edit();   break;
-        case "save":   $this->save();   break;
-        case "users_save":   $this->usersave();   break;
-        case "delete": $this->delete(); break;
+        case "edit":           $this->edit();         break;
+        case "save":           $this->save();         break;
+        case "users_save":     $this->usersave();     break;
+        case "users_delete":   $this->userdelete();   break;
+        case "delete":         $this->delete();       break;
+	case "plugins_save":   $this->pluginsave();   break;
+	case "plugins_delete": $this->plugindelete(); break;
       }
       
       return true;
@@ -202,7 +221,24 @@ class admin extends Plugin {
       $this->smarty->assign("admin_msg", $this->workpage . " written successfully.");
     }
   }
-  
+ 
+  function userfile($data) {
+        /* store admin.conf */
+        $file = $this->config["config_path"] . "/admin.conf";
+	if(! is_writable($file) ) {
+          $this->smarty->assign("admin_error", "admin.conf is not writable!");
+	}
+	else {
+          $fd = fopen($file, 'w');
+          foreach ($data as $user => $md5) {
+            fwrite($fd, $user . " = " . $md5 . "\n");
+          }
+          fclose($fd);
+          chmod($file, 0777);
+          $this->smarty->assign("admin_msg", "User saved.");
+	}
+  }
+ 
   function usersave() {
     $users = $this->pconfig;
     if($this->password == $this->password2) {
@@ -213,19 +249,7 @@ class admin extends Plugin {
       }
       else {
         $users[$this->workuser] = md5($this->password);
-        $file = $this->config["config_path"] . "/admin.conf";
-	if(! is_writable($file) ) {
-          $this->smarty->assign("admin_error", "admin.conf is not writable!");
-	}
-	else {
-          $fd = fopen($file, 'w');
-          foreach ($users as $user => $md5) {
-            fwrite($fd, $user . " = " . $md5 . "\n");
-          }
-          fclose($fd);
-          chmod($file, 0777);
-          $this->smarty->assign("admin_msg", "User saved.");
-	}
+	$this->userfile($users);
         $this->smarty->assign("admin_mode", "users");
       }
     }
@@ -236,9 +260,34 @@ class admin extends Plugin {
     }
   }
 
+  function userdelete() {
+    $users = $this->pconfig;
+    unset ($users[$this->workuser]);
+    $this->userfile($users);
+    $this->smarty->assign("admin_mode", "users");
+  }
+
   function delete() {
     unlink($this->config["data_path"] . '/' . $this->category . '/' . $this->workpage . '.txt');
     $this->smarty->assign("admin_msg", $this->workpage . " removed successfully.");
   }
 
+  function pluginlist() {
+      $this->plugins = array();
+      foreach ($this->handler as $handler => $handler_list) {
+        foreach ($handler_list as $plugin) {
+          $this->plugins[$plugin]["handler"][$handler] = 1;
+	  if(! array_key_exists("version", $this->plugins[$plugin])) {
+	    $cfgfile = $this->config["plugin_path"] . "/" . $plugin . ".nfo";
+	    $plugcfg = array("version" => "unversioned", "description" => "", "author" => "", "author_email" => "", "url" => "");
+	    if(file_exists($cfgfile)) {
+              $plugcfg = parse_config($cfgfile);
+	    }
+	    foreach ($plugcfg as $option => $value) {
+              $this->plugins[$plugin][$option] = $value;
+	    }
+	  }
+	}
+      }
+  }
 }
