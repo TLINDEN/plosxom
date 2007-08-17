@@ -1,0 +1,5 @@
+version = 1.00
+description = Post videos using a very simple syntax (youtube, google-video)
+author = Pali Dhar
+author_email = nobrain AT bk DOT ru
+url =  http://code.google.com/p/plosxom/wiki/PluginYoutube

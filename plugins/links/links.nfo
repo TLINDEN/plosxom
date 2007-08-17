@@ -1,0 +1,5 @@
+version = 1.00
+description = Add links to your blog using simple config files
+author = Pali Dhar
+author_email = nobrain AT bk DOT ru
+url = http://code.google.com/p/plosxom/wiki/PluginLinks
