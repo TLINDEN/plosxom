@@ -38,6 +38,9 @@
  # were re-used at all.
  #
 
+# turn on error output, some installations of php
+# have it turned off, for some obscure reason
+ini_set("display_errors", "on");
 
 # load configuration
 $stderr = "";
@@ -119,7 +122,13 @@ class Plosxom {
 
   function parse_input() {
     # we let plugins parse the url input
-    $path = $_SERVER['PATH_INFO'];
+    if( ! $_SERVER['PATH_INFO']) {
+        # redirected?
+	$path = $_SERVER['ORIG_PATH_INFO'];
+    }
+    else {
+        $path = $_SERVER['PATH_INFO'];
+    }
 
     if ( ereg('^[a-zA-Z0-9\/\_\-\.\;\:]*$', $path) ) {
       $gotfilter = 0;
@@ -150,8 +159,6 @@ class Plosxom {
 	    list($this->category, $this->posting) = $items;
 	  }
         }
-	$this->input["posting"]  = $this->posting;
-	$this->input["category"] = $this->category;
       }
     }
   }
@@ -198,12 +205,10 @@ class Plosxom {
     if($posts) {
       foreach ($this->get_handlers("hook_content") as $handler) {
         foreach ($posts as $pos => $entry) {
-          //$posts[$pos]["text"] = $this->plugins[$handler]->hook_content($entry);
-          $posts[$pos] = $this->plugins[$handler]->hook_content($entry);
+          $posts[$pos]["text"] = $this->plugins[$handler]->hook_content($entry["text"]);
         }
         if ( $this->posting ) {
-          //$post["text"] = $this->plugins[$handler]->hook_content($post);
-          $post = $this->plugins[$handler]->hook_content($post);
+          $post["text"] = $this->plugins[$handler]->hook_content($post["text"]);
         }
       }
       if($this->input["past"]) {
@@ -224,8 +229,7 @@ class Plosxom {
 
     if ( $this->posting ) {
       foreach ($this->get_handlers("hook_content") as $handler) {
-	//$post["text"] = $this->plugins[$handler]->hook_content($post);
-	$post = $this->plugins[$handler]->hook_content($post);
+	$post["text"] = $this->plugins[$handler]->hook_content($post["text"]);
       }
       $this->smarty->assign('post', $post);
       $this->smarty->assign('lastmodified', $post["mtime"]);
@@ -341,12 +345,9 @@ function parse_config($file) {
         $line = preg_replace("/#.+?$/", "", $line);  # remove trailing comment, if any
         if(preg_match("/^(.+?)\s*=\s*(.*)$/", $line, $match)) {
 	  # option = value
-	  $option = trim($match[1]);
-	  $value  = trim($match[2]);
+	  $option = $match[1];
+	  $value  = $match[2];
 	  $config[$option] = $value;
-	}
-	else {
-          $config[trim($line)] = 1;
 	}
       }
     }
