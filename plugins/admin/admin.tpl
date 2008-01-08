@@ -10,8 +10,20 @@ function setCat(showcat) {
 {/literal}
 </script>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="cache-control" content="no-cache">
 <link rel="stylesheet" type="text/css" href="{$config.baseurl}/templates/{$config.template}/admin.css">
+
+<!--
+     redirect the user back to the blog if unauthenticated/unauthorized.
+     you may comment this out if don't like this.
+-->
+{if $unauth}
+<meta http-equiv="refresh" content="10; URL={$config.whoami}">
+{/if}
+
 </head>
+
 <body>
 
 {config_load file='lang.conf' section="$lang"}
@@ -19,6 +31,13 @@ function setCat(showcat) {
 
 {if $unauth}
 
+  <!--
+     If you want to hide details about authentication errors,
+     e.g. wether a user doesn't exist or a password doesn't
+     match, comment $unauth out and just print something like
+     this:
+     <b>Access Denied!</b>
+    -->
   {$unauth}
 
 {else}
@@ -42,20 +61,18 @@ function setCat(showcat) {
 </div>
 
 <br/>
-<br/>
-
 
 {if $admin_msg}
-    <div style="background: limegreen; display: box;">{$admin_msg}</div>
+    <div class="msg">{$admin_msg}</div>
 {/if}
 
 {if $admin_error}
-    <div style="background: orange; display: box;">Error: {$admin_error}</div>
+    <div class="error">Error: {$admin_error}</div>
 {/if}
 
 
-{if $admin_mode == "admin_edit_page" or $admin_mode == "admin_create_page"}
-   {if $admin_mode == "admin_create_page"}
+{if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create"}
+   {if $admin_mode == "admin_page_create"}
      {assign var="title" value="Create new posting"}
    {else}
      {assign var="title" value="Edit `$post.category`/`$post.id`"}
@@ -63,9 +80,9 @@ function setCat(showcat) {
    
    <h4>{$title}</h4>
     <form method="post" name="edit" action="{$config.whoami}/admin">
-      <input type="hidden" name="mode" value="admin_save_page">
+      <input type="hidden" name="mode" value="admin_page_save">
       <input type="hidden" name="admin" value="yes">
-      <input type="hidden" name="workpage" value="{$post.file}">
+      <input type="hidden" name="id" value="{$post.file}">
       <input type="hidden" name="category" value="{$post.category}">
       <table cellspacing="0" colpadding="0" width="100%" border="0">
       <tr>
@@ -110,7 +127,7 @@ function setCat(showcat) {
     </tr>
   {foreach item=post from=$posts}
     <tr>
-      <td><a href="{$config.whoami}/{$post.id}" title="View Posting">{$post.title}</a></td>
+      <td><a href="{$config.whoami}/{$post.category}/{$post.id}" title="View Posting">{$post.title}</a></td>
       <td>{$post.category}</td>
       <td>{$post.mtime|date_format:"%d.%m.%Y %H:%M"}</td>
       <td>{$post.text|count_characters} bytes)</td>

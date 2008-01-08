@@ -30,6 +30,7 @@
 
 class admin extends Plugin {
   var $mode;
+  var $admin;
   var $userlist;
   var $currentuser;
 
@@ -37,11 +38,13 @@ class admin extends Plugin {
     $this->add_handler("hook_url_filter", "admin");
     $this->add_handler("hook_send_header", "admin");
     $this->userlist = parse_config("admin.conf");
+    $this->smarty->force_compile = 1;
+    $this->smarty->caching       = 0;
   }
 
   function hook_send_header() {
-    if(! $this->mode ) {
-      # not in admin mode, do not authenticate
+    if(! $this->admin ) {
+      # not in admin mode, do notthing
       return;
     }
 
@@ -60,7 +63,10 @@ class admin extends Plugin {
 	  header('HTTP/1.0 401 Unauthorized');
 	  $this->smarty->assign("unauth", "You are not authorized to access this page! Password missmatch!");
 	}
-        # else: user authenticated, just proceed. 
+	else {
+          # user authenticated
+	  $this->proceed();
+	}
       }
       else {
         header($authheader);
@@ -71,11 +77,26 @@ class admin extends Plugin {
   }
 
   function hook_url_filter($path) {
-    if(preg_match("/^\/admin/", $path) || $_POST['admin'] || $_GET['admin']) {
+    $adreg = "/^\/admin/";
+    if(    preg_match($adreg, $path)            # index.php/admin
+	|| preg_match($adreg, $_POST['mode'])   # <input type=hidden name=mode value=admin_ ..
+	|| preg_match($adreg, $_GET['mode'])    # index.php?mode=admin_...
+	|| $_POST['admin']                      # <input type=hidden name=admin value=yes ..
+	|| $_GET['admin']                       # index.php?admin=yes
+	) {
       $this->admin = true;
+      $this->template = "admin.tpl"; # overwrite index template, we are using our own
+      return true;
     }
     else {
       return false;
+    }
+  }
+
+  function proceed() {
+    if(! $this->admin ) {
+      # not in admin mode, do notthing
+      return;
     }
 
     # preset mode
@@ -90,7 +111,9 @@ class admin extends Plugin {
       $this->input[$option] = $value;
     }
 
-    $this->template = "admin.tpl";
+    # could be overwriten by some admin_* method
+    $this->smarty->assign("admin_mode", $this->input['mode']);
+    
     $this->config["postings"] = 30;
 
     switch($this->input['mode']) {
@@ -140,29 +163,44 @@ class admin extends Plugin {
 				break;
     }
       
-    $this->smarty->assign("admin_mode", $this->input['mode']);
     $this->smarty->assign("menu", $menu);
-
-    return true;
   }
 
   function admin_page_edit() {
-    $post = standard::getfile($this->config["data_path"], $this->input['workpage'] . ".txt", $this->input['category']);
-    $categories = standard::fetch_categories();
-    $this->smarty->assign("post", $post);
-    $this->smarty->assign("categories", $categories);
+    $post = standard::getfile($this->config["data_path"], $this->input['id'] . ".txt", $this->input['category']);
+    if($post) {
+      $categories = standard::fetch_categories();
+      $this->smarty->assign("post", $post);
+      $this->smarty->assign("categories", $categories);
+    }
+    else {
+      $this->smarty->assign("admin_error", $this->input['id'] . " does not exist or permission denied!");
+      $this->smarty->assign("admin_mode", "admin_index");
+    }
   }
 
+  function admin_page_delete() {
+    $file = $this->config["data_path"] . '/' . $this->input['category'] . '/' . $this->input['id'] . '.txt';
+    if( is_writable($file) && file_exists($file) ) {
+      unlink($file);
+      $this->smarty->assign("admin_msg", $this->input['id'] . " removed successfully.");
+    }
+    else {
+      $this->smarty->assign("admin_error", $this->input['id'] . " does not exist or permission denied!");
+    }
+    $this->smarty->assign("admin_mode", "admin_index");
+  }
 
   function admin_page_save() {
     $base        = $this->config["data_path"];
-    $file        = $this->input['workpage'];
+    $file        = $this->input['id'];
     $category    = $this->input['category'];
     $newcategory = $this->input['newcategory'];
-    $content     = $this->title . "\n\n" . $this->content . "\n";
+    $content     = $this->input['title'] . "\n\n" . $this->input['content'] . "\n";
 
     if(! $file ) {
-      $file = preg_replace("/[^a-z0-9A-Z\s\_\-\.]/", "", $this->title);
+      $file = preg_replace("/[^a-z0-9A-Z\s\_\-\.]/", "", $this->input['title']);
+      $create = true;
     }
 
     $file = preg_replace("/[\s\-_\/\\\(\)]+/", "_", $file);
@@ -179,25 +217,28 @@ class admin extends Plugin {
         unlink("$base/$category/$file");
       }
       $file = "$base/$newcategory/$file";
+      $dir  = "$base/$newcategory";
     }
     else { 
       $file = "$base/$category/$file";
+      $dir  = "$base/$category";
     }
 
-    if(! file_exists($file) ) {
-      $ping = 1;
+    if(! file_exists($file) && ! is_writable($dir) ) {
+      $this->smarty->assign("admin_error", "data directory is not writable!");
     }
-
-    if( ! is_writable($file)) {
-      $this->smarty->assign("admin_error", "$category/$file is not writable!");
+    elseif( ! is_writable($file) && ! $create) {
+      $this->smarty->assign("admin_error", "$file is not writable!");
     }
     else {
       $fd = fopen($file, 'w');
       fwrite($fd, stripslashes($content));
       fclose($fd); 
       chmod($file, 0777);
-      $this->smarty->assign("admin_msg", $this->input['workpage'] . " written successfully.");
+      $this->smarty->assign("admin_msg", '"' . $this->input['title'] . '" written successfully.');
     }
+
+    $this->smarty->assign("admin_mode", "admin_index");
   }
  
   function userfile($data) {
@@ -223,17 +264,17 @@ class admin extends Plugin {
       if(strlen($this->input['password']) < 6) {
         $this->smarty->assign("admin_error", "Password too short!");
 	$this->smarty->assign("admin_user", $this->input['workuser'] );
-	$this->smarty->assign("admin_mode", "users_edit");
+	$this->smarty->assign("admin_mode", "admin_users_edit");
       }
       else {
         $users[$this->input['workuser']] = md5($this->input['password']);
 	$this->userfile($users);
-        $this->smarty->assign("admin_mode", "users");
+        $this->smarty->assign("admin_mode", "admin_users");
       }
     }
     else {
       $this->smarty->assign("admin_user", $this->input['workuser'] );
-      $this->smarty->assign("admin_mode", "users_edit");
+      $this->smarty->assign("admin_mode", "admin_users_edit");
       $this->smarty->assign("admin_error", "Passwords didn't match!");
     }
   }
@@ -242,12 +283,7 @@ class admin extends Plugin {
     $users = $this->userlist;
     unset ($users[$this->input['workuser']]);
     $this->userfile($users);
-    $this->smarty->assign("admin_mode", "users");
-  }
-
-  function admin_page_delete() {
-    unlink($this->config["data_path"] . '/' . $this->input['category'] . '/' . $this->input['workpage'] . '.txt');
-    $this->smarty->assign("admin_msg", $this->input['workpage'] . " removed successfully.");
+    $this->smarty->assign("admin_mode", "admin_users");
   }
 
   function pluginlist() {

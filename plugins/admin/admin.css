@@ -97,3 +97,19 @@ input {
 .f-right {
     float:right;
 }
+
+.msg {
+  background: limegreen;
+  display: box;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.error {
+  background: orange;
+  display: box;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
