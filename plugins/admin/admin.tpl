@@ -24,21 +24,21 @@ function setCat(showcat) {
 {else}
 
 <div class="menu">
-  <a href="{$config.whoami}/admin">Postings</a> 
-  |
-  <a href="{$config.whoami}/admin/users">Users</a>
-  |
-  <a href="{$config.whoami}/admin/plugins">Plugins</a>
-  |
-  <a href="{$config.whoami}/admin/templates">Templates</a>
-  |
-  <a href="{$config.whoami}/admin/config">Config</a>
-  |
-  <a href="{$config.whoami}/admin/rpcping">RPC Ping</a>
-  |
+  <a {if $menu == "index"}    id="highlite" {else} href="{$config.whoami}?admin=yes&" {/if}>Postings</a>
+
+  <a {if $menu == "user"}     id="highlite" {else} href="{$config.whoami}?admin=yes&mode=admin_users" {/if}>Users</a>
+
+  <a {if $menu == "plugin"}   id="highlite" {else} href="{$config.whoami}?admin=yes&mode=admin_plugins" {/if}>Plugins</a>
+
+  <a {if $menu == "template"} id="highlite" {else} href="{$config.whoami}?admin=yes&mode=admin_templates" {/if}>Templates</a>
+
+  <a {if $menu == "config"}   id="highlite" {else} href="{$config.whoami}?admin=yes&mode=admin_config" {/if}>Config</a>
+
+  <a {if $menu == "rpc"}      id="highlite" {else} href="{$config.whoami}?admin=yes&mode=rpcping" {/if}>RPC Ping</a>
+ 
   <a href="{$config.whoami}">View Blog</a>
-  |
-  <a href="{$config.whoami}/admin/help">Help</a>
+  
+  <a {if $menu == "help"}     id="highlite" {else} href="{$config.whoami}?admin=yes&mode=help" {/if}>Help</a>
 </div>
 
 <br/>
@@ -54,8 +54,8 @@ function setCat(showcat) {
 {/if}
 
 
-{if $admin_mode == "edit" or $admin_mode == "create"}
-   {if $admin_mode == "create"}
+{if $admin_mode == "admin_edit_page" or $admin_mode == "admin_create_page"}
+   {if $admin_mode == "admin_create_page"}
      {assign var="title" value="Create new posting"}
    {else}
      {assign var="title" value="Edit `$post.category`/`$post.id`"}
@@ -63,7 +63,8 @@ function setCat(showcat) {
    
    <h4>{$title}</h4>
     <form method="post" name="edit" action="{$config.whoami}/admin">
-      <input type="hidden" name="mode" value="save">
+      <input type="hidden" name="mode" value="admin_save_page">
+      <input type="hidden" name="admin" value="yes">
       <input type="hidden" name="workpage" value="{$post.file}">
       <input type="hidden" name="category" value="{$post.category}">
       <table cellspacing="0" colpadding="0" width="100%" border="0">
@@ -94,9 +95,9 @@ function setCat(showcat) {
       <input type="submit" name="submit" value="Save">
     </form>
 
-{elseif $admin_mode == "index"}
+{elseif $admin_mode == "admin_index"}
 
-  <a class="submenu" href="{$config.whoami}/admin/create">New Posting</a><br/>
+  <a class="submenu" href="{$config.whoami}?admin=yes&mode=admin_page_create">New Posting</a><br/>
 
   {* multiple postings, list them *}
   <table border="0" width="100%">
@@ -109,13 +110,13 @@ function setCat(showcat) {
     </tr>
   {foreach item=post from=$posts}
     <tr>
-      <td><a href="{$config.whoami}/{$post.id}">{$post.title}</a></td>
+      <td><a href="{$config.whoami}/{$post.id}" title="View Posting">{$post.title}</a></td>
       <td>{$post.category}</td>
       <td>{$post.mtime|date_format:"%d.%m.%Y %H:%M"}</td>
       <td>{$post.text|count_characters} bytes)</td>
       <td>
-           <a href="{$config.whoami}/admin/edit/{$post.category}/{$post.id}">edit</a> |
-	   <a href="{$config.whoami}/admin/delete/{$post.category}/{$post.id}">delete</a>
+           <a href="{$config.whoami}?admin=yes&mode=admin_page_edit&category={$post.category}&id={$post.id}">edit</a> |
+	   <a href="{$config.whoami}?admin=yes&mode=admin_page_delete&category={$post.category}&id={$post.id}">delete</a>
       </td>
     </tr>
   {/foreach}
@@ -128,32 +129,32 @@ function setCat(showcat) {
   {if $posts}
     {* if there are no post, we are at the last page and do not display more 'past links *}
     <div class="f-left">
-    <a href="{$config.whoami}/admin/past/{$past}">{#older#}</a>
+    <a href="{$config.whoami}?admin=yes&past={$past}">{#older#}</a>
     </div>
   {/if}
   {if $newer}
     {if $newer == "null"}
        {* if we are at the first page, there are no more pages, display no newer link in this case *}
        <div class="f-right">
-         <a href="{$config.whoami}/admin">{#newer#}</a>
+         <a href="{$config.whoami}?admin=yes&">{#newer#}</a>
        </div>
     {else}
       <div class="f-right">
-        <a href="{$config.whoami}/admin/past/{$newer}">{#newer#}</a>
+        <a href="{$config.whoami}?admin=yes&past={$newer}">{#newer#}</a>
       </div>
     {/if}
   {/if}
 {else}
   <div class="f-left">
-   <a href="{$config.whoami}/admin/past/{$config.postings}">{#older#}</a>
+   <a href="{$config.whoami}?admin=yes&past={$config.postings}">{#older#}</a>
   </div>
 {/if}
 
 
 
-{elseif $admin_mode == "users"}
+{elseif $admin_mode == "admin_users"}
 
-  <a href="{$config.whoami}/admin/users/create" class="submenu">New User</a><br/><br/>
+  <a href="{$config.whoami}?admin=yes&mode=admin_users_create" class="submenu">New User</a><br/><br/>
 
     {* multiple postings, list them *}
       <table border="0" width="100%">
@@ -169,17 +170,17 @@ function setCat(showcat) {
           <td>{$username}</td>
 	  <td>{$md5}</td>
 	  <td>
-            <a href="{$config.whoami}/admin/users/edit/{$username}">edit</a>
+            <a href="{$config.whoami}?admin=yes&mode=admin_users_edit&username={$username}">edit</a>
 	    |
-            <a href="{$config.whoami}/admin/users/delete/{$username}">delete</a>
+            <a href="{$config.whoami}?admin=yes&mode=admin_users_delete&username={$username}">delete</a>
 	  </td>
        </tr>
     {/foreach}
 
 
-{elseif $admin_mode == "users_create" || $admin_mode == "users_edit"}
+{elseif $admin_mode == "admin_users_create" || $admin_admin_mode == "users_edit"}
 
-  {if $admin_mode == "users_create"}
+  {if $admin_mode == "admin_users_create"}
      {assign var="title" value="Create new user"}
   {else}
      {assign var="title" value="Edit `$admin_user`"}
@@ -187,8 +188,9 @@ function setCat(showcat) {
   {/if}
 
   <h4>{$title}</h4>
-    <form method="post" name="edit" action="{$config.whoami}/admin/users">
+    <form method="post" name="edit" action="{$config.whoami}/admin">
       <input type="hidden" name="mode" value="users_save">
+      <input type="hidden" name="admin" value="yes">
       <input type="hidden" name="workuser" value="{$admin_user}">
     <table border="0">
      <tr>

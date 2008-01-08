@@ -27,42 +27,58 @@ th {
     color: #ffffff;
 }
 
+#highlite {
+    font-weight: bold;
+    padding: 5px;
+    padding-bottom: 8px;
+    background: #ffffff;
+    color: #6DA6E2;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .menu a {
-	  color: #ffffff;
-	  background-color: #6DA6E2;
-	  text-decoration: none;
-	  font-weight: bold;
-	  padding: 3px;
+  color: #ffffff;
+  background-color: #6DA6E2;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .menu a:hover {
-	  color: #6DA6E2;
-	  background-color: #ffffff;
-	  font-weight: bold;
-	  text-decoration: none;
+  color: #6DA6E2;
+  background-color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px;
+  padding-bottom: 8px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 h1 {
-	  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	  font-weight: normal;
-	  font-size: 32px;
-	  color: #6DA6E2;
-	  margin-bottom: 30px;
-	  background-color: #FFFFFF;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 32px;
+  color: #6DA6E2;
+  margin-bottom: 30px;
+  background-color: #FFFFFF;
 }
 
 a {
-	  color: #6DA6E2;
-	  background-color: #FFFFFF;
-	  text-decoration: none;
-	  font-weight: bold;
+  color: #6DA6E2;
+  background-color: #FFFFFF;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 a:hover {
-	  background-color: #FFFFFF;
-	  color: inherit;
-	  font-weight: bold;
-	  text-decoration: underline;
+  background-color: #FFFFFF;
+  color: inherit;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 textarea {
