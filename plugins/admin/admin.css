@@ -99,7 +99,7 @@ input {
 }
 
 .msg {
-  background: limegreen;
+  border: 1px solid #a6dbaa;
   display: box;
   padding: 5px;
   margin-bottom: 10px;
@@ -107,7 +107,7 @@ input {
 }
 
 .error {
-  background: orange;
+  border: 1px solid #d8ada2;
   display: box;
   padding: 5px;
   margin-bottom: 10px;
