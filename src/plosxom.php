@@ -184,6 +184,7 @@ class Plosxom {
 
   function engine() {
     # go rendering
+    $this->send_headers();
 
     # get list of postings or set single posting
     $posts = array();
@@ -247,7 +248,6 @@ class Plosxom {
       $tpl = $this->template;
     }
 
-    $this->send_headers();
     $this->smarty->display($this->config["template"] . "/" . $tpl);
   }
 
