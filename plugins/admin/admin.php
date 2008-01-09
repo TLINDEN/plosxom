@@ -119,17 +119,17 @@ class admin extends Plugin {
     switch($this->input['mode']) {
         case "admin_page_edit":
 	                        $this->admin_page_edit();
-				$menu = 'page';
+				$menu = 'index';
 				break;
 				
         case "admin_page_save":
 	                        $this->admin_page_save();
-				$menu = 'page';
+				$menu = 'index';
 				break;
 
         case "admin_page_delete":
 	                        $this->admin_page_delete();
-				$menu = 'page';
+				$menu = 'index';
 				break;
 
         case "admin_users":     
@@ -277,6 +277,7 @@ class admin extends Plugin {
       $this->smarty->assign("admin_mode", "admin_users_edit");
       $this->smarty->assign("admin_error", "Passwords didn't match!");
     }
+    $this->admin_users();
   }
 
   function admin_user_delete() {
@@ -284,6 +285,13 @@ class admin extends Plugin {
     unset ($users[$this->input['workuser']]);
     $this->userfile($users);
     $this->smarty->assign("admin_mode", "admin_users");
+    $this->admin_users();
+  }
+
+  function admin_users() {
+      $users = $this->userlist;
+      ksort($users);
+      $this->smarty->assign("admin_users", $users);
   }
 
   function pluginlist() {
@@ -303,11 +311,5 @@ class admin extends Plugin {
 	  }
 	}
       }
-  }
-
-  function admin_users() {
-      $users = $this->userlist;
-      ksort($users);
-      $this->smarty->assign("admin_users", $users);
   }
 }
