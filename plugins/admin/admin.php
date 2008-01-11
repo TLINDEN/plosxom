@@ -37,6 +37,7 @@ class admin extends Plugin {
   function register() {
     $this->add_handler("hook_url_filter", "admin");
     $this->add_handler("hook_send_header", "admin");
+    $this->add_handler("hook_content", "admin");
     $this->userlist = parse_config("admin.conf");
     $this->smarty->force_compile = 1;
     $this->smarty->caching       = 0;
@@ -298,18 +299,54 @@ class admin extends Plugin {
       $this->plugins = array();
       foreach ($this->handler as $handler => $handler_list) {
         foreach ($handler_list as $plugin) {
+	  if($plugin == "standard") { continue; } # ignore standard plugin
+
           $this->plugins[$plugin]["handler"][$handler] = 1;
+
 	  if(! array_key_exists("version", $this->plugins[$plugin])) {
 	    $cfgfile = $this->config["plugin_path"] . "/" . $plugin . ".nfo";
-	    $plugcfg = array("version" => "unversioned", "description" => "", "author" => "", "author_email" => "", "url" => "");
+
+            $plugcfg = array("version" => "unversioned", 
+	                     "description" => "", "author" => "", 
+			     "author_email" => "", "url" => "");
+
 	    if(file_exists($cfgfile)) {
               $plugcfg = parse_config($cfgfile);
 	    }
+
 	    foreach ($plugcfg as $option => $value) {
               $this->plugins[$plugin][$option] = $value;
+	    }
+
+	    $this->plugins[$plugin]['name'] = $plugin;
+	    
+	    if(file_exists($this->config["config_path"] . "/" . $plugin . ".conf")) {
+              $this->plugins[$plugin]['config'] = 1;
+	    }
+
+	    if(file_exists($this->config["config_path"] . "/" . $plugin . ".disabled")) {
+              $this->plugins[$plugin]['state'] = 'inactive';
+	    }
+	    else {
+              $this->plugins[$plugin]['state'] = 'active';
 	    }
 	  }
 	}
       }
+  }
+
+  function admin_plugins() {
+    $this->pluginlist();
+    $this->smarty->assign("plugins", $this->plugins);
+  }
+
+  function hook_content(&$text) {
+    return $text;
+    if ($this->input['mode'] == "admin_plugins") {
+      print "<pre>";
+      var_dump($this->plugins);
+      print "</pre>";
+    }
+    return $text;
   }
 }

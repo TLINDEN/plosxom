@@ -27,7 +27,9 @@ function setCat(showcat) {
 <body>
 
 {config_load file='lang.conf' section="$lang"}
+<!--
 <h1>{$config.blog_name} - Blog Administration</h4>
+-->
 
 {if $unauth}
 
@@ -127,7 +129,7 @@ function setCat(showcat) {
     </tr>
   {foreach item=post from=$posts}
     <tr>
-      <td><a href="{$config.whoami}/{$post.category}/{$post.id}" title="View Posting">{$post.title}</a></td>
+      <td><a href="{$config.whoami}/{$post.category}/{$post.id}" title="View '{$post.title}'">{$post.title|truncate:40:" ...":false}</a></td>
       <td>{$post.category}</td>
       <td>{$post.mtime|date_format:"%d.%m.%Y %H:%M"}</td>
       <td>{$post.text|count_characters} bytes)</td>
@@ -222,6 +224,51 @@ function setCat(showcat) {
      </table><br/>
       <input type="submit" name="submit" value="Save">
     </form>
+
+
+
+{elseif $admin_mode == "admin_plugins"}
+
+<a href="{$config.whoami}?admin=yes&mode=admin_plugins_install" class="submenu">Install new plugin</a><br/><br/>
+
+ <table border="0" width="100%">
+  <tr>
+   <th align="left">Name</th>
+   <th align="left">Version</th>
+   <th align="left">State</th>
+   <th align="left">Author</th>
+   <th align="left">Description</th>
+  </tr>
+{foreach item=plugin from=$plugins}
+  {if $plugin.state == "active"}
+     {assign var="color" value="green"}
+     {assign var="newstate" value="inactive"}
+     {assign var="newstateaction" value="disable"}
+  {else}
+     {assign var="color" value="red"}
+     {assign var="newstate" value="active"}
+     {assign var="newstateaction" value="enable&nbsp;"}
+  {/if}
+  <tr>
+    <td>{$plugin.name}</td>
+    <td><a href="{$plugin.url}">{$plugin.version}</a></td>
+    <td><span style="color: {$color};">{$plugin.state}</span></td>
+    <td><a href="mailto:{$plugin.author_email}">{$plugin.author}</a></td>
+    <td><span title="{$plugin.description}">{$plugin.description|truncate:40:" ...":false}</span></td>
+    <td>
+      <code>
+      <a href="{$config.whoami}?admin=yes&mode=admin_plugins_changestate&newstate={$newstate}">{$newstateaction}</a>
+      |
+      <a href="{$config.whoami}?admin=yes&mode=admin_plugins_delete&plugin={$plugin.name}">delete</a>
+      {if $plugin.config}
+        |
+        <a href="{$config.whoami}?admin=yes&mode=admin_plugins_editconfig&plugin={$plugin.name}">edit plugin config</a>
+      {/if}
+      </code>
+    </td>
+  </tr>
+    {/foreach}
+ </table>
 
 {/if} <!-- endif admin_mode -->
 
