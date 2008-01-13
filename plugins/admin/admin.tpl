@@ -22,14 +22,19 @@ function setCat(showcat) {
 <meta http-equiv="refresh" content="10; URL={$config.whoami}">
 {/if}
 
+{assign var="base"   value=$config.baseurl}
+{assign var="tpl"    value=$config.template}
+{assign var="edit"   value="<img title=edit   src=$base/templates/$tpl/edit.png   border=0>"}
+{assign var="delete" value="<img title=delete src=$base/templates/$tpl/remove.png border=0>"}
+
 </head>
 
 <body>
 
 {config_load file='lang.conf' section="$lang"}
-<!--
+
 <h1>{$config.blog_name} - Blog Administration</h4>
--->
+
 
 {if $unauth}
 
@@ -62,7 +67,19 @@ function setCat(showcat) {
   <a {if $menu == "help"}     id="highlite" {else} href="{$config.whoami}?admin=yes&mode=help" {/if}>Help</a>
 </div>
 
-<br/>
+
+<div class="submenu">
+{if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create" or $admin_mode == "admin_index"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_page_create">New Posting</a>
+{elseif $admin_mode == "admin_users" or $admin_mode == "admin_users_edit" or $admin_mode == "admin_users_create"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_users_create">New User</a>
+{elseif $admin_mode == "admin_plugins" or $admin_mode == "admin_plugins_edit" or $admin_mode == "admin_plugins_create"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_plugins_install">Install new plugin</a>
+{elseif $admin_mode == "admin_templates" or $admin_mode == "admin_users_templates" or $admin_mode == "admin_users_templates"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_templates_install">Install new template</a>
+{/if}
+</div>
+
 
 {if $admin_msg}
     <div class="msg">{$admin_msg}</div>
@@ -116,12 +133,14 @@ function setCat(showcat) {
 
 {elseif $admin_mode == "admin_index"}
 
-  <a class="submenu" href="{$config.whoami}?admin=yes&mode=admin_page_create">New Posting</a><br/>
-
   {* multiple postings, list them *}
   <table border="0" width="100%">
     <tr>
-     <th align="left">Title</th><th align="left">Category</th><th align="left">Modification Time</th><th align="left">Size</th><th>Actions</th>
+     <th align="left">Title</th>
+     <th align="left">Category</th>
+     <th align="left">Modification Time</th>
+     <th align="left">Size</th>
+     <th align="left">Actions</th>
     </tr>
     <tr>
      <td colspan="5">
@@ -132,10 +151,10 @@ function setCat(showcat) {
       <td><a href="{$config.whoami}/{$post.category}/{$post.id}" title="View '{$post.title}'">{$post.title|truncate:40:" ...":false}</a></td>
       <td>{$post.category}</td>
       <td>{$post.mtime|date_format:"%d.%m.%Y %H:%M"}</td>
-      <td>{$post.text|count_characters} bytes)</td>
+      <td>{$post.text|count_characters} bytes</td>
       <td>
-           <a href="{$config.whoami}?admin=yes&mode=admin_page_edit&category={$post.category}&id={$post.id}">edit</a> |
-	   <a href="{$config.whoami}?admin=yes&mode=admin_page_delete&category={$post.category}&id={$post.id}">delete</a>
+           <a href="{$config.whoami}?admin=yes&mode=admin_page_edit&category={$post.category}&id={$post.id}">{$edit}</a>
+	   <a href="{$config.whoami}?admin=yes&mode=admin_page_delete&category={$post.category}&id={$post.id}">{$delete}</a>
       </td>
     </tr>
   {/foreach}
@@ -173,8 +192,6 @@ function setCat(showcat) {
 
 {elseif $admin_mode == "admin_users"}
 
-  <a href="{$config.whoami}?admin=yes&mode=admin_users_create" class="submenu">New User</a><br/><br/>
-
     {* multiple postings, list them *}
       <table border="0" width="100%">
         <tr>
@@ -189,9 +206,8 @@ function setCat(showcat) {
           <td>{$username}</td>
 	  <td>{$md5}</td>
 	  <td>
-            <a href="{$config.whoami}?admin=yes&mode=admin_users_edit&username={$username}">edit</a>
-	    |
-            <a href="{$config.whoami}?admin=yes&mode=admin_users_delete&username={$username}">delete</a>
+            <a href="{$config.whoami}?admin=yes&mode=admin_users_edit&username={$username}">{$edit}</a>
+            <a href="{$config.whoami}?admin=yes&mode=admin_users_delete&username={$username}">{$delete}</a>
 	  </td>
        </tr>
     {/foreach}
@@ -229,42 +245,43 @@ function setCat(showcat) {
 
 {elseif $admin_mode == "admin_plugins"}
 
-<a href="{$config.whoami}?admin=yes&mode=admin_plugins_install" class="submenu">Install new plugin</a><br/><br/>
-
  <table border="0" width="100%">
   <tr>
    <th align="left">Name</th>
    <th align="left">Version</th>
-   <th align="left">State</th>
    <th align="left">Author</th>
    <th align="left">Description</th>
+   <th align="left">State</th>
+   <th align="left">Actions</th>
   </tr>
+
+  <tr>
+   <td colspan="6">
+     <p style="border-bottom: 1px solid #c4c4c4;"></p>
+   </td>
+  </tr>
+
 {foreach item=plugin from=$plugins}
   {if $plugin.state == "active"}
-     {assign var="color" value="green"}
      {assign var="newstate" value="inactive"}
-     {assign var="newstateaction" value="disable"}
+     {assign var="img"      value="<img title=deactivate src=$base/templates/$tpl/ok.png border=0>"}
   {else}
-     {assign var="color" value="red"}
      {assign var="newstate" value="active"}
-     {assign var="newstateaction" value="enable&nbsp;"}
+     {assign var="img"      value="<img title=activate   src=$base/templates/$tpl/no.png border=0>"}
   {/if}
   <tr>
     <td>{$plugin.name}</td>
     <td><a href="{$plugin.url}">{$plugin.version}</a></td>
-    <td><span style="color: {$color};">{$plugin.state}</span></td>
     <td><a href="mailto:{$plugin.author_email}">{$plugin.author}</a></td>
     <td><span title="{$plugin.description}">{$plugin.description|truncate:40:" ...":false}</span></td>
     <td>
-      <code>
-      <a href="{$config.whoami}?admin=yes&mode=admin_plugins_changestate&newstate={$newstate}">{$newstateaction}</a>
-      |
-      <a href="{$config.whoami}?admin=yes&mode=admin_plugins_delete&plugin={$plugin.name}">delete</a>
+      <a href="{$config.whoami}?admin=yes&mode=admin_plugins_changestate&newstate={$newstate}">{$img}</a>
+    </td>
+    <td>
+      <a href="{$config.whoami}?admin=yes&mode=admin_plugins_delete&plugin={$plugin.name}">{$delete}</a>
       {if $plugin.config}
-        |
-        <a href="{$config.whoami}?admin=yes&mode=admin_plugins_editconfig&plugin={$plugin.name}">edit plugin config</a>
+        <a href="{$config.whoami}?admin=yes&mode=admin_plugins_editconfig&plugin={$plugin.name}">{$edit}</a>
       {/if}
-      </code>
     </td>
   </tr>
     {/foreach}

@@ -143,6 +143,10 @@ class admin extends Plugin {
 				$menu = 'user';
 				break;
 
+        case "admin_users_create":
+				$menu = 'user';
+				break;
+
         case "admin_users_delete":
 	                        $this->admin_users_delete();
 				$menu = 'user';
@@ -296,43 +300,47 @@ class admin extends Plugin {
   }
 
   function pluginlist() {
-      $this->plugins = array();
-      foreach ($this->handler as $handler => $handler_list) {
-        foreach ($handler_list as $plugin) {
-	  if($plugin == "standard") { continue; } # ignore standard plugin
+    # generates a list of installed plugins
+    $this->plugins = array();
 
-          $this->plugins[$plugin]["handler"][$handler] = 1;
+    if ( file_exists($this->config["plugin_path"]) ) {
+      $plugin_dh = opendir($this->config["plugin_path"]);
+      while ( ( $file = readdir( $plugin_dh )) !== false) {
+        if ( preg_match( '/^(.+?)\.nfo$/', $file, $match ) ) {
+	  $plugin = $match[1];
 
-	  if(! array_key_exists("version", $this->plugins[$plugin])) {
-	    $cfgfile = $this->config["plugin_path"] . "/" . $plugin . ".nfo";
+	  if($plugin == "standard") {
+	    continue;
+	  }
 
-            $plugcfg = array("version" => "unversioned", 
-	                     "description" => "", "author" => "", 
-			     "author_email" => "", "url" => "");
+	  $plugcfg = array("version" => "unversioned", 
+			   "description" => "", "author" => "", 
+			   "author_email" => "", "url" => "");
 
-	    if(file_exists($cfgfile)) {
-              $plugcfg = parse_config($cfgfile);
-	    }
+	  $cfgfile = $this->config["plugin_path"] . "/" . $plugin . ".nfo";
+	  $plugcfg = parse_config($cfgfile);
+	  
+	  foreach ($plugcfg as $option => $value) {
+	    $this->plugins[$plugin][$option] = $value;
+	  }
 
-	    foreach ($plugcfg as $option => $value) {
-              $this->plugins[$plugin][$option] = $value;
-	    }
+	  $this->plugins[$plugin]['name'] = $plugin;
 
-	    $this->plugins[$plugin]['name'] = $plugin;
-	    
-	    if(file_exists($this->config["config_path"] . "/" . $plugin . ".conf")) {
-              $this->plugins[$plugin]['config'] = 1;
-	    }
+	  if(file_exists($this->config["config_path"] . "/" . $plugin . ".conf")) {
+	    $this->plugins[$plugin]['config'] = 1;
+	  }
 
-	    if(file_exists($this->config["config_path"] . "/" . $plugin . ".disabled")) {
-              $this->plugins[$plugin]['state'] = 'inactive';
-	    }
-	    else {
-              $this->plugins[$plugin]['state'] = 'active';
-	    }
+	  if(file_exists($this->config["config_path"] . "/" . $plugin . ".disabled")) {
+	    $this->plugins[$plugin]['state'] = 'inactive';
+	  }
+	  else {
+	    $this->plugins[$plugin]['state'] = 'active';
 	  }
 	}
       }
+    }
+
+    sort($this->plugins);
   }
 
   function admin_plugins() {
@@ -350,3 +358,8 @@ class admin extends Plugin {
     return $text;
   }
 }
+
+ 
+ 
+ 
+
