@@ -238,17 +238,17 @@ class Plosxom {
     }
 
     $this->smarty->assign('config', $this->config);
-    $this->smarty->assign('lang', $this->config["lang"]);
+    $this->smarty->assign('lang'  , $this->config["lang"]);
 
     # $this->smarty->debugging = true;
 
-    $tpl = "index.tpl";
+    $tpl = $this->config["template"] . "/index.tpl";
     if($this->template) {
       # some plugin has overwritten the default template filename
       $tpl = $this->template;
     }
 
-    $this->smarty->display($this->config["template"] . "/" . $tpl);
+    $this->smarty->display( $tpl );
   }
 
 
