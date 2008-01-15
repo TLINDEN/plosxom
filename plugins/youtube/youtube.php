@@ -152,7 +152,7 @@ class youtube extends Plugin {
     $this->smarty->assign("mode",     $params["mode"]);
     $this->smarty->assign("yvideoid", $yvideoid);
 
-    $this->smarty->display($this->config["template"] . "/" . $tpl);
+    $this->smarty->display("shared/$tpl");
   }
   
 }
