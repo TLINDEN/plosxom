@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>{$config.blog_name} - Blog Administration</title>
-<script type="text/javascript" src="{$config.baseurl}/templates/{$config.template}/admin_dhtml.js"></script>
+<script type="text/javascript" src="{$config.baseurl}/templates/shared/admin_dhtml.js"></script>
 <script type="text/javascript">
 {literal}
 function setCat(showcat) {
@@ -12,7 +12,7 @@ function setCat(showcat) {
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="cache-control" content="no-cache">
-<link rel="stylesheet" type="text/css" href="{$config.baseurl}/templates/{$config.template}/admin.css">
+<link rel="stylesheet" type="text/css" href="{$config.baseurl}/templates/shared/admin.css">
 
 <!--
      redirect the user back to the blog if unauthenticated/unauthorized.
@@ -23,12 +23,11 @@ function setCat(showcat) {
 {/if}
 
 {assign var="base"   value=$config.baseurl}
-{assign var="tpl"    value=$config.template}
-{assign var="edit"   value="<img title=edit   src=$base/templates/$tpl/edit.png   border=0>"}
-{assign var="delete" value="<img title=delete src=$base/templates/$tpl/remove.png border=0>"}
+{assign var="edit"   value="<img title=edit   src=$base/templates/shared/edit.png   border=0>"}
+{assign var="delete" value="<img title=delete src=$base/templates/shared/remove.png border=0>"}
 
 {if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create"}
-<script language="javascript" type="text/javascript" src="{$config.baseurl}/templates/{$config.template}/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="{$config.baseurl}/templates/shared/tiny_mce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript">
 tinyMCE.init({ldelim}
     	mode : "textareas",
@@ -46,9 +45,9 @@ tinyMCE.init({ldelim}
 	plugin_insertdate_dateFormat : "%Y-%m-%d",
 	plugin_insertdate_timeFormat : "%H:%M:%S",
 	extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
-	external_link_list_url : "{$config.baseurl}/templates/{$config.template}/tiny_mce/link_list.js",
-	external_image_list_url : "{$config.baseurl}/templates/{$config.template}/tiny_mce/image_list.js",
-	flash_external_list_url : "{$config.baseurl}/templates/{$config.template}/tiny_mce/flash_list.js"
+	external_link_list_url : "{$config.baseurl}/templates/shared/tiny_mce/link_list.js",
+	external_image_list_url : "{$config.baseurl}/templates/shared/tiny_mce/image_list.js",
+	flash_external_list_url : "{$config.baseurl}/templates/shared/tiny_mce/flash_list.js"
 {rdelim});
 </script>
 {/if}
@@ -76,21 +75,14 @@ tinyMCE.init({ldelim}
 {else}
 
 <div class="menu">
-  <a {if $menu == "index"}    id="highlite" {else} href="{$config.whoami}?admin=yes&" {/if}>Postings</a>
-
-  <a {if $menu == "user"}     id="highlite" {else} href="{$config.whoami}?admin=yes&mode=admin_users" {/if}>Users</a>
-
-  <a {if $menu == "plugin"}   id="highlite" {else} href="{$config.whoami}?admin=yes&mode=admin_plugins" {/if}>Plugins</a>
-
-  <a {if $menu == "template"} id="highlite" {else} href="{$config.whoami}?admin=yes&mode=admin_templates" {/if}>Templates</a>
-
-  <a {if $menu == "config"}   id="highlite" {else} href="{$config.whoami}?admin=yes&mode=admin_config" {/if}>Config</a>
-
-  <a {if $menu == "rpc"}      id="highlite" {else} href="{$config.whoami}?admin=yes&mode=rpcping" {/if}>RPC Ping</a>
- 
+  <a {if $menu == "index"}    id="highlite" {/if} href="{$config.whoami}?admin=yes&"                     >Postings</a>
+  <a {if $menu == "user"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_users"     >Users</a>
+  <a {if $menu == "plugin"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_plugins"   >Plugins</a>
+  <a {if $menu == "template"} id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_templates" >Templates</a>
+  <a {if $menu == "config"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_config"    >Config</a>
+  <a {if $menu == "rpc"}      id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=rpcping"         >RPC Ping</a>
+  <a {if $menu == "help"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=help"            >Help</a>
   <a href="{$config.whoami}">View Blog</a>
-  
-  <a {if $menu == "help"}     id="highlite" {else} href="{$config.whoami}?admin=yes&mode=help" {/if}>Help</a>
 </div>
 
 
@@ -114,6 +106,11 @@ tinyMCE.init({ldelim}
 {if $admin_error}
     <div class="error">Error: {$admin_error}</div>
 {/if}
+
+{if $admin_info}
+    <div class="info">Info: {$admin_info}</div>
+{/if}
+
 
 
 {if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create"}
@@ -290,10 +287,10 @@ tinyMCE.init({ldelim}
 {foreach item=plugin from=$plugins}
   {if $plugin.state == "active"}
      {assign var="newstate" value="inactive"}
-     {assign var="img"      value="<img title=deactivate src=$base/templates/$tpl/ok.png border=0>"}
+     {assign var="img"      value="<img title=deactivate src=$base/templates/shared/ok.png border=0>"}
   {else}
      {assign var="newstate" value="active"}
-     {assign var="img"      value="<img title=activate   src=$base/templates/$tpl/no.png border=0>"}
+     {assign var="img"      value="<img title=activate   src=$base/templates/shared/no.png border=0>"}
   {/if}
   <tr>
     <td>{$plugin.name}</td>

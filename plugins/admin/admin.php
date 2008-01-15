@@ -86,7 +86,7 @@ class admin extends Plugin {
 	|| $_GET['admin']                       # index.php?admin=yes
 	) {
       $this->admin = true;
-      $this->template = "admin.tpl"; # overwrite index template, we are using our own
+      $this->template = "shared/admin.tpl"; # overwrite index template, we are using our own
       return true;
     }
     else {
@@ -167,7 +167,7 @@ class admin extends Plugin {
 				$menu = 'plugin';
 				break;
     }
-      
+
     $this->smarty->assign("menu", $menu);
   }
 
@@ -203,6 +203,8 @@ class admin extends Plugin {
     $newcategory = $this->input['newcategory'];
     $content     = $this->input['title'] . "\n\n" . $this->input['content'] . "\n";
 
+    $this->smarty->assign("admin_mode", "admin_index");
+
     if(! $file ) {
       $file = preg_replace("/[^a-z0-9A-Z\s\_\-\.]/", "", $this->input['title']);
       $create = true;
@@ -215,14 +217,49 @@ class admin extends Plugin {
 
     if($category != $newcategory) {
       if (! is_dir("$base/$newcategory")) {
-        mkdir("$base/$newcategory");
-        chmod("$base/$newcategory", 0775);
+	if( ! is_writable($base) ) {
+	  $this->smarty->assign("admin_error", "data directory is not writable!");
+	  return;
+	}
+	else {
+          mkdir("$base/$newcategory");
+          chmod("$base/$newcategory", 0775);
+	}
       }
       if($category) {
-        unlink("$base/$category/$file");
+	if(! file_exists("$base/$category/$file")) {
+          $this->smarty->assign("admin_error", "old file does not exist anymore!");
+	  return;
+	}
+        if( ! unlink("$base/$category/$file")) {
+          $this->smarty->assign("admin_error", "could not remove old file!");
+	  return;
+	}
+	else {
+          # rmdir
+	  $dh = opendir("$base/$category");
+	  $empty = true;
+	  while ( ( $F = readdir( $dh )) !== false) {
+            if($F !== "." and $F !== "..") {
+	      $empty = false;
+	      break;
+	    }
+	  }
+	  closedir($dh);
+	  if( $empty) {
+            if(! rmdir("$base/$category")) {
+              $this->smarty->assign("admin_info", "could not remove empty category directory '$category'!");
+              # we continue to run here, this is not fatal
+	    }
+	    else {
+              $this->smarty->assign("admin_info", "empty category directory '$category' have been removed.");
+	    }
+	  }
+	}
       }
       $file = "$base/$newcategory/$file";
       $dir  = "$base/$newcategory";
+      $create = true;
     }
     else { 
       $file = "$base/$category/$file";
@@ -231,19 +268,29 @@ class admin extends Plugin {
 
     if(! file_exists($file) && ! is_writable($dir) ) {
       $this->smarty->assign("admin_error", "data directory is not writable!");
+      return;
     }
     elseif( ! is_writable($file) && ! $create) {
       $this->smarty->assign("admin_error", "$file is not writable!");
+      return;
     }
     else {
       $fd = fopen($file, 'w');
-      fwrite($fd, stripslashes($content));
-      fclose($fd); 
-      chmod($file, 0777);
-      $this->smarty->assign("admin_msg", '"' . $this->input['title'] . '" written successfully.');
+      if($fd = fopen($file, 'w')) {
+        if (! fwrite($fd, stripslashes($content))) {
+          $this->smarty->assign("admin_error", "could not write to file '$file'");
+	}
+	else {
+          fclose($fd); 
+          chmod($file, 0777);
+          $this->smarty->assign("admin_msg", '"' . $this->input['title'] . '" written successfully.');
+	}
+      }
+      else {
+	$this->smarty->assign("admin_error", "could not open file '$file' for writing!");
+      }
     }
 
-    $this->smarty->assign("admin_mode", "admin_index");
   }
  
   function userfile($data) {
