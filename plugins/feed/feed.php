@@ -64,19 +64,19 @@ class feed extends Plugin {
     # we look for category and archive
     if(preg_match("/^\/feed\/rss$/", $path)) {
       $this->version  = "rss";
-      $this->template = "rss.tpl";
+      $this->template = "shared/rss.tpl";
       $this->smarty->assign("feed", $this->version);
       $this->config["contenttype"] = 'application/rss+xml';
     }
     if(preg_match("/^\/feed\/rss2$/", $path)) {
       $this->version  = "rss2";
-      $this->template = "rss2.tpl";
+      $this->template = "shared/rss2.tpl";
       $this->smarty->assign("feed", $this->version);
       $this->config["contenttype"] = 'application/rss+xml';
     }
     if(preg_match("/^\/feed\/atom$/", $path)) {
       $this->version  = "atom";
-      $this->template = "atom.tpl";
+      $this->template = "shared/atom.tpl";
       $this->smarty->assign("feed", $this->version);
       $this->config["contenttype"] = 'application/atom+xml';
     } 
