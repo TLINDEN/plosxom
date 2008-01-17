@@ -47,6 +47,7 @@ $stderr = "";
 $config_path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/etc";
 $config = parse_config($config_path . "/plosxom.conf");
 $config["config_path"] = $config_path;
+$config["version"] = 1.05;
 
 # load smarty template engine
 define('SMARTY_DIR', $config["lib_path"] . "/"); 
@@ -74,15 +75,17 @@ $plosxom->engine();
 class Plosxom {
 
   var $config, $smarty, $plugins, $handler, $template, $filter_plugin;
-  var $posting, $category, $input, $posts;
+  var $posting, $category, $input, $posts, $registry;
 
   function Plosxom(&$conf, &$smart) {
     $this->config = &$conf;
     $this->smarty = &$smart;
     
     $this->handler = array();
-    $this->plugins = array();
     $this->input   = array("past" => 0);
+
+    # central plugin register
+    $this->registry = new Registry();
 
     # load available plugins
     $this->load_plugins();
@@ -103,15 +106,16 @@ class Plosxom {
 	  include_once($this->config["plugin_path"] . "/" . $plugin);
 	  # we got here, so try to register the plugin
 	    $plugin_name = $match[1];
-	    $this->plugins[$plugin_name] = new $plugin_name     (
+	    $this->registry->plugins[$plugin_name] = new $plugin_name     (
 	                                   $this->handler,
 					   $this->config,
 					   $this->input,
 					   $this->template,
 					   $this->filter_plugin,
 					   $this->smarty,
-					   $this->posts ); 
-            $this->plugins[$plugin_name]->register();
+					   $this->posts,
+					   $this->registry ); 
+            $this->registry->plugins[$plugin_name]->register();
 	}
       }
     }
@@ -132,12 +136,12 @@ class Plosxom {
 
     if ( ereg('^[a-zA-Z0-9\/\_\-\.\;\:]*$', $path) ) {
       $gotfilter = 0;
-      foreach ($this->get_handlers("hook_url_filter") as $handler) {
-        if ( $this->plugins[$handler]->hook_url_filter($path) ) {
+      foreach ($this->registry->get_handlers("hook_url_filter") as $handler) {
+        if ( $this->registry->plugins[$handler]->hook_url_filter($path) ) {
 	  # add the first matching url_filter plugin as filter
 	  # as only one filter can be in effect in the same time,
 	  # we skip the next installed handlers for this hook
-	  # plugins define this themselfes! # $this->filter_plugin = $this->plugins[$handler];
+	  # plugins define this themselfes! # $this->filter_plugin = $this->registry->plugins[$handler];
 	  $gotfilter = 1;
 	  break;
 	}
@@ -165,8 +169,8 @@ class Plosxom {
 
   function send_headers() {
     # send http headers, if any
-    foreach ($this->get_handlers("hook_send_header") as $handler) {
-      $this->plugins[$handler]->hook_send_header($filter, $params);
+    foreach ($this->registry->get_handlers("hook_send_header") as $handler) {
+      $this->registry->plugins[$handler]->hook_send_header($filter, $params);
     }
 
     # finaly send the type of content, may have been modified by some plugin
@@ -192,24 +196,24 @@ class Plosxom {
 
     if ( $this->posting ) {
       # single posting, fetch it
-      $handler = $this->get_handler("hook_storage_fetch");
-      $post    = $this->plugins[$handler]->hook_storage_fetch($this->category, $this->posting);
+      $handler = $this->registry->get_handler("hook_storage_fetch");
+      $post    = $this->registry->plugins[$handler]->hook_storage_fetch($this->category, $this->posting);
       $this->smarty->assign('singleposting', 1);
     }
     else {
       # fetch all matching postings
-      $handler = $this->get_handler("hook_storage_fetchall");
-      $posts   = $this->plugins[$handler]->hook_storage_fetchall();
+      $handler = $this->registry->get_handler("hook_storage_fetchall");
+      $posts   = $this->registry->plugins[$handler]->hook_storage_fetchall();
     }
 
     # manipulate postings, if any
     if($posts) {
-      foreach ($this->get_handlers("hook_content") as $handler) {
+      foreach ($this->registry->get_handlers("hook_content") as $handler) {
         foreach ($posts as $pos => $entry) {
-          $posts[$pos]["text"] = $this->plugins[$handler]->hook_content($entry["text"]);
+          $posts[$pos]["text"] = $this->registry->plugins[$handler]->hook_content($entry["text"]);
         }
         if ( $this->posting ) {
-          $post["text"] = $this->plugins[$handler]->hook_content($post["text"]);
+          $post["text"] = $this->registry->plugins[$handler]->hook_content($post["text"]);
         }
       }
       if($this->input["past"]) {
@@ -229,8 +233,8 @@ class Plosxom {
     }
 
     if ( $this->posting ) {
-      foreach ($this->get_handlers("hook_content") as $handler) {
-	$post["text"] = $this->plugins[$handler]->hook_content($post["text"]);
+      foreach ($this->registry->get_handlers("hook_content") as $handler) {
+	$post["text"] = $this->registry->plugins[$handler]->hook_content($post["text"]);
       }
       $this->smarty->assign('post', $post);
       $this->smarty->assign('lastmodified', $post["mtime"]);
@@ -251,40 +255,62 @@ class Plosxom {
     $this->smarty->display( $tpl );
   }
 
+}
 
+class Registry {
+    var $plugins;
+    var $handler;
+    
+    function Registry() {
+      $this->plugins = array();
+      $this->handler = array();
+    }
+    
     function get_handlers($type, $onlyfirst = 0) {
-    # used by the core to access installed handlers
-    # which get called in the appropriate state
-    #
-    # if a handler is requested with $onlyfirst set to true
-    # then this is a required handler, it must exist
-    if( array_key_exists($type, $this->handler) ) {
-      if( $onlyfirst ) {
-        return $this->handler[$type][0];
+      # used by the core to access installed handlers
+      # which get called in the appropriate state
+      #
+      # if a handler is requested with $onlyfirst set to true
+      # then this is a required handler, it must exist
+      if( array_key_exists($type, $this->handler) ) {
+        if( $onlyfirst ) {
+          return $this->handler[$type][0];
+        }
+        else {
+          return $this->handler[$type];
+        }
       }
       else {
-        return $this->handler[$type];
+        # no handlers for this type installed
+        if ( $onlyfirst ) {
+          # we consider this an error
+          die("Required plugin handler \"$type\" is not installed!");
+        }
+        else {
+          return array();
+        }
       }
     }
-    else {
-      # no handlers for this type installed
-      if ( $onlyfirst ) {
-        # we consider this an error
-        die("Required plugin handler \"$type\" is not installed!");
-      }
-      else {
-        return array();
-      }
-    }
-  }
 
-  function get_handler($type) {
-    # return a single handler, in fact this is the first
-    # one installed, other handlers of this type will
-    # be ignored. If one wants to replace a required
-    # handler, he has to de-install the plugin in question
-    # and install his own one.
-    return $this->get_handlers($type, 1);
+    function get_handler($type) {
+      # return a single handler, in fact this is the first
+      # one installed, other handlers of this type will
+      # be ignored. If one wants to replace a required
+      # handler, he has to de-install the plugin in question
+      # and install his own one.
+      return $this->get_handlers($type, 1);
+    }
+  
+  function add_handler($type, $hdl) {
+    # $type is a handler type
+    # $hdl is a plugin name
+    if(! array_key_exists($type, $this->handler) ) {
+      # create array of handlers for this type
+      $this->handler[$type] = array();
+    }
+    
+    # install the handler plugin
+    array_push($this->handler[$type], $hdl);
   }
 }
 
@@ -296,6 +322,7 @@ class Plugin {
   # handlers.
 
   var $handler;
+  var $registry;
   var $filter_plugin;
   var $template;
   var $config;
@@ -303,7 +330,7 @@ class Plugin {
   var $smarty;
   var $posts;
 
-  function Plugin (&$H, &$C, &$I, &$T, &$F, &$S, &$P) {
+  function Plugin (&$H, &$C, &$I, &$T, &$F, &$S, &$P, &$R) {
     $this->handler       = &$H;
     $this->config        = &$C;
     $this->input         = &$I;
@@ -311,18 +338,19 @@ class Plugin {
     $this->filter_plugin = &$F;
     $this->smarty        = &$S;
     $this->posts         = &$P;
+    $this->registry      = &$R;
+  }
+
+  function get_handler($type) {
+    return $this->registry->get_handler($type);
+  }
+
+  function get_handlers($type, $onlyfirst = 0) {
+    return $this->registry->get_handlers($type, $onlyfirst);
   }
 
   function add_handler($type, $hdl) {
-    # $type is a handler type
-    # $hdl is a plugin name
-    if(! array_key_exists($type, $this->handler) ) {
-      # create array of handlers for this type
-      $this->handler[$type] = array();
-    }
-    
-    # install the handler plugin
-    array_push($this->handler[$type], $hdl);
+    $this->registry->add_handler($type, $hdl);
   }
 
   function replace_template($tpl) {
