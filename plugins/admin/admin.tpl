@@ -26,7 +26,7 @@ function setCat(showcat) {
 {assign var="edit"   value="<img title=edit   src=$base/templates/shared/edit.png   border=0>"}
 {assign var="delete" value="<img title=delete src=$base/templates/shared/remove.png border=0>"}
 
-{if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create"}
+{if $admin_mode == "admin_post_edit" or $admin_mode == "admin_post_create"}
 <script language="javascript" type="text/javascript" src="{$config.baseurl}/templates/shared/tiny_mce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript">
 tinyMCE.init({ldelim}
@@ -58,8 +58,8 @@ tinyMCE.init({ldelim}
 
 {config_load file='lang.conf' section="$lang"}
 
-<h1>{$config.blog_name} - Blog Administration</h4>
-
+<!-- <h1>{$config.blog_name} - Blog Administration</h4>
+-->
 
 {if $unauth}
 
@@ -74,26 +74,30 @@ tinyMCE.init({ldelim}
 
 {else}
 
-<div class="menu">
-  <a {if $menu == "index"}    id="highlite" {/if} href="{$config.whoami}?admin=yes&"                     >Postings</a>
-  <a {if $menu == "user"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_users"     >Users</a>
-  <a {if $menu == "plugin"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_plugins"   >Plugins</a>
+<div class="menu" style="float:left; width:80%;">
+  <a {if $menu == "post"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&"                     >Postings</a>
+  <a {if $menu == "user"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_user"      >Users</a>
+  <a {if $menu == "plugin"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_plugin"    >Plugins</a>
   <a {if $menu == "template"} id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_templates" >Templates</a>
   <a {if $menu == "config"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_config"    >Config</a>
   <a {if $menu == "rpc"}      id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=rpcping"         >RPC Ping</a>
+{if $plugin_admin_page}
+  <a {if $menu == "page"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_page"      >Pages</a>
+{/if}
+</div>
+<div class="menu" style="text-align:right; white-space: nowrap;">
   <a {if $menu == "help"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=help"            >Help</a>
   <a href="{$config.whoami}">View Blog</a>
 </div>
 
-
-<div class="submenu">
-{if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create" or $admin_mode == "admin_index"}
-  <a href="{$config.whoami}?admin=yes&mode=admin_page_create">New Posting</a>
-{elseif $admin_mode == "admin_users" or $admin_mode == "admin_users_edit" or $admin_mode == "admin_users_create"}
-  <a href="{$config.whoami}?admin=yes&mode=admin_users_create">New User</a>
-{elseif $admin_mode == "admin_plugins" or $admin_mode == "admin_plugins_edit" or $admin_mode == "admin_plugins_create"}
-  <a href="{$config.whoami}?admin=yes&mode=admin_plugins_install">Install new plugin</a>
-{elseif $admin_mode == "admin_templates" or $admin_mode == "admin_users_templates" or $admin_mode == "admin_users_templates"}
+<div class="submenu" style="clear:both;">
+{if $admin_mode == "admin_post_edit" or $admin_mode == "admin_post_create" or $admin_mode == "admin_post"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_post_create">New Posting</a>
+{elseif $admin_mode == "admin_user" or $admin_mode == "admin_user_edit" or $admin_mode == "admin_user_create"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_user_create">New User</a>
+{elseif $admin_mode == "admin_plugin" or $admin_mode == "admin_plugin_edit" or $admin_mode == "admin_plugin_create"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_plugin_install">Install new plugin</a>
+{elseif $admin_mode == "admin_templates" or $admin_mode == "admin_user_templates" or $admin_mode == "admin_user_templates"}
   <a href="{$config.whoami}?admin=yes&mode=admin_templates_install">Install new template</a>
 {/if}
 </div>
@@ -113,8 +117,8 @@ tinyMCE.init({ldelim}
 
 
 
-{if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create"}
-   {if $admin_mode == "admin_page_create"}
+{if $admin_mode == "admin_post_edit" or $admin_mode == "admin_post_create"}
+   {if $admin_mode == "admin_post_create"}
      {assign var="title" value="Create new posting"}
    {else}
      {assign var="title" value="Edit <a href=$base/`$post.category`/`$post.id`>`$post.title`</a>"}
@@ -122,7 +126,7 @@ tinyMCE.init({ldelim}
    
    <h4>{$title}</h4>
     <form method="post" name="edit" action="{$config.whoami}/admin">
-      <input type="hidden" name="mode" value="admin_page_save">
+      <input type="hidden" name="mode" value="admin_post_save">
       <input type="hidden" name="admin" value="yes">
       <input type="hidden" name="id" value="{$post.file}">
       <input type="hidden" name="category" value="{$post.category}">
@@ -154,7 +158,7 @@ tinyMCE.init({ldelim}
       <input type="submit" name="submit" value="Save">
     </form>
 
-{elseif $admin_mode == "admin_index"}
+{elseif $admin_mode == "admin_post"}
 
   {* multiple postings, list them *}
   <table border="0" width="100%">
@@ -176,8 +180,8 @@ tinyMCE.init({ldelim}
       <td>{$post.mtime|date_format:"%d.%m.%Y %H:%M"}</td>
       <td>{$post.text|count_characters} bytes</td>
       <td>
-           <a href="{$config.whoami}?admin=yes&mode=admin_page_edit&category={$post.category}&id={$post.id}">{$edit}</a>
-	   <a href="{$config.whoami}?admin=yes&mode=admin_page_delete&category={$post.category}&id={$post.id}">{$delete}</a>
+           <a href="{$config.whoami}?admin=yes&mode=admin_post_edit&category={$post.category}&id={$post.id}">{$edit}</a>
+	   <a href="{$config.whoami}?admin=yes&mode=admin_post_delete&category={$post.category}&id={$post.id}">{$delete}</a>
       </td>
     </tr>
   {/foreach}
@@ -213,46 +217,47 @@ tinyMCE.init({ldelim}
 
 
 
-{elseif $admin_mode == "admin_users"}
+{elseif $admin_mode == "admin_user"}
 
     {* multiple postings, list them *}
       <table border="0" width="100%">
         <tr>
-          <th align="left">Username</th><th align="left">MD5 Password</th><th>Actions</th>
+          <th align="left">Username</th>
+	  <th align="left">MD5 Password</th>
+	  <th align="left">Actions</th>
         </tr>
         <tr>
         <td colspan="3">
           <p style="border-bottom: 1px solid #c4c4c4;"></p>
        </tr>
-    {foreach item=md5 key=username from=$admin_users}
+    {foreach item=md5 key=username from=$admin_user}
        <tr>
           <td>{$username}</td>
 	  <td>{$md5}</td>
 	  <td>
-            <a href="{$config.whoami}?admin=yes&mode=admin_users_edit&username={$username}">{$edit}</a>
-            <a href="{$config.whoami}?admin=yes&mode=admin_users_delete&username={$username}">{$delete}</a>
+            <a href="{$config.whoami}?admin=yes&mode=admin_user_edit&username={$username}">{$edit}</a>
+            <a href="{$config.whoami}?admin=yes&mode=admin_user_delete&username={$username}">{$delete}</a>
 	  </td>
        </tr>
     {/foreach}
 
 
-{elseif $admin_mode == "admin_users_create" || $admin_admin_mode == "users_edit"}
+{elseif $admin_mode == "admin_user_create" || $admin_mode == "admin_user_edit"}
 
-  {if $admin_mode == "admin_users_create"}
+  {if $admin_mode == "admin_user_create"}
      {assign var="title" value="Create new user"}
   {else}
-     {assign var="title" value="Edit `$admin_user`"}
+     {assign var="title" value="Edit `$username`"}
      {assign var="readonly" value="readonly"}
   {/if}
 
   <h4>{$title}</h4>
     <form method="post" name="edit" action="{$config.whoami}/admin">
-      <input type="hidden" name="mode" value="users_save">
+      <input type="hidden" name="mode" value="admin_user_save">
       <input type="hidden" name="admin" value="yes">
-      <input type="hidden" name="workuser" value="{$admin_user}">
     <table border="0">
      <tr>
-      <td>Username:</td><td><input type="text" name="username" size="40" value="{$admin_user}" {$readonly}></td>
+      <td>Username:</td><td><input type="text" name="username" size="40" value="{$username}" {$readonly}></td>
      </tr>
      <tr>
       <td>Password:</td><td><input type="password" name="password" size="40"></td>
@@ -266,7 +271,7 @@ tinyMCE.init({ldelim}
 
 
 
-{elseif $admin_mode == "admin_plugins"}
+{elseif $admin_mode == "admin_plugin"}
 
  <table border="0" width="100%">
   <tr>
@@ -298,12 +303,12 @@ tinyMCE.init({ldelim}
     <td><a href="mailto:{$plugin.author_email}">{$plugin.author}</a></td>
     <td><span title="{$plugin.description}">{$plugin.description|truncate:40:" ...":false}</span></td>
     <td>
-      <a href="{$config.whoami}?admin=yes&mode=admin_plugins_changestate&newstate={$newstate}">{$img}</a>
+      <a href="{$config.whoami}?admin=yes&mode=admin_plugin_changestate&newstate={$newstate}">{$img}</a>
     </td>
     <td>
-      <a href="{$config.whoami}?admin=yes&mode=admin_plugins_delete&plugin={$plugin.name}">{$delete}</a>
+      <a href="{$config.whoami}?admin=yes&mode=admin_plugin_delete&plugin={$plugin.name}">{$delete}</a>
       {if $plugin.config}
-        <a href="{$config.whoami}?admin=yes&mode=admin_plugins_editconfig&plugin={$plugin.name}">{$edit}</a>
+        <a href="{$config.whoami}?admin=yes&mode=admin_plugin_editconfig&plugin={$plugin.name}">{$edit}</a>
       {/if}
     </td>
   </tr>

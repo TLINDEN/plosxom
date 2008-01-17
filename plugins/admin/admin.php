@@ -35,6 +35,9 @@ class admin extends Plugin {
   var $currentuser;
 
   function register() {
+    if($this->config["version"] < 1.05) {
+      die("The admin plugin requires at least plosxom version 1.05, this is: " . $this->config["version"]);
+    }
     $this->add_handler("hook_url_filter", "admin");
     $this->add_handler("hook_send_header", "admin");
     $this->add_handler("hook_content", "admin");
@@ -101,8 +104,8 @@ class admin extends Plugin {
     }
 
     # preset mode
-    $this->input['mode'] = 'admin_index';
-    $menu = 'index';
+    $this->input['mode'] = 'admin_post';
+    $menu = 'post';
 
     # fetch input
     foreach ($_GET as $option => $value) {
@@ -114,64 +117,38 @@ class admin extends Plugin {
 
     # could be overwriten by some admin_* method
     $this->smarty->assign("admin_mode", $this->input['mode']);
-    
+   
+    # posts per page
     $this->config["postings"] = 30;
 
-    switch($this->input['mode']) {
-        case "admin_page_edit":
-	                        $this->admin_page_edit();
-				$menu = 'index';
-				break;
-				
-        case "admin_page_save":
-	                        $this->admin_page_save();
-				$menu = 'index';
-				break;
+    # switch to specific processing method
+    if(preg_match("/^admin_([a-z]+)/", $this->input['mode'], $match)) {
+      $menu = $match[1];
+      $method = $this->input['mode'];
 
-        case "admin_page_delete":
-	                        $this->admin_page_delete();
-				$menu = 'index';
-				break;
+      if(is_callable(array($this, $method))) {
+        $this->$method();
+	$called = true;
+      }
 
-        case "admin_users":     
-	                        $this->admin_users();
-				$menu = 'user';
-				break;
+      foreach ($this->get_handlers($this->input['mode']) as $handler) {
+	if(is_callable(array($this->registry->plugins[$handler], $method))) {
+          $this->registry->plugins[$handler]->$method();
+          $called = true;
+	}
+      }
 
-        case "admin_users_save":
-	                        $this->admin_users_save();
-				$menu = 'user';
-				break;
-
-        case "admin_users_create":
-				$menu = 'user';
-				break;
-
-        case "admin_users_delete":
-	                        $this->admin_users_delete();
-				$menu = 'user';
-				break;
-
-        case "admin_plugins":
-	                        $this->admin_plugins();
-				$menu = 'plugin';
-				break;
-
-	case "admin_plugins_save":
-	                        $this->admin_plugins_save();
-				$menu = 'plugin';
-				break;
-
-	case "admin_plugins_delete":
-	                        $this->admin_plugins_delete();
-				$menu = 'plugin';
-				break;
+      if(! $called) {
+        $this->smarty->assign("admin_error", "unsupported admin mode: $method");
+      }
     }
 
     $this->smarty->assign("menu", $menu);
   }
 
-  function admin_page_edit() {
+  function admin_post() {}
+
+  function admin_post_edit() {
     $post = standard::getfile($this->config["data_path"], $this->input['id'] . ".txt", $this->input['category']);
     if($post) {
       $categories = standard::fetch_categories();
@@ -184,19 +161,16 @@ class admin extends Plugin {
     }
   }
 
-  function admin_page_delete() {
+  function admin_post_delete() {
     $file = $this->config["data_path"] . '/' . $this->input['category'] . '/' . $this->input['id'] . '.txt';
-    if( is_writable($file) && file_exists($file) ) {
-      unlink($file);
+    if( $this->unlink($file) ) {
       $this->smarty->assign("admin_msg", $this->input['id'] . " removed successfully.");
     }
-    else {
-      $this->smarty->assign("admin_error", $this->input['id'] . " does not exist or permission denied!");
-    }
+    # else: error stored in unlink()
     $this->smarty->assign("admin_mode", "admin_index");
   }
 
-  function admin_page_save() {
+  function admin_post_save() {
     $base        = $this->config["data_path"];
     $file        = $this->input['id'];
     $category    = $this->input['category'];
@@ -217,44 +191,18 @@ class admin extends Plugin {
 
     if($category != $newcategory) {
       if (! is_dir("$base/$newcategory")) {
-	if( ! is_writable($base) ) {
-	  $this->smarty->assign("admin_error", "data directory is not writable!");
+	if(! $this->mkdir("$base/$newcategory") ) {
 	  return;
-	}
-	else {
-          mkdir("$base/$newcategory");
-          chmod("$base/$newcategory", 0775);
 	}
       }
       if($category) {
-	if(! file_exists("$base/$category/$file")) {
-          $this->smarty->assign("admin_error", "old file does not exist anymore!");
-	  return;
-	}
-        if( ! unlink("$base/$category/$file")) {
-          $this->smarty->assign("admin_error", "could not remove old file!");
+	if( ! $this->unlink("$base/$category/$file")) {
 	  return;
 	}
 	else {
-          # rmdir
-	  $dh = opendir("$base/$category");
-	  $empty = true;
-	  while ( ( $F = readdir( $dh )) !== false) {
-            if($F !== "." and $F !== "..") {
-	      $empty = false;
-	      break;
-	    }
-	  }
-	  closedir($dh);
-	  if( $empty) {
-            if(! rmdir("$base/$category")) {
-              $this->smarty->assign("admin_info", "could not remove empty category directory '$category'!");
-              # we continue to run here, this is not fatal
-	    }
-	    else {
-              $this->smarty->assign("admin_info", "empty category directory '$category' have been removed.");
-	    }
-	  }
+	  # we ignore errors here and keep such directories
+	  # because it doesn't interupt plosxom in any way
+	  $this->rmdir("$base/$category");
 	}
       }
       $file = "$base/$newcategory/$file";
@@ -275,75 +223,80 @@ class admin extends Plugin {
       return;
     }
     else {
-      $fd = fopen($file, 'w');
-      if($fd = fopen($file, 'w')) {
-        if (! fwrite($fd, stripslashes($content))) {
-          $this->smarty->assign("admin_error", "could not write to file '$file'");
-	}
-	else {
-          fclose($fd); 
-          chmod($file, 0777);
-          $this->smarty->assign("admin_msg", '"' . $this->input['title'] . '" written successfully.');
-	}
+      if($this->write($file, $content)) {
+        $this->smarty->assign("admin_msg", '"' . $this->input['title'] . '" written successfully.');
       }
       else {
-	$this->smarty->assign("admin_error", "could not open file '$file' for writing!");
+        return;
       }
     }
-
   }
  
   function userfile($data) {
-        /* store admin.conf */
-        $file = $this->config["config_path"] . "/admin.conf";
-	if(! is_writable($file) ) {
-          $this->smarty->assign("admin_error", "admin.conf is not writable!");
-	}
-	else {
-          $fd = fopen($file, 'w');
-          foreach ($data as $user => $md5) {
-            fwrite($fd, $user . " = " . $md5 . "\n");
-          }
-          fclose($fd);
-          chmod($file, 0777);
-          $this->smarty->assign("admin_msg", "User saved.");
-	}
+    /* store admin.conf */
+    $file = $this->config["config_path"] . "/admin.conf";
+    $content = '';
+    foreach ($data as $user => $md5) {
+      $content .= $user . ' = ' . $md5 . "\n";
+    }
+    return $this->write($file, $content); 
   }
- 
+
+  function admin_user_create() {}
+
+  function admin_user_edit() {
+    $users = $this->userlist;
+    if(array_key_exists($this->input['username'], $users)) {
+      $this->smarty->assign("username", $this->input['username']);
+    }
+    else {
+      $this->smarty->assign("admin_error", "user " . $this->input['username'] . "doesn't exist!");
+      $this->smarty->assign("admin_mode", "admin_user");
+      $this->admin_user();
+    }
+  }
+
   function admin_user_save() {
     $users = $this->userlist;
     if($this->input['password'] == $this->input['password2']) {
       if(strlen($this->input['password']) < 6) {
         $this->smarty->assign("admin_error", "Password too short!");
-	$this->smarty->assign("admin_user", $this->input['workuser'] );
-	$this->smarty->assign("admin_mode", "admin_users_edit");
+	$this->smarty->assign("admin_user", $this->input['username'] );
+	$this->smarty->assign("admin_mode", "admin_user_edit");
       }
       else {
-        $users[$this->input['workuser']] = md5($this->input['password']);
-	$this->userfile($users);
-        $this->smarty->assign("admin_mode", "admin_users");
+        $users[$this->input['username']] = md5($this->input['password']);
+	if ( $this->userfile($users) ) {
+          $this->smarty->assign("admin_msg", "User " . $this->input['username'] . " has been saved.");
+	  $this->userlist = parse_config("admin.conf");
+	}
+        $this->smarty->assign("admin_mode", "admin_user");
       }
     }
     else {
-      $this->smarty->assign("admin_user", $this->input['workuser'] );
-      $this->smarty->assign("admin_mode", "admin_users_edit");
+      $this->smarty->assign("admin_user", $this->input['username'] );
+      $this->smarty->assign("admin_mode", "admin_user_edit");
       $this->smarty->assign("admin_error", "Passwords didn't match!");
     }
-    $this->admin_users();
+    $this->admin_user();
   }
+
 
   function admin_user_delete() {
     $users = $this->userlist;
-    unset ($users[$this->input['workuser']]);
-    $this->userfile($users);
-    $this->smarty->assign("admin_mode", "admin_users");
-    $this->admin_users();
+    unset ($users[$this->input['username']]);
+    if ( $this->userfile($users) ) {
+      $this->smarty->assign("admin_msg", "User " . $this->input['username'] . " has been deleted.");
+      $this->userlist = parse_config("admin.conf");
+    }
+    $this->smarty->assign("admin_mode", "admin_user");
+    $this->admin_user();
   }
 
-  function admin_users() {
+  function admin_user() {
       $users = $this->userlist;
       ksort($users);
-      $this->smarty->assign("admin_users", $users);
+      $this->smarty->assign("admin_user", $users);
   }
 
   function pluginlist() {
@@ -390,23 +343,119 @@ class admin extends Plugin {
     sort($this->plugins);
   }
 
-  function admin_plugins() {
+  function admin_plugin() {
     $this->pluginlist();
     $this->smarty->assign("plugins", $this->plugins);
   }
 
   function hook_content(&$text) {
     return $text;
-    if ($this->input['mode'] == "admin_plugins") {
+    if ($this->input['mode'] == "admin_plugin") {
       print "<pre>";
       var_dump($this->plugins);
       print "</pre>";
     }
     return $text;
   }
+
+  function write($file, $content) {
+    if(! file_exists($file)) {
+      $dir = dirname($file);
+      if (! is_dir($dir) || ! is_writable($dir)) {
+        $this->smarty->assign("admin_error", "'$dir' is not a directory or does not exist!");
+        return false;
+      }
+    }
+
+    $fd = fopen($file, 'w');
+    if ( ! $fd ) {
+      $this->smarty->assign("admin_error", "could not open file '$file'!");
+      return false;
+    }
+    else {
+      if (! fwrite($fd, stripslashes($content))) {
+        $this->smarty->assign("admin_error", "could not write to file '$file'");
+        return false;
+      }
+      else {
+        fclose($fd); 
+        chmod($file, 0777);
+	#$filename = basename($file);
+        #$this->smarty->assign("admin_info", "'$filename' has been written");
+        return true;
+      }
+    }
+  }
+
+  function mkdir($dir) {
+    $base = dirname($dir);
+    if( ! is_writable($base) ) {
+      $this->smarty->assign("admin_error", "directory '$base' is not writable!");
+      return false;
+    }
+    else {
+      if ( mkdir($dir) ) {
+	chmod($dir, 0775);
+	return true;
+      }
+      else {
+	$this->smarty->assign("admin_error", "could not create directory '$dir'!");
+	return false;
+      }
+    }
+  }
+
+  function unlink($file) {
+    if(! file_exists($file)) {
+      $this->smarty->assign("admin_error", "file '$file' does not exist anymore!");
+      return false;
+    }
+    else {
+      if( ! unlink($file)) {
+	$this->smarty->assign("admin_error", "could not remove file '$file'!");
+	return false;
+      }
+      else {
+	return true;
+      }
+    }
+  }
+
+  function rmdir($dir) {
+    if (! is_dir($dir)  || ! is_writable($dir)) {
+      $this->smarty->assign("admin_error", "'$dir' is not a directory or does not exist!");
+      return false;
+    }
+
+    $dh = opendir($dir);
+    if ( ! $dh ) {
+      $this->smarty->assign("admin_error", "could not open directory '$dir'!");
+      return false;
+    }
+
+    $empty = true;
+    while ( ( $F = readdir( $dh )) !== false) {
+      if($F !== "." and $F !== "..") {
+	$empty = false;
+	break;
+      }
+    }
+    closedir($dh);
+
+    if( $empty ) {
+      if(! rmdir($dir)) {
+	$this->smarty->assign("admin_error", "could not remove directory '$dir'!");
+	return false;
+      }
+      else {
+	$this->smarty->assign("admin_info", "directory '$dir' have been removed.");
+	return true;
+      }
+    }
+    else {
+      $this->smarty->assign("admin_error", "directory '$dir' is not empty!");
+      return false;
+    }
+  }
+
 }
-
- 
- 
- 
-
