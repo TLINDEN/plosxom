@@ -148,16 +148,60 @@ class admin extends Plugin {
 
   function admin_post() {}
 
-  function admin_post_edit() {
-    $post = standard::getfile($this->config["data_path"], $this->input['id'] . ".txt", $this->input['category']);
-    if($post) {
-      $categories = standard::fetch_categories();
-      $this->smarty->assign("post", $post);
-      $this->smarty->assign("categories", $categories);
+  function admin_config() {
+    $configs = array();
+    $dh = opendir($this->config['config_path']);
+    if($dh) {
+      while ( ( $F = readdir( $dh )) !== false) {
+	if($F == "." or $F == "..") {
+	  continue;
+	}
+	if ( preg_match("/\.conf$/", $F)) {
+	  $configs[] = $F;
+	}
+      }
+      closedir($dh);
     }
     else {
-      $this->smarty->assign("admin_error", $this->input['id'] . " does not exist or permission denied!");
-      $this->smarty->assign("admin_mode", "admin_index");
+      $this->smarty->assign("admin_error", "config directory not readable!");
+    }
+    $this->smarty->assign("configs", $configs);
+  }
+
+  function admin_config_edit() {
+    $filename = $this->config['config_path'] . '/'. $this->input['configfile'];
+    if(is_readable($filename) and ereg('\.conf$', $filename)) {
+      $content = implode('', file($filename));
+      $this->smarty->assign("configcontent", $content);
+      $this->smarty->assign("configfile", $this->input['configfile']);
+    }
+    else {
+      $this->smarty->assign("admin_error", "configfile " . $this->input['configfile'] . " does not exist or is not readable!");
+      $this->smarty->assign("admin_mode", "admin_config");
+    }
+  }
+
+  function admin_config_save() {
+    $filename = $this->config['config_path'] . '/'. $this->input['configfile'];
+    if($this->write($filename, $this->input['configcontent'])) {
+      $this->smarty->assign("admin_msg", '"' . $this->input['configfile'] . '" written successfully.');
+    }
+    $this->admin_config();
+    $this->smarty->assign("admin_mode", "admin_config");
+  }
+
+  function admin_post_edit() {
+    if($this->input['id']) {
+      $post = standard::getfile($this->config["data_path"], $this->input['id'] . ".txt", $this->input['category']);
+      if($post) {
+	$categories = standard::fetch_categories();
+	$this->smarty->assign("post", $post);
+	$this->smarty->assign("categories", $categories);
+      }
+      else {
+	$this->smarty->assign("admin_error", $this->input['id'] . " does not exist or permission denied!");
+	$this->smarty->assign("admin_mode", "admin_index");
+      }
     }
   }
 
@@ -457,5 +501,6 @@ class admin extends Plugin {
       return false;
     }
   }
+
 
 }

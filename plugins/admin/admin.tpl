@@ -26,7 +26,7 @@ function setCat(showcat) {
 {assign var="edit"   value="<img title=edit   src=$base/templates/shared/edit.png   border=0>"}
 {assign var="delete" value="<img title=delete src=$base/templates/shared/remove.png border=0>"}
 
-{if $admin_mode == "admin_post_edit" or $admin_mode == "admin_post_create"}
+{if $admin_mode == "admin_post_edit" or $admin_mode == "admin_page_edit"}
 <script language="javascript" type="text/javascript" src="{$config.baseurl}/templates/shared/tiny_mce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript">
 tinyMCE.init({ldelim}
@@ -58,8 +58,8 @@ tinyMCE.init({ldelim}
 
 {config_load file='lang.conf' section="$lang"}
 
-<!-- <h1>{$config.blog_name} - Blog Administration</h4>
--->
+<h1>{$config.blog_name} - Blog Administration</h4>
+
 
 {if $unauth}
 
@@ -91,8 +91,8 @@ tinyMCE.init({ldelim}
 </div>
 
 <div class="submenu" style="clear:both;">
-{if $admin_mode == "admin_post_edit" or $admin_mode == "admin_post_create" or $admin_mode == "admin_post"}
-  <a href="{$config.whoami}?admin=yes&mode=admin_post_create">New Posting</a>
+{if $admin_mode == "admin_post_edit" or $admin_mode == "admin_post"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_post_edit">New Posting</a>
 {elseif $admin_mode == "admin_user" or $admin_mode == "admin_user_edit" or $admin_mode == "admin_user_create"}
   <a href="{$config.whoami}?admin=yes&mode=admin_user_create">New User</a>
 {elseif $admin_mode == "admin_plugin" or $admin_mode == "admin_plugin_edit" or $admin_mode == "admin_plugin_create"}
@@ -101,8 +101,8 @@ tinyMCE.init({ldelim}
   <a href="{$config.whoami}?admin=yes&mode=admin_templates_install">Install new template</a>
 {/if}
 {if $plugin_admin_page}
-  {if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create" or $admin_mode == "admin_page"}
-   <a href="{$config.whoami}?admin=yes&mode=admin_page_create">New Static Page</a>
+  {if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page"}
+   <a href="{$config.whoami}?admin=yes&mode=admin_page_edit">New Static Page</a>
   {/if}
 {/if}
 </div>
@@ -122,11 +122,11 @@ tinyMCE.init({ldelim}
 
 
 
-{if $admin_mode == "admin_post_edit" or $admin_mode == "admin_post_create"}
-   {if $admin_mode == "admin_post_create"}
-     {assign var="title" value="Create new posting"}
-   {else}
+{if $admin_mode == "admin_post_edit"}
+   {if $post.id}
      {assign var="title" value="Edit <a href=$base/`$post.category`/`$post.id`>`$post.title`</a>"}
+   {else}
+     {assign var="title" value="Create new posting"}
    {/if}
    
    <h4>{$title}</h4>
@@ -136,12 +136,21 @@ tinyMCE.init({ldelim}
       <input type="hidden" name="id" value="{$post.file}">
       <input type="hidden" name="category" value="{$post.category}">
       <table cellspacing="0" colpadding="0" width="100%" border="0">
-      <tr>
+       <tr>
         <td align="left">
-          Category: <input type="text" name="newcategory" value="{$post.category}" id="cat">
+          Category:
+        </td>
+        <td align="left">
+          Title:
+        </td>
+      </tr>
+
+      <tr>
+        <td align="left" style="padding-right: 20px;">
+          <input type="text" name="newcategory" value="{$post.category}" id="cat" style="width: 180px;">
 	</td>
 	<td align="right">
-          Title: <input type="text" name="title" size="80" value="{$post.title}">
+          <input type="text" name="title" value="{$post.title}" style="width: 592px;">
 	</td>
       </tr>
       </table>
@@ -151,7 +160,7 @@ tinyMCE.init({ldelim}
 	 {if $post.category == $cat}
 	   {assign var="showcat" value="<font style='background: #c4c4c4;' title='current category'>`$cat`</font>"}
 	 {else}
-	   {assign var="showcat" value="`$cat`} 
+	   {assign var="showcat" value="`$cat`"} 
 	 {/if}</a>
          <!-- <a href="JavaScript:setCat('{$cat}')">{$showcat}</a> -->
 	 <a href="#" onclick="setCat('{$cat}')">{$showcat}</a>
@@ -161,6 +170,7 @@ tinyMCE.init({ldelim}
       <textarea name="content" rows="30">{$post.raw}</textarea>
       <br/>
       <input type="submit" name="submit" value="Save">
+      <input type="button" value="Cancel" onclick="javascript:history.back()">
     </form>
 
 {elseif $admin_mode == "admin_post"}
@@ -348,6 +358,82 @@ tinyMCE.init({ldelim}
   </table>
   
 <br/>
+
+
+
+
+{elseif $admin_mode == "admin_page_edit"}
+   {if $post.id}
+     {assign var="title" value="Edit <a href=$base/page/`$page.id`>`$page.title`</a>"}
+   {else}
+     {assign var="title" value="Create new static page"}
+   {/if}
+   
+   <h4>{$title}</h4>
+    <form method="post" name="edit" action="{$config.whoami}/admin">
+      <input type="hidden" name="mode" value="admin_page_save">
+      <input type="hidden" name="admin" value="yes">
+      <input type="hidden" name="id" value="{$page.file}">
+      <table border="0" cellspacing="0" colpadding="0" width="100%">
+        <tr>
+	  <td align="left">
+	    Title:
+	  </td>
+	  <td align="right">
+	    <input type="text" name="title" value="{$page.title}" style="width: 692px;">
+	  </td>
+	</tr>
+      </table>
+      <br/>
+      <textarea name="content" rows="30">{$page.raw}</textarea>
+      <br/>
+      <input type="submit" name="submit" value="Save">
+      <input type="button" value="Cancel" onclick="javascript:history.back()">
+    </form>
+
+
+
+
+{elseif $admin_mode == "admin_config"}
+
+  {* multiple configs, list them *}
+  <table border="0" width="100%">
+    <tr>
+     <th align="left">Configfile</th>
+     <th align="left">Actions</th>
+    </tr>
+    <tr>
+     <td colspan="5">
+       <p style="border-bottom: 1px solid #c4c4c4;"></p>
+    </tr>
+
+  {foreach item=configfile from=$configs}
+
+     <tr>
+      <td>{$configfile}</td>
+      <td>
+           <a href="{$config.whoami}?admin=yes&mode=admin_config_edit&configfile={$configfile}">{$edit}</a>
+      </td>
+    </tr>
+
+  {/foreach}
+
+ </table>
+
+
+{elseif $admin_mode == "admin_config_edit"}
+   <h4>Edit configfile {$configfile}</h4>
+    <form method="post" name="edit" action="{$config.whoami}/admin">
+      <input type="hidden" name="mode" value="admin_config_save">
+      <input type="hidden" name="admin" value="yes">
+      <input type="hidden" name="configfile" value="{$configfile}">
+      <br/>
+      <textarea name="configcontent" rows="30">{$configcontent}</textarea>
+      <br/>
+      <input type="submit" name="submit" value="Save">
+      <input type="button" value="Cancel" onclick="javascript:history.back()">
+    </form>
+
 
 
 {/if} <!-- endif admin_mode -->
