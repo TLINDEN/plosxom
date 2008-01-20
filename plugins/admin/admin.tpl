@@ -323,7 +323,7 @@ tinyMCE.init({ldelim}
     <td>
       <a href="{$config.whoami}?admin=yes&mode=admin_plugin_delete&plugin={$plugin.name}">{$delete}</a>
       {if $plugin.config}
-        <a href="{$config.whoami}?admin=yes&mode=admin_plugin_editconfig&plugin={$plugin.name}">{$edit}</a>
+        <a href="{$config.whoami}?admin=yes&mode=admin_config_edit&configfile={$plugin.name}.conf&back=admin_plugin">{$edit}</a>
       {/if}
     </td>
   </tr>
@@ -426,6 +426,9 @@ tinyMCE.init({ldelim}
     <form method="post" name="edit" action="{$config.whoami}/admin">
       <input type="hidden" name="mode" value="admin_config_save">
       <input type="hidden" name="admin" value="yes">
+      {if $back}
+        <input type="hidden" name="back" value="{$back}">
+      {/if}
       <input type="hidden" name="configfile" value="{$configfile}">
       <br/>
       <textarea name="configcontent" rows="30">{$configcontent}</textarea>

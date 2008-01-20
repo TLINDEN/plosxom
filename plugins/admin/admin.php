@@ -143,6 +143,12 @@ class admin extends Plugin {
       }
     }
 
+    if($this->input['back']) {
+      if(preg_match("/^admin_([a-z]+)/", $this->input['back'], $match)) {
+	$menu = $match[1];
+      }
+    }
+
     $this->smarty->assign("menu", $menu);
   }
 
@@ -170,6 +176,12 @@ class admin extends Plugin {
 
   function admin_config_edit() {
     $filename = $this->config['config_path'] . '/'. $this->input['configfile'];
+    $back = 'admin_config';
+
+    if($this->input['back']) {
+      $back = $this->input['back'];
+      $this->smarty->assign("back", $back);
+    }
     if(is_readable($filename) and ereg('\.conf$', $filename)) {
       $content = implode('', file($filename));
       $this->smarty->assign("configcontent", $content);
@@ -187,7 +199,14 @@ class admin extends Plugin {
       $this->smarty->assign("admin_msg", '"' . $this->input['configfile'] . '" written successfully.');
     }
     $this->admin_config();
-    $this->smarty->assign("admin_mode", "admin_config");
+    $back = 'admin_config';
+    if($this->input['back']) {
+      $back = $this->input['back'];
+      if($back == 'admin_plugin') {
+	$this->admin_plugin();
+      }
+    }
+    $this->smarty->assign("admin_mode", $back);
   }
 
   function admin_post_edit() {
