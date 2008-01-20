@@ -100,6 +100,11 @@ tinyMCE.init({ldelim}
 {elseif $admin_mode == "admin_templates" or $admin_mode == "admin_user_templates" or $admin_mode == "admin_user_templates"}
   <a href="{$config.whoami}?admin=yes&mode=admin_templates_install">Install new template</a>
 {/if}
+{if $plugin_admin_page}
+  {if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page_create" or $admin_mode == "admin_page"}
+   <a href="{$config.whoami}?admin=yes&mode=admin_page_create">New Static Page</a>
+  {/if}
+{/if}
 </div>
 
 
@@ -314,6 +319,36 @@ tinyMCE.init({ldelim}
   </tr>
     {/foreach}
  </table>
+
+{elseif $admin_mode == "admin_page"}
+
+  {* multiple postings, list them *}
+  <table border="0" width="100%">
+    <tr>
+     <th align="left">Title</th>
+     <th align="left">Modification Time</th>
+     <th align="left">Size</th>
+     <th align="left">Actions</th>
+    </tr>
+    <tr>
+     <td colspan="5">
+       <p style="border-bottom: 1px solid #c4c4c4;"></p>
+    </tr>
+  {foreach item=post from=$pages}
+    <tr>
+      <td><a href="{$config.whoami}/page/{$post.id}" title="View '{$post.title}'">{$post.title|truncate:80:" ...":false}</a></td>
+      <td>{$post.mtime|date_format:"%d.%m.%Y %H:%M"}</td>
+      <td>{$post.text|count_characters} bytes</td>
+      <td>
+           <a href="{$config.whoami}?admin=yes&mode=admin_page_edit&id={$post.id}">{$edit}</a>
+           <a href="{$config.whoami}?admin=yes&mode=admin_page_delete&id={$post.id}">{$delete}</a>
+      </td>
+    </tr>
+  {/foreach}
+  </table>
+  
+<br/>
+
 
 {/if} <!-- endif admin_mode -->
 
