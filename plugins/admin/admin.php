@@ -232,7 +232,7 @@ class admin extends Plugin {
     # else: error stored in unlink()
     $this->smarty->assign("admin_mode", "admin_index");
   }
-
+  
   function admin_post_save() {
     $base        = $this->config["data_path"];
     $file        = $this->input['id'];
@@ -243,7 +243,7 @@ class admin extends Plugin {
     $this->smarty->assign("admin_mode", "admin_index");
 
     if(! $file ) {
-      $file = preg_replace("/[^a-z0-9A-Z\s\_\-\.]/", "", $this->input['title']);
+      $file = preg_replace("/[^a-z0-9A-Z\s\_\-\.\/\\\(\)]/", "", $this->input['title']);
       $create = true;
     }
 
@@ -263,9 +263,7 @@ class admin extends Plugin {
 	  return;
 	}
 	else {
-	  # we ignore errors here and keep such directories
-	  # because it doesn't interupt plosxom in any way
-	  $this->rmdir("$base/$category");
+	  $this->rmdir("$base/$category"); # we ignore errors here and keep such directories
 	}
       }
       $file = "$base/$newcategory/$file";
@@ -393,7 +391,11 @@ class admin extends Plugin {
 	    $this->plugins[$plugin]['config'] = 1;
 	  }
 
-	  if(file_exists($this->config["config_path"] . "/" . $plugin . ".disabled")) {
+	  if(file_exists($this->config["plugin_path"] . "/" . $plugin . ".txt")) {
+            $this->plugins[$plugin]['help'] = 1;
+          }
+
+	  if(file_exists($this->config["plugin_path"] . "/" . $plugin . ".disabled")) {
 	    $this->plugins[$plugin]['state'] = 'inactive';
 	  }
 	  else {
@@ -406,9 +408,156 @@ class admin extends Plugin {
     sort($this->plugins);
   }
 
+  function admin_plugin_help() {
+    $file = $this->config["plugin_path"] . "/" . $this->input['plugin'] . '.txt';
+    if(is_readable($file)) {
+      $help = implode('', file($file));
+      $this->smarty->assign("plugin_help", $help);
+      $this->smarty->assign("plugin", $this->input['plugin']);
+    }
+    else {
+      $this->smarty->assign("admin_error", $this->input['plugin'] . " does not have a help file installed!");
+      $this->admin_plugin();
+      $this->smarty->assign("admin_mode", 'admin_plugin');
+    }
+  }
+
   function admin_plugin() {
     $this->pluginlist();
     $this->smarty->assign("plugins", $this->plugins);
+  }
+
+  function admin_plugin_install() {
+    if(! is_writable($this->config["plugin_path"]) or ! is_writable($this->config["template_path"] . '/shared')) {
+      $this->smarty->assign("admin_error", "plugin path or shared template path not writable!");
+      $this->admin_plugin();
+      $this->smarty->assign("admin_mode", 'admin_plugin');
+    }
+  }
+
+  function admin_plugin_upload() {
+    $orig = basename($_FILES['archive']['name']);
+    $tmp  = $_FILES['archive']['tmp_name'];
+    $err  = $_FILES['archive']['error'];
+    $size = $_FILES['archive']['size'];
+    $info = '';
+    $help = '';
+
+    if($error) {
+      $this->smarty->assign("admin_error", $error);
+    }
+    else {
+      if(preg_match("/^(.*)\.zip$/", $orig, $match)) {
+	$plugin = preg_replace("/[^a-z0-9A-Z\s\_\-\.\/\\\(\)]/", '', $match[1]);
+	if($size > 0) {
+	  $zipfile = $this->config['tmp_path'] . '/' . $plugin . '.zip';
+	  if(move_uploaded_file($tmp, $zipfile)) {
+	    $zip = new ZipArchive();
+	    $zip->open($zipfile);
+	    for ($pos = 0; $pos < $zip->numFiles; $pos++) {
+	      $file = $zip->statIndex($pos);
+	      $fd = $zip->getStream($file['name']);
+	      if($fd) {
+		$content = '';
+		while (!feof($fd)) {
+		  $content .= fread($fd, 2);
+		}
+		fclose($fd);
+		if(preg_match("/\.tpl$/", $file['name'])) {
+		  if($this->write($this->config['template_path'] . '/shared/' . basename($file['name']), $content, true)) {
+		    $info .= "Extracted " . basename($file['name']) . " to " . $this->config['template_path'] . '/shared/' . "<br/>";
+		  }
+		}
+		elseif(preg_match("/\.conf$/", $file['name'])) {
+		  if($this->write($this->config['config_path'] . '/' . basename($file['name']), $content, true)) {
+                    $info .= "Extracted " . basename($file['name']) . " to " . $this->config['config_path'] . "<br/>";
+                  }
+		}
+		elseif(preg_match("/\./", $file['name'])) {
+		  if($this->write($this->config['plugin_path'] . '/' . basename($file['name']), $content, true)) {
+                    $info .= "Extracted " . basename($file['name']) . " to " . $this->config['plugin_path'] . "<br/>";
+                  }
+		  if(preg_match("/\.txt$/", $file['name'])) {
+		    $help = $content;
+		  }
+		}
+	      }
+	      else {
+		$this->smarty->assign("admin_error", "error extracting " . $file['name'] . " from $zipfile!");
+		break;
+	      }
+	    }
+	    $this->unlink($zipfile);
+	  }
+	  else {
+	    $this->smarty->assign("admin_error", "possible upload attack, aborted!");
+	  }
+	}
+	else {
+	  $this->smarty->assign("admin_error", "uploaded file has 0 bytes!");
+	}
+      }
+      else {
+	$this->smarty->assign("admin_error", "ZIP file expected!");
+      }
+    }
+    if($info) {
+      $this->smarty->assign("admin_info", $info);
+      if($help) {
+	$this->smarty->assign("plugin_help", $help);
+      }
+    }
+    $this->admin_plugin();
+    $this->smarty->assign("admin_mode", 'admin_plugin');
+  }
+
+  function admin_plugin_delete() {
+    $plugin = $this->input['plugin'];
+    $info   = '<br/>';
+    if($plugin) {
+      $php = $this->config["plugin_path"] . '/' . $plugin . '.php';
+      $nfo = $this->config["plugin_path"] . '/' . $plugin . '.nfo';
+      $txt = $this->config["plugin_path"] . '/' . $plugin . '.txt';
+      foreach (array($php, $txt, $nfo) as $file) {
+	if(file_exists($file) and is_writable($file) and is_writable($this->config["plugin_path"])) {
+	  if($this->unlink($file)) {
+	    $info .= "removed $file<br/>";
+	  }
+	}
+	else {
+	  $info .= "$file does not exist or permission denied!<br/>";
+	}
+      }
+    }
+    else {
+      $this->smarty->assign("admin_error", "no plugin given");
+    }
+    $this->smarty->assign("admin_info", $info);
+    $this->admin_plugin();
+    $this->smarty->assign("admin_mode", 'admin_plugin');
+  }
+
+  function admin_plugin_changestate() {
+    $disabled = $this->config["plugin_path"] . '/' . $this->input['plugin'] . '.disabled';
+    if(is_writable($this->config["plugin_path"])) {
+      if($this->input['newstate'] == 'inactive') {
+	if($this->write($disabled, ' ')) {
+	  $this->smarty->assign("admin_msg", $this->input['plugin'] . " deactivated.");
+	}
+      }
+      else {
+	if(file_exists($disabled)) {
+	  if($this->unlink($disabled)) {
+	    $this->smarty->assign("admin_msg", $this->input['plugin'] . " activated.");
+	  }
+	}
+      }
+    }
+    else {
+      $this->smarty->assign("admin_error", "Plugin path not writable!");
+    }
+    $this->admin_plugin();
+    $this->smarty->assign("admin_mode", 'admin_plugin');
   }
 
   function hook_content(&$text) {
@@ -421,7 +570,7 @@ class admin extends Plugin {
     return $text;
   }
 
-  function write($file, $content) {
+  function write($file, $content, $dontstrip=false) {
     if(! file_exists($file)) {
       $dir = dirname($file);
       if (! is_dir($dir) || ! is_writable($dir)) {
@@ -436,15 +585,16 @@ class admin extends Plugin {
       return false;
     }
     else {
-      if (! fwrite($fd, stripslashes($content))) {
+      if(! $dontstrip) {
+	$content = stripslashes($content);
+      }
+      if (! fwrite($fd, $content)) {
         $this->smarty->assign("admin_error", "could not write to file '$file'");
         return false;
       }
       else {
         fclose($fd); 
         chmod($file, 0777);
-	#$filename = basename($file);
-        #$this->smarty->assign("admin_info", "'$filename' has been written");
         return true;
       }
     }

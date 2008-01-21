@@ -288,6 +288,10 @@ tinyMCE.init({ldelim}
 
 {elseif $admin_mode == "admin_plugin"}
 
+ {if $plugin_help}
+  <div class="msg">{$plugin_help}</div>
+ {/if}
+
  <table border="0" width="100%">
   <tr>
    <th align="left">Name</th>
@@ -316,9 +320,13 @@ tinyMCE.init({ldelim}
     <td>{$plugin.name}</td>
     <td><a href="{$plugin.url}">{$plugin.version}</a></td>
     <td><a href="mailto:{$plugin.author_email}">{$plugin.author}</a></td>
-    <td><span title="{$plugin.description}">{$plugin.description|truncate:40:" ...":false}</span></td>
     <td>
-      <a href="{$config.whoami}?admin=yes&mode=admin_plugin_changestate&newstate={$newstate}">{$img}</a>
+       <span title="{$plugin.description}">
+         {if $plugin.help}<a href="{$config.whoami}?admin=yes&mode=admin_plugin_help&plugin={$plugin.name}">{/if}{$plugin.description|truncate:40:" ...":false}{if $plugin.help}</a>{/if}
+       </span>
+    </td>
+    <td>
+      <a href="{$config.whoami}?admin=yes&mode=admin_plugin_changestate&newstate={$newstate}&plugin={$plugin.name}">{$img}</a>
     </td>
     <td>
       <a href="{$config.whoami}?admin=yes&mode=admin_plugin_delete&plugin={$plugin.name}">{$delete}</a>
@@ -329,6 +337,15 @@ tinyMCE.init({ldelim}
   </tr>
     {/foreach}
  </table>
+
+
+{elseif $admin_mode == "admin_plugin_help"}
+
+<h2>Installation instructions and help for plugin {$plugin}</h2>
+
+{$plugin_help}
+
+<a href="{$config.whoami}?admin=yes&mode=admin_plugin">back</a>
 
 {elseif $admin_mode == "admin_page"}
 
@@ -436,6 +453,21 @@ tinyMCE.init({ldelim}
       <input type="submit" name="submit" value="Save">
       <input type="button" value="Cancel" onclick="javascript:history.back()">
     </form>
+
+
+{elseif $admin_mode == "admin_plugin_install"}
+
+<h4>Install new plugin</h4>
+
+<p>Enter location of plugin zip file on your local harddisk or locate it using the 'browse' button</p>
+
+<form method="post" name="uploadplugin" action="{$config.whoami}/admin" enctype="multipart/form-data">
+  <input type="hidden" name="mode" value="admin_plugin_upload">
+  <input type="hidden" name="admin" value="yes">
+  <input type="file" name="archive" size="80">
+  <br/>
+  <input type="submit" name="submit" value="upload this file">
+</form>
 
 
 
