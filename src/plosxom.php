@@ -30,7 +30,6 @@
  #    "Pali Dhar" <nobrain@bk.ru>
  #
 
-
  #
  # based on phpblosxom by Robert Daeley <robert@celsius1414.com>
  # http://www.celsius1414.com/phposxom/. phpblosxom copyright
@@ -101,12 +100,20 @@ class Plosxom {
     if ( file_exists($this->config["plugin_path"]) ) {
       $plugin_dh = opendir($this->config["plugin_path"]);
       while ( ($plugin = readdir( $plugin_dh )) !== false) {
+	if ( preg_match( '/^\./', $plugin)) { continue; }
         if ( preg_match( '/^(.+?)\.php$/', $plugin, $match ) ) {
-	  # ok, try to load the plugin
+	  $plugin_name = $match[1];
+	  
+	  if(file_exists($this->config["plugin_path"] . '/' . $plugin_name . '.disabled')) {
+	    # ignore this one
+	    continue;
+	  }
+
+          # ok, try to load the plugin
 	  include_once($this->config["plugin_path"] . "/" . $plugin);
-	  # we got here, so try to register the plugin
-	    $plugin_name = $match[1];
-	    $this->registry->plugins[$plugin_name] = new $plugin_name     (
+
+          # we got here, so try to register the plugin
+	  $this->registry->plugins[$plugin_name] = new $plugin_name     (
 	                                   $this->handler,
 					   $this->config,
 					   $this->input,
@@ -115,7 +122,7 @@ class Plosxom {
 					   $this->smarty,
 					   $this->posts,
 					   $this->registry ); 
-            $this->registry->plugins[$plugin_name]->register();
+	  $this->registry->plugins[$plugin_name]->register();
 	}
       }
     }
@@ -371,6 +378,7 @@ function parse_config($file) {
       if(! preg_match("/\s*#/", $line) or preg_match("/^\s*$/", $line)) {
         # ignore comments and empty lines
         $line = preg_replace("/#.+?$/", "", $line);  # remove trailing comment, if any
+	$line = preg_replace("/\r/", "", $line);     # remove line-feed
         if(preg_match("/^(.+?)\s*=\s*(.*)$/", $line, $match)) {
 	  # option = value
 	  $option = $match[1];
