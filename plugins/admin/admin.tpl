@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de"
 <head>
 <title>{$config.blog_name} - Blog Administration</title>
 <script type="text/javascript" src="{$config.baseurl}/templates/shared/admin_dhtml.js"></script>
@@ -47,8 +49,9 @@ tinyMCE.init({ldelim}
 	extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
 	external_link_list_url : "{$config.baseurl}/templates/shared/tiny_mce/link_list.js",
 	external_image_list_url : "{$config.baseurl}/templates/shared/tiny_mce/image_list.js",
-	flash_external_list_url : "{$config.baseurl}/templates/shared/tiny_mce/flash_list.js"
+	flash_external_list_url : "{$config.baseurl}/templates/shared/tiny_mce/flash_list.js",
 {rdelim});
+
 </script>
 {/if}
 
@@ -58,8 +61,9 @@ tinyMCE.init({ldelim}
 
 {config_load file='lang.conf' section="$lang"}
 
-<h1>{$config.blog_name} - Blog Administration</h4>
-
+<img src="/demo/images/acc.png" style="float:left;"/>
+<h1 style="float:right;">{$config.blog_name} - Blog Administration</h4>
+<br style="clear:both;">
 
 {if $unauth}
 
@@ -76,6 +80,7 @@ tinyMCE.init({ldelim}
 
 <div class="menu" style="float:left; width:80%;">
   <a {if $menu == "post"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&"                     >Postings</a>
+  <a {if $menu == "media"}    id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_media"     >Media</a>
   <a {if $menu == "user"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_user"      >Users</a>
   <a {if $menu == "plugin"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_plugin"    >Plugins</a>
   <a {if $menu == "template"} id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_templates" >Templates</a>
@@ -468,6 +473,21 @@ tinyMCE.init({ldelim}
   <br/>
   <input type="submit" name="submit" value="upload this file">
 </form>
+
+
+
+{elseif $admin_mode == "admin_media"}
+
+ {foreach item=image from=$images}
+  <div class="thumb">
+   {if $image.normal}
+    <a href="{$config.imgurl}/{$image.orig}">original size</a><br/>
+    <a href="{$config.imgurl}/{$image.normal}"><img src="{$config.imgurl}/{$image.thumbnail}" title="{$config.image_normal_width}x{$config.image_normal_width} width version" border="0"/></a>
+   {else}
+    <a href="{$config.imgurl}/{$image.orig}"><img src="{$config.imgurl}/{$image.thumbnail}" border="0"/></a> 
+   {/if}
+  </div>
+ {/foreach}
 
 
 

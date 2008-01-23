@@ -672,4 +672,67 @@ class admin extends Plugin {
   }
 
 
+  function admin_media() {
+    include_once('admin/thumbnail.inc.php');
+    $images = $this->scan_dir($this->config['image_path'], '(jpg|jpeg|gif|png)');
+    $thumbnails = array();
+    foreach ($images as $image) {
+      $thumb = '___' . $image;
+      $entry = array();
+      if(! file_exists($this->config['image_path'] . '/' . $thumb) ) {
+	/* create new thumbnail */
+	/* FIXME: add mtime check! */
+	$T = new Thumbnail($this->config['image_path'] . '/' . $image);
+	$T->resize(150,150);
+	$T->cropFromCenter(100);
+	$T->createReflection(40,20,80,true,'#a4a4a4');
+	$T->save($this->config['image_path'] . '/' . $thumb);
+	chmod($this->config['image_path'] . '/' . $thumb, 0777);
+      }
+      if($this->config['image_normal_width']) {
+	$normal = 'normal___' . $this->config['image_normal_width'] . 'x' . $this->config['image_normal_width'] . '_' . $image;
+	if(! file_exists($this->config['image_path'] . '/' . $normal) ) {
+	  /* create new normal width version of image */
+	  /* FIXME: add mtime check! */
+	  $T = new Thumbnail($this->config['image_path'] . '/' . $image);
+	  $T->resize($this->config['image_normal_width'], $this->config['image_normal_width']);
+	  $T->save($this->config['image_path'] . '/' . $normal);
+	  chmod($this->config['image_path'] . '/' . $normal, 0777);
+	}
+	$entry['normal'] = $normal;
+      }
+      $entry['thumbnail'] = $thumb;
+      $entry['orig']     = $image;
+      $thumbnails[] = $entry;
+    }
+    $this->smarty->assign("images", $thumbnails);
+  }
+
+  function scan_dir($dir, $filter) {
+    if(is_dir($dir) and is_readable($dir)) {
+      $handle = opendir($dir);
+      $files  = array();
+
+      while(($file = readdir($handle))!== false) {
+	if($filter and ! preg_match("/\.$filter$/i", $file)) {
+	  continue;
+	}
+	if(preg_match("/^___/", $file) or preg_match("/^normal___/", $file)) {
+	  continue;
+	}
+	if(is_readable("$dir/$file")) {
+	  $files[] = $file;
+	}
+      }
+    
+      closedir($handle);
+      return $files;
+    }
+    else {
+      $this->smarty->assign("admin_error", "directory '$dir' does not exist or is not readable!");
+      return array();
+    }
+  }
+
+ 
 }
