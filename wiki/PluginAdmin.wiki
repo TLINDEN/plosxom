@@ -10,7 +10,7 @@ Administration Plugin
 
 The admin plugin is currently under development and not released yet.
 
-[http://plosxom.googlecode.com/svn/plugins/admin/ Check the Subversion repository for updates meanwhile].
+[http://plosxom.googlecode.com/svn/plugins/admin/ Check the Subversion repository for updates meanwhile]. But be careful, it will not work with the current release of plosxom, it needs at least version [http://plosxom.googlecode.com/svn/src/ 1.05], which is currently only available via subversion too. It will be released until the admin plugin is complete.
 
 = Development State =
 
@@ -42,4 +42,14 @@ Missing functionality as of *24.01.2008*:
 
 For the curious you might take a look how it looks so far:
 
-[http://www.23hq.com/PaliDhar/photo/2805302/original http://www.23hq.com/PaliDhar/photo/2805302/standardhttp://www.23hq.com/PaliDhar/photo/2805302/standard]
+[http://www.23hq.com/PaliDhar/photo/2364042/original List of postings]
+
+[http://www.23hq.com/PaliDhar/photo/2805302/original Editing a posting]
+
+[23hq.com/PaliDhar/photo/2805198/original Managing plugins]
+
+[http://www.23hq.com/PaliDhar/photo/2824016/original Installing a plugin]
+
+[http://www.23hq.com/PaliDhar/photo/2828758/original Media files management]
+
+_Please note that some screenshots might be outdated_
