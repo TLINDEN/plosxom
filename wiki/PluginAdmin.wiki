@@ -1,0 +1,45 @@
+#summary One-sentence summary of this page.
+#labels Phase-Design
+
+= Introduction =
+
+Administration Plugin
+
+
+= Details =
+
+The admin plugin is currently under development and not released yet.
+
+[http://plosxom.googlecode.com/svn/plugins/admin/ Check the Subversion repository for updates meanwhile].
+
+= Development State =
+
+*Last updated: 24.01.2008*
+
+For now the following functionality is implemented so far:
+
+  * admin login using http basic authentication
+  * it uses its own template and is therefore fully customizable too
+  * supports plugins itself (admin-plugins), an example is the [http://plosxom.googlecode.com/svn/plugins/page/plugin_admin_page.php static-page admin pluign], which is complete
+  * create, edit and remove of blog postings
+  * wysiwyg editor (tinymce)
+  * media file management (no upload yet)
+  * config file management, the user can directly edit configs from the admin backend
+  * user management
+  * installation and deletion of plugins, plugins can also deactivated
+
+Missing functionality as of *24.01.2008*:
+
+  * media file upload and delete function
+  * selected images will not properly inserted into posts from tinymce
+  * template management
+  * rpc ping (although the code backend already exists, I'm using it every day)
+  * admin plugin for tag generation
+  * documentation (online help)
+  * localization (using admin-lang.conf and smarty lang support)
+
+= Screenshots =
+
+For the curious you might take a look how it looks so far:
+
+[http://www.23hq.com/PaliDhar/photo/2805302/original http://www.23hq.com/PaliDhar/photo/2805302/standardhttp://www.23hq.com/PaliDhar/photo/2805302/standard]
