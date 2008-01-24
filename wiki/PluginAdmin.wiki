@@ -10,7 +10,7 @@ Administration Plugin
 
 The admin plugin is currently under development and not released yet.
 
-[http://plosxom.googlecode.com/svn/plugins/admin/ Check the Subversion repository for updates meanwhile]. But be careful, it will not work with the current release of plosxom, it needs at least version [http://plosxom.googlecode.com/svn/src/ 1.05], which is currently only available via subversion too. It will be released until the admin plugin is complete.
+[http://plosxom.googlecode.com/svn/plugins/admin/ Check the Subversion repository for updates meanwhile]. But be careful, it will not work with the current release of plosxom, it needs at least version [http://plosxom.googlecode.com/svn/src/ 1.06], which is currently only available via subversion too. It will be released until the admin plugin is complete.
 
 = Development Status =
 
