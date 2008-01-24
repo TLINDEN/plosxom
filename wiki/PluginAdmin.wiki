@@ -42,14 +42,10 @@ Missing functionality as of *24.01.2008*:
 
 For the curious you might take a look how it looks so far:
 
-[http://www.23hq.com/PaliDhar/photo/2364042/original List of postings]
-
-[http://www.23hq.com/PaliDhar/photo/2805302/original Editing a posting]
-
-[23hq.com/PaliDhar/photo/2805198/original Managing plugins]
-
-[http://www.23hq.com/PaliDhar/photo/2824016/original Installing a plugin]
-
-[http://www.23hq.com/PaliDhar/photo/2828758/original Media files management]
+  * [http://www.23hq.com/PaliDhar/photo/2364042/original List of postings]
+  * [http://www.23hq.com/PaliDhar/photo/2805302/original Editing a posting]
+  * [http://www.23hq.com/PaliDhar/photo/2805198/original Managing plugins]
+  * [http://www.23hq.com/PaliDhar/photo/2824016/original Installing a plugin]
+  * [http://www.23hq.com/PaliDhar/photo/2828758/original Media files management]
 
 _Please note that some screenshots might be outdated_
