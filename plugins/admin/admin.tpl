@@ -61,7 +61,7 @@ tinyMCE.init({ldelim}
 
 {config_load file='lang.conf' section="$lang"}
 
-<img src="/demo/images/acc.png" style="float:left;"/>
+<img src="{$config.baseurl}/templates/shared/plosxom.png" style="float:left;"/>
 <h1 style="float:right;">{$config.blog_name} - Blog Administration</h4>
 <br style="clear:both;">
 
