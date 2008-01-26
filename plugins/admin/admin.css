@@ -124,13 +124,7 @@ input {
     border: 1px solid #6DA6E2;
 }
 
-.f-left {
-    float:left;
-}
 
-.f-right {
-    float:right;
-}
 
 .msg {
   border: 1px solid #a6dbaa;
@@ -159,15 +153,22 @@ input {
 .thumb {
   float: left;
   padding: 5px;
-  width:   110px;
+  width:   120px;
   height:  130px;
   margin-bottom: 10px;
   text-align: center;
+  margin-right: 20px;
 }
 
-.thumb a:hover {
+.thumbimage a:hover {
   color: #ffffff;
   background-color: #6DA6E2;
-  text-decoration: none;
-  padding: 2px;
+}
+
+.f-left {
+  float:left;
+}
+
+.f-right {
+  float:right;
 }

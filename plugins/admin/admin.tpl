@@ -104,6 +104,8 @@ tinyMCE.init({ldelim}
   <a href="{$config.whoami}?admin=yes&mode=admin_plugin_install">Install new plugin</a>
 {elseif $admin_mode == "admin_templates" or $admin_mode == "admin_user_templates" or $admin_mode == "admin_user_templates"}
   <a href="{$config.whoami}?admin=yes&mode=admin_templates_install">Install new template</a>
+{elseif $admin_mode == "admin_media" or $admin_mode == "admin_media_upload" or $admin_mode == "admin_media_delete"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_media_upload">Upload file</a>
 {/if}
 {if $plugin_admin_page}
   {if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page"}
@@ -478,16 +480,55 @@ tinyMCE.init({ldelim}
 
 {elseif $admin_mode == "admin_media"}
 
+
  {foreach item=image from=$images}
   <div class="thumb">
-   {if $image.normal}
-    <a href="{$config.imgurl}/{$image.orig}">original size</a><br/>
-    <a href="{$config.imgurl}/{$image.normal}"><img src="{$config.imgurl}/{$image.thumbnail}" title="{$config.image_normal_width}x{$config.image_normal_width} width version" border="0"/></a>
-   {else}
-    <a href="{$config.imgurl}/{$image.orig}"><img src="{$config.imgurl}/{$image.thumbnail}" border="0"/></a> 
-   {/if}
+   <div class="f-left">
+    <div class="thumbimage">
+     {if $image.normal}
+      <a target="__new" href="{$config.imgurl}/{$image.normal}"><img src="{$image.thumbnail}"
+         title="{$image.orig}" border="0"/></a>
+     {else}
+      <a href="{$config.imgurl}/{$image.orig}"><img title="{$image.orig}" src="{$image.thumbnail}" border="0"/></a>
+     {/if}
+   </div>
+  </div>
+
+  <div class="f-right">
+    <a href="{$config.whoami}?admin=yes&mode=admin_media_delete&image={$image.orig}"><img
+       src="{$config.baseurl}/templates/shared/img-delete.png" 
+       title="remove image" border="0"></a><br/>
+
+    {if $image.isimage}
+       <a target="__new" href="{$config.imgurl}/{$image.orig}"><img   class="" border="0"
+          title="original size view"
+          src="{$config.baseurl}/templates/shared/img-view-orig.png"></a><br/>
+
+       {if $image.normal}
+         <a target="__new"  href="{$config.imgurl}/{$image.normal}"><img border="0"
+            title="{$config.image_normal_width}x{$config.image_normal_width} width version"
+            src="{$config.baseurl}/templates/shared/img-view-small.png"></a>
+       {/if}
+    {/if}
+  </div>
+
   </div>
  {/foreach}
+
+
+{elseif $admin_mode == "admin_media_upload"}
+
+<h4>Upload media file</h4>
+
+<p>Enter location of media file on your local harddisk or locate it using the 'browse' button</p>
+
+<form method="post" name="uploadmedia" action="{$config.whoami}/admin" enctype="multipart/form-data">
+  <input type="hidden" name="mode" value="admin_media_uploadfile">
+  <input type="hidden" name="admin" value="yes">
+  <input type="file" name="mediafile" size="80">
+  <br/>
+  <input type="submit" name="submit" value="upload this file">
+</form>
 
 
 

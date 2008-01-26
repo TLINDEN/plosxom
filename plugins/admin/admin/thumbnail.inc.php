@@ -210,7 +210,7 @@ class Thumbnail {
    * @param int $height
    * @return array
    */
-  function calcWidth($width,$height) {
+  function calcHeight($width,$height) {
     $newWp = (100 * $this->maxWidth) / $width;
     $newHeight = ($height * $newWp) / 100;
     return array('newWidth'=>intval($this->maxWidth),'newHeight'=>intval($newHeight));
@@ -223,7 +223,7 @@ class Thumbnail {
    * @param int $height
    * @return array
    */
-  function calcHeight($width,$height) {
+  function calcWidth($width,$height) {
     $newHp = (100 * $this->maxHeight) / $height;
     $newWidth = ($width * $newHp) / 100;
     return array('newWidth'=>intval($newWidth),'newHeight'=>intval($this->maxHeight));
@@ -329,32 +329,55 @@ class Thumbnail {
     $this->maxWidth = $maxWidth;
     $this->maxHeight = $maxHeight;
 
-    $this->calcImageSize($this->currentDimensions['width'],$this->currentDimensions['height']);
+    $W = $this->currentDimensions['width'];
+    $H = $this->currentDimensions['height'];
 
-    if(function_exists("ImageCreateTrueColor")) {
-      $this->workingImage = ImageCreateTrueColor($this->newDimensions['newWidth'],$this->newDimensions['newHeight']);
+    if ( $W < $maxWidth and $H < $maxHeight ) {
+      if(function_exists("ImageCreateTrueColor")) {
+	$this->workingImage = ImageCreateTrueColor($maxWidth, $maxHeight);
+      }
+      else {
+	$this->workingImage = ImageCreate($maxWidth, $maxHeight);
+      }
+      $white = imagecolorallocate($this->workingImage, 255, 255, 255);
+      imagefill($this->workingImage, 0, 0, $white);
+      $newW = ($maxWidth  - $W) / 2;
+      $newH = ($maxHeight - $H) / 2;
+      imagecopy($this->workingImage, $this->oldImage, $newW, $newH, 0, 0, $W, $H);
+      $this->oldImage = $this->workingImage;
+      $this->newImage = $this->workingImage;
+      $this->currentDimensions['width']  = $maxWidth;
+      $this->currentDimensions['height'] = $maxHeight;
     }
     else {
-      $this->workingImage = ImageCreate($this->newDimensions['newWidth'],$this->newDimensions['newHeight']);
+
+      $this->calcImageSize($this->currentDimensions['width'],$this->currentDimensions['height']);
+
+      if(function_exists("ImageCreateTrueColor")) {
+	$this->workingImage = ImageCreateTrueColor($this->newDimensions['newWidth'],$this->newDimensions['newHeight']);
+      }
+      else {
+	$this->workingImage = ImageCreate($this->newDimensions['newWidth'],$this->newDimensions['newHeight']);
+      }
+
+      ImageCopyResampled(
+			 $this->workingImage,
+			 $this->oldImage,
+			 0,
+			 0,
+			 0,
+			 0,
+			 $this->newDimensions['newWidth'],
+			 $this->newDimensions['newHeight'],
+			 $this->currentDimensions['width'],
+			 $this->currentDimensions['height']
+			 );
+      
+      $this->oldImage = $this->workingImage;
+      $this->newImage = $this->workingImage;
+      $this->currentDimensions['width'] = $this->newDimensions['newWidth'];
+      $this->currentDimensions['height'] = $this->newDimensions['newHeight'];
     }
-
-    ImageCopyResampled(
-		       $this->workingImage,
-		       $this->oldImage,
-		       0,
-		       0,
-		       0,
-		       0,
-		       $this->newDimensions['newWidth'],
-		       $this->newDimensions['newHeight'],
-		       $this->currentDimensions['width'],
-		       $this->currentDimensions['height']
-		       );
-
-    $this->oldImage = $this->workingImage;
-    $this->newImage = $this->workingImage;
-    $this->currentDimensions['width'] = $this->newDimensions['newWidth'];
-    $this->currentDimensions['height'] = $this->newDimensions['newHeight'];
   }
 
   /**

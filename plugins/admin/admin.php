@@ -33,6 +33,7 @@ class admin extends Plugin {
   var $admin;
   var $userlist;
   var $currentuser;
+  var $imgreg = '(jpg|jpeg|gif|png)';
 
   function register() {
     if($this->config["version"] < 1.05) {
@@ -448,7 +449,7 @@ class admin extends Plugin {
     }
     else {
       if(preg_match("/^(.*)\.zip$/", $orig, $match)) {
-	$plugin = preg_replace("/[^a-z0-9A-Z\s\_\-\.\/\\\(\)]/", '', $match[1]);
+	$plugin = preg_replace("/[\"\*\'\`\]\[\s\/\\\(\)]/", '', $match[1]);
 	if($size > 0) {
 	  $zipfile = $this->config['tmp_path'] . '/' . $plugin . '.zip';
 	  if(move_uploaded_file($tmp, $zipfile)) {
@@ -672,61 +673,134 @@ class admin extends Plugin {
   }
 
 
+  function media_get_thname($image) {
+    $normal = 'normal___' . $this->config['image_normal_width'] . 'x' . $this->config['image_normal_width'] . '_' . $image;
+    $thumb  = '___' . $image;
+    return array($normal, $thumb);
+  }
+
+  function admin_media_delete() {
+    if($this->input['image']) {
+      $names  = $this->media_get_thname($this->input['image']);
+      $thumb  = $this->config['image_path'] . '/' . $names[0];
+      $normal = $this->config['image_path'] . '/' . $names[1];
+      $image  = $this->config['image_path'] . '/' . $this->input['image'];
+      $info = '<br/>';
+      foreach (array($thumb, $normal, $image) as $file) {
+	if(file_exists($file) and is_writable($file)) {
+	  if($this->unlink($file)) {
+	    $info .= "Removed $file<br/>";
+	  }
+	  else {
+	    $info .= "Could not remove $file<br/>";
+	  }
+	}
+	else {
+	  $info .= "$file does not exist!<br/>";
+	}
+      }
+    }
+    else {
+      $this->smarty->assign("admin_error", "no image filename given!");
+    }
+    $this->smarty->assign("admin_info", $info);
+    $this->smarty->assign("admin_mode", "admin_media");
+    $this->admin_media();
+  }
+
   function admin_media() {
     include_once('admin/thumbnail.inc.php');
-    $images = $this->scan_dir($this->config['image_path'], '(jpg|jpeg|gif|png)');
+    $files      = $this->scan_dir($this->config['image_path']);
     $thumbnails = array();
-    foreach ($images as $image) {
-      $thumb = '___' . $image;
-      $entry = array();
-      if(! file_exists($this->config['image_path'] . '/' . $thumb) ) {
-	/* create new thumbnail */
-	/* FIXME: add mtime check! */
-	$T = new Thumbnail($this->config['image_path'] . '/' . $image);
-	$T->resize(150,150);
-	$T->cropFromCenter(100);
-	$T->createReflection(40,20,80,true,'#a4a4a4');
-	$T->save($this->config['image_path'] . '/' . $thumb);
-	chmod($this->config['image_path'] . '/' . $thumb, 0777);
-      }
-      if($this->config['image_normal_width']) {
-	$normal = 'normal___' . $this->config['image_normal_width'] . 'x' . $this->config['image_normal_width'] . '_' . $image;
-	if(! file_exists($this->config['image_path'] . '/' . $normal) ) {
-	  /* create new normal width version of image */
+    foreach ($files as $file) {
+      $entry  = array();
+      if(preg_match("/\." . $this->imgreg . "$/i", $file)) {
+	$image = $file;
+	$names  = $this->media_get_thname($image);
+	$normal = $names[0];
+	$thumb  = $names[1];
+      
+	if(! file_exists($this->config['image_path'] . '/' . $thumb) ) {
+	  /* create new thumbnail */
 	  /* FIXME: add mtime check! */
 	  $T = new Thumbnail($this->config['image_path'] . '/' . $image);
-	  $T->resize($this->config['image_normal_width'], $this->config['image_normal_width']);
-	  $T->save($this->config['image_path'] . '/' . $normal);
-	  chmod($this->config['image_path'] . '/' . $normal, 0777);
+	  $T->resize(150,150);
+	  $T->cropFromCenter(100);
+	  $T->createReflection(40,15,90,true,'#a4a4a4');
+	  $T->save($this->config['image_path'] . '/' . $thumb);
+	  chmod($this->config['image_path'] . '/' . $thumb, 0777);
 	}
-	$entry['normal'] = $normal;
+	if($this->config['image_normal_width']) {
+	  if(! file_exists($this->config['image_path'] . '/' . $normal) ) {
+	    /* create new normal width version of image */
+	    /* FIXME: add mtime check! */
+	    $T = new Thumbnail($this->config['image_path'] . '/' . $image);
+	    if($T->getCurrentWidth() > $this->config['image_normal_width']) {
+	      $T->resize($this->config['image_normal_width'], $this->config['image_normal_width']);
+	      $T->save($this->config['image_path'] . '/' . $normal);
+	      chmod($this->config['image_path'] . '/' . $normal, 0777);
+	      $entry['normal'] = $normal;
+	    }
+	  }
+	  else {
+	    $entry['normal'] = $normal;
+	  }
+	}
+	$entry['thumbnail'] = $this->config['imgurl'] . '/' . $thumb;
+	$entry['orig']      = $image;
+	$entry['isimage']   = 1;
       }
-      $entry['thumbnail'] = $thumb;
-      $entry['orig']     = $image;
+      else {
+	if(preg_match("/.*\.(.+)$/", $file, $match)) {
+	  $suffix = $match[1];
+	}
+	else {
+	  $suffix = "unknown";
+	}
+	if(file_exists($this->config['template_path'] . '/shared/' . $suffix . '.png')) {
+	  $entry['thumbnail'] = $this->config['baseurl'] . '/templates/shared/' . $suffix . '.png';
+	}
+	else {
+	  $entry['thumbnail'] = $this->config['baseurl'] . '/templates/shared/unknown.png';
+	}
+	$entry['orig']      = $file;
+      }
       $thumbnails[] = $entry;
     }
     $this->smarty->assign("images", $thumbnails);
   }
 
-  function scan_dir($dir, $filter) {
+  function scan_dir($dir) {
     if(is_dir($dir) and is_readable($dir)) {
       $handle = opendir($dir);
       $files  = array();
 
       while(($file = readdir($handle))!== false) {
-	if($filter and ! preg_match("/\.$filter$/i", $file)) {
-	  continue;
-	}
-	if(preg_match("/^___/", $file) or preg_match("/^normal___/", $file)) {
+	if(preg_match("/^___/", $file) or preg_match("/^normal___/", $file) or is_dir("$dir/$file")) {
 	  continue;
 	}
 	if(is_readable("$dir/$file")) {
-	  $files[] = $file;
+	  $mtime = filemtime("$dir/$file");
+	  $entry = array("mtime" => $mtime, "file" => $file);
+	  $files[] = $entry;
 	}
       }
     
       closedir($handle);
-      return $files;
+
+      # reverse sort the files
+      $sort = array();
+      foreach ($files as $pos => $entry) {
+	$sort[$pos] = $entry["mtime"];
+      }
+      array_multisort($sort, SORT_DESC, $files);
+
+      $sorted = array();
+      foreach ($files as $pos => $entry) {
+        $sorted[$pos] = $entry["file"];
+      }
+
+      return $sorted;
     }
     else {
       $this->smarty->assign("admin_error", "directory '$dir' does not exist or is not readable!");
@@ -734,5 +808,36 @@ class admin extends Plugin {
     }
   }
 
+
+  function admin_media_upload() {}
+
+  function admin_media_uploadfile() {
+    $orig = basename($_FILES['mediafile']['name']);
+    $tmp  = $_FILES['mediafile']['tmp_name'];
+    $err  = $_FILES['mediafile']['error'];
+    $size = $_FILES['mediafile']['size'];
+
+    if($error) {
+      $this->smarty->assign("admin_error", $error);
+    }
+    else {
+      if($size > 0) {
+	$dest = $this->config['image_path'] . '/' . preg_replace("/[\"\*\'\`\]\[\s\/\\\(\)]/", '', $orig);
+	if(move_uploaded_file($tmp, $dest)) {
+	  chmod($dest, 0777);
+	  $this->smarty->assign("admin_msg", "$dest successfully uploaded");	  
+	}
+	else {
+	  $this->smarty->assign("admin_error", "possible upload attack, aborted!");
+	}
+      }
+      else {
+	$this->smarty->assign("admin_error", "uploaded file has 0 bytes!");
+      }
+    }
+
+    $this->smarty->assign("admin_mode", "admin_media");
+    $this->admin_media();
+  }
  
 }
