@@ -83,12 +83,12 @@ tinyMCE.init({ldelim}
   <a {if $menu == "media"}    id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_media"     >Media</a>
   <a {if $menu == "user"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_user"      >Users</a>
   <a {if $menu == "plugin"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_plugin"    >Plugins</a>
-  <a {if $menu == "template"} id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_templates" >Templates</a>
+  <a {if $menu == "template"} id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_template"  >Templates</a>
   <a {if $menu == "config"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_config"    >Config</a>
-  <a {if $menu == "rpc"}      id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=rpcping"         >RPC Ping</a>
-{if $plugin_admin_page}
-  <a {if $menu == "page"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_page"      >Pages</a>
-{/if}
+  <a {if $menu == "extras"}   id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_extras"    >Extras</a>
+{foreach from=$menu_tpl item=tpl}
+  {include file=$tpl}
+{/foreach}
 </div>
 <div class="menu" style="text-align:right; white-space: nowrap;">
   <a {if $menu == "help"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=help"            >Help</a>
@@ -102,16 +102,14 @@ tinyMCE.init({ldelim}
   <a href="{$config.whoami}?admin=yes&mode=admin_user_create">New User</a>
 {elseif $admin_mode == "admin_plugin" or $admin_mode == "admin_plugin_edit" or $admin_mode == "admin_plugin_create"}
   <a href="{$config.whoami}?admin=yes&mode=admin_plugin_install">Install new plugin</a>
-{elseif $admin_mode == "admin_templates" or $admin_mode == "admin_user_templates" or $admin_mode == "admin_user_templates"}
-  <a href="{$config.whoami}?admin=yes&mode=admin_templates_install">Install new template</a>
+{elseif $admin_mode == "admin_template" or $admin_mode == "admin_template_edit" or $admin_mode == "admin_template_delete" or $admin_mode == "admin_template_install"}
+  <a href="{$config.whoami}?admin=yes&mode=admin_template_install">Install new template</a>
 {elseif $admin_mode == "admin_media" or $admin_mode == "admin_media_upload" or $admin_mode == "admin_media_delete"}
   <a href="{$config.whoami}?admin=yes&mode=admin_media_upload">Upload file</a>
 {/if}
-{if $plugin_admin_page}
-  {if $admin_mode == "admin_page_edit" or $admin_mode == "admin_page"}
-   <a href="{$config.whoami}?admin=yes&mode=admin_page_edit">New Static Page</a>
-  {/if}
-{/if}
+{foreach from=$submenu_tpl item=tpl}
+  {include file=$tpl}
+{/foreach}
 </div>
 
 
@@ -446,6 +444,7 @@ tinyMCE.init({ldelim}
 
 
 {elseif $admin_mode == "admin_config_edit"}
+   
    <h4>Edit configfile {$configfile}</h4>
     <form method="post" name="edit" action="{$config.whoami}/admin">
       <input type="hidden" name="mode" value="admin_config_save">
@@ -531,6 +530,135 @@ tinyMCE.init({ldelim}
 </form>
 
 
+
+{elseif $admin_mode == "admin_extras"}
+
+<br/>
+{foreach from=$extra_tpl item=tpl}
+  {include file=$tpl}
+{/foreach}
+
+
+
+
+
+
+
+{elseif $admin_mode == "admin_template"}
+
+ {if $template_help}
+  <div class="msg">{$template_help}</div>
+ {/if}
+
+ <table border="0" width="100%" cellspacing="0" cellpadding="5">
+  <tr>
+   <th align="left">Preview</th>
+   <th align="left">Name</th>
+   <th align="left">Version</th>
+   <th align="left">Author</th>
+   <th align="left">Description</th>
+   <th align="left">State</th>
+   <th align="left">Actions</th>
+  </tr>
+
+  <tr>
+   <td colspan="7">
+     <p style="border-bottom: 1px solid #c4c4c4;"></p>
+   </td>
+  </tr>
+
+{assign var="bg" value=""}
+
+{foreach item=template from=$templates}
+  {if $template.state == "active"}
+     {assign var="activestyle" value="color:green;"}
+     {assign var="activate" value="0"}
+     {assign var="img"      value="<img title='in use' src=$base/templates/shared/ok.png border=0>"}
+  {else}
+     {assign var="activestyle" value=""}
+     {assign var="activate" value="1"}
+     {assign var="img"      value="<img title='activate template'  src=$base/templates/shared/no.png border=0>"}
+  {/if}
+  <tr valign="top" bgcolor="{$bg}">
+    <td>
+    {if $template.screenshot}
+     <a target="__new" href="{$base}/templates/{$template.name}/{$template.screenshot}"/><img
+        src="{$base}/templates/{$template.name}/{$template.thumbnail}" title="preview" border="0"/></a>
+    {/if}
+    </td>
+    <td style="{$activestyle}">{$template.name}</td>
+    <td>{if $template.url}<a href="{$template.url}">{/if}{$template.version}{if $template.url}</a>{/if}</td>
+    <td>{if $template.author_email}<a href="mailto:{$template.author_email}">{/if}{$template.author}{if $template.author_email}</a>{/if}</td>
+    <td>
+         {if $template.help}<a href="{$config.whoami}?admin=yes&mode=admin_template_help&template={$template.name}">{/if}{$template.description}{if $template.help}</a>{/if}
+    </td>
+    <td>
+      {if $activate}
+        <a href="{$config.whoami}?admin=yes&mode=admin_template_changestate&newstate={$newstate}&template={$template.name}">{$img}</a>
+      {else}
+        {$img}
+      {/if}
+    </td>
+    <td>
+      <a href="{$config.whoami}?admin=yes&mode=admin_template_delete&template={$template.name}">{$delete}</a>
+      <a href="{$config.whoami}?admin=yes&mode=admin_template_edit&template={$template.name}">{$edit}</a>
+    </td>
+  </tr>
+
+  {if $bg}
+    {assign var="bg" value=""}
+  {else}
+    {assign var="bg" value="#f9f9f9"}
+  {/if}
+
+ {/foreach}
+ </table>
+
+
+
+{elseif $admin_mode == "admin_template_edit"}
+
+<h4>Edit files of template <i>{$template}</i></h4>
+
+  {* multiple template files, list them *}
+  <table border="0" width="100%">
+    <tr>
+     <th align="left">Templatefile</th>
+     <th align="left">Actions</th>
+    </tr>
+    <tr>
+     <td colspan="5">
+       <p style="border-bottom: 1px solid #c4c4c4;"></p>
+    </tr>
+
+  {foreach item=file from=$template_files}
+
+     <tr>
+      <td>{$file}</td>
+      <td>
+           <a href="{$config.whoami}?admin=yes&mode=admin_template_editfile&template_file={$file}&template={$template}">{$edit}</a>
+      </td>
+    </tr>
+
+  {/foreach}
+
+ </table>
+
+
+{elseif $admin_mode == "admin_template_editfile"}
+   
+   <h4>Edit template file {$template_file} - template {$template}</h4>
+    <form method="post" name="edit" action="{$config.whoami}/admin">
+      <input type="hidden" name="mode" value="admin_template_savefile">
+      <input type="hidden" name="admin" value="yes">
+      <input type="hidden" name="template" value="{$template}">
+      <input type="hidden" name="template_file" value="{$template_file}">
+      <br/>
+      <textarea name="template_content" rows="30">{$template_content}</textarea>
+      <br/>
+      <input type="submit" name="submit" value="Save">
+      <input type="button" value="Cancel" onclick="javascript:history.back()">
+    </form>
 
 {/if} <!-- endif admin_mode -->
 

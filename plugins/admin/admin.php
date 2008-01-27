@@ -122,6 +122,11 @@ class admin extends Plugin {
     # posts per page
     $this->config["postings"] = 30;
 
+    # individual admin-plugin templates
+    $this->smarty->assign("extra_tpl", $this->get_templates("extra"));
+    $this->smarty->assign("menu_tpl", $this->get_templates("menu"));
+    $this->smarty->assign("submenu_tpl", $this->get_templates("submenu"));
+
     # switch to specific processing method
     if(preg_match("/^admin_([a-z]+)/", $this->input['mode'], $match)) {
       $menu = $match[1];
@@ -168,6 +173,7 @@ class admin extends Plugin {
 	}
       }
       closedir($dh);
+      sort($configs);
     }
     else {
       $this->smarty->assign("admin_error", "config directory not readable!");
@@ -595,7 +601,7 @@ class admin extends Plugin {
       }
       else {
         fclose($fd); 
-        chmod($file, 0777);
+        chmod($file, 0666);
         return true;
       }
     }
@@ -709,7 +715,7 @@ class admin extends Plugin {
   }
 
   function admin_media() {
-    include_once('admin/thumbnail.inc.php');
+    include_once($this->config["lib_path"] . '/thumbnail.inc.php');
     $files      = $this->scan_dir($this->config['image_path']);
     $thumbnails = array();
     foreach ($files as $file) {
@@ -728,7 +734,7 @@ class admin extends Plugin {
 	  $T->cropFromCenter(100);
 	  $T->createReflection(40,15,90,true,'#a4a4a4');
 	  $T->save($this->config['image_path'] . '/' . $thumb);
-	  chmod($this->config['image_path'] . '/' . $thumb, 0777);
+	  chmod($this->config['image_path'] . '/' . $thumb, 0666);
 	}
 	if($this->config['image_normal_width']) {
 	  if(! file_exists($this->config['image_path'] . '/' . $normal) ) {
@@ -738,7 +744,7 @@ class admin extends Plugin {
 	    if($T->getCurrentWidth() > $this->config['image_normal_width']) {
 	      $T->resize($this->config['image_normal_width'], $this->config['image_normal_width']);
 	      $T->save($this->config['image_path'] . '/' . $normal);
-	      chmod($this->config['image_path'] . '/' . $normal, 0777);
+	      chmod($this->config['image_path'] . '/' . $normal, 0666);
 	      $entry['normal'] = $normal;
 	    }
 	  }
@@ -824,7 +830,7 @@ class admin extends Plugin {
       if($size > 0) {
 	$dest = $this->config['image_path'] . '/' . preg_replace("/[\"\*\'\`\]\[\s\/\\\(\)]/", '', $orig);
 	if(move_uploaded_file($tmp, $dest)) {
-	  chmod($dest, 0777);
+	  chmod($dest, 0666);
 	  $this->smarty->assign("admin_msg", "$dest successfully uploaded");	  
 	}
 	else {
@@ -839,5 +845,136 @@ class admin extends Plugin {
     $this->smarty->assign("admin_mode", "admin_media");
     $this->admin_media();
   }
+
+  function admin_extras() {}
+
+  function admin_template() {
+    $templates = array();
+    if(is_dir($this->config["template_path"])) {
+      $dh = opendir($this->config["template_path"]);
+      while ( ( $template = readdir( $dh )) !== false) {
+	if(is_dir($this->config["template_path"] . "/$template")
+	  and $template != "shared" and $template != '.' and $template != '..') {
+	  $nfofile = $this->config["template_path"] . "/$template/$template.nfo";
+
+	  $nfo = array("version" => "unversioned", 
+		       "description" => "", "author" => "unknown", 
+		       "author_email" => "", "url" => "",
+		       "icon" => "", "state" => "inactive",
+		       "name" => $template
+		       );
+
+	  if (file_exists($nfofile)) {
+	    $nfo = parse_config($nfofile);
+	  }
+
+	  if($this->config['template'] == $template) {
+	    $nfo['state'] = "active";
+	  }
+
+	  if($nfo['screenshot']) {
+	    $screenshot = $this->config["template_path"] . "/$template/" . $nfo['screenshot'];
+	    if( file_exists($screenshot) and is_writable($this->config["template_path"] . "/$template/") ) {
+
+	      include_once($this->config["lib_path"] . '/thumbnail.inc.php');
+	      $file = '___' . preg_replace("/[^a-z0-9A-Z\s\_\-\.\/\\\(\)]/", '', $nfo['screenshot']);
+	      $thumb = $this->config["template_path"] . "/$template/" . $file;
+
+	      $T = new Thumbnail($screenshot);
+	      $T->resize(150,150);
+	      $T->cropFromCenter(100);
+
+	      $T->save($thumb);
+	      chmod($thumb, 0666);
+
+	      $nfo['thumbnail'] = $file;
+	    }
+	    else {
+	      $nfo['screenshot'] = '';
+	    }
+	  }
+	  $nfo['name'] = $template;
+ 	  $templates[$template] = $nfo;
+	}
+      }
+    }
+    $this->smarty->assign("templates", $templates);
+  }
+
+  function admin_template_changestate() {
+    if(is_dir($this->config["template_path"] . "/$template/" . $this->input['template'])) {
+      $configfile = $this->config['config_path'] . '/'. 'plosxom.conf';
+      $content = implode('', file($configfile));
+      $changed = preg_replace("/^template = .*$/m", "template = " . $this->input['template'], $content);
+      if($changed != $content) {
+	if(is_writable($configfile)) {
+	  if($this->write($configfile, $changed)) {
+	    $this->smarty->assign("admin_msg", "template has been set to " . $this->input['template']);
+	    $this->config['template'] = $this->input['template'];
+	  }
+	}
+	else {
+	  $this->smarty->assign("admin_error", "plosxom.conf not writable!");
+	}
+      }
+      else {
+	$this->smarty->assign("admin_error", "replacing template in plosxom.conf failed!");
+      }
+    }
+    else {
+      $this->smarty->assign("admin_error", "template does not exist!");
+    }
+    $this->admin_template();
+    $this->smarty->assign("admin_mode", "admin_template");
+  }
+
+  function admin_template_edit() {
+    $files = array();
+    $dh = opendir($this->config['template_path'] . '/' . $this->input['template']);
+    if($dh) {
+      while ( ( $F = readdir( $dh )) !== false) {
+        if($F == "." or $F == "..") {
+          continue;
+        }
+        if ( preg_match("/\.(tpl|css)$/", $F)) {
+          $files[] = $F;
+        }
+      }
+      closedir($dh);
+      sort($files);
+    }
+    else {
+      $this->smarty->assign("admin_error", "template directory not readable!");
+    }
+    $this->smarty->assign("template", $this->input['template']);
+    $this->smarty->assign("template_files", $files);
+  }
+
+
+  function admin_template_editfile() {
+    $filename = $this->config['template_path'] . '/' . $this->input['template'] . '/' . $this->input['template_file'];
+    if(is_readable($filename) and ereg('\.(tpl|css)$', $filename)) {
+      $content = implode('', file($filename));
+      $this->smarty->assign("template_content", $content);
+      $this->smarty->assign("template_file", $this->input['template_file']);
+    }
+    else {
+      $this->smarty->assign("admin_error", "template file " . $this->input['template_file'] . " does not exist or is not readable!");
+      $this->smarty->assign("admin_mode", "admin_template_edit");
+      $this->admin_template_edit();
+    }
+    $this->smarty->assign("template", $this->input['template']);
+  }
+
+  function admin_template_savefile() {
+    $filename = $this->config['template_path'] . '/' . $this->input['template'] . '/' . $this->input['template_file'];
+    if($this->write($filename, $this->input['template_content'])) {
+      $this->smarty->assign("admin_msg", '"' . $this->input['template_file'] . '" written successfully.');
+    }
+    $this->smarty->assign("admin_mode", "admin_template_edit");
+    $this->admin_template_edit();
+    $this->smarty->assign("template", $this->input['template']);
+  }
+
  
 }
