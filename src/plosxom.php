@@ -267,10 +267,12 @@ class Plosxom {
 class Registry {
     var $plugins;
     var $handler;
+    var $templates;
     
     function Registry() {
-      $this->plugins = array();
-      $this->handler = array();
+      $this->plugins   = array();
+      $this->handler   = array();
+      $this->templates = array();
     }
     
     function get_handlers($type, $onlyfirst = 0) {
@@ -319,6 +321,10 @@ class Registry {
     # install the handler plugin
     array_push($this->handler[$type], $hdl);
   }
+
+  function add_template($type, $template) {
+    $this->templates[$type][] = $template;
+  }
 }
 
 
@@ -360,6 +366,19 @@ class Plugin {
     $this->registry->add_handler($type, $hdl);
   }
 
+  function add_template($type, $template) {
+    $this->registry->add_template($type, $template);
+  }
+
+  function get_templates($type) {
+    if(array_key_exists($type, $this->registry->templates)) {
+      return $this->registry->templates[$type];
+    }
+    else {
+      return array();
+    }
+  }
+
   function replace_template($tpl) {
     $this->template = $tpl;
   }
@@ -383,7 +402,16 @@ function parse_config($file) {
 	  # option = value
 	  $option = $match[1];
 	  $value  = $match[2];
-	  $config[$option] = $value;
+	  if(array_key_exists($option, $config)) {
+	    if(! is_array($config[$option])) {
+	      // mage it an array
+	      $config[$option] = array($config[$option]);
+	    }
+	    $config[$option][] = $value;
+	  }
+	  else {
+	    $config[$option] = $value;
+	  }
 	}
       }
     }
