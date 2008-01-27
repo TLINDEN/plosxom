@@ -10,7 +10,9 @@ class plugin_admin_page extends Plugin{
       $this->add_handler("admin_page",         "plugin_admin_page");
       $this->add_handler("admin_page_edit",    "plugin_admin_page");
       $this->add_handler("admin_page_save",    "plugin_admin_page");
-      $this->add_handler("admin_page_delete", "plugin_admin_page");
+      $this->add_handler("admin_page_delete",  "plugin_admin_page");
+      $this->add_template("menu",              "shared/menu_page.tpl");
+      $this->add_template("submenu",           "shared/submenu_page.tpl");
       $this->smarty->assign("plugin_admin_page", true);
     }
   }
