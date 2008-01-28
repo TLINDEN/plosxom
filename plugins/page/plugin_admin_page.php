@@ -9,9 +9,11 @@ class plugin_admin_page extends Plugin{
     if($this->pconfig["data"]) {
       $this->add_handler("admin_page",         "plugin_admin_page");
       $this->add_handler("admin_page_edit",    "plugin_admin_page");
+      $this->add_handler("admin_page_view",    "plugin_admin_page");
       $this->add_handler("admin_page_save",    "plugin_admin_page");
       $this->add_handler("admin_page_delete",  "plugin_admin_page");
       $this->add_template("menu",              "shared/menu_page.tpl");
+      $this->add_template("main",              "shared/main_page.tpl");
       $this->add_template("submenu",           "shared/submenu_page.tpl");
       $this->smarty->assign("plugin_admin_page", true);
     }
@@ -22,6 +24,10 @@ class plugin_admin_page extends Plugin{
     $this->smarty->assign('pages', $pages);
   }
 
+  function admin_page_view() {
+    $this->admin_page_edit();
+  }
+
   function admin_page_edit() {
     if ($this->input['id']) {
       $page = standard::getfile($this->pconfig["data"], $this->input['id'] . '.txt');
@@ -29,11 +35,12 @@ class plugin_admin_page extends Plugin{
 	  $this->smarty->assign("page", $page);
       }
       else {
-	  $this->smarty->assign("admin_error", $this->input['id'] . " does not exist or permission denied!");
-	  $this->smarty->assign("admin_mode", "admin_page");
+	  $this->smarty->append("admin_error", $this->input['id'] . " does not exist or permission denied!");
+	  $this->smarty->append("admin_mode", "admin_page");
+	  $this->admin_page();
       }
     }
-    $this->admin_page();
+
   }
 
   function admin_page_save() {
@@ -54,14 +61,14 @@ class plugin_admin_page extends Plugin{
       }
 
       if(! file_exists($file) && ! is_writable($base) ) {
-	  $this->smarty->assign("admin_error", "data directory is not writable!");
+	  $this->smarty->append("admin_error", "data directory is not writable!");
       }
       elseif( ! is_writable($base . '/' . $file) && ! $create) {
-	  $this->smarty->assign("admin_error", "$file is not writable!");
+	  $this->smarty->append("admin_error", "$file is not writable!");
       }
       else {
 	  if($this->registry->plugins['admin']->write($base . '/' . $file, $content)) {
-	      $this->smarty->assign("admin_msg", '"' . $this->input['title'] . '" written successfully.');
+	      $this->smarty->append("admin_msg", '"' . $this->input['title'] . '" written successfully.');
 	  }
       }
       $this->admin_page();
@@ -70,7 +77,7 @@ class plugin_admin_page extends Plugin{
   function admin_page_delete() {
       $file = $this->pconfig["data"] . '/' . $this->input['id'] . '.txt';
       if( $this->registry->plugins['admin']->unlink($file) ) {
-	  $this->smarty->assign("admin_msg", $this->input['id'] . " removed successfully.");
+	  $this->smarty->append("admin_msg", $this->input['id'] . " removed successfully.");
       }
     # else: error stored in unlink()
       $this->smarty->assign("admin_mode", "admin_page");
@@ -95,7 +102,7 @@ class plugin_admin_page extends Plugin{
       array_multisort($sort, SORT_DESC, $pages);
     }
     else {
-      $this->smarty->assign("admin_error", "data path for static pages does not exist");
+      $this->smarty->append("admin_error", "data path for static pages does not exist");
     }
     return $pages;
   }
