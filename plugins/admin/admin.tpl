@@ -113,18 +113,35 @@ tinyMCE.init({ldelim}
 </div>
 
 
-{if $admin_msg}
-    <div class="msg">{$admin_msg}</div>
-{/if}
-
 {if $admin_error}
-    <div class="error">Error: {$admin_error}</div>
+ <div class="error">
+  <p>Error:<br/>
+   {foreach from=$admin_error item=message}
+    {$message}<br/>
+   {/foreach}
+  </p>
+ </div>
 {/if}
 
 {if $admin_info}
-    <div class="info">Info: {$admin_info}</div>
+ <div class="info">
+  <p>Info:<br/>
+   {foreach from=$admin_info item=message}
+    {$message}<br/>
+   {/foreach}
+  </p>
+ </div>
 {/if}
 
+{if $admin_msg}
+ <div class="msg">
+  <p>Success:<br/>
+   {foreach from=$admin_msg item=message}
+    {$message}<br/>
+   {/foreach}
+  </p>
+ </div>
+{/if}
 
 
 {if $admin_mode == "admin_post_edit"}
@@ -172,11 +189,32 @@ tinyMCE.init({ldelim}
        {/foreach}
       <br/>
       <br/>
-      <textarea name="content" rows="30">{$post.raw}</textarea>
+      <textarea name="content" rows="30">{$post.text}</textarea>
       <br/>
       <input type="submit" name="submit" value="Save">
       <input type="button" value="Cancel" onclick="javascript:history.back()">
+      {foreach from=$postsave_tpl item=tpl}
+        {include file=$tpl}
+      {/foreach}
     </form>
+
+
+
+
+{elseif $admin_mode == "admin_post_view"}
+
+   <h4>View "{$post.title}"</h4>
+
+   <p>
+   <a href="{$config.whoami}?admin=yes&mode=admin_post_edit&category={$post.category}">edit this posting</a>
+   </p>
+
+   <div class="view">{$post.text}</div>
+
+      <input type="button" value="back" onclick="javascript:history.back()">
+
+
+
 
 {elseif $admin_mode == "admin_post"}
 
@@ -195,7 +233,7 @@ tinyMCE.init({ldelim}
     </tr>
   {foreach item=post from=$posts}
     <tr>
-      <td><a href="{$config.whoami}/{$post.category}/{$post.id}" title="View '{$post.title}'">{$post.title|truncate:40:" ...":false}</a></td>
+      <td><a href="{$config.whoami}?admin=yes&mode=admin_post_view&category={$post.category}&id={$post.id}" title="View '{$post.title}'">{$post.title|truncate:40:" ...":false}</a></td>
       <td>{$post.category}</td>
       <td>{$post.mtime|date_format:"%d.%m.%Y %H:%M"}</td>
       <td>{$post.text|count_characters} bytes</td>
@@ -352,66 +390,8 @@ tinyMCE.init({ldelim}
 
 <a href="{$config.whoami}?admin=yes&mode=admin_plugin">back</a>
 
-{elseif $admin_mode == "admin_page"}
-
-  {* multiple postings, list them *}
-  <table border="0" width="100%">
-    <tr>
-     <th align="left">Title</th>
-     <th align="left">Modification Time</th>
-     <th align="left">Size</th>
-     <th align="left">Actions</th>
-    </tr>
-    <tr>
-     <td colspan="5">
-       <p style="border-bottom: 1px solid #c4c4c4;"></p>
-    </tr>
-  {foreach item=post from=$pages}
-    <tr>
-      <td><a href="{$config.whoami}/page/{$post.id}" title="View '{$post.title}'">{$post.title|truncate:80:" ...":false}</a></td>
-      <td>{$post.mtime|date_format:"%d.%m.%Y %H:%M"}</td>
-      <td>{$post.text|count_characters} bytes</td>
-      <td>
-           <a href="{$config.whoami}?admin=yes&mode=admin_page_edit&id={$post.id}">{$edit}</a>
-           <a href="{$config.whoami}?admin=yes&mode=admin_page_delete&id={$post.id}">{$delete}</a>
-      </td>
-    </tr>
-  {/foreach}
-  </table>
-  
-<br/>
 
 
-
-
-{elseif $admin_mode == "admin_page_edit"}
-   {if $post.id}
-     {assign var="title" value="Edit <a href=$base/page/`$page.id`>`$page.title`</a>"}
-   {else}
-     {assign var="title" value="Create new static page"}
-   {/if}
-   
-   <h4>{$title}</h4>
-    <form method="post" name="edit" action="{$config.whoami}/admin">
-      <input type="hidden" name="mode" value="admin_page_save">
-      <input type="hidden" name="admin" value="yes">
-      <input type="hidden" name="id" value="{$page.file}">
-      <table border="0" cellspacing="0" colpadding="0" width="100%">
-        <tr>
-	  <td align="left">
-	    Title:
-	  </td>
-	  <td align="right">
-	    <input type="text" name="title" value="{$page.title}" style="width: 692px;">
-	  </td>
-	</tr>
-      </table>
-      <br/>
-      <textarea name="content" rows="30">{$page.raw}</textarea>
-      <br/>
-      <input type="submit" name="submit" value="Save">
-      <input type="button" value="Cancel" onclick="javascript:history.back()">
-    </form>
 
 
 
@@ -432,7 +412,9 @@ tinyMCE.init({ldelim}
   {foreach item=configfile from=$configs}
 
      <tr>
-      <td>{$configfile}</td>
+      <td>
+           <a href="{$config.whoami}?admin=yes&mode=admin_config_view&configfile={$configfile}">{$configfile}</a>
+      </td>
       <td>
            <a href="{$config.whoami}?admin=yes&mode=admin_config_edit&configfile={$configfile}">{$edit}</a>
       </td>
@@ -441,6 +423,24 @@ tinyMCE.init({ldelim}
   {/foreach}
 
  </table>
+
+
+
+{elseif $admin_mode == "admin_config_view"}
+
+   <h4>View configfile {$configfile}</h4>
+
+   <p>
+   <a href="{$config.whoami}?admin=yes&mode=admin_config_edit&configfile={$configfile}">edit this config file</a>
+   </p>
+
+   <div class="view"><pre>{$configcontent}</pre></div>
+
+   <a href="{$config.whoami}?admin=yes&mode=admin_config">back</a>
+
+
+
+
 
 
 {elseif $admin_mode == "admin_config_edit"}
@@ -579,7 +579,7 @@ tinyMCE.init({ldelim}
      {assign var="activate" value="1"}
      {assign var="img"      value="<img title='activate template'  src=$base/templates/shared/no.png border=0>"}
   {/if}
-  <tr valign="top" bgcolor="{$bg}">
+  <tr valign="top" class="{$bg}">
     <td>
     {if $template.screenshot}
      <a target="__new" href="{$base}/templates/{$template.name}/{$template.screenshot}"/><img
@@ -590,7 +590,7 @@ tinyMCE.init({ldelim}
     <td>{if $template.url}<a href="{$template.url}">{/if}{$template.version}{if $template.url}</a>{/if}</td>
     <td>{if $template.author_email}<a href="mailto:{$template.author_email}">{/if}{$template.author}{if $template.author_email}</a>{/if}</td>
     <td>
-         {if $template.help}<a href="{$config.whoami}?admin=yes&mode=admin_template_help&template={$template.name}">{/if}{$template.description}{if $template.help}</a>{/if}
+        {$template.description}
     </td>
     <td>
       {if $activate}
@@ -608,7 +608,7 @@ tinyMCE.init({ldelim}
   {if $bg}
     {assign var="bg" value=""}
   {else}
-    {assign var="bg" value="#f9f9f9"}
+    {assign var="bg" value="greyrow"}
   {/if}
 
  {/foreach}
@@ -660,7 +660,34 @@ tinyMCE.init({ldelim}
       <input type="button" value="Cancel" onclick="javascript:history.back()">
     </form>
 
+
+
+{elseif $admin_mode == "admin_template_install"}
+
+<h4>Install new template</h4>
+
+<p>Enter location of template zip file on your local harddisk or locate it using the 'browse' button</p>
+
+<form method="post" name="uploadtemplate" action="{$config.whoami}/admin" enctype="multipart/form-data">
+  <input type="hidden" name="mode" value="admin_template_upload">
+  <input type="hidden" name="admin" value="yes">
+  <input type="file" name="template" size="80">
+  <br/>
+  <input type="submit" name="submit" value="upload this file">
+</form>
+
+
+{else}
+
+{foreach from=$main_tpl item=tpl}
+  {include file=$tpl}
+{/foreach}
+
+
+
+
 {/if} <!-- endif admin_mode -->
+
 
 {/if} <!-- endif $unauth -->
 
