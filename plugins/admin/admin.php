@@ -45,6 +45,30 @@ class admin extends Plugin {
     $this->userlist = parse_config("admin-users.conf");
     $this->smarty->force_compile = 1;
     $this->smarty->caching       = 0;
+
+    $this->smarty->register_function("xprintf", array(&$this, "xprintf"));
+  }
+
+  function xprintf($param, &$smarty) {
+    $pos = 1;
+    $msg = $param['id'];
+    foreach ($param['param'] as $entry) {
+      $msg = str_replace("%$pos", $entry, $msg);
+      $pos++;
+    }
+    return $msg;
+  }
+
+  function append_error() {
+    /* FIXME: message type hinzufuegen */
+    $params = func_get_args();
+    $id     = array_shift($params);
+    $this->smarty->append("error", array('id' => $id, 'param' => $params));
+  }
+
+  function admin_test() {
+    $this->append_error('error1', 'filename', 'directory');
+    $this->append_error('error2', 'icon', '98bytes');
   }
 
   function hook_send_header() {
@@ -147,7 +171,7 @@ class admin extends Plugin {
       }
 
       if(! $called) {
-        $this->smarty->append("admin_error", "unsupported admin mode: $method");
+        $this->error("unsupported admin mode: $method");
       }
     }
 
@@ -182,7 +206,7 @@ class admin extends Plugin {
       sort($configs);
     }
     else {
-      $this->smarty->append("admin_error", "config directory not readable!");
+      $this->error("config directory not readable!");
     }
     $this->smarty->assign("configs", $configs);
   }
@@ -201,7 +225,7 @@ class admin extends Plugin {
       $this->smarty->assign("configfile", $this->input['configfile']);
     }
     else {
-      $this->smarty->append("admin_error", "configfile " . $this->input['configfile'] . " does not exist or is not readable!");
+      $this->error("configfile " . $this->input['configfile'] . " does not exist or is not readable!");
       $this->admin_config();
       $this->smarty->assign("admin_mode", "admin_config");
     }
@@ -216,7 +240,7 @@ class admin extends Plugin {
   function admin_config_save() {
     $filename = $this->config['config_path'] . '/'. $this->input['configfile'];
     if($this->write($filename, $this->input['configcontent'])) {
-      $this->smarty->append("admin_msg", '"' . $this->input['configfile'] . '" written successfully.');
+      $this->info('"' . $this->input['configfile'] . '" written successfully.');
     }
     $this->admin_config();
     $back = 'admin_config';
@@ -238,7 +262,7 @@ class admin extends Plugin {
 	$this->smarty->assign("categories", $categories);
       }
       else {
-	$this->smarty->append("admin_error", $this->input['id'] . " does not exist or permission denied!");
+	$this->error($this->input['id'] . " does not exist or permission denied!");
 	$this->smarty->assign("admin_mode", "admin_post");
 	$this->admin_post();
       }
@@ -254,7 +278,7 @@ class admin extends Plugin {
   function admin_post_delete() {
     $file = $this->config["data_path"] . '/' . $this->input['category'] . '/' . $this->input['id'] . '.txt';
     if( $this->unlink($file) ) {
-      $this->smarty->append("admin_msg", $this->input['id'] . " removed successfully.");
+      $this->info($this->input['id'] . " removed successfully.");
     }
     # else: error stored in unlink()
     $this->smarty->assign("admin_mode", "admin_post");
@@ -305,14 +329,14 @@ class admin extends Plugin {
     }
 
     if(! file_exists($file) && ! is_writable($dir) ) {
-      $this->smarty->append("admin_error", "data directory is not writable!");
+      $this->error("data directory is not writable!");
     }
     elseif( ! is_writable($file) && ! $create) {
-      $this->smarty->append("admin_error", "$file is not writable!");
+      $this->error("$file is not writable!");
     }
     else {
       if($this->write($file, $content)) {
-        $this->smarty->append("admin_msg", '"' . $this->input['title'] . '" written successfully.');
+        $this->info('"' . $this->input['title'] . '" written successfully.');
 	foreach ($this->get_handlers('admin_postsave') as $handler) {
 	  $this->registry->plugins[$handler]->admin_postsave();
 	}
@@ -339,7 +363,7 @@ class admin extends Plugin {
       $this->smarty->assign("username", $this->input['username']);
     }
     else {
-      $this->smarty->append("admin_error", "user " . $this->input['username'] . "doesn't exist!");
+      $this->error("user " . $this->input['username'] . "doesn't exist!");
       $this->smarty->assign("admin_mode", "admin_user");
       $this->admin_user();
     }
@@ -349,14 +373,14 @@ class admin extends Plugin {
     $users = $this->userlist;
     if($this->input['password'] == $this->input['password2']) {
       if(strlen($this->input['password']) < 6) {
-        $this->smarty->append("admin_error", "Password too short!");
+        $this->error("Password too short!");
 	$this->smarty->assign("admin_user", $this->input['username'] );
 	$this->smarty->assign("admin_mode", "admin_user_edit");
       }
       else {
         $users[$this->input['username']] = md5($this->input['password']);
 	if ( $this->userfile($users) ) {
-          $this->smarty->append("admin_msg", "User " . $this->input['username'] . " has been saved.");
+          $this->info("User " . $this->input['username'] . " has been saved.");
 	  $this->userlist = parse_config("admin-users.conf");
 	}
         $this->smarty->assign("admin_mode", "admin_user");
@@ -365,7 +389,7 @@ class admin extends Plugin {
     else {
       $this->smarty->assign("admin_user", $this->input['username'] );
       $this->smarty->assign("admin_mode", "admin_user_edit");
-      $this->smarty->append("admin_error", "Passwords didn't match!");
+      $this->error("Passwords didn't match!");
     }
     $this->admin_user();
   }
@@ -375,7 +399,7 @@ class admin extends Plugin {
     $users = $this->userlist;
     unset ($users[$this->input['username']]);
     if ( $this->userfile($users) ) {
-      $this->smarty->append("admin_msg", "User " . $this->input['username'] . " has been deleted.");
+      $this->info("User " . $this->input['username'] . " has been deleted.");
       $this->userlist = parse_config("admin-users.conf");
     }
     $this->smarty->assign("admin_mode", "admin_user");
@@ -444,7 +468,7 @@ class admin extends Plugin {
       $this->smarty->assign("plugin", $this->input['plugin']);
     }
     else {
-      $this->smarty->append("admin_error", $this->input['plugin'] . " does not have a help file installed!");
+      $this->error($this->input['plugin'] . " does not have a help file installed!");
       $this->admin_plugin();
       $this->smarty->assign("admin_mode", 'admin_plugin');
     }
@@ -457,7 +481,7 @@ class admin extends Plugin {
 
   function admin_plugin_install() {
     if(! is_writable($this->config["plugin_path"]) or ! is_writable($this->config["template_path"] . '/shared')) {
-      $this->smarty->append("admin_error", "plugin path or shared template path not writable!");
+      $this->error("plugin path or shared template path not writable!");
       $this->admin_plugin();
       $this->smarty->assign("admin_mode", 'admin_plugin');
     }
@@ -472,7 +496,7 @@ class admin extends Plugin {
     $help = '';
 
     if($error) {
-      $this->smarty->append("admin_error", $error);
+      $this->error($error);
     }
     else {
       if(preg_match("/^(.*)\.zip$/", $orig, $match)) {
@@ -511,26 +535,26 @@ class admin extends Plugin {
 		}
 	      }
 	      else {
-		$this->smarty->append("admin_error", "error extracting " . $file['name'] . " from $zipfile!");
+		$this->error("error extracting " . $file['name'] . " from $zipfile!");
 		break;
 	      }
 	    }
 	    $this->unlink($zipfile);
 	  }
 	  else {
-	    $this->smarty->append("admin_error", "possible upload attack, aborted!");
+	    $this->error("possible upload attack, aborted!");
 	  }
 	}
 	else {
-	  $this->smarty->append("admin_error", "uploaded file has 0 bytes!");
+	  $this->error("uploaded file has 0 bytes!");
 	}
       }
       else {
-	$this->smarty->append("admin_error", "ZIP file expected!");
+	$this->error("ZIP file expected!");
       }
     }
     if($info) {
-      $this->smarty->append("admin_info", $info);
+      $this->info($info);
       if($help) {
 	$this->smarty->assign("plugin_help", $help);
       }
@@ -558,9 +582,9 @@ class admin extends Plugin {
       }
     }
     else {
-      $this->smarty->append("admin_error", "no plugin given");
+      $this->error("no plugin given");
     }
-    $this->smarty->append("admin_info", $info);
+    $this->info($info);
     $this->admin_plugin();
     $this->smarty->assign("admin_mode", 'admin_plugin');
   }
@@ -570,19 +594,19 @@ class admin extends Plugin {
     if(is_writable($this->config["plugin_path"])) {
       if($this->input['newstate'] == 'inactive') {
 	if($this->write($disabled, ' ')) {
-	  $this->smarty->append("admin_msg", $this->input['plugin'] . " deactivated.");
+	  $this->info($this->input['plugin'] . " deactivated.");
 	}
       }
       else {
 	if(file_exists($disabled)) {
 	  if($this->unlink($disabled)) {
-	    $this->smarty->append("admin_msg", $this->input['plugin'] . " activated.");
+	    $this->info($this->input['plugin'] . " activated.");
 	  }
 	}
       }
     }
     else {
-      $this->smarty->append("admin_error", "Plugin path not writable!");
+      $this->error("Plugin path not writable!");
     }
     $this->admin_plugin();
     $this->smarty->assign("admin_mode", 'admin_plugin');
@@ -602,14 +626,14 @@ class admin extends Plugin {
     if(! file_exists($file)) {
       $dir = dirname($file);
       if (! is_dir($dir) || ! is_writable($dir)) {
-        $this->smarty->append("admin_error", "'$dir' is not a directory or does not exist!");
+        $this->error("'$dir' is not a directory or does not exist!");
         return false;
       }
     }
 
     $fd = fopen($file, 'w');
     if ( ! $fd ) {
-      $this->smarty->append("admin_error", "could not open file '$file'!");
+      $this->error("could not open file '$file'!");
       return false;
     }
     else {
@@ -617,7 +641,7 @@ class admin extends Plugin {
 	$content = stripslashes($content);
       }
       if (! fwrite($fd, $content)) {
-        $this->smarty->append("admin_error", "could not write to file '$file'");
+        $this->error("could not write to file '$file'");
         return false;
       }
       else {
@@ -631,7 +655,7 @@ class admin extends Plugin {
   function mkdir($dir) {
     $base = dirname($dir);
     if( ! is_writable($base) ) {
-      $this->smarty->append("admin_error", "directory '$base' is not writable!");
+      $this->error("directory '$base' is not writable!");
       return false;
     }
     else {
@@ -640,7 +664,7 @@ class admin extends Plugin {
 	return true;
       }
       else {
-	$this->smarty->append("admin_error", "could not create directory '$dir'!");
+	$this->error("could not create directory '$dir'!");
 	return false;
       }
     }
@@ -648,12 +672,12 @@ class admin extends Plugin {
 
   function unlink($file) {
     if(! file_exists($file)) {
-      $this->smarty->append("admin_error", "file '$file' does not exist anymore!");
+      $this->error("file '$file' does not exist anymore!");
       return false;
     }
     else {
       if( ! unlink($file)) {
-	$this->smarty->append("admin_error", "could not remove file '$file'!");
+	$this->error("could not remove file '$file'!");
 	return false;
       }
       else {
@@ -664,13 +688,13 @@ class admin extends Plugin {
 
   function rmdir($dir) {
     if (! is_dir($dir)  || ! is_writable($dir)) {
-      $this->smarty->append("admin_error", "'$dir' is not a directory or does not exist!");
+      $this->error("'$dir' is not a directory or does not exist!");
       return false;
     }
 
     $dh = opendir($dir);
     if ( ! $dh ) {
-      $this->smarty->append("admin_error", "could not open directory '$dir'!");
+      $this->error("could not open directory '$dir'!");
       return false;
     }
 
@@ -685,16 +709,16 @@ class admin extends Plugin {
 
     if( $empty ) {
       if(! rmdir($dir)) {
-	$this->smarty->append("admin_error", "could not remove directory '$dir'!");
+	$this->error("could not remove directory '$dir'!");
 	return false;
       }
       else {
-	$this->smarty->append("admin_info", "directory '$dir' have been removed.");
+	$this->info("directory '$dir' have been removed.");
 	return true;
       }
     }
     else {
-      $this->smarty->append("admin_error", "directory '$dir' is not empty!");
+      $this->error("directory '$dir' is not empty!");
       return false;
     }
   }
@@ -728,9 +752,9 @@ class admin extends Plugin {
       }
     }
     else {
-      $this->smarty->append("admin_error", "no image filename given!");
+      $this->error("no image filename given!");
     }
-    $this->smarty->append("admin_info", $info);
+    $this->info($info);
     $this->smarty->assign("admin_mode", "admin_media");
     $this->admin_media();
   }
@@ -852,7 +876,7 @@ class admin extends Plugin {
       return $sorted;
     }
     else {
-      $this->smarty->append("admin_error", "directory '$dir' does not exist or is not readable!");
+      $this->error("directory '$dir' does not exist or is not readable!");
       return array();
     }
   }
@@ -867,21 +891,21 @@ class admin extends Plugin {
     $size = $_FILES['mediafile']['size'];
 
     if($error) {
-      $this->smarty->append("admin_error", $error);
+      $this->error($error);
     }
     else {
       if($size > 0) {
 	$dest = $this->config['image_path'] . '/' . preg_replace("/[\"\*\'\`\]\[\s\/\\\(\)]/", '', $orig);
 	if(move_uploaded_file($tmp, $dest)) {
 	  chmod($dest, 0666);
-	  $this->smarty->append("admin_msg", "$dest successfully uploaded");	  
+	  $this->info("$dest successfully uploaded");	  
 	}
 	else {
-	  $this->smarty->append("admin_error", "possible upload attack, aborted!");
+	  $this->error("possible upload attack, aborted!");
 	}
       }
       else {
-	$this->smarty->append("admin_error", "uploaded file has 0 bytes!");
+	$this->error("uploaded file has 0 bytes!");
       }
     }
 
@@ -954,20 +978,20 @@ class admin extends Plugin {
       if($changed != $content) {
 	if(is_writable($configfile)) {
 	  if($this->write($configfile, $changed)) {
-	    $this->smarty->append("admin_msg", "template has been set to " . $this->input['template']);
+	    $this->info("template has been set to " . $this->input['template']);
 	    $this->config['template'] = $this->input['template'];
 	  }
 	}
 	else {
-	  $this->smarty->append("admin_error", "plosxom.conf not writable!");
+	  $this->error("plosxom.conf not writable!");
 	}
       }
       else {
-	$this->smarty->append("admin_error", "replacing template in plosxom.conf failed!");
+	$this->error("replacing template in plosxom.conf failed!");
       }
     }
     else {
-      $this->smarty->append("admin_error", "template does not exist!");
+      $this->error("template does not exist!");
     }
     $this->admin_template();
     $this->smarty->assign("admin_mode", "admin_template");
@@ -989,7 +1013,7 @@ class admin extends Plugin {
       sort($files);
     }
     else {
-      $this->smarty->append("admin_error", "template directory not readable!");
+      $this->error("template directory not readable!");
     }
     $this->smarty->assign("template", $this->input['template']);
     $this->smarty->assign("template_files", $files);
@@ -1004,7 +1028,7 @@ class admin extends Plugin {
       $this->smarty->assign("template_file", $this->input['template_file']);
     }
     else {
-      $this->smarty->append("admin_error", "template file " . $this->input['template_file'] . " does not exist or is not readable!");
+      $this->error("template file " . $this->input['template_file'] . " does not exist or is not readable!");
       $this->smarty->assign("admin_mode", "admin_template_edit");
       $this->admin_template_edit();
     }
@@ -1014,7 +1038,7 @@ class admin extends Plugin {
   function admin_template_savefile() {
     $filename = $this->config['template_path'] . '/' . $this->input['template'] . '/' . $this->input['template_file'];
     if($this->write($filename, $this->input['template_content'])) {
-      $this->smarty->append("admin_msg", '"' . $this->input['template_file'] . '" written successfully.');
+      $this->info('"' . $this->input['template_file'] . '" written successfully.');
     }
     $this->smarty->assign("admin_mode", "admin_template_edit");
     $this->admin_template_edit();
@@ -1024,7 +1048,7 @@ class admin extends Plugin {
 
   function admin_template_install() {
     if(! is_writable($this->config["template_path"])) {
-      $this->smarty->append("admin_error", "template path is not writable!");
+      $this->error("template path is not writable!");
       $this->admin_template();
       $this->smarty->assign("admin_mode", 'admin_template');
     }
@@ -1039,10 +1063,10 @@ class admin extends Plugin {
     $help = '';
 
     if($error) {
-      $this->smarty->append("admin_error", $error);
+      $this->error($error);
     }
     elseif(! preg_match("/^[0-9a-z\_\-\.]*$/i", $orig)) {
-      $this->smarty->append("admin_error", "Template archive names shall only consist of chars 0-9, a-z, A-Z, -, _, . !");
+      $this->error("Template archive names shall only consist of chars 0-9, a-z, A-Z, -, _, . !");
     }
     else {
       if(preg_match("/^(.*)\.zip$/i", $orig, $match)) {
@@ -1060,7 +1084,7 @@ class admin extends Plugin {
 	      }
 	    }
 	    if(! $tplfiles) {
-	      $this->smarty->append("admin_error", "zip file contains either no files at all or files are not organized in a directory!");
+	      $this->error("zip file contains either no files at all or files are not organized in a directory!");
 	    }
 	    else {
 	      if($zip->extractTo($this->config['template_path'], $tplfiles)) {
@@ -1077,33 +1101,33 @@ class admin extends Plugin {
 		      }
 		    }
 		  }
-		  $this->smarty->append("admin_msg", "template has been installed.");
+		  $this->info("template has been installed.");
 		}
 		else {
-		  $this->smarty->append("admin_error", "extraction of template $template failed!");
+		  $this->error("extraction of template $template failed!");
 		}
 	      }
 	      else {
-		$this->smarty->append("admin_error", "extraction of template $template failed!");
+		$this->error("extraction of template $template failed!");
 	      }
 	    }
 	    $this->unlink($zipfile);
 	  }
 	  else {
-	    $this->smarty->append("admin_error", "possible upload attack, aborted!");
+	    $this->error("possible upload attack, aborted!");
 	  }
 	}
 	else {
-	  $this->smarty->append("admin_error", "uploaded file has 0 bytes!");
+	  $this->error("uploaded file has 0 bytes!");
 	}
       }
       else {
-	$this->smarty->append("admin_error", "ZIP file expected, got: $orig!");
+	$this->error("ZIP file expected, got: $orig!");
       }
     }
 
     if($info) {
-      $this->smarty->append("admin_info", $info);
+      $this->info($info);
     }
 
     $this->admin_template();
@@ -1113,20 +1137,20 @@ class admin extends Plugin {
 
   function admin_template_delete() {
     if($this->input['template'] == $this->config['template']) {
-      $this->smarty->append("admin_error", "Cannot remove $template, it is currently in use!");
+      $this->error("Cannot remove $template, it is currently in use!");
     }
     else {
       $tpl = $this->config['template_path'] . '/' . $this->input['template'];
       if(is_dir($tpl) and is_writable($tpl)) {
 	if($this->deldir($tpl)) {
-	  $this->smarty->append("admin_msg", "Removed template directory $tpl");
+	  $this->info("Removed template directory $tpl");
 	}
 	else {
-	  $this->smarty->append("admin_error", "Could not remove template directory $tpl!");
+	  $this->error("Could not remove template directory $tpl!");
 	}
       }
       else {
-	$this->smarty->append("admin_error", "Directory $tpl does not exist or permission denied!");
+	$this->error("Directory $tpl does not exist or permission denied!");
       }
     }
     $this->admin_template();
