@@ -46,7 +46,7 @@ $stderr = "";
 $config_path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/etc";
 $config = parse_config($config_path . "/plosxom.conf");
 $config["config_path"] = $config_path;
-$config["version"] = 1.05;
+$config["version"] = 1.06;
 
 # load smarty template engine
 define('SMARTY_DIR', $config["lib_path"] . "/"); 
@@ -89,11 +89,27 @@ class Plosxom {
     # load available plugins
     $this->load_plugins();
 
+    # localization
+    $this->load_langfiles();
+
     # initialize runtime variables
     $this->init_runtime();
 
     # parse input coming from GET or POST
     $this->parse_input();
+  }
+
+  function load_langfiles() {
+    $langfiles = array();
+    $dh = opendir($this->config["config_path"]);
+    while ( ($file = readdir( $dh ) ) !== false ) {
+      if( preg_match( '/^lang/', $file) ) {
+	if( is_readable($this->config["config_path"] . '/' . $file) ) {
+	  $langfiles[] = $this->config["config_path"] . '/' . $file;
+	}
+      }
+    }
+    $this->smarty->assign('langfiles', $langfiles);
   }
 
   function load_plugins() {
