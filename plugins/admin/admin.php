@@ -68,7 +68,7 @@ class admin extends Plugin {
     $params = func_get_args();
     $id     = array_shift($params);
     $type   = "messageinfo";
-    if(ereg('^error', $id) {
+    if(ereg('^error', $id)) {
       $type = "messageerror";
     }
     $this->smarty->append($type, array('id' => $id, 'param' => $params));
@@ -547,7 +547,7 @@ class admin extends Plugin {
 	    $this->unlink($zipfile);
 	  }
 	  else {
-	    $this->message('erroruptrick')
+	    $this->message('erroruptrick');
 	  }
 	}
 	else {

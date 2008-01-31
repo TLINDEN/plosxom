@@ -127,8 +127,8 @@ a:hover {
 }
 
 .greyrow a:hover {
-  background-color: #FFFFFF;
-  color: #6DA6E2;;
+//  background-color: #FFFFFF;
+  color: inherit;
   font-weight: bold;
   text-decoration: underline;
 }
@@ -170,7 +170,7 @@ input {
   margin-bottom: 10px;
 }
 
-.msg {
+.info {
   border: 1px solid #a6dbaa;
   display: box;
   padding: 5px;
@@ -180,14 +180,6 @@ input {
 
 .error {
   border: 1px solid #d8ada2;
-  display: box;
-  padding: 5px;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.info {
-  border: 1px solid orange;
   display: box;
   padding: 5px;
   margin-bottom: 10px;
