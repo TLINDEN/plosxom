@@ -73,14 +73,7 @@ tinyMCE.init({ldelim}
 
 {if $unauth}
 
-  <!--
-     If you want to hide details about authentication errors,
-     e.g. wether a user doesn't exist or a password doesn't
-     match, comment $unauth out and just print something like
-     this:
      <b>{#accessdenied#}</b>
-    -->
-  {$unauth}
 
 {else}
 
@@ -118,36 +111,31 @@ tinyMCE.init({ldelim}
 {/foreach}
 </div>
 
+{config_load file='lang-admin.conf' section="en"}
+{config_load file='lang-admin.conf' section="$lang"}
 
-{if $admin_error}
- <div class="error">
-  <p>{#boxerror#}:<br/>
-   {foreach from=$admin_error item=message}
-    {$message}<br/>
-   {/foreach}
-  </p>
- </div>
-{/if}
-
-{if $admin_info}
+{if $messageinfo}
  <div class="info">
   <p>{#boxinfo#}:<br/>
-   {foreach from=$admin_info item=message}
-    {$message}<br/>
-   {/foreach}
+    {foreach from=$messageinfo item=part}
+      {assign var="index" value="`$part.id`"}
+      {xprintf id=$smarty.config.$index param=$part.param}<br/>
+    {/foreach}
   </p>
  </div>
 {/if}
 
-{if $admin_msg}
- <div class="msg">
-  <p>{#boxmsg#}:<br/>
-   {foreach from=$admin_msg item=message}
-    {$message}<br/>
-   {/foreach}
+{if $messageerror}
+ <div class="error">
+  <p>{#boxerror#}:<br/>
+    {foreach from=$messageinfo item=part}
+      {assign var="index" value="`$part.id`"}
+      {xprintf id=$smarty.config.$index param=$part.param}<br/>
+    {/foreach}
   </p>
  </div>
 {/if}
+
 
 
 {if $admin_mode == "admin_post_edit"}
@@ -717,13 +705,6 @@ tinyMCE.init({ldelim}
 
 {elseif $admin_mode == "admin_test"}
 
-{config_load file='admin-messages.conf' section="$lang"}
-{foreach from=$error item=part}
- {assign var="index" value="`$part.id`"}
- Message: {xprintf id=$smarty.config.$index param=$part.param}<br/>
-{/foreach}
-
-<!-- {xprintf id=$smarty.config.$index param=$param}-->
 
 {else}
 
