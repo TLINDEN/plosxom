@@ -33,7 +33,7 @@ function setCat(showcat) {
 {assign var="delete" value="<img title=delete src=$base/templates/shared/remove.png border=0>"}
 
 {if $admin_mode == "admin_post_edit" or $admin_mode == "admin_page_edit"}
-<script language="javascript" type="text/javascript" src="{$config.baseurl}/templates/shared/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="{$config.baseurl}/templates/shared/tiny_mce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript">
 tinyMCE.init({ldelim}
     	mode : "textareas",
@@ -54,6 +54,10 @@ tinyMCE.init({ldelim}
 	external_link_list_url : "{$config.baseurl}/templates/shared/tiny_mce/link_list.js",
 	external_image_list_url : "{$config.baseurl}/templates/shared/tiny_mce/image_list.js",
 	flash_external_list_url : "{$config.baseurl}/templates/shared/tiny_mce/flash_list.js",
+	relative_urls : false,
+	convert_urls : false,
+	document_base_url : "{$config.baseurl}",
+	language : "{$lang}"
 {rdelim});
 
 </script>
@@ -90,7 +94,7 @@ tinyMCE.init({ldelim}
 {/foreach}
 </div>
 <div class="menu" style="text-align:right; white-space: nowrap;">
-  <a {if $menu == "help"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=help"            >{#menuhelp#}</a>
+  <a {if $menu == "help"}     id="highlite" {/if} href="{$config.whoami}?admin=yes&mode=admin_help"            >{#menuhelp#}</a>
   <a href="{$config.whoami}">{#menuviewblog#}</a>
 </div>
 
@@ -128,7 +132,7 @@ tinyMCE.init({ldelim}
 {if $messageerror}
  <div class="error">
   <p>{#boxerror#}:<br/>
-    {foreach from=$messageinfo item=part}
+    {foreach from=$messageerror item=part}
       {assign var="index" value="`$part.id`"}
       {xprintf id=$smarty.config.$index param=$part.param}<br/>
     {/foreach}
@@ -136,13 +140,11 @@ tinyMCE.init({ldelim}
  </div>
 {/if}
 
-
-
 {if $admin_mode == "admin_post_edit"}
    {if $post.id}
      {assign var="title" value="`$smarty.config.edit` <a href=$base/`$post.category`/`$post.id`>`$post.title`</a>"}
    {else}
-     {assign var="title" value="#createnew# #posting#"}
+     {assign var="title" value="`$smarty.config.createnew` `$smarty.config.posting`"}
    {/if}
    
    <h4>{$title}</h4>
@@ -200,7 +202,7 @@ tinyMCE.init({ldelim}
    <h4>{#view#} "{$post.title}"</h4>
 
    <p>
-   <a href="{$config.whoami}?admin=yes&mode=admin_post_edit&category={$post.category}">{#editthis#} {#posting#}</a>
+   <a href="{$config.whoami}?admin=yes&mode=admin_post_edit&category={$post.category}&id={$post.id}">{#editthis#} {#posting#}</a>
    </p>
 
    <div class="view">{$post.text}</div>
@@ -703,8 +705,9 @@ tinyMCE.init({ldelim}
   <input type="submit" name="submit" value="{#plugupload#}">
 </form>
 
-{elseif $admin_mode == "admin_test"}
+{elseif $admin_mode == "admin_help"}
 
+  {include file="`$config.template_path`/shared/admin_help.tpl"}
 
 {else}
 

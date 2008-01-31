@@ -36,8 +36,8 @@ class admin extends Plugin {
   var $imgreg = '(jpg|jpeg|gif|png)';
 
   function register() {
-    if($this->config["version"] < 1.05) {
-      die("The admin plugin requires at least plosxom version 1.05, this is: "
+    if($this->config["version"] < 1.06) {
+      die("The admin plugin requires at least plosxom version 1.06, this is: "
 	  . $this->config["version"]);
     }
     $this->add_handler("hook_url_filter", "admin");
@@ -68,7 +68,7 @@ class admin extends Plugin {
     $params = func_get_args();
     $id     = array_shift($params);
     $type   = "messageinfo";
-    if(ereg('^error', $id)) {
+    if(ereg('error', $id)) {
       $type = "messageerror";
     }
     $this->smarty->append($type, array('id' => $id, 'param' => $params));
@@ -76,37 +76,47 @@ class admin extends Plugin {
 
   function hook_send_header() {
     if(! $this->admin ) {
-      # not in admin mode, do notthing
+      # not in admin mode, do nothing
       return;
     }
 
-    $authheader = "WWW-Authenticate: Basic realm='Plosxom Blog Admin Plugin'";
-    if(! $_SERVER['PHP_AUTH_USER'] || ! $_SERVER['PHP_AUTH_PW']) {
-      header($authheader);
-      header('HTTP/1.0 401 Unauthorized');
-      /* no credentials supplied */
-      $this->smarty->assign("unauth", true);
+    if(! $this->userlist ) {
+      /* ok admin-users.conf exists, but contains no users
+       * so provide the form to create the admin user */
+      if(! ereg('admin_user_', $_GET['mode']) and ! ereg('admin_user_', $_POST['mode'])) {
+	header('Location: ' . $this->config['whoami'] . '?admin=yes&mode=admin_user_create&username=admin&initial=1');
+      }
+      $this->proceed();
     }
     else {
-      $this->currentuser = $_SERVER['PHP_AUTH_USER'];
-      if (array_key_exists($this->currentuser, $this->userlist)) {
-	$md5given = md5($_SERVER['PHP_AUTH_PW']);
-	if($md5given != $this->userlist[$this->currentuser]) {
-          header($authheader);
-	  header('HTTP/1.0 401 Unauthorized');
-	  /* password missmatch */
-	  $this->smarty->assign("unauth", true);
-	}
-	else {
-          # user authenticated
-	  $this->proceed();
-	}
+      $authheader = "WWW-Authenticate: Basic realm='Plosxom Blog Admin Plugin'";
+      if(! $_SERVER['PHP_AUTH_USER'] || ! $_SERVER['PHP_AUTH_PW']) {
+	header($authheader);
+	header('HTTP/1.0 401 Unauthorized');
+	/* no credentials supplied */
+	$this->smarty->assign("unauth", true);
       }
       else {
-        header($authheader);
-	header('HTTP/1.0 401 Unauthorized');
-	/* user does not exist */
-	$this->smarty->assign("unauth", true);
+	$this->currentuser = $_SERVER['PHP_AUTH_USER'];
+	if (array_key_exists($this->currentuser, $this->userlist)) {
+	  $md5given = md5($_SERVER['PHP_AUTH_PW']);
+	  if($md5given != $this->userlist[$this->currentuser]) {
+	    header($authheader);
+	    header('HTTP/1.0 401 Unauthorized');
+	    /* password missmatch */
+	    $this->smarty->assign("unauth", true);
+	  }
+	  else {
+	    /* user authenticated */
+	    $this->proceed();
+	  }
+	}
+	else {
+	  header($authheader);
+	  header('HTTP/1.0 401 Unauthorized');
+	  /* user does not exist */
+	  $this->smarty->assign("unauth", true);
+	}
       }
     }
   }
@@ -360,7 +370,14 @@ class admin extends Plugin {
     return $this->write($file, $content); 
   }
 
-  function admin_user_create() {}
+  function admin_user_create() {
+    if($this->input['username']) {
+      $this->smarty->assign("username", $this->input['username']);
+    }
+    if($this->input['initial']) {
+      $this->message('infouserinit');
+    }
+  }
 
   function admin_user_edit() {
     $users = $this->userlist;
@@ -1180,4 +1197,5 @@ class admin extends Plugin {
     return $files;
   }
 
+  function admin_help() {}
 }
