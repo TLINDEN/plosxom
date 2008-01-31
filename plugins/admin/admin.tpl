@@ -3,8 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang}"
 <head>
 
-{config_load file='admin-lang.conf' section="en"}
-{config_load file='admin-lang.conf' section="$lang"}
+{foreach from=$langfiles item=file}
+  {config_load file="$file" section="en"}
+  {config_load file="$file" section="$lang"}
+{/foreach}
 
 <title>{$config.blog_name} - Blog Administration</title>
 <script type="text/javascript" src="{$config.baseurl}/templates/shared/admin_dhtml.js"></script>
@@ -67,13 +69,16 @@ tinyMCE.init({ldelim}
 
 <body>
 
-{config_load file='lang.conf' section="$lang"}
 
-<!--
+
+
 <img src="{$config.baseurl}/templates/shared/plosxom.png" style="float:left;"/>
-<h1 style="float:right;">{$config.blog_name} - Blog Administration</h4>
+<div class="title">
+  <h1>Blog Administration</h1>
+  <h2>{$config.blog_name} - {$config.blog_title}</h2>
+</div>
 <br style="clear:both;">
--->
+
 
 {if $unauth}
 
@@ -113,10 +118,10 @@ tinyMCE.init({ldelim}
 {foreach from=$submenu_tpl item=tpl}
   {include file=$tpl}
 {/foreach}
+&nbsp;
 </div>
 
-{config_load file='lang-admin.conf' section="en"}
-{config_load file='lang-admin.conf' section="$lang"}
+
 
 {if $messageinfo}
  <div class="info">
@@ -219,8 +224,8 @@ tinyMCE.init({ldelim}
   {* multiple postings, list them *}
   <table border="0" width="100%">
     <tr>
-     <th align="left">{#itle#}</th>
-     <th align="left">{#category#}</th>
+     <th align="left">{#title#}</th>
+     <th align="left">{#cattitle#}</th>
      <th align="left">{#mtime#}</th>
      <th align="left">{#size#}</th>
      <th align="left">{#actions#}</th>

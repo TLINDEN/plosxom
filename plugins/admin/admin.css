@@ -20,6 +20,26 @@ th {
 
 }
 
+.title {
+  float: right;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  color: #6DA6E2;
+  margin-bottom: 20px;
+  background-color: #FFFFFF;
+  text-align: right;
+}
+
+.title h1 {
+  font-size: 40px;
+  margin-bottom: 0;
+  margin-bottom: 0;
+}
+
+.title h2 {
+  font-size: 20px;
+  margin-bottom: 0;
+}
 
 #highlite {
   font-weight: bold;
@@ -92,14 +112,6 @@ th {
   padding: 2px;
 }
 
-h1 {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  font-size: 48px;
-  color: #6DA6E2;
-  margin-bottom: 30px;
-  background-color: #FFFFFF;
-}
 
 a {
   color: #6DA6E2;
