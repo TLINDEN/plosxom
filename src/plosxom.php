@@ -44,6 +44,8 @@ ini_set("display_errors", "on");
 # load configuration
 $stderr = "";
 $config_path = dirname($_SERVER["SCRIPT_FILENAME"]) . "/etc";
+include(dirname(__FILE__) . "/lib/plosxom-lib.php");
+
 $config = parse_config($config_path . "/plosxom.conf");
 $config["config_path"] = $config_path;
 $config["version"] = 1.06;
@@ -51,7 +53,6 @@ $config["version"] = 1.06;
 # load smarty template engine
 define('SMARTY_DIR', $config["lib_path"] . "/"); 
 include(SMARTY_DIR . 'Smarty.class.php');
-include(SMARTY_DIR . 'plosxom-lib.php');
 
 # initialize the smarty engine
 $smarty = new Smarty;
