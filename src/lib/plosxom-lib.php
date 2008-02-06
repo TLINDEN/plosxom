@@ -2,10 +2,21 @@
 
 function parse_config($file) {
   global $config_path;
-  if(! ereg("^\/", $file)) {
-    # add config dir
+  if(! ereg("\/", $file)) {
+    // filename contains no path parts at all
     $file = $config_path . "/$file";
   }
+  elseif( ereg("^\/", $file)) {
+    // absolute file path, keep it untouched
+    ;
+  }
+  elseif( ereg(".+\/", $file) ) {
+    /* filename contains path parts but is relative
+     * go one level up
+     */
+    $file = $config_path . "/../$file";
+  }
+
   if (file_exists($file)) {
     $config = array();
     foreach (file($file) as $line) {
