@@ -712,7 +712,7 @@ tinyMCE.init({ldelim}
 
 {elseif $admin_mode == "admin_help"}
 
-  {include file="`$config.template_path`/shared/README.html"}
+  {include file="`$config.template_path`/shared/readme.tpl"}
 
 {else}
 
