@@ -4,22 +4,16 @@
 #  
 
 #
-#  This is the physical location of the plosxom installation on the
-#  filesystem.
-lib_path = /home/palidhar/htdocs/html/demo/lib
-
-
-#
 #  Where are the templates located. This directory must be visible
 #  to the webserver, because templates provide css stylesheets, which
 #  are required.
-template_path = /home/palidhar/htdocs/html/demo/templates
+template_path = [template_path]
 
 
 #
 #  The directory where pre-compiled templates can be stored. Must
 #  be writable for the webserver.
-tmp_path = /home/palidhar/tmp
+tmp_path = [tmp_path]
 
 
 #
@@ -28,35 +22,37 @@ tmp_path = /home/palidhar/tmp
 #  will be indexed. To hide a file from the blog, change its permissions
 #  so that the webserver can't read it anymore. Consider this as
 #  "draft posting" feature.
-data_path = /home/palidhar/htdocs/html/demo/data
+data_path = [data_path]
 
 
 #
 #  Where plugins are located.
-plugin_path = /home/palidhar/htdocs/html/demo/plugins
+plugin_path = [plugin_path]
 
 
 #
 # Where we store images
-image_path = /home/palidhar/htdocs/html/demo/images
+image_path = [image_path]
+
 
 # width of normalized images
 image_normal_width = 400
 
+
 #
 #  The name of the template. Each template is a directory beneath
 #  the template_path.
-template = crystalx
+template = default
 
 
 #
 #  The overall name of your blog.
-blog_name = Demo
+blog_name = Blog
 
 
 #
 #  Add a short description, a oneliner is far enogh.
-blog_title = Testing Plosxom
+blog_title = My first plosxom powered blog
 
 
 #
@@ -66,13 +62,13 @@ postings = 10
 
 #
 #  Your name.
-author = testuser
+author = admin
 
 
 #
 #  Add a link to your homepage or something which will be used to
 #  underline the author name.
-author_link = http://palidhar.nonlogic.org
+author_link = [whoami]
 
 
 #
@@ -81,18 +77,24 @@ author_email = nospam@nospam.com
 
 #
 #  This is the http url of the plosxom blog.
-whoami = http://palidhar.nonlogic.org/demo/plosxom.php
+whoami = [whoami]
 
 
 #
 #  This is the base url of the blog, without the plosxom.php file.
 #  Will be used to create image or stylesheet links.
-baseurl =  http://palidhar.nonlogic.org/demo
+baseurl =  [baseurl]
 
-
-imgurl = http://palidhar.nonlogic.org/demo/images
 
 #
-#  Language for output
+# This is the base url for images
+imgurl = [imgurl]
+
+
+#
+#  Language for output, currently de or en are supported
+#  Please note that the template you are using has to support
+#  it. English will be loaded always per default, therefore
+#  untranslated terms will be displayed in english
 lang = en
 
