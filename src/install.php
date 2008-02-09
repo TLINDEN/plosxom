@@ -53,8 +53,52 @@ foreach ($_POST as $option => $value) {
   $input[$option] = $value;
 }
 
+if($_SERVER['SERVER_PORT'] !== 80) {
+  $port = ':' . $_SERVER['SERVER_PORT'];
+}
+$proto = "http://";
+if($_SERVER['HTTPS']) {
+  $proto = "https://";
+}
+$path       = dirname($_SERVER['SCRIPT_NAME']);
+$lib_path   = dirname(__FILE__) . "/lib";
+$baseurl    = rtrim($proto . $_SERVER['HTTP_HOST'] . $path, '/');
+$imgurl     = $baseurl . '/images';
+$whoami     = $baseurl . '/plosxom.php';
 $configfile = dirname(__FILE__) . "/etc/plosxom.conf";
-$config = parse_config($configfile);
+
+if(file_exists(dirname(__FILE__) . "/etc/plosxom.conf")) {
+  $config = parse_config($configfile);
+}
+else {
+  /* generate config from dist file */
+  $content = implode ('', file(dirname(__FILE__) . "/etc/plosxom.conf.dist"));
+  $cfgvars = array ('[template_path]', '[plugin_path]', '[tmp_path]',
+		    '[image_path]', '[data_path]', '[author_link]',
+		    '[whoami]', '[baseurl]', '[imgurl]');
+  $dirs = array(
+		dirname(__FILE__) . "/templates",
+		dirname(__FILE__) . "/plugins",
+		"/tmp",
+		dirname(__FILE__) . "/images",
+		dirname(__FILE__) . "/data",
+		$whoami, $whoami, $baseurl, $imgurl
+		);
+  
+  $generated = str_replace($cfgvars, $dirs, $content);
+
+  if(is_writable(dirname(__FILE__) . "/etc")) {
+    if(write_config($generated)) {
+      print "<h1>Generated config $configfile</h1>";
+      $config = parse_config($configfile);
+    }
+  }
+  else {
+    print "<h1>Generated config, copy the following text to $configfile:</h1>";
+    print "<pre style='border: 1px solid #c4c4c4;'>$generated</pre>";
+    exit;
+  }
+}
 
 if($input['stage'] == 'var') {
   if(is_readable($configfile)) {
@@ -62,21 +106,7 @@ if($input['stage'] == 'var') {
     $changed = preg_replace("/^" . $input['var'] . " = .*$/m", $input['var'] . ' = ' . $input['value'], $content);
     if($changed !== $content) {
       if(is_writable($configfile)) {
-	$fd = fopen($configfile, 'w');
-	if($fd) {
-	  if( fwrite($fd, $changed) ) {
-	    fclose($fd); 
-	    chmod($configfile , 0666);
-	    print "<h1>Configfile successfully changed.</h1>";
-	    $config = parse_config($configfile);
-	  }
-	  else {
-	    print "<h1>Failed to write data to $configfile! Please fix the permissions and retry!</h1>";
-	  }
-	}
-	else {
-	  print "<h1>Failed to open $configfile for writing! Please fix the permissions and retry!</h1>";
-	}
+	write_config($changed);
       }
       else {
 	print "<h1>Could not write to $configfile! Please fix the permissions and retry!</h1>";
@@ -124,8 +154,8 @@ elseif($input['stage'] == 'admin') {
   }
 
   if($success) {
-    print "<a href=\"" . $config{whoami} . "/admin\">Login to the admin backend now!</a>";
-    print "<br/><a href=\"" . $config{whoami} . "\">Visit your blog now!</a>";
+    print "<a href=\"" . $config['whoami'] . "/admin\">Login to the admin backend now!</a>";
+    print "<br/><a href=\"" . $config['whoami'] . "\">Visit your blog now!</a>";
     print "<h1>Please remove the file <b>install.php</b></h1>";
   }
 
@@ -157,7 +187,7 @@ elseif($input['stage'] == 'admin') {
   <?
 
       if($config) {
-	define('SMARTY_DIR', $config["lib_path"] . "/"); 
+	define('SMARTY_DIR', $lib_path . "/"); 
 	include(SMARTY_DIR . 'Smarty.class.php');
 	$smarty = new Smarty;
 	if($smarty) {
@@ -176,68 +206,52 @@ elseif($input['stage'] == 'admin') {
    </tr>
    <tr>
      <th><br/>Option</th>
-     <th colspan="2"><br/>Current and suggested value</th>
+     <th colspan="2"><br/>Current value</th>
      <th>Testlink</th>
    </tr>
    <?
-    if($_SERVER['SERVER_PORT'] !== 80) {
-      $port = ':' . $_SERVER['SERVER_PORT'];
-    }
-    $proto = "http://";
-    if($_SERVER['HTTPS']) {
-      $proto = "https://";
-    }
-    $path    = dirname($_SERVER['SCRIPT_NAME']);
-    $baseurl = rtrim($proto . $_SERVER['HTTP_HOST'] . $path, '/');
-    $imgurl  = $baseurl . '/images';
-    $whoami  = $baseurl . '/plosxom.php';
+
     
-    $vars = array('whoami'   => array( $config['whoami'],  $whoami,  $whoami),
-		  'baseurl'  => array( $config['baseurl'], $baseurl, "$baseurl/templates/shared/ok.png"),
-		  'imgurl'   => array( $config['imgurl'],  $imgurl,  "$imgurl/plosxom.png"));
+    $vars = array('whoami'   => array($config['whoami'],  $config['whoami']),
+		  'baseurl'  => array($config['baseurl'], $config['baseurl'] . "/templates/shared/ok.png"),
+		  'imgurl'   => array($config['imgurl'],  $config['imgurl'] . "/plosxom.png"));
 
     $varform    = '<form name="modifyvar" action="install.php" method="post"><input type="hidden" name="stage" value="var">';
     $varformend = '<input type="submit" name="submit" value="change"></form>';
 
     foreach ($vars as $varname => $value) {
-      print "<tr><td valign=top>$varname</td><td colspan='2'><font style='color:#c4c4c4'>suggested: <b>" . $value[1]
-	. "</b></font><br/>" . $varform . "current: <input type='hidden' name='var' value='$varname'><input size=60 type=text name='value' value='"
+      print "<tr><td valign=top>$varname</td><td colspan='2'>" . $varform . "<input type='hidden' name='var' value='$varname'>"
+	. "<input size=60 type=text name='value' value='"
 	. $value[0] . "'>" . $varformend . "</td>"
-	. "<td><a href=\"$value[2]\">test</a></td>"
+	. "<td><a href=\"$value[1]\">test</a></td>"
 	. "</tr>";
     }
 
    ?>
      <tr>
       <th><br/>Directory</th>
-      <th><br/>Current and suggested value</th>
+      <th><br/>Current value</th>
       <th><br/>Readable</th>
       <th><br/>Writable</th>
      </tr>
   <?
        $directories = array(
-			    'config_path'   => array( dirname(__FILE__) . "/etc"),
-			    'template_path' => array( $config['template_path'],   dirname(__FILE__) . "/templates"),
-			    'plugin_path'   => array( $config['plugin_path'],     dirname(__FILE__) . "/plugins"),
-			    'tmp_path'      => array( $config['tmp_path'],        dirname(__FILE__) . "/tmp"),
-			    'image_path'    => array( $config['image_path'],      dirname(__FILE__) . "/images"),
-			    'data_path'     => array( $config['data_path'],       dirname(__FILE__) . "/data")
+			    'template_path' => $config['template_path'],
+			    'plugin_path'   => $config['plugin_path'],
+			    'tmp_path'      => $config['tmp_path'],
+			    'image_path'    => $config['image_path'],
+			    'data_path'     => $config['data_path'],
 			    );
 
     $dirform    = '<form name="modifyvar" action="install.php" method="post"><input type="hidden" name="stage" value="var">';
     $dirformend = '<input type="submit" name="submit" value="change"></form>';
     foreach ($directories as $type => $dir) {
-      if(! $dir[1] ) {
-	// not configurable
-	print "<tr><td valign=top>$type</td><td>current: <b>" . $dir[0] . "</b><br/><br/></td><td><font color=";
-      }
-      else {
-	print "<tr><td valign=top>$type</td><td><font style='color:#c4c4c4'>suggested: <b>" . $dir[1]
-	    . "</b></font><br/>" . $dirform . "current: <input type='hidden' name='var' value='$type'><input size=60 type=text name='value' value='"
-	    . $dir[0] . "'>" . $dirformend . "</td>"
-	    . "<td><font color=";
-      }
-      if(is_readable($dir[0])) {
+      print "<tr><td valign=top>$type</td><td>" . $dirform . "<input type='hidden' name='var' value='$type'>"
+	. "<input size=60 type=text name='value' value='"
+	. $dir . "'>" . $dirformend . "</td>"
+	. "<td><font color=";
+      
+      if(is_readable($dir)) {
 	print "green>OK</td>\n";
 
       }
@@ -247,7 +261,7 @@ elseif($input['stage'] == 'admin') {
       }
 
       print "<td><font color=";
-      if(is_writable($dir[0])) {
+      if(is_writable($dir)) {
         print "green>OK</td>\n";
       }
       else {
@@ -285,6 +299,31 @@ elseif($input['stage'] == 'admin') {
         <?
       }
     }
+
+
+function write_config($content) {
+  global $configfile;
+  $fd = fopen($configfile, 'w');
+  if($fd) {
+    if( fwrite($fd, $content) ) {
+      fclose($fd); 
+      chmod($configfile , 0666);
+      print "<h1>Configfile successfully written.</h1>";
+      $config = parse_config($configfile);
+    }
+    else {
+      print "<h1>Failed to write data to $configfile! Please fix the permissions and retry!</h1>";
+      return false;
+    }
+  }
+  else {
+    print "<h1>Failed to open $configfile for writing! Please fix the permissions and retry!</h1>";
+    return false;
+  }
+
+  return true;
+}
+
 ?>
 </table>
 </body>
