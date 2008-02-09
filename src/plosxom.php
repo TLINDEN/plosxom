@@ -72,6 +72,7 @@ $smarty = new Smarty;
 $smarty->template_dir = $config["template_path"];
 $smarty->config_dir   = $config["config_path"];
 $smarty->compile_dir  = $config["tmp_path"];
+$smarty->caching      = 0;
 
 /* initialize plosxom */
 $plosxom = new Plosxom($config, $smarty);
