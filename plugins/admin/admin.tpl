@@ -712,15 +712,13 @@ tinyMCE.init({ldelim}
 
 {elseif $admin_mode == "admin_help"}
 
-  {include file="`$config.template_path`/shared/admin_help.tpl"}
+  {include file="`$config.template_path`/shared/README.html"}
 
 {else}
 
 {foreach from=$main_tpl item=tpl}
   {include file=$tpl}
 {/foreach}
-
-
 
 
 {/if} <!-- endif admin_mode -->
