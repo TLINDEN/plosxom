@@ -17,6 +17,31 @@ also be linked instead of embedded, and
 the link can be a text string or the
 video preview image.
 
+Added admin plugin, which is a webinterface
+to maintain all aspects of the blog.
+
+Readme file has been rewritten, it also
+contains some help about the admin
+backend.
+
+A install.php gui installer has been
+added which makes it easier to install
+plosxom for newbiews.
+
+The page plugin now contains an admin
+plugin so that one can maintain static
+pages from admin backend. The same applies
+for the technorati-tag plugin.
+
+An rpc-ping admin plugin has been added,
+it is also possible to issue rpc-pings
+after a posting has been created or
+changed.
+
+The plosxom core classes "Plosxom, Registry
+and Plugin" have been outsourced into
+external files (residing in the lib/ directory)
+for easier maintenance.
 
 
 Release 1.05 fixes and new plugins
