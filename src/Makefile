@@ -1,11 +1,12 @@
 version  = $(shell cat VERSION)
 pkg      = plosxom-core
 plugins  = admin admin_rpc categories feed links more page technorati tagcloud youtube
-libfiles = IXR_Library.inc.php
-plugfiles = $(shell find ../plugins -name "*.php"  | grep -v '.svn'; \
-		    find ../plugins -name "*.nfo"  | grep -v '.svn'; \
-		    find ../plugins -name "*.txt"  | grep -v '.svn'; )
-conffiles = $(shell find ../plugins -name "*.conf" | grep -v '.svn')
+libfiles = IXR_Library.inc.php thumbnail.inc.php
+plugfiles = $(shell cd ../plugins; \
+		 find $(plugins) -name "*.php"  | grep -v '.svn'; \
+		 find $(plugins) -name "*.nfo"  | grep -v '.svn'; \
+		 find $(plugins) -name "*.txt"  | grep -v '.svn'; )
+conffiles = $(shell cd ../plugins; find $(plugins) -name "*.conf" | grep -v '.svn')
 
 
 all:
@@ -32,8 +33,12 @@ core:
 	rm -rf ../$(pkg)-$(version)
 	mkdir -p ../$(pkg)-$(version)
 	cp -R * ../$(pkg)-$(version)/
-	cp $(plugfiles) ../$(pkg)-$(version)/plugins/
-	cp $(conffiles) ../$(pkg)-$(version)/plugins/
+	$(foreach plugfile,$(plugfiles), \
+		cp ../plugins/$(plugfile) ../$(pkg)-$(version)/plugins/; \
+	)
+	$(foreach conffile,$(conffiles), \
+		cp ../plugins/$(conffile) ../$(pkg)-$(version)/etc/; \
+	)
 	mkdir -p ../$(pkg)-$(version)/templates/shared
 	$(foreach plugin,$(plugins), \
 		cp -R ../plugins/$(plugin)/* ../$(pkg)-$(version)/templates/shared/;   \
@@ -41,10 +46,13 @@ core:
 	rm -f ../$(pkg)-$(version)/templates/shared/*.php
 	rm -f ../$(pkg)-$(version)/templates/shared/*.conf
 	rm -f ../$(pkg)-$(version)/templates/shared/*.txt
-	$(forach libfile,$(libfiles), \
+	$(foreach libfile,$(libfiles), \
 		mv ../$(pkg)-$(version)/plugins/$(libfile) ../$(pkg)-$(version)/lib/; \
 	)
-	rm -rf $(shell find ../$(pkg)-$(version) -name .svn)
+	sleep 3
+	$(foreach svndir,$(shell find ../$(pkg)-$(version) -name .svn), \
+		rm -rf $(svndir); \
+	)
 	cd ../$(pkg)-$(version)/ && rm Makefile *.pl plugpack.sh
 	cd .. && tar cpzf $(pkg)-$(version).tar.gz $(pkg)-$(version)
 
