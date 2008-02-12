@@ -43,7 +43,7 @@ h1 {
     <h1>Welcome to the plosxom installation</h1>
 <?
 
-include('lib/plosxom-lib.php');
+include('lib/Plosxom-functions.php');
 
 // fetch input                                                                                                                                                                                                  
 foreach ($_GET as $option => $value) {
@@ -94,7 +94,8 @@ else {
     }
   }
   else {
-    print "<h1>Generated config, copy the following text to $configfile:</h1>";
+    print "<h1>Write permission denied for $configfile!</h1>";
+    print "<h2>Generated config, copy the following text to $configfile:</h2>";
     print "<pre style='border: 1px solid #c4c4c4;'>$generated</pre>";
     exit;
   }
