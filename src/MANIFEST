@@ -147,13 +147,13 @@ templates/blogtxt/blogtxt-screenshot.png
 MANIFEST
 LICENSE
 VERSION
+RELEASENOTES
 CHANGELOG
 Makefile
 diff.pl
 pages/about.txt
 plugpack.sh
 stresstest.pl
-RELEASENOTES
 README.txt
 install.php
 index.php
