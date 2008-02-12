@@ -16,6 +16,8 @@ chdir("$base/$current");
 my %currentfiles = map { $_ => 1 } split/\n/, `find -type f`;
 
 my $patchdir = "$base/${current}-patch";
+my $olddir   = "$base/${last}";
+
 mkdir ($patchdir);
 
 foreach my $file (keys %currentfiles) {
@@ -45,7 +47,7 @@ sub install {
   my $dir = $file;
   $dir =~ s([^/]*$)();
   system("mkdir -p $patchdir/$dir");
-  if ($dir =~ /(templates|etc)/) {
+  if ($dir =~ /(templates|etc)/ && $file =~ /\.(tpl|css)$/ && -e "$last/$file") {
     # dont patch, add .upgrade file
     my $newfile = $file;
     $newfile =~ s(.*/)();
