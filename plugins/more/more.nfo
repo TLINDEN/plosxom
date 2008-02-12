@@ -1,0 +1,5 @@
+version = 1.00
+description = Add support for "read more" link to shorten postings on the mainpage.
+author = Pali Dhar
+author_email = nobrain AT bk DOT ru
+url = http://code.google.com/p/plosxom/wiki/PluginMore
