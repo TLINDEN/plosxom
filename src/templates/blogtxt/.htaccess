@@ -1,6 +1,6 @@
 #
 # allow stylesheets
-<Files ~ "\.(css)$">
+<Files ~ "\.(css|png|jpg)$">
   Order allow,deny
   Allow from all
 </Files>
