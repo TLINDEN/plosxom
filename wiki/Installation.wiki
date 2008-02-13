@@ -11,15 +11,11 @@
 
 Make sure your webserver is able to access all the files. Read permissions are sufficient.
 
-= Configuration =
+= Manual Configuration =
+
+*Please note: remove the automated installer 'install.php' bevor starting with manual installation*
 
 Next, edit the plosxom configuration file *etc/plosxom.conf*. Here is an explanation of the variables.
-
-
-This is the physical location of the plosxom installation on the
-filesystem.
-
-*lib_path = /path/to/webspace/plosxom/lib*
 
 Where are the templates located. This directory must be visible
 to the webserver, because templates provide css stylesheets, which
@@ -79,7 +75,9 @@ Will be used to create image or stylesheet links.
 
 *baseurl = http://yourpage/plosxom/*
 
+= Automated Installation =
 
+After unpacking point your browser to your site and call 'install.php'. It will guide you through the process of the installation and cry about missing permissions. You can also create an initial admin account from it.
 
 = Posting =
 
