@@ -44,18 +44,18 @@ To include a youtube video in a blog post, do the following:
 
 2. retrieve the video id, example:
 {{{
-  http://youtube.com/watch?v=*OEXt9qb0zBI*
+  http://youtube.com/watch?v=OEXt9qb0zBI
                              ^^^^^^^^^^^  this is the video id}}}
 
 3. in a new blog post add one of the following versions:
 
-   * plain ascii html link to the youtube page:
-     {{{{youtube mode="ascii" id="jt4XH65rOxA"}}}}
-   * preview image with link to youtube page:
-     {{{{youtube mode="image" id="jt4XH65rOxA"}}}}
-   * display inline video player in the blog post:
-     {{{{youtube id="jt4XH65rOxA"}}}}
-   * the same as above but with custom dimensions:
-     {{{{youtube width="320" height="240" id="jt4XH65rOxA"}}}}
+ * plain ascii html link to the youtube page:
+   {{{{youtube mode="ascii" id="jt4XH65rOxA"}}}}
+ * preview image with link to youtube page:
+   {{{{youtube mode="image" id="jt4XH65rOxA"}}}}
+ * display inline video player in the blog post:
+   {{{{youtube id="jt4XH65rOxA"}}}}
+ * the same as above but with custom dimensions:
+   {{{{youtube width="320" height="240" id="jt4XH65rOxA"}}}}
 
 The same applies for sevenload and google videos. The plugin distinguishes the type of video using the video-id.
