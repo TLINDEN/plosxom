@@ -45,7 +45,8 @@ To include a youtube video in a blog post, do the following:
 2. retrieve the video id, example:
 {{{
   http://youtube.com/watch?v=OEXt9qb0zBI
-                             ^^^^^^^^^^^  this is the video id}}}
+                             ^^^^^^^^^^^  this is the video id
+}}}
 
 3. in a new blog post add one of the following versions:
 
