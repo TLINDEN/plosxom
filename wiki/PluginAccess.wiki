@@ -4,10 +4,12 @@
 
 Block particular users out using their ip address. This plugin exists mainly to show what can be done with plosxom plugins, however it works. of course :)
 
+= Download =
+
+[http://plosxom.googlecode.com/files/access-1.01.zip version 1.01]
+
 = Install =
 
 1. Copy access.php to your plugin directory.
 
 2. Copy access.conf to your etc directory and edit it. The redirect path must be a complete working url. You may add an "access denied" page to your blog using the [PluginStaticPage Static page plugin]. Following the redirect url add ip adresses you want to block, one ip address per line.
-
-[http://plosxom.googlecode.com/files/access-1.00.zip Download version 1.00]
