@@ -4,10 +4,11 @@
 
 Add technorati tags to your postings.
 
+= Download =
+
+[http://plosxom.googlecode.com/files/technorati-1.03.zip version 1.03]
 
 = Install =
-
-
 
 To install:
 
@@ -48,5 +49,3 @@ end of the posting file like this:
 tag:technorati, tag:plosxom, tag:php, ...
 }}}
 
-
-[http://plosxom.googlecode.com/files/technorati-1.02.zip Download versoin 1.02]
