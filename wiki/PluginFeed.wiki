@@ -4,11 +4,15 @@
 
 Add rss feed (rss/rss2/atom) feature to the blog.
 
+= Download =
+
+[http://plosxom.googlecode.com/files/feed-1.01.zip version 1.01]
+
 = Install =
 
 copy feed.php to your plugin dir
 
-copy the .tpl files to your template dir
+copy the .tpl files to the template/shared dir
 
 somewhere in your header template add the following code:
 
@@ -23,5 +27,3 @@ you may add a html link to a feed like this:
 {{{
 <a href="{$config.whoami}/feed/rss">RSS Feed</a>
 }}}
-
-[http://plosxom.googlecode.com/files/feed-1.00.zip Download version 1.00]
