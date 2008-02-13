@@ -40,12 +40,15 @@ That's all about it.
 
 To include a youtube video in a blog post, do the following:
 
- * visit the youtube video page you want to post
- * retrieve the video id, example:
-   {{{
+1. visit the youtube video page you want to post
+
+2. retrieve the video id, example:
+{{{
   http://youtube.com/watch?v=*OEXt9qb0zBI*
                              ^^^^^^^^^^^  this is the video id}}}
- * in a new blog post add one of the following versions:
+
+3. in a new blog post add one of the following versions:
+
    * plain ascii html link to the youtube page:
      {{{{youtube mode="ascii" id="jt4XH65rOxA"}}}}
    * preview image with link to youtube page:
