@@ -29,7 +29,7 @@ Add static pages to your blog.
 {else}
 }}}
 
-5. before the {else} add this clause:
+6. before the {else} add this clause:
 
 {{{
 {elseif $page}
@@ -39,9 +39,9 @@ Add static pages to your blog.
 
 (change template name accordingly)
 
-6. create .txt files in your pages directory.
+7. create .txt files in your pages directory.
 
-7. to link to a static page, add this (eg. to your menu):
+8. to link to a static page, add this (eg. to your menu):
 
 {{{
 <a href="{$config.whoami}/page/about">About</a>
