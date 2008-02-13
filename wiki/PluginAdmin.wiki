@@ -3,18 +3,17 @@
 
 = Introduction =
 
-Administration Plugin
+Administration Webinterface Plugin
 
 
 = Details =
 
-The admin plugin is currently under development and not released yet.
+This plugin will be delivered with plosxom core release. Usage is straight forward and easy to learn.
 
-[http://plosxom.googlecode.com/svn/plugins/admin/ Check the Subversion repository for updates meanwhile]. But be careful, it will not work with the current release of plosxom, it needs at least version [http://plosxom.googlecode.com/svn/src/ 1.06], which is currently only available via subversion too. It will be released until the admin plugin is complete.
 
 = Development Status =
 
-*Last updated: 24.01.2008*
+*Last updated: 13.2.2008*
 
 For now the following functionality is implemented so far:
 
@@ -27,20 +26,16 @@ For now the following functionality is implemented so far:
   * config file management, the user can directly edit configs from the admin backend
   * user management
   * installation and deletion of plugins, plugins can also deactivated
-
-Missing functionality as of *24.01.2008*:
-
   * media file upload and delete function
-  * selected images will not properly inserted into posts from tinymce
   * template management
-  * rpc ping (although the code backend already exists, I'm using it every day)
-  * admin plugin for tag generation
-  * documentation (online help)
-  * localization (using admin-lang.conf and smarty lang support)
+  * [PluginAdminRPC rpc ping]
+  * [PluginTagCloud admin plugin for tag generation]
+  * [PlosxomReadme documentation (online help)]
+  * [http://code.google.com/p/plosxom/source/browse/plugins/admin/lang-admin.conf localization (using smarty lang support)]
 
 = Screenshots =
 
-For the curious you might take a look how it looks so far:
+For the curious you might take a look how it looks:
 
   * [http://www.23hq.com/PaliDhar/photo/2364042/original List of postings]
   * [http://www.23hq.com/PaliDhar/photo/2805302/original Editing a posting]
@@ -49,3 +44,17 @@ For the curious you might take a look how it looks so far:
   * [http://www.23hq.com/PaliDhar/photo/2828758/original Media files management]
 
 _Please note that some screenshots might be outdated_
+
+
+= Download =
+
+While the admin plugin can be downloaded [http://plosxom.googlecode.com/files/admin-1.00.zip separately] it is not recommended to do so. Instead use the latest version of plosxom which includes the latest admin backend.
+
+However, if you intend to download and install it manually, please consider the following hints:
+
+ * the admin plugin requires at least plosxom *1.06* or higher
+ * copy the files admin.php, admin.nfo to your plugin directory
+ * copy the files admin-users.cionf and lang-admin.conf to your etc directory
+ * copy all the other files and directories to templates/shared/
+ * add a link to the admin backend:
+   {{{<a href="{$config.whoami}/admin">Login</a>}}}
