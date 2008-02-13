@@ -14,6 +14,7 @@ This is a list of official plosxom plugins. If you wrote a plugin you find usefu
 
  * [PluginTechnorati Technorati Plugin]
  * [PluginMore Read More Plugin]
+ * [PLuginYoutube Youtube Video Plugin]
 
 = Content Generation =
 
