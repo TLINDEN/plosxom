@@ -6,6 +6,10 @@ Admin-Plugin to issue [http://de.wikipedia.org/wiki/XML-RPC XML-RPC Pings] to va
 
 This plugin is distributed with plosxom.
 
+= Download =
+
+[http://plosxom.googlecode.com/files/admin_rpc-1.00.zip admin_rpc 1.00]
+
 = Installation =
 
  * Copy the files 'plugin_admin_rpc.php' and 'admin_rpc.nfo' to your plugins/ directory
