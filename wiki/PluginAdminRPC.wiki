@@ -9,7 +9,7 @@ This plugin is distributed with plosxom.
 = Installation =
 
  * Copy the files 'plugin_admin_rpc.php' and 'admin_rpc.nfo' to your plugins/ directory
- * Copy the *.tpl files to the directory 'templates/shared/'
+ * Copy all tpl files to the directory 'templates/shared/'
  * Copy the file 'rpcsites.conf' to your etc/ directory
  * Copy the file 'IXR_Library.inc.php' to your lib/ directory
 
