@@ -5,17 +5,23 @@
 
 Add static pages to your blog.
 
+= Download =
+
+[http://plosxom.googlecode.com/files/page-1.01.zip version 1.01]
+
 = Install =
 
-1. copy page.php to your plugins directory.
+1. copy page.php and plugin_admin_page.php to your plugins directory.
 
 2. copy page.conf to your etc directory and configure it,
    you only have to assign it a directory which holds static
    pages (.txt files too).
 
-3. create that directory.
+3. copy main_page.tpl, menu_page.tpl and submenu_page.tpl to templates/shared/
 
-4. edit your index template. Look for this context:
+4. create the pages/ directory configured in page.conf, make sure it is accessible.
+
+5. edit your index template. Look for this context:
 
 {{{
 {elseif $posts}
@@ -44,6 +50,3 @@ Add static pages to your blog.
 (here we are linking to an about page)
 
 That's it
-
-
-[http://plosxom.googlecode.com/files/page-1.00.zip Download version 1.00]
