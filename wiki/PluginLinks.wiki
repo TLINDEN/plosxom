@@ -4,6 +4,10 @@
 
 Add links to your blog using simple config files. Multiple configs can be used, eg. one for personal links, one for blogroll, etc.
 
+= Download =
+
+[http://plosxom.googlecode.com/files/links-1.00.zip version 1.00]
+
 = Install =
 
 1. copy links.php to your plugins directory.
@@ -48,5 +52,3 @@ requires 2 parameters:
  * template - how the link shall appear. %1 will be used for the url and %2 for the link name.
 
 That's it - now add links to your link configs as you like!
-
-[http://plosxom.googlecode.com/files/links-1.00.zip Download version 1.00]
