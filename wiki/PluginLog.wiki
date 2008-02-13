@@ -4,8 +4,11 @@
 
 A plugin to add access logging capabilities to the blog. This is usefull if your webserver doesn't log or if you don't have access to the log (like me).
 
-= Install =
+= Download =
 
+[http://plosxom.googlecode.com/files/log-1.00.zip version 1.00]
+
+= Install =
 
 1. copy log.php to your plugins directory.
 
@@ -23,5 +26,3 @@ membership differs from weberserver, add the setguid bit, eg:
 
 This way, at least the group ownerships of files created there
 in will be preserved so you can still maintain the logs.
-
-[http://plosxom.googlecode.com/files/log-1.00.zip Download version 1.00]
