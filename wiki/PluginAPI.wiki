@@ -7,6 +7,13 @@ This is the complete API available for plugin developers.
 
 = What can plugins do =
 
+Plugins can do almost anything - you name it. Here is a list of the possibilities, although it does not claim to be complete:
+
+ * modify postings on the fly
+ * add stuff to postings
+ * completely generate content (e.g. links, menus, whatever)
+ *
+
 = How Plugins work =
 
 = File System Structure =
