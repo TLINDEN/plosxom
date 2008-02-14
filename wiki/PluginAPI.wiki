@@ -1,6 +1,28 @@
 #summary API for plugins
 #labels Featured
 
+= Table of content =
+
+ * [#Introduction Introduction]
+ * [#What_can_plugins_do What can plugins do]
+ * [#How_Plugins_work How Plugins work]
+ * [#Plugin_packaging Plugin packaging]
+ * [#The_Plugin_class The Plugin class]
+ * [#Registering_a_plugin Registering a plugin]
+ * [#The_Registry_class The Registry class]
+ * [#The_config_array The config array]
+ * [#Plugin_configuration Plugin configuration]
+ * [#The_Smarty_object The Smarty object]
+ * [#Registering_a_hook Registering a hook]
+ * [#Available_hooks Available hooks]
+   * [#hook_url_filter hook_url_filter]
+   * [#hook_send_header hook_send_header]
+   * [#hook_storage_fetch hook_storage_fetch]
+   * [#hook_storage_fetchall hook_storage_fetchall]
+   * [#hook_content hook_content]
+ * [#Localization_support Localization support]
+
+
 = Introduction =
 
 This is the complete API available for plugin developers.
