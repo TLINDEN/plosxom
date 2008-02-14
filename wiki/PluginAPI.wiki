@@ -14,9 +14,9 @@ Plugins can do almost anything - you name it. Here is a list of the possibilitie
  * completely generate content (e.g. [PluginLinks links plugin])
  * add or modify HTTP headers (e.g. [PluginFeed feed plugin])
  * filter postings based on some arbitrary criteria (e.g. [CategoriesPlugin categories plugin])
- * deliver the postings completely different (e.g. [PluginFeed feed plugin])
+ * deliver the postings a completely different way (e.g. [PluginFeed feed plugin])
  * add authentication support (e.g.[PluginAdmin admin plugin])
- * add template functions (e.g. [PluginYoutube youtube plugin])
+ * add template functions (e.g. [PLuginYoutube youtube plugin])
  * add new features  (e.g. [PluginStaticPage static-page plugin])
 
 = How Plugins work =
@@ -37,14 +37,16 @@ Say there is a plugin *test*, it muss at least have this code:
 ?>
 }}}
 
+And it must be named *test.php* and located in *plugins/*.
+
 Plosxom creates a new object for this plugin subclass. After that
 the following parameters are available to the plugin:
 
  * `$this->handler`: the current config (associative array)
  * `$this->config`: a list of installed plugin handlers (associative array)
  * `$this->input`: associative array of input variables (GET and POST)
- * `the current start template file (e.g. "index.tpl")
- * `$this->template`: the name of the plugin which matches the current url using the *hook_url_filter* hook
+ * `$this->template`: the current start template file (e.g. "index.tpl")
+ * `$this->filter_plugin`: the name of the plugin which matches the current url using the *hook_url_filter* hook
  * `$this->smarty`: the smarty template object
  * `$this->posts`: an associative array of postings
  * `$this->registry`: the *Registry* object (see below)
@@ -80,10 +82,10 @@ to the smarty template object.
 Refer to the [http://www.smarty.net/manual/en/ smarty online documentation for details].
 
 An exception are admin sub-plugins. The [PluginAdmin admin webinterface] is
-in fact an ordinary plugin. It has its own plugin support, but admin sub-plugins
+in fact an ordinary plugin but it has its own plugin support. Admin sub-plugins
 have to be registered as all other plugins as well. But such sub-plugins
 are not required to register special hooks, instead they have to
-implement one or more admin_ methods which will be called automatically
+implement one or more `admin_*` methods which will be called automatically
 if the CGI variable *mode* points to them, see below for more details on this.
 
 = Plugin packaging =
@@ -104,25 +106,21 @@ author_email = nobrain AT bk DOT ru
 url          = http://code.google.com/p/plosxom/wiki/PluginStaticPage
 }}}
 
+Also optional it may contain a file with *txt* extension with the
+same name as the plugin, eg *feed.txt*, which may contain installation
+instructions. Those instructions will be displayed if the user installs
+the plugin via the admin backend.
 
 = The Plugin class =
 
-You plugin inherits from the *Plugin* class and can therefore call
+Your plugin inherits from the *Plugin* class and can therefore call
 the following methods:
 
- * `get_handler($hook)`: returns the first registered plugin handler
-   for this particular hook.
- * `get_handlers($hook)`: the very same as above but returns a
-   list of all handlers for the given hook.
- * `add_handler($hook, $pluginname)`: a plugin has to call this method
-   to register itself for a particular handler. It has to provide a
-   method of the same name as the hook then. Usually called within
-   the `register()` method. eg:
-   {{{  $this->add_handler('hook_url_filter', 'feed')}}}
- * `add_template($type, $template)`: this can be used by admin
-   sub-plugins to register template-hooks (see below).
- * `replace_template($template)`: use this to replace the template
-   file (default: `index.tpl`) with your own.
+ * `get_handler($hook)`: returns the first registered plugin handler for this particular hook.
+ * `get_handlers($hook)`: the very same as above but returns a list of all handlers for the given hook.
+ * `add_handler($hook, $pluginname)`: a plugin has to call this method to register itself for a particular handler. It has to provide a method of the same name as the hook then. Usually called within the `register()` method. eg: {{{  $this->add_handler('hook_url_filter', 'feed')}}}
+ * `add_template($type, $template)`: this can be used by admin sub-plugins to register template-hooks (see below).
+ * `replace_template($template)`: use this to replace the template file (default: `index.tpl`) with your own.
 
 = Registering a plugin =
 
@@ -195,6 +193,16 @@ For example to get the value of the variable _data_path_ in the config:
 $path = $this->config["data_path"];
 }}}
 
+There are some special internal config variables which are
+not available in the plosxom.conf file but are added at runtime
+by Plosxom:
+
+ * 'contenttype': this will be used as content type header for client output. You may overwrite it, eg: {{{$this->config["contenttype"] = 'application/atom+xml';}}}
+ * 'posting': this variable will be 'true' if Plosxom displays a single posting and not the list of postings.
+ * 'config_path': the directory where config files are located
+ * 'lib_path': the directory where libraries are located
+ * 'version': the current Plosxom version number
+
 = Plugin configuration =
 
 A plugin may also support its own configuration file. Such a file must
@@ -230,7 +238,7 @@ format = %date %remote %status %uri %referrer %agent
 
 To get the content of such a config file, call the global method
 *parse_config()* with the filename of your config file as parameter.
-If the filename contains not path parts it will be searched in
+If the filename contains no path parts it will be searched in
 the plosxom *etc/* directory, otherwise in the given path.
 
 Example:
@@ -242,18 +250,7 @@ $this->mycfg = parse_config("log.conf");
 Usually you would do this in the *register()* method during the
 initialization of the plugin.
 
-There are some special internal config variables which are
-not available in the plosxom.conf file but are added at runtime
-by Plosxom:
 
- * 'contenttype': this will be used as content type header
-   for client output. You may overwrite it, eg:
-   {{{$this->config["contenttype"] = 'application/atom+xml';}}}
- * 'posting': this variable will be 'true' if Plosxom displays
-   a single posting and not the list of postings.
- * 'config_path': the directory where config files are located
- * 'lib_path': the directory where libraries are located
- * 'version': the current Plosxom version number
 
 = The Smarty object =
 
@@ -322,8 +319,7 @@ one plugin can catch a certain url.
 
 Passed parameters:
 
- * a string containing the path part of the url. In fact this is
-   the content of the enviroment variable 'PATH_INFO'.
+ * a string containing the path part of the url. In fact this is the content of the enviroment variable 'PATH_INFO'.
 
 Expected return value:
 
@@ -381,3 +377,57 @@ Passed parameters:
 Expected return value:
 
  * the (possibly) modified text content of a posting
+
+
+= Localization support =
+
+Plosxom templates support localization so that a template can
+be displayed in different languages. Which language to use will be configured
+by the user in the *plosxom.conf* variable *lang*, by default this is *en*.
+
+Plosxom passes all .conf files starting with *lang-* located in the
+*etc/* directory to smarty. So if you want to write a language file, just
+create a lang-_something_ file and place it there.
+
+Every language must have it's own ini-style block in the config
+file, here is a short example:
+
+{{{
+# language file for miracle plugin
+[en]
+miracle = miracle
+
+[de]
+miracle = Spiegel
+
+[fr]
+miracle = miroir
+}}}
+
+You may also provide an extra language file for an existing
+language file as long as it contains the required ini-style
+language declaration. This way you can extend language support
+for a certain template or plugin without altering the original
+language files.
+
+The *en* (english) language part will *always* loaded. Make sure
+that your language file contains at least all required variables
+in the english language block. If a variable is undefined in a
+particular language or ir the user configures a language which
+is completely undefined, everything will be displayed in english,
+which is much better than to display nothing.
+
+Language variables can be used in smarty templates in two ways:
+
+{{{
+{#miracle#}
+}}}
+
+This is the standard way. However, sometimes you may need to use
+such a language variable in a variable assignment or inside
+a foreach block or something else. In such a case you can refer
+to the language variable this way:
+
+{{{
+{assign var="title" value="`$smarty.config.miracle`"}
+}}}
