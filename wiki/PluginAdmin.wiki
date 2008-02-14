@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Administration Webinterface Plugin
 #labels Phase-Design
 
 = Introduction =
