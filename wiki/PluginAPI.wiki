@@ -1,6 +1,20 @@
-#summary Plugin API for plosxom
+#summary API for plugins
 #labels Featured
 
-= API =
+= Introduction =
 
-FIXME
+This is the complete API available for plugin developers.
+
+= What can plugins do =
+
+= How Plugins work =
+
+= File System Structure =
+
+= The Plugin class =
+
+= Registering a plugin =
+
+= Registering a hook =
+
+= Available hooks =
