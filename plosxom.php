@@ -57,6 +57,9 @@ $config = parse_config($pwd . "/etc/plosxom.conf");
 define('SMARTY_DIR', $config["lib_path"] . "/"); 
 include(SMARTY_DIR . 'Smarty.class.php');
 
+# load the standard storage plugin
+include_once($config["plugin_path"] . "/standard.php");
+
 # initialize the smarty engine
 $smarty = new Smarty;
 $smarty->template_dir = $config["template_path"];
