@@ -48,10 +48,10 @@ ini_set("display_errors", "on");
 $config_path = dirname(__FILE__) . "/etc";
 $lib_path    = dirname(__FILE__) . "/lib";
 
-include($lib_path . "/Plosxom-functions.php");
-include($lib_path . "/Plosxom-class.php");
-include($lib_path . "/Registry-class.php");
-include($lib_path . "/Plugin-class.php");
+include_once($lib_path . "/Plosxom-functions.php");
+include_once($lib_path . "/Plosxom-class.php");
+include_once($lib_path . "/Registry-class.php");
+include_once($lib_path . "/Plugin-class.php");
 
 if(file_exists("install.php")) {
   print("Remove the file 'install.php' first!");
@@ -61,11 +61,11 @@ if(file_exists("install.php")) {
 $config = parse_config($config_path . "/plosxom.conf");
 $config["config_path"] = $config_path;
 $config["lib_path"]    = $lib_path;
-$config["version"]     = 1.06;
+$config["version"]     = 1.07;
 
 /* load smarty template engine */
 define('SMARTY_DIR', $config["lib_path"] . "/"); 
-include(SMARTY_DIR . 'Smarty.class.php');
+include_once(SMARTY_DIR . 'Smarty.class.php');
 
 /* initialize the smarty engine */
 $smarty = new Smarty;
@@ -73,6 +73,9 @@ $smarty->template_dir = $config["template_path"];
 $smarty->config_dir   = $config["config_path"];
 $smarty->compile_dir  = $config["tmp_path"];
 $smarty->caching      = 0;
+
+/* pre-load the filesystem management module */
+include_once($config["plugin_path"] . "/standard.php");
 
 /* initialize plosxom */
 $plosxom = new Plosxom($config, $smarty);
