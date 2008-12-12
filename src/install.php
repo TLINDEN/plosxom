@@ -35,6 +35,15 @@ h1 {
  color: #6DA6E2;
  font-size: 12px;
 }
+
+.error {
+ color: red;
+}
+
+.warn {
+ color: #ff7e00;
+}
+
 -->
 </style>
 
@@ -94,7 +103,7 @@ else {
     }
   }
   else {
-    print "<h1>Write permission denied for $configfile!</h1>";
+    print "<h1 class=error>Write permission denied for $configfile!</h1>";
     print "<h2>Generated config, copy the following text to $configfile:</h2>";
     print "<pre style='border: 1px solid #c4c4c4;'>$generated</pre>";
     exit;
@@ -108,24 +117,25 @@ if($input['stage'] == 'var') {
     if($changed !== $content) {
       if(is_writable($configfile)) {
 	write_config($changed);
+        $config = parse_config($configfile);
       }
       else {
-	print "<h1>Could not write to $configfile! Please fix the permissions and retry!</h1>";
+	print "<h1 class=error>Could not write to $configfile! Please fix the permissions and retry!</h1>";
       }
     }
     else {
-      print "<h1>Config unchanged!</h1>";
+      print "<h1 class=warn>Config unchanged!</h1>";
     }
   }
   else {
-    print "<h1>Failed to open $configfile for reading!</h1>";
+    print "<h1 class=error>Failed to open $configfile for reading!</h1>";
   }
 }
 
 elseif($input['stage'] == 'admin') {
   if($input['password'] == $input['password2']) {
     if(strlen($input['password']) < 6) {
-      print "<h1>Password too short, go back and retry!</h1>";
+      print "<h1 class=warn>Password too short, go back and retry!</h1>";
     }
     else {
       $md5 = md5($input['password']);
@@ -138,20 +148,20 @@ elseif($input['stage'] == 'admin') {
 	    $success = 1;
 	  }
 	  else {
-	    print "<h1>Failed to write account data to $users! Please fix the permissions and retry!</h1>";
+	    print "<h1 class=error>Failed to write account data to $users! Please fix the permissions and retry!</h1>";
 	  }
 	}
 	else {
-	  print "<h1>Failed to open $users for writing! Please fix the permissions and retry!</h1>";
+	  print "<h1 class=error>Failed to open $users for writing! Please fix the permissions and retry!</h1>";
 	}
       }
       else {
-	print "<h1>Could not write to $users! Please fix the permissions and retry!</h1>";
+	print "<h1 class=error>Could not write to $users! Please fix the permissions and retry!</h1>";
       }
     }
   }
   else {
-    print "<h1>Passwords doesn't match, go back and retry!</h1>";
+    print "<h1 class=warn>Passwords doesn't match, go back and retry!</h1>";
   }
 
   if($success) {
@@ -224,7 +234,7 @@ elseif($input['stage'] == 'admin') {
       print "<tr><td valign=top>$varname</td><td colspan='2'>" . $varform . "<input type='hidden' name='var' value='$varname'>"
 	. "<input size=60 type=text name='value' value='"
 	. $value[0] . "'>" . $varformend . "</td>"
-	. "<td><a href=\"$value[1]\">test</a></td>"
+	. "<td><a title=\"$value[1]\" href=\"$value[1]\">test</a></td>"
 	. "</tr>";
     }
 
@@ -272,14 +282,15 @@ elseif($input['stage'] == 'admin') {
       print '</tr>';
     }
 
+
     if($notreadable) {
-      print "<tr><td colspan='4'><br/><h1>Some directories are not readable!<br/>Please fix the permissions and<br/>reload this page to continue!</h1></td></tr>";
+      print "<tr><td colspan='4'><br/><h1 class=error>Some directories are not readable!<br/>Please fix the permissions and<br/>reload this page to continue!</h1></td></tr>";
     }
     else {
       print "<tr><td colspan='4'><br/><h1>All directories are readable, so your new blog is now working</h1>";
       print "<a href=\"" . $config{whoami} . "\">You may now visit your blog.<br/><br/></a></td></tr>";
       if($notwritable) {
-	print "<tr><td colspan='4'><br/><h1>Some directories are not writable!<br/>The admin backend may not work, please fix the permissions<br/>and reload this page to continue!</h1></td></tr>";
+	print "<tr><td colspan='4'><br/><h1 class=warn>Some directories are not writable!<br/>The admin backend may not work, please fix the permissions<br/>and reload this page to continue!</h1></td></tr>";
       }
       else {
 	?>
@@ -308,17 +319,21 @@ function write_config($content) {
   if($fd) {
     if( fwrite($fd, $content) ) {
       fclose($fd); 
-      chmod($configfile , 0666);
+      if (is_writable(dirname($configfile))) {
+        if (chmod($configfile , 0666)) {
+          print "<h1 class=error>Could not change permissions for $configfile to 0666</h1>";
+        }
+      }
       print "<h1>Configfile successfully written.</h1>";
       $config = parse_config($configfile);
     }
     else {
-      print "<h1>Failed to write data to $configfile! Please fix the permissions and retry!</h1>";
+      print "<h1 class=error>Failed to write data to $configfile! Please fix the permissions and retry!</h1>";
       return false;
     }
   }
   else {
-    print "<h1>Failed to open $configfile for writing! Please fix the permissions and retry!</h1>";
+    print "<h1 class=error>Failed to open $configfile for writing! Please fix the permissions and retry!</h1>";
     return false;
   }
 
@@ -327,5 +342,9 @@ function write_config($content) {
 
 ?>
 </table>
+
+<br/><br/>
+<form method="get" name="reload" action="install.php"/><input type="submit" value="Check permissions again"></form>
+
 </body>
 </html>
