@@ -8,6 +8,8 @@ plugfiles = $(shell cd ../plugins; \
 		 find $(plugins) -name "*.txt"  | grep -v '.svn'; )
 conffiles = $(shell cd ../plugins; find $(plugins) -name "*.conf" | grep -v '.svn')
 
+ver:
+	@echo "version " $(version)
 
 all:
 	@echo "Only manual installation supported at the moment!"
@@ -62,7 +64,6 @@ patch:
 	cd .. && tar cpzf $(pkg)-$(version)-patch.tar.gz $(pkg)-$(version)-patch
 	@echo
 	@echo Building done:
-	@md5sum ../$(pkg)-$(version).tar.gz
 	@echo building plugin packs
 	./plugpack.sh
 

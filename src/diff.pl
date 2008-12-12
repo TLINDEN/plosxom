@@ -2,6 +2,9 @@
 use Shell qw(cp);
 use Data::Dumper;
 sub install;
+
+use Digest::MD5 qw(md5_base64);
+
 sub md5;
 
 my $base = "/home/scip/D/plosxom";
@@ -11,9 +14,9 @@ chomp $dirs;
 my($last, $current) = split /\s\s*/, $dirs;
 
 chdir("$base/$last");
-my %lastfiles = map { $_ => 1 } split/\n/, `find -type f`;
+my %lastfiles = map { $_ => 1 } split/\n/, `find . -type f`;
 chdir("$base/$current");
-my %currentfiles = map { $_ => 1 } split/\n/, `find -type f`;
+my %currentfiles = map { $_ => 1 } split/\n/, `find . -type f`;
 
 my $patchdir = "$base/${current}-patch";
 my $olddir   = "$base/${last}";
@@ -38,8 +41,7 @@ print "done\n";
 
 sub md5 {
   my($file) = @_;
-  my($md5, undef) = split /\s\s*/, `md5sum $file`;
-  return $md5;
+  return md5_base64($file);
 }
 
 sub install {
