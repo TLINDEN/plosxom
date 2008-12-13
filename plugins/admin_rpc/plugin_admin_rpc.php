@@ -31,7 +31,7 @@ class plugin_admin_rpc extends Plugin{
       }
     }
     else {
-      $this->smarty->append("admin_error", "no rpc sites defined in rpcsites.conf!");
+      admin::message('errorgeneric', 'no rpc sites defined in rpcsites.conf');
       return;
     }
 
@@ -48,8 +48,7 @@ class plugin_admin_rpc extends Plugin{
       }
     }
     
-    $oldinfo = $this->smarty->get_template_vars('admin_info');
-    $this->smarty->append("admin_info", $oldinfo . $info);
+    admin::message('infogeneric', $info);
 
   }
 
