@@ -76,7 +76,7 @@ class admin extends Plugin {
 
   function hook_send_header() {
     if(! $this->admin ) {
-      # not in admin mode, do nothing
+      // not in admin mode, do nothing
       return;
     }
 
