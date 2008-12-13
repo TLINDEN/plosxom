@@ -38,13 +38,13 @@ class plugin_admin_tagcloud extends Plugin{
       $cloudfile = $this->config['config_path'] . '/tagcloud.conf';
       if($this->registry->plugins['admin']->write($cloudfile, $content)) {
 	$oldinfo = $this->smarty->get_template_vars('admin_info');
-	$this->smarty->append("admin_info", "$oldinfo<br/>Generate-Tagcloud: tagcloud.conf has been successfully regenerated<br/>");
+	admin::message('infocfgsaved', 'tagcloud.conf');
       }
       chmod($cloudfile, 0666);
     }
     else {
       $oldinfo = $this->smarty->get_template_vars('admin_info');
-      $this->smarty->append("admin_info", "$oldinfo<br/>Generate-Tagcloud: no tags found in any posting<br/>");
+      admin::message('infogeneric', 'no tags found in any posting');
     }
 
     if(! $return) {
