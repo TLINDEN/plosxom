@@ -832,7 +832,12 @@ class admin extends Plugin {
 	      $this->make_normalized($original, $normalized, $this->config['image_normal_width']);
 	    }
 	  }
-	  $entry['normal'] = $normal;
+	  if (file_exists($this->config['image_path'] . '/' . $normal)) {
+	    $entry['normal'] = $normal;
+	  }
+	  else {
+	    $entry['normal'] = $image;
+	  }
 	}
 
 	$entry['thumbnail'] = $this->config['imgurl'] . '/' . $thumb;
