@@ -1,6 +1,8 @@
+# -*-perl-*-
+
 =head1 NAME
 
-plosxom - a filesystem based blog tool
+plosxom - a filesystem based php blog tool
 
 =head1 INTRODUCTION
 
@@ -28,7 +30,9 @@ MySQL, which is the worst database system on the planet. With plosxom
 you could write a sqlite backend or whatever you like, even a mysql
 backend. Wordpress is also a "large biest", it contains a lot of
 source code and thus a lot of problems, especially from the security
-point of view.
+point of view. Even wordpress templates are in fact just plain PHP
+files, they contain executable code, they can't be edited with a
+HTML editor, look weird and are difficult to maintain.
 
 Speaking of security - plosxom were developed with strong security in
 mind. Since there is almost no cgi input being used in the software,
@@ -36,9 +40,22 @@ this goal were not difficult to achive. Everything which gets into
 the script will be filtered for bogus characters. Future attacks are
 hopefully prevented using this technique.
 
-There is no administration backend delivered with plosxom, because
-you write textfiles (or upload them) - that's all. Without admin
-backend, the blog can't be hijacked like most other blogs could be.
+There is now a administration backend delivered with plosxom which is
+enabled by default. See L<USING THE ADMIN WEBINTERFACE> for further
+details how to use it. Login to the admin interface is provided as
+B<HTTP Basic Authentication>, which is of course not neccessarily
+more secure than CGI login using form variables and session cookies.
+However, it makes it more difficult for attackers to bypass the
+login process using screwed CGI variable input or something. In the
+future we will also support B<HTTP Digest authentication> which
+actually IS more secure, because no cleartext password will be transmitted
+over the wire.
+
+If you still feel unsecure with the admin backend and are happy
+with unix commandline control of the blog (which in fact just consists
+of creating textfiles, directories and uploading images), then you
+may want to disable the admin backend. Just create a file B<admin.disabled>
+in your plugins directory (where the file B<admin.php> resides).
 
 The plosxom core engine is very small. In fact, I wrote it in just
 two days. This sounds like a hell of a crap, but it isn't. Much
