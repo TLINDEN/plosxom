@@ -1,0 +1,31 @@
+Welcome to your new Plosxom weblog
+
+Gratulation, you have successfully installed <B>Plosxom</B> on your website!
+
+You may now do one of the following things:
+
+<ul>
+  <li><a href="{$config.whoami}/admin">Login to the admin backend to maintain your new blog</a></li>
+  <li><a href="{$config.whoami}?admin=yes&mode=admin_post_edit">Write a new posting</a></li>
+  <li><a href="{$config.whoami}?admin=yes&mode=admin_template">Choose another template</a></li>
+  <li>
+      Or, go to the data directory, remove the introduction and add a new posting
+      using the shell. Example:
+<pre>
+  % cd {$config.data_path}
+  % rm -rf introduction
+  % mkdir test
+  % cd test/
+  % vi myfirstpost.txt
+  % chmod 644 myfirstpost.txt
+</pre>
+      Make sure to use the first line of the file, followed by an empty line, as the
+      topic of the posting.
+   </li>
+</ul>
+
+It would also be a good idea to read the documentation if you haven't done already:
+
+<a href="{$config.whoami}?admin=yes&mode=admin_help">Plosxom User Documentation</a>
+
+Good luck and have fun with Plosxom!
