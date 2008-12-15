@@ -1,6 +1,6 @@
 version  = $(shell cat VERSION)
 pkg      = plosxom-core
-plugins  = admin admin_rpc categories feed links more page technorati tagcloud youtube
+plugins  = admin admin_backup admin_rpc categories feed links more page technorati tagcloud youtube
 libfiles = IXR_Library.inc.php thumbnail.inc.php
 plugfiles = $(shell cd ../plugins; \
 		 find $(plugins) -name "*.php"  | grep -v '.svn'; \

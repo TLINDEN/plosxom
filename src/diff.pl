@@ -3,13 +3,14 @@ use Shell qw(cp);
 use Data::Dumper;
 sub install;
 
-use Digest::MD5 qw(md5_base64);
+use Digest::MD5 qw(md5_base64 md5_hex);
 
 sub md5;
 
 my $base = "/home/scip/D/plosxom";
-chdir "..";
-my $dirs = `ls -d plosxom-core*`;
+chdir($base);
+
+my $dirs = `ls -d plosxom-core-?.??`;
 chomp $dirs;
 my($last, $current) = split /\s\s*/, $dirs;
 
@@ -26,12 +27,14 @@ mkdir ($patchdir);
 foreach my $file (keys %currentfiles) {
   print "processing $file\n";
   if (! exists $lastfiles{$file}) {
+    print "   installing new file\n";
     install($file);
   }
   else {
     $lastmd5 = md5("$base/$last/$file");
     $curmd5  = md5("$base/$current/$file");
     if ($lastmd5 ne $curmd5) {
+      print "   installing changed file\n";
       install($file);
     }
   }
@@ -41,7 +44,11 @@ print "done\n";
 
 sub md5 {
   my($file) = @_;
-  return md5_base64($file);
+  my $dig = new Digest::MD5;
+  open F, "<$file" or die "Could not open file $file: $!\n";
+  $dig->addfile(F);
+  close F;
+  return $dig->hexdigest();
 }
 
 sub install {
