@@ -51,10 +51,7 @@ core:
 	$(foreach libfile,$(libfiles), \
 		mv ../$(pkg)-$(version)/plugins/$(libfile) ../$(pkg)-$(version)/lib/; \
 	)
-	sleep 3
-	$(foreach svndir,$(shell find ../$(pkg)-$(version) -name .svn), \
-		rm -rf $(svndir); \
-	)
+	find -d ../$(pkg)-$(version) -name .svn -exec rm -rf {} \;
 	cd ../$(pkg)-$(version)/ && rm Makefile *.pl plugpack.sh
 	cd .. && tar cpzf $(pkg)-$(version).tar.gz $(pkg)-$(version)
 

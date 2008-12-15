@@ -254,6 +254,55 @@ Example:
 =back
 
 
+=head1 SEARCH ENGINE FRIENDLY URLS
+
+By default plosxom uses urls like this:
+
+ http://loria/plosxom.php/bullshit/aufschwung
+
+While this is in fact still ok for search engines and looks
+ok, it still contains the PHP file B<plosxom.php> in the url.
+
+You may circumvent this using the apache module B<MOD_REWRITE>.
+
+Fist, create a B<.htaccess> file in the directory which contains the
+plosxom.php like this:
+
+ <IfModule mod_rewrite.c>
+   RewriteEngine On
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule    ^(.+)/(.+)$   /plosxom.php/$1/$2  [PT,L]
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule    ^(.+)$        /plosxom.php/$1     [PT,L]
+ </IfModule>
+
+If plosxom is not installed in the document root but inside a
+subdirectory, eg:
+
+ http://loria/blog/plosxom.php
+
+then you have to add a base directory for mod_rewrite in the
+.htaccess file:
+
+ RewriteBase /blog
+
+Next, you have to modify the configuration of plosxom so that
+it generates appropriate links. The variable to modify is
+B<whoami>.
+
+If it contains for example the following:
+
+ whoami = http://loria/plosxom.php
+
+change it to:
+
+ whoami = http://loria
+
+Note that we added no trailing slash, plosxom will add slashes
+as neccessary.
+
 =head1 USING PLOSXOM
 
 

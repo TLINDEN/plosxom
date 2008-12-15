@@ -1,3 +1,21 @@
+Release 1.07 fixes and features
+-------------------------------
+
+The 'standard.php' preloading issue have been fixed,
+the but made it impossible to get plosxom to run at
+all on new installations.
+
+There is a new adminplugin ("extras" menu) which makes
+it possible to create backups of the blog content. Postings,
+static pages and media files will be saved. Such backups
+can be restored to another installation, even on another
+server at a later time, eg. after server outage or move
+to another provider.
+
+The installer have been reworked a bit which works now
+more reliable.
+
+
 Release 1.06 fixes and new plugins
 -----------------------------------
 
