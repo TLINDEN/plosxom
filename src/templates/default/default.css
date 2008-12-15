@@ -2,7 +2,7 @@ body {
   margin-left: 20%;
   margin-right: 20%;
   font-family: Courier New, monospace;
-  font-size: normal;
+  font-size: 10px;
 }
 
 img {
@@ -17,7 +17,7 @@ li {
 pre {
   //font-family: fixed;
   font-family: Courier New, monospace;
-  font-size: small;
+  font-size: 12px;
   background: #f0f4f0;
   margin-left: 40px;
   padding: 2px;
@@ -54,7 +54,7 @@ blockquote {
 	margin: 40 30px 0 10px;
 	padding-left: 20px;
 	border-left: 5px solid #ddd;
-        font-size: small;
+        font-size: 10px;
         font-style: italic;
          color: #2F4F4F;
 	text-align: justify;
