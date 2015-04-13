@@ -1,0 +1,48 @@
+# Introduction #
+
+Add technorati tags to your postings.
+
+# Download #
+
+[version 1.03](http://plosxom.googlecode.com/files/technorati-1.03.zip)
+
+# Install #
+
+To install:
+
+Add this to your stylesheet:
+
+```
+.tag {
+ color: #c0c0c0;
+ font-size: 70%;
+}
+```
+
+In your template replace:
+
+```
+{elseif $category}
+ {assign var="url" value="/category/$category"}
+{else}
+```
+
+by:
+
+```
+{elseif $category}
+ {assign var="url" value="/category/$category"}
+{elseif $technoratitag}
+ {assign var="url" value="/tag/$technoratitag"}
+{else}
+```
+
+copy technorati.php to your plugin directory.
+make it readable by your webserver.
+
+To add technorati tags to your post add them to the
+end of the posting file like this:
+
+```
+tag:technorati, tag:plosxom, tag:php, ...
+```
