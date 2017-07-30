@@ -1,0 +1,28 @@
+#summary Admin-Plugin RPC Ping
+
+= Introduction =
+
+Admin-Plugin to issue [http://de.wikipedia.org/wiki/XML-RPC XML-RPC Pings] to various sites (configurable) to announce your blog so that others know you've updated your blog.
+
+This plugin is distributed with plosxom.
+
+= Download =
+
+[http://plosxom.googlecode.com/files/admin_rpc-1.00.zip admin_rpc 1.00]
+
+= Installation =
+
+ * Copy the files 'plugin_admin_rpc.php' and 'admin_rpc.nfo' to your plugins/ directory
+ * Copy all tpl files to the directory 'templates/shared/'
+ * Copy the file 'rpcsites.conf' to your etc/ directory
+ * Copy the file 'IXR_Library.inc.php' to your lib/ directory
+
+= Configuration =
+
+Edit the file etc/rpcsites.conf either manually or via the admin webinterface and add or remove rpc ping sites.
+
+A comprehensive list of sites available for RPC Ping can be found here:
+
+ * [http://codex.wordpress.org/Update_Services Updateservice page @wp]
+ * [http://www.phparrow.com/Current_Ping_List PHPArrow's list]
+ * you may also google for 'rpc ping list'

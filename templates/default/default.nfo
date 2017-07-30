@@ -1,0 +1,6 @@
+version = 1.00
+description = Default template, very basic - with lang support (lang.conf)
+author = Pali Dhar
+author_email = nobrain AT bk DOT ru
+url = http://code.google.com/p/plosxom/
+screenshot = plosxom-screenshoot.png

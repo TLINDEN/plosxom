@@ -1,0 +1,271 @@
+/*
+Theme: Black Tie 1.0
+Release date: 22 May 2008
+Author: Heather Rivers (http://heather-rivers.com/)
+License: Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported
+Details: http://creativecommons.org/licenses/by-nc-sa/3.0/
+More about sIFR (it's really sweet): http://www.mikeindustries.com/blog/sifr/
+*/
+
+/* General */
+
+* {
+    margin:0;
+    padding:0;
+}
+
+body {
+    font-family:"Lucida Grande",verdana,sans-serif;
+    background-color:#121212;
+    color:#999;
+    font-size:11px;
+    line-height:1.8;
+}
+
+a:link, a:visited {
+    text-decoration:none;
+    color:#ccc;
+    font-weight:bold;
+    border-bottom:1px dotted #ccc;
+}
+
+a:hover {
+    border:0;
+}
+
+a img {
+    border:0;
+}
+
+h1, h2, h3 {
+    font-family:georgia,serif;
+    font-weight:normal;
+    letter-spacing:-.05em;
+    margin:0;
+    padding:0;
+    line-height:1em;
+    color:#fff;
+}
+
+div#container {
+    width:430px;
+    margin:0 auto;
+    background-color:#000;
+    border-left:1px solid #333;
+    border-right:1px solid #333;
+}
+
+/* Header */
+div#header {
+    padding:15px;
+    position:relative;
+}
+
+div#header h1 {
+    text-align:center;
+    font-size:80px;
+    padding:20px 0 20px 0;
+    margin:0 20px 0 20px;
+}
+
+div#header h1 a {
+    border:0 !important;
+}
+
+ul#top-left, div#top-right {
+    position:absolute;
+    top:15px;
+    width:100px;
+}
+
+ul#top-left {
+    left:-115px;
+    text-align:right;
+    list-style:none;
+}
+
+div#top-right {
+    right:-115px;
+    text-align:left;
+}
+
+div.subtitle h2 {
+    background-color:#121212;
+    border-top:1px solid #333;
+    border-bottom:1px solid #333;
+    text-align:center;
+    font-family:verdana;
+    font-size:11px;
+    letter-spacing:0;
+    text-transform:uppercase;
+    padding:3px;
+}
+
+/* Following */
+div#following {
+    margin:15px 0;
+}
+
+div#following a {
+    border:0 !important;
+}
+
+div#following ul {
+    margin:10px 0;
+}
+
+div#following ul li {
+    float:left;
+    list-style:none;
+}
+
+div#following img {
+    width:16px;
+    height:16px;
+    padding:2px;
+    margin:2px;
+    border:1px solid #666;
+    background-color:#000;
+}
+
+div#following img:hover {
+    background-color:#666;
+}
+
+/* Posts */
+div.post-container {
+    position:relative;
+}
+
+div.post h2 {
+    font-size:18px;
+    line-height:24px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:18px;
+}
+
+h2 a {
+    font-weight:normal !important;
+}
+
+h3 {
+    font-size:32px;
+}
+
+div.post {
+    width:400px;
+    padding:20px 15px;
+    position:relative;
+    text-align: justify;
+}
+
+div.post p {
+    margin:.5em 0 1em 0;
+}
+
+div.post blockquote {
+    margin-left:2em;
+}
+
+div.post ol, div.post ul {
+    margin-left:1.5em;
+}
+
+/* Post meta (permalink, date, tags, reblog links) */
+
+
+a.permalink {
+    display:none;
+}
+
+div.post-meta {
+    width:200px;
+    position:absolute;
+    left:-215px;
+    top:50px;
+    text-align:right;
+    color:#333;
+}
+
+div.post-meta ul {
+    list-style:none;
+}
+
+div.post-meta a {
+    color:#666;
+    border:0 !important;
+}
+
+span.date-link {
+    line-height:22px;
+    font-size:11px;
+}
+
+div#bottom ul {
+    list-style:none;
+}
+
+div#bottom a {
+    border:0;
+    font-size:50px;
+    font-weight:normal !important;
+}
+
+div#bottom a.prev-link, .next-link {
+    position:absolute;
+    bottom:15px;
+}
+
+div#bottom a.prev-link {
+    left:0;
+}
+div#bottom a.next-link {
+    right:0;
+}
+
+/* Footer */
+#footer {
+    text-align:center;
+    padding:5px;
+    color:#333;
+}
+
+#footer a {
+    color:#666;
+    border:0 !important;
+}
+
+/* Photo post */
+div.photo div.the-image {
+    margin-bottom:6px;
+}
+
+div.photo div.the-image img {
+    margin:0 auto;
+}
+
+div.photo div.the-image a {
+    border:0 !important;
+}
+
+/* Chat post */
+div.chat ul {
+    list-style:none;
+    margin-left:0 !important;
+}
+div.chat ul li {
+    padding:2px 0;
+}
+div.chat ul span.label {
+    text-transform:uppercase;
+    font-weight:bold;
+    color:#fff;
+    letter-spacing:1px;
+}
+
+/* Audio post */
+div.audio {
+    text-align:center;
+}
+

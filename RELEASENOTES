@@ -1,0 +1,125 @@
+Release 1.07 fixes and features
+-------------------------------
+
+The 'standard.php' preloading issue have been fixed,
+the but made it impossible to get plosxom to run at
+all on new installations.
+
+There is a new adminplugin ("extras" menu) which makes
+it possible to create backups of the blog content. Postings,
+static pages and media files will be saved. Such backups
+can be restored to another installation, even on another
+server at a later time, eg. after server outage or move
+to another provider.
+
+The installer have been reworked a bit which works now
+more reliable.
+
+
+Release 1.06 fixes and new plugins
+-----------------------------------
+
+All templates have been changed to use
+smarty's eval() function for post text.
+This way blog postings (and pages) may
+contain any valid smarty code. You can
+install smarty plugins and use them in
+your blog. Also plosxom plugins may make
+use of this feature - the new youtube
+plugin is such a plugin.
+
+New plugin added - youtube plugin. It
+allows the user to embed youtube videos
+in a blog post. Optionally videos can
+also be linked instead of embedded, and
+the link can be a text string or the
+video preview image.
+
+Added admin plugin, which is a webinterface
+to maintain all aspects of the blog.
+
+Readme file has been rewritten, it also
+contains some help about the admin
+backend.
+
+A install.php gui installer has been
+added which makes it easier to install
+plosxom for newbiews.
+
+The page plugin now contains an admin
+plugin so that one can maintain static
+pages from admin backend. The same applies
+for the technorati-tag plugin.
+
+An rpc-ping admin plugin has been added,
+it is also possible to issue rpc-pings
+after a posting has been created or
+changed.
+
+The plosxom core classes "Plosxom, Registry
+and Plugin" have been outsourced into
+external files (residing in the lib/ directory)
+for easier maintenance.
+
+
+Release 1.05 fixes and new plugins
+-----------------------------------
+
+Some of the previously plugins have been added
+to the core plosxom distribution. This makes
+things for newbies easier.
+
+Also two new templates were added, try them out!
+
+
+
+Release 1.04 - bug fixes
+-----------------------------------
+
+Plugin interface has been cleaned up. The
+standard plugin has a new function fetch_categories(),
+which can be used to create category listings.
+
+A new plugin "categories" does this exactly.
+
+A couple of minor typos and bugs have been
+fixed too.
+
+
+
+
+Release 1.03 - bug fixes
+-----------------------------------
+
+Posting title extraction has been fixed.
+
+The default template now has language support,
+english is the standard language from now on,
+but german is also available. See lang.conf
+in the etc/ directory.
+
+Archiving fixed, there were lots of bugs.
+
+The default template has a nuew sub template
+just for postings which is shared for single
+postings and post listings.
+
+A new config variable 'author_email' has
+been added.
+
+Content-type can be overwritten by plugins.
+
+The template class ($smarty) contains a
+reference of the postings array, which makes
+it possible for plugins to access it.
+
+
+
+
+
+
+Release 1.02 - first public release
+-----------------------------------
+
+The core has been written from scratch.
+Most things do mostly as they should.

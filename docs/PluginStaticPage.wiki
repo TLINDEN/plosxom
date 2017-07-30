@@ -1,0 +1,52 @@
+#summary Static Page Plugin - Content
+#labels Plugin
+
+= Introduction =
+
+Add static pages to your blog.
+
+= Download =
+
+[http://plosxom.googlecode.com/files/page-1.01.zip version 1.01]
+
+= Install =
+
+1. copy page.php and plugin_admin_page.php to your plugins directory.
+
+2. copy page.conf to your etc directory and configure it,
+   you only have to assign it a directory which holds static
+   pages (.txt files too).
+
+3. copy main_page.tpl, menu_page.tpl and submenu_page.tpl to templates/shared/
+
+4. create the pages/ directory configured in page.conf, make sure it is accessible.
+
+5. edit your index template. Look for this context:
+
+{{{
+{elseif $posts}
+[..]
+{else}
+}}}
+
+6. before the {else} add this clause:
+
+{{{
+{elseif $page}
+
+  {include file="default/page.tpl" post="`$page`" }
+}}}
+
+(change template name accordingly)
+
+7. create .txt files in your pages directory.
+
+8. to link to a static page, add this (eg. to your menu):
+
+{{{
+<a href="{$config.whoami}/page/about">About</a>
+}}}
+
+(here we are linking to an about page)
+
+That's it

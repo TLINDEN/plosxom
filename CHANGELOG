@@ -1,0 +1,3108 @@
+------------------------------------------------------------------------
+r237 | palidhar | 2008-12-15 19:53:52 +0100 (Mo, 15. Dez 2008) | 4 lines
+Geänderte Pfade:
+   M /src/MANIFEST
+   M /src/Makefile
+   M /src/README.pod
+   M /src/RELEASENOTES
+   M /src/etc/plosxom.conf
+   A /src/images
+
+- added images/ directory so default install works
+- fixed Makefile for dist creation
+- added hint in the config for SEO config
+
+------------------------------------------------------------------------
+r236 | palidhar | 2008-12-15 00:02:19 +0100 (Mo, 15. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+
+fixed bug in linking to normalized images in media manager
+
+------------------------------------------------------------------------
+r235 | palidhar | 2008-12-15 00:01:32 +0100 (Mo, 15. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin_backup/plugin_admin_backup.php
+
+completed restore
+
+------------------------------------------------------------------------
+r234 | palidhar | 2008-12-14 02:22:12 +0100 (So, 14. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /src/README.pod
+
+updated docu
+
+------------------------------------------------------------------------
+r233 | palidhar | 2008-12-13 18:51:00 +0100 (Sa, 13. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin_backup/extra_backup.tpl
+   M /plugins/admin_backup/plugin_admin_backup.php
+
+- basic zip archive creation works (supports: ZipArchive Class and /bin/zip command)
+
+------------------------------------------------------------------------
+r232 | palidhar | 2008-12-13 18:50:12 +0100 (Sa, 13. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/lang-admin.conf
+
+-
+
+------------------------------------------------------------------------
+r231 | palidhar | 2008-12-13 18:49:45 +0100 (Sa, 13. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/tagcloud/plugin_admin_tagcloud.php
+
+fixed error handling
+
+------------------------------------------------------------------------
+r230 | palidhar | 2008-12-13 18:49:23 +0100 (Sa, 13. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin_rpc/plugin_admin_rpc.php
+
+fixed error handling
+
+------------------------------------------------------------------------
+r229 | palidhar | 2008-12-13 01:31:19 +0100 (Sa, 13. Dez 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin_backup
+   A /plugins/admin_backup/VERSION
+   A /plugins/admin_backup/admin_backup.nfo
+   A /plugins/admin_backup/extra_backup.tpl
+   A /plugins/admin_backup/plugin_admin_backup.php
+
+started with backup/restore admin-plugin
+
+------------------------------------------------------------------------
+r228 | palidhar | 2008-12-12 23:42:33 +0100 (Fr, 12. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /src/install.php
+
+fixed bugs and added reload button
+
+------------------------------------------------------------------------
+r227 | palidhar | 2008-12-12 21:43:22 +0100 (Fr, 12. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /src/MANIFEST
+   M /src/Makefile
+   M /src/VERSION
+   M /src/diff.pl
+
+fixed linux dependencies
+
+------------------------------------------------------------------------
+r226 | palidhar | 2008-12-12 21:27:10 +0100 (Fr, 12. Dez 2008) | 4 lines
+Geänderte Pfade:
+   A /src/etc/plosxom.conf
+
+added default plosxom.conf which would make it possible
+to go with default plosxom install live without editing 
+or creating it
+
+------------------------------------------------------------------------
+r225 | palidhar | 2008-12-12 21:26:06 +0100 (Fr, 12. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+fixed bug#1, standard.php will now loaded first
+
+------------------------------------------------------------------------
+r224 | palidhar | 2008-12-10 12:07:07 +0100 (Mi, 10. Dez 2008) | 2 lines
+Geänderte Pfade:
+   M /trunk/plosxom.php
+
+fixed bug #1 (http://code.google.com/p/plosxom/issues/detail?id=1)
+
+------------------------------------------------------------------------
+r223 | palidhar | 2008-02-14 17:00:51 +0100 (Do, 14. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAPI.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r222 | palidhar | 2008-02-14 16:45:24 +0100 (Do, 14. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAPI.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r221 | palidhar | 2008-02-14 15:59:04 +0100 (Do, 14. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAPI.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r220 | palidhar | 2008-02-14 13:51:52 +0100 (Do, 14. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PlosxomReadme.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r219 | palidhar | 2008-02-14 13:51:23 +0100 (Do, 14. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdmin.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r218 | palidhar | 2008-02-14 13:04:12 +0100 (Do, 14. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAPI.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r217 | palidhar | 2008-02-14 13:01:46 +0100 (Do, 14. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAPI.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r216 | palidhar | 2008-02-14 13:01:24 +0100 (Do, 14. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r215 | palidhar | 2008-02-13 16:24:28 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PLuginYoutube.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r214 | palidhar | 2008-02-13 16:24:08 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PLuginYoutube.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r213 | palidhar | 2008-02-13 16:23:27 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PLuginYoutube.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r212 | palidhar | 2008-02-13 16:22:00 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   A /wiki/PLuginYoutube.wiki
+
+Created wiki page through web user interface.
+------------------------------------------------------------------------
+r211 | palidhar | 2008-02-13 16:12:28 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r210 | palidhar | 2008-02-13 15:09:31 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/Installation.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r209 | palidhar | 2008-02-13 14:58:54 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginLog.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r208 | palidhar | 2008-02-13 14:58:21 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginStaticPage.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r207 | palidhar | 2008-02-13 14:57:57 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginStaticPage.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r206 | palidhar | 2008-02-13 14:55:07 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginFeed.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r205 | palidhar | 2008-02-13 14:54:12 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/CategoriesPlugin.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r204 | palidhar | 2008-02-13 14:53:36 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginLinks.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r203 | palidhar | 2008-02-13 14:52:57 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginTagCloud.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r202 | palidhar | 2008-02-13 14:52:25 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginTechnorati.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r201 | palidhar | 2008-02-13 14:51:06 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAccess.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r200 | palidhar | 2008-02-13 14:49:50 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   A /wiki/PluginMore.wiki
+
+Created wiki page through web user interface.
+------------------------------------------------------------------------
+r199 | palidhar | 2008-02-13 14:41:37 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdminRPC.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r198 | palidhar | 2008-02-13 14:40:53 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdminRPC.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r197 | palidhar | 2008-02-13 14:30:58 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdminRPC.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r196 | palidhar | 2008-02-13 14:30:26 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdminRPC.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r195 | palidhar | 2008-02-13 14:29:42 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   A /wiki/PluginAdminRPC.wiki
+
+Created wiki page through web user interface.
+------------------------------------------------------------------------
+r194 | palidhar | 2008-02-13 14:18:59 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   A /wiki/PlosxomReadme.wiki
+
+Created wiki page through web user interface.
+------------------------------------------------------------------------
+r193 | palidhar | 2008-02-13 14:12:18 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdmin.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r192 | palidhar | 2008-02-13 14:02:15 +0100 (Mi, 13. Feb 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r191 | palidhar | 2008-02-12 16:43:08 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /src/MANIFEST
+
+updated
+
+------------------------------------------------------------------------
+r190 | palidhar | 2008-02-12 16:42:46 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /src/Makefile
+
+fixed missing lib files bug
+
+------------------------------------------------------------------------
+r189 | palidhar | 2008-02-12 16:40:42 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/tagcloud/extra_tagcloud.tpl
+
+forgot to add tpl
+
+------------------------------------------------------------------------
+r188 | palidhar | 2008-02-12 16:37:29 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /src/templates/blogtxt/.htaccess
+   M /src/templates/crystalx/.htaccess
+   M /src/templates/default/.htaccess
+
+fixed permissions for images
+
+------------------------------------------------------------------------
+r187 | palidhar | 2008-02-12 16:33:01 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin/thumbnail.inc.php
+
+forgot to add to repository
+
+------------------------------------------------------------------------
+r186 | palidhar | 2008-02-12 15:57:37 +0100 (Di, 12. Feb 2008) | 3 lines
+Geänderte Pfade:
+   M /src/install.php
+
+- fixed include bug (used the wrong file)
+- added message about missing etc write permissions
+
+------------------------------------------------------------------------
+r185 | palidhar | 2008-02-12 15:48:02 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /src/diff.pl
+
+using .upgraded suffix only if target file already exists in previous version
+
+------------------------------------------------------------------------
+r184 | palidhar | 2008-02-12 15:31:18 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /src/CHANGELOG
+   M /src/MANIFEST
+   M /src/Makefile
+   M /src/RELEASENOTES
+   A /src/plugpack.sh
+
+done for 1.06
+
+------------------------------------------------------------------------
+r183 | palidhar | 2008-02-12 14:58:47 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/access/VERSION
+   M /plugins/feed/VERSION
+   M /plugins/page/VERSION
+   M /plugins/tagcloud/VERSION
+   M /plugins/technorati/VERSION
+
+increased versions
+
+------------------------------------------------------------------------
+r182 | palidhar | 2008-02-12 14:13:54 +0100 (Di, 12. Feb 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/access/access.nfo
+   D /plugins/admin_rpc/admin.nfo
+   A /plugins/admin_rpc/admin_rpc.nfo (von /plugins/admin_rpc/admin.nfo:171)
+   A /plugins/log/log.nfo
+   A /plugins/more/more.nfo
+   M /plugins/technorati/technorati.nfo
+
+added missing nfo files
+
+------------------------------------------------------------------------
+r181 | palidhar | 2008-02-09 17:58:30 +0100 (Sa, 09. Feb 2008) | 2 lines
+Geänderte Pfade:
+   D /plugins/admin/README.html
+   M /plugins/admin/admin.tpl
+   A /plugins/admin/readme.tpl
+
+renamed docu to readme.tpl
+
+------------------------------------------------------------------------
+r180 | palidhar | 2008-02-09 17:56:47 +0100 (Sa, 09. Feb 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin/README.html
+   M /plugins/admin/admin.tpl
+
+added documentation
+
+------------------------------------------------------------------------
+r179 | palidhar | 2008-02-09 17:54:19 +0100 (Sa, 09. Feb 2008) | 2 lines
+Geänderte Pfade:
+   D /src/README
+   A /src/README.txt
+   M /src/plosxom.php
+
+created new readme from pod input file
+
+------------------------------------------------------------------------
+r178 | palidhar | 2008-02-09 17:46:51 +0100 (Sa, 09. Feb 2008) | 2 lines
+Geänderte Pfade:
+   A /src/README.pod
+
+added new readme
+
+------------------------------------------------------------------------
+r177 | palidhar | 2008-02-09 17:01:45 +0100 (Sa, 09. Feb 2008) | 2 lines
+Geänderte Pfade:
+   A /src/index.php
+
+added simple wrapper
+
+------------------------------------------------------------------------
+r176 | palidhar | 2008-02-09 17:01:27 +0100 (Sa, 09. Feb 2008) | 4 lines
+Geänderte Pfade:
+   M /src/install.php
+   A /src/lib/Plosxom-class.php
+   A /src/lib/Plosxom-functions.php
+   A /src/lib/Plugin-class.php
+   A /src/lib/Registry-class.php
+   D /src/lib/plosxom-lib.php
+   M /src/plosxom.php
+
+- outsourced classes to extra files (eases maintentance)
+- moved plosxom-lib.php to Plosxom-functions.php
+- plosxom.php now fails if install.php still exists
+
+------------------------------------------------------------------------
+r175 | palidhar | 2008-02-09 16:59:50 +0100 (Sa, 09. Feb 2008) | 2 lines
+Geänderte Pfade:
+   D /src/etc/plosxom.conf
+   A /src/etc/plosxom.conf.dist
+
+- plosxom.conf will now created by install.php first
+
+------------------------------------------------------------------------
+r174 | palidhar | 2008-02-06 16:26:09 +0100 (Mi, 06. Feb 2008) | 3 lines
+Geänderte Pfade:
+   M /src/lib/plosxom-lib.php
+
+- better handling of relative filenames
+- default are relative directory names
+
+------------------------------------------------------------------------
+r173 | palidhar | 2008-02-04 16:17:36 +0100 (Mo, 04. Feb 2008) | 3 lines
+Geänderte Pfade:
+   M /src/install.php
+   M /src/plosxom.php
+
+- completed install script
+- fixed plosxom-lib loading bug in plosxom.php
+
+------------------------------------------------------------------------
+r172 | palidhar | 2008-02-02 18:42:50 +0100 (Sa, 02. Feb 2008) | 3 lines
+Geänderte Pfade:
+   A /src/install.php
+   A /src/lib/plosxom-lib.php
+   M /src/plosxom.php
+
+- added basic installer and sanity check
+- outsourced parse_config function so that the installer can use it independently from plosxom
+
+------------------------------------------------------------------------
+r171 | palidhar | 2008-02-01 00:35:59 +0100 (Fr, 01. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.tpl
+   M /plugins/admin/lang-admin.conf
+
+added auto loading of lang* files, fixed title styling
+
+------------------------------------------------------------------------
+r170 | palidhar | 2008-02-01 00:35:05 +0100 (Fr, 01. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+added auto loading of lang* files
+
+------------------------------------------------------------------------
+r169 | palidhar | 2008-02-01 00:04:08 +0100 (Fr, 01. Feb 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/plosxom.png
+
+resized
+
+------------------------------------------------------------------------
+r168 | palidhar | 2008-01-31 23:01:30 +0100 (Do, 31. Jan 2008) | 4 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+   M /plugins/admin/lang-admin.conf
+   A /plugins/admin/tiny_mce
+   A /plugins/admin/tiny_mce/changelog.txt
+   A /plugins/admin/tiny_mce/jscripts
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/langs/en.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/license.txt
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/css/advhr.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/js/rule.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advhr/rule.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/css/advimage.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/image.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/img/sample.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/js/image.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advimage/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/css/advlink.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/js/advlink.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/advlink/link.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/autosave
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/autosave/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/autosave/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/bbcode
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/bbcode/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/bbcode/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/compat2x
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/compat2x/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/compat2x/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/contextmenu
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/contextmenu/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/contextmenu/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/directionality
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/directionality/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/directionality/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/emotions.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-cool.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-cry.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-embarassed.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-foot-in-mouth.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-frown.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-innocent.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-kiss.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-laughing.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-money-mouth.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-sealed.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-smile.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-surprised.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-tongue-out.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-undecided.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-wink.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/img/smiley-yell.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/js/emotions.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/emotions/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/dialog.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/img/example.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/js/dialog.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/langs/en.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/example/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/css/fullpage.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/fullpage.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/js/fullpage.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullpage/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullscreen
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullscreen/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullscreen/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/fullscreen/fullscreen.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/iespell
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/iespell/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/iespell/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/buttons.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/window.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/inlinepopups/template.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/insertdatetime
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/insertdatetime/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/insertdatetime/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/layer
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/layer/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/layer/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/css/content.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/css/media.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/img/flash.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/img/flv_player.swf
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/img/quicktime.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/img/realmedia.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/img/shockwave.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/img/trans.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/img/windowsmedia.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/js/embed.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/js/media.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/media/media.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/nonbreaking
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/nonbreaking/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/nonbreaking/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/noneditable
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/noneditable/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/noneditable/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/pagebreak
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/pagebreak/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/pagebreak/css/content.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/pagebreak/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/pagebreak/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/pagebreak/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/pagebreak/img/pagebreak.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/pagebreak/img/trans.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/blank.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/css/blank.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/css/pasteword.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/js/pastetext.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/js/pasteword.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/pastetext.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/paste/pasteword.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/preview
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/preview/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/preview/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/preview/example.html
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/preview/jscripts
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/preview/jscripts/embed.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/print
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/print/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/print/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/safari
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/safari/blank.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/safari/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/safari/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/save
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/save/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/save/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/css/searchreplace.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/js/searchreplace.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/searchreplace/searchreplace.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/css/props.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/js/props.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/style/props.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/cell.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/css/cell.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/css/row.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/css/table.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/js/cell.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/js/merge_cells.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/js/row.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/js/table.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/merge_cells.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/row.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/table/table.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/blank.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/css/template.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/js/template.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/template/template.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/visualchars
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/visualchars/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/visualchars/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/abbr.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/acronym.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/attributes.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/cite.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/css/attributes.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/css/popup.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/css/xhtmlxtras.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/del.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/editor_plugin.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/ins.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/js/abbr.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/js/acronym.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/js/attributes.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/js/cite.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/js/del.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/js/element_common.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/js/ins.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/plugins/xhtmlxtras/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/about.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/anchor.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/charmap.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/color_picker.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/editor_template.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/editor_template_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/image.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/img/colorpicker.jpg
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/img/icons.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/js/about.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/js/anchor.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/js/charmap.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/js/color_picker.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/js/image.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/js/link.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/js/source_editor.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/langs/en.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/langs/en_dlg.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/link.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/content.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/dialog.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/img/buttons.png
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/img/items.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/img/menu_arrow.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/img/menu_check.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/img/progress.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/img/tabs.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/default/ui.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/o2k7
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/o2k7/content.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/o2k7/dialog.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/o2k7/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/o2k7/img/button_bg.png
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/skins/o2k7/ui.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/advanced/source_editor.htm
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/editor_template.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/editor_template_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/img/icons.gif
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/langs
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/langs/en.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins/default
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins/default/content.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins/default/ui.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins/o2k7
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins/o2k7/content.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins/o2k7/img
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins/o2k7/img/button_bg.png
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/themes/simple/skins/o2k7/ui.css
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/tiny_mce.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/tiny_mce_popup.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/tiny_mce_src.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/utils
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/utils/editable_selects.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/utils/form_utils.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/utils/mclayer.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/utils/mctabs.js
+   A /plugins/admin/tiny_mce/jscripts/tiny_mce/utils/validate.js
+   A /plugins/admin/tiny_mce/langs
+   A /plugins/admin/tiny_mce/langs/de.js
+   A /plugins/admin/tiny_mce/plugins
+   A /plugins/admin/tiny_mce/plugins/advhr
+   A /plugins/admin/tiny_mce/plugins/advhr/langs
+   A /plugins/admin/tiny_mce/plugins/advhr/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/advimage
+   A /plugins/admin/tiny_mce/plugins/advimage/langs
+   A /plugins/admin/tiny_mce/plugins/advimage/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/advlink
+   A /plugins/admin/tiny_mce/plugins/advlink/langs
+   A /plugins/admin/tiny_mce/plugins/advlink/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/emotions
+   A /plugins/admin/tiny_mce/plugins/emotions/langs
+   A /plugins/admin/tiny_mce/plugins/emotions/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/fullpage
+   A /plugins/admin/tiny_mce/plugins/fullpage/langs
+   A /plugins/admin/tiny_mce/plugins/fullpage/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/media
+   A /plugins/admin/tiny_mce/plugins/media/langs
+   A /plugins/admin/tiny_mce/plugins/media/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/paste
+   A /plugins/admin/tiny_mce/plugins/paste/langs
+   A /plugins/admin/tiny_mce/plugins/paste/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/searchreplace
+   A /plugins/admin/tiny_mce/plugins/searchreplace/langs
+   A /plugins/admin/tiny_mce/plugins/searchreplace/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/style
+   A /plugins/admin/tiny_mce/plugins/style/langs
+   A /plugins/admin/tiny_mce/plugins/style/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/table
+   A /plugins/admin/tiny_mce/plugins/table/langs
+   A /plugins/admin/tiny_mce/plugins/table/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/template
+   A /plugins/admin/tiny_mce/plugins/template/langs
+   A /plugins/admin/tiny_mce/plugins/template/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/langs
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/themes
+   A /plugins/admin/tiny_mce/themes/advanced
+   A /plugins/admin/tiny_mce/themes/advanced/langs
+   A /plugins/admin/tiny_mce/themes/advanced/langs/de.js
+   A /plugins/admin/tiny_mce/themes/advanced/langs/de_dlg.js
+   A /plugins/admin/tiny_mce/themes/simple
+   A /plugins/admin/tiny_mce/themes/simple/langs
+   A /plugins/admin/tiny_mce/themes/simple/langs/de.js
+
+- updated tiny_mce to 3.0
+- added help slot
+- if no users exist, authentication will be bypassed and new user can be created (nothing else can be done)
+
+------------------------------------------------------------------------
+r167 | palidhar | 2008-01-31 22:42:21 +0100 (Do, 31. Jan 2008) | 2 lines
+Geänderte Pfade:
+   D /plugins/admin/tiny_mce
+
+removed
+
+------------------------------------------------------------------------
+r166 | palidhar | 2008-01-31 01:23:11 +0100 (Do, 31. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+
+some last localization fixes, it works now
+
+------------------------------------------------------------------------
+r165 | palidhar | 2008-01-31 01:12:45 +0100 (Do, 31. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+   M /plugins/admin/lang-admin.conf
+
+completed localization
+
+------------------------------------------------------------------------
+r164 | palidhar | 2008-01-30 23:46:29 +0100 (Mi, 30. Jan 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin/lang-admin.conf
+
+added lang file
+
+------------------------------------------------------------------------
+r163 | palidhar | 2008-01-30 23:43:32 +0100 (Mi, 30. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.tpl
+
+stepping forward
+
+------------------------------------------------------------------------
+r162 | palidhar | 2008-01-30 00:16:52 +0100 (Mi, 30. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+
+started to localize info and error messages
+
+------------------------------------------------------------------------
+r161 | palidhar | 2008-01-28 01:21:15 +0100 (Mo, 28. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/tagcloud/plugin_admin_tagcloud.php
+   A /plugins/tagcloud/postsave_tagcloud.tpl
+
+- added post_save support (tagcloud generated after saving a posting)
+
+------------------------------------------------------------------------
+r160 | palidhar | 2008-01-28 01:20:37 +0100 (Mo, 28. Jan 2008) | 3 lines
+Geänderte Pfade:
+   A /plugins/page/main_page.tpl
+   A /plugins/page/menu_page.tpl
+   M /plugins/page/plugin_admin_page.php
+   A /plugins/page/submenu_page.tpl
+
+- main template outsourced ffrom admin plugin to here
+- added page view support instead of directly linking to it
+
+------------------------------------------------------------------------
+r159 | palidhar | 2008-01-28 01:19:06 +0100 (Mo, 28. Jan 2008) | 3 lines
+Geänderte Pfade:
+   M /plugins/admin_rpc/plugin_admin_rpc.php
+   A /plugins/admin_rpc/postsave_rpc.tpl
+   A /plugins/admin_rpc/rpcsites.conf
+
+- added post_save support (rpc ping issued after saving a posting)
+- added own config file with listing of rpc sites
+
+------------------------------------------------------------------------
+r158 | palidhar | 2008-01-28 01:17:56 +0100 (Mo, 28. Jan 2008) | 6 lines
+Geänderte Pfade:
+   A /plugins/admin/admin-users.conf
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+- finished template management
+- added support for main templates for admin-plugin
+- messages such as info or error are now smarty arrays
+- added view modes for postings and configs
+- moved page code to page admin-plugin(plugin_admin_page)
+
+------------------------------------------------------------------------
+r157 | palidhar | 2008-01-28 01:14:22 +0100 (Mo, 28. Jan 2008) | 2 lines
+Geänderte Pfade:
+   A /src/templates/default/default.nfo
+   A /src/templates/default/plosxom-screenshoot.png
+
+added default .nfo file and screenshot
+
+------------------------------------------------------------------------
+r156 | palidhar | 2008-01-28 01:12:14 +0100 (Mo, 28. Jan 2008) | 3 lines
+Geänderte Pfade:
+   M /src/plugins/standard.php
+
+added spport to omit css class blogparagraph when adding <p> paragraphs after reading a post
+(required by admin-plugin visual editor, which only supports plain <p> tags without any css)
+
+------------------------------------------------------------------------
+r155 | palidhar | 2008-01-27 01:35:17 +0100 (So, 27. Jan 2008) | 4 lines
+Geänderte Pfade:
+   D /plugins/admin/admin
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+- started with template management, listing, selecting current template and edit template files works
+- completed media management
+- added support for auto-include template files for admin plugins (extra, menu and submenu)
+
+------------------------------------------------------------------------
+r154 | palidhar | 2008-01-27 01:32:47 +0100 (So, 27. Jan 2008) | 2 lines
+Geänderte Pfade:
+   A /src/templates/blogtxt/blogtxt-screenshot.png
+   A /src/templates/blogtxt/blogtxt.nfo
+   A /src/templates/crystalx/crystalx.nfo
+   A /src/templates/crystalx/screenshot-crytalx.png
+
+added .nfo files and screenshots for admin template installer
+
+------------------------------------------------------------------------
+r153 | palidhar | 2008-01-27 01:31:19 +0100 (So, 27. Jan 2008) | 3 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+- added support for array options in config files, just use the same option multiple times
+- added support for admin auto templates
+
+------------------------------------------------------------------------
+r152 | palidhar | 2008-01-27 01:29:51 +0100 (So, 27. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/page/plugin_admin_page.php
+
+completed
+
+------------------------------------------------------------------------
+r151 | palidhar | 2008-01-27 01:28:40 +0100 (So, 27. Jan 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/tagcloud/plugin_admin_tagcloud.php
+
+added admin plugin to re-generate tagcloud from postings
+
+------------------------------------------------------------------------
+r150 | palidhar | 2008-01-27 01:27:36 +0100 (So, 27. Jan 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin_rpc
+   A /plugins/admin_rpc/IXR_Library.inc.php
+   A /plugins/admin_rpc/admin.nfo
+   A /plugins/admin_rpc/extra_rpc.tpl
+   A /plugins/admin_rpc/plugin_admin_rpc.php
+
+added rpc ping support (admin plugin only)
+
+------------------------------------------------------------------------
+r149 | palidhar | 2008-01-26 01:43:36 +0100 (Sa, 26. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.tpl
+   A /plugins/admin/plosxom.png
+
+added plosxom logo (draft)
+
+------------------------------------------------------------------------
+r148 | palidhar | 2008-01-26 01:35:22 +0100 (Sa, 26. Jan 2008) | 6 lines
+Geänderte Pfade:
+   A /plugins/admin/3gp.png
+   A /plugins/admin/aac.png
+   M /plugins/admin/admin/thumbnail.inc.php
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+   A /plugins/admin/aif.png
+   A /plugins/admin/asf.png
+   A /plugins/admin/au.png
+   A /plugins/admin/avi.png
+   A /plugins/admin/bz2.png
+   A /plugins/admin/cda.png
+   A /plugins/admin/doc.png
+   A /plugins/admin/dsp.png
+   A /plugins/admin/flv.png
+   A /plugins/admin/gz.png
+   A /plugins/admin/img-delete.png
+   A /plugins/admin/img-upload.png
+   A /plugins/admin/img-view-orig.png
+   A /plugins/admin/img-view-small.png
+   A /plugins/admin/img.png
+   A /plugins/admin/iso.png
+   A /plugins/admin/m4a.png
+   A /plugins/admin/mid.png
+   A /plugins/admin/mov.png
+   A /plugins/admin/mp3.png
+   A /plugins/admin/mp4.png
+   A /plugins/admin/mpa.png
+   A /plugins/admin/mpg.png
+   A /plugins/admin/ogg.png
+   A /plugins/admin/pdf.png
+   A /plugins/admin/pkg.png
+   A /plugins/admin/pls.png
+   A /plugins/admin/ra.png
+   A /plugins/admin/rar.png
+   A /plugins/admin/swf.png
+   A /plugins/admin/tgz.png
+   A /plugins/admin/txt.png
+   A /plugins/admin/unknown.png
+   A /plugins/admin/wav.png
+   A /plugins/admin/wm4.png
+   A /plugins/admin/wma.png
+   A /plugins/admin/wmv.png
+   A /plugins/admin/zip.png
+
+- fixed thumbnail generation
+- implemented upload functionality
+- sorting thumbnails by mtime (just like post, latest first)
+- added support for non-image uploads
+- added icon thumbs for non-image files like pdf or txt so we have a consitent look
+
+------------------------------------------------------------------------
+r147 | palidhar | 2008-01-24 23:42:41 +0100 (Do, 24. Jan 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdmin.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r146 | palidhar | 2008-01-24 23:39:38 +0100 (Do, 24. Jan 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdmin.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r145 | palidhar | 2008-01-24 23:38:07 +0100 (Do, 24. Jan 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdmin.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r144 | palidhar | 2008-01-24 23:37:20 +0100 (Do, 24. Jan 2008) | 1 line
+Geänderte Pfade:
+   M /wiki/PluginAdmin.wiki
+
+Edited wiki page through web user interface.
+------------------------------------------------------------------------
+r143 | palidhar | 2008-01-24 23:31:31 +0100 (Do, 24. Jan 2008) | 1 line
+Geänderte Pfade:
+   A /wiki/PluginAdmin.wiki
+
+Created wiki page through web user interface.
+------------------------------------------------------------------------
+r142 | palidhar | 2008-01-23 01:45:23 +0100 (Mi, 23. Jan 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin/admin
+   A /plugins/admin/admin/thumbnail.inc.php
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+added image management (no upload yet)
+
+------------------------------------------------------------------------
+r141 | palidhar | 2008-01-23 01:43:39 +0100 (Mi, 23. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /src/etc/plosxom.conf
+
+added image config vars
+
+------------------------------------------------------------------------
+r140 | palidhar | 2008-01-21 01:34:24 +0100 (Mo, 21. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+- added .disabled support
+
+------------------------------------------------------------------------
+r139 | palidhar | 2008-01-21 01:33:39 +0100 (Mo, 21. Jan 2008) | 3 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+- added plugin help support ($plugin.txt)
+- added plugin install support (upload & extract)
+
+------------------------------------------------------------------------
+r138 | palidhar | 2008-01-20 21:56:12 +0100 (So, 20. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+added edit plugin config (links to config mode)
+
+------------------------------------------------------------------------
+r137 | palidhar | 2008-01-20 20:39:47 +0100 (So, 20. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/page/plugin_admin_page.php
+
+added save & delete support
+
+------------------------------------------------------------------------
+r136 | palidhar | 2008-01-20 20:37:23 +0100 (So, 20. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+added config file edit support
+
+------------------------------------------------------------------------
+r135 | palidhar | 2008-01-20 01:02:46 +0100 (So, 20. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.tpl
+
+added page support
+
+------------------------------------------------------------------------
+r134 | palidhar | 2008-01-20 01:02:20 +0100 (So, 20. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/page/plugin_admin_page.php
+
+added index
+
+------------------------------------------------------------------------
+r133 | palidhar | 2008-01-17 23:38:54 +0100 (Do, 17. Jan 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/page/plugin_admin_page.php
+
+added admin plugin for page management (empty for now)
+
+------------------------------------------------------------------------
+r132 | palidhar | 2008-01-17 23:38:14 +0100 (Do, 17. Jan 2008) | 5 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+- reorganized code and template
+- now calls admin plugins, if installed (along with menu link)
+- checks plosxom version to make sure it is only installed
+  in compatible environment
+
+------------------------------------------------------------------------
+r131 | palidhar | 2008-01-17 23:36:15 +0100 (Do, 17. Jan 2008) | 9 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+- introduced new class Registry, which holds now all plugins and
+  handlers. A reference of the registry object is now available
+  to plugins so that plugins can call plugins via proper handler.
+- added version to config object
+- moved get_handler(s) methods to registry class, the plugin class
+  still contains those functions but forwards calls to them to
+  the registry class. The functions are thus no more core functions
+  but available to plugins too.
+
+------------------------------------------------------------------------
+r130 | palidhar | 2008-01-15 16:21:43 +0100 (Di, 15. Jan 2008) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin/edit.png
+   A /plugins/admin/no.png
+   A /plugins/admin/ok.png
+   A /plugins/admin/remove.png
+
+added image buttons
+
+------------------------------------------------------------------------
+r129 | palidhar | 2008-01-15 16:20:18 +0100 (Di, 15. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+added shared template dir
+
+------------------------------------------------------------------------
+r128 | palidhar | 2008-01-15 16:19:52 +0100 (Di, 15. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/feed/feed.php
+
+moved template stuff to shared/ template dir
+
+------------------------------------------------------------------------
+r127 | palidhar | 2008-01-15 16:19:37 +0100 (Di, 15. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/youtube/youtube.php
+
+moved template stuff to shared/ template dir
+
+------------------------------------------------------------------------
+r126 | palidhar | 2008-01-15 16:19:23 +0100 (Di, 15. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+moved template stuff to shared/ template dir
+
+------------------------------------------------------------------------
+r125 | palidhar | 2008-01-14 15:14:51 +0100 (Mo, 14. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.tpl
+   A /plugins/admin/tiny_mce
+   A /plugins/admin/tiny_mce/blank.htm
+   A /plugins/admin/tiny_mce/flash_list.js
+   A /plugins/admin/tiny_mce/image_list.js
+   A /plugins/admin/tiny_mce/langs
+   A /plugins/admin/tiny_mce/langs/en.js
+   A /plugins/admin/tiny_mce/langs/readme.txt
+   A /plugins/admin/tiny_mce/license.txt
+   A /plugins/admin/tiny_mce/link_list.js
+   A /plugins/admin/tiny_mce/plugins
+   A /plugins/admin/tiny_mce/plugins/_template
+   A /plugins/admin/tiny_mce/plugins/_template/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/_template/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/_template/images
+   A /plugins/admin/tiny_mce/plugins/_template/images/template.gif
+   A /plugins/admin/tiny_mce/plugins/_template/langs
+   A /plugins/admin/tiny_mce/plugins/_template/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/_template/popup.htm
+   A /plugins/admin/tiny_mce/plugins/_template/readme.txt
+   A /plugins/admin/tiny_mce/plugins/advhr
+   A /plugins/admin/tiny_mce/plugins/advhr/css
+   A /plugins/admin/tiny_mce/plugins/advhr/css/advhr.css
+   A /plugins/admin/tiny_mce/plugins/advhr/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/advhr/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/advhr/images
+   A /plugins/admin/tiny_mce/plugins/advhr/images/advhr.gif
+   A /plugins/admin/tiny_mce/plugins/advhr/jscripts
+   A /plugins/admin/tiny_mce/plugins/advhr/jscripts/rule.js
+   A /plugins/admin/tiny_mce/plugins/advhr/langs
+   A /plugins/admin/tiny_mce/plugins/advhr/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/advhr/readme.txt
+   A /plugins/admin/tiny_mce/plugins/advhr/rule.htm
+   A /plugins/admin/tiny_mce/plugins/advimage
+   A /plugins/admin/tiny_mce/plugins/advimage/css
+   A /plugins/admin/tiny_mce/plugins/advimage/css/advimage.css
+   A /plugins/admin/tiny_mce/plugins/advimage/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/advimage/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/advimage/image.htm
+   A /plugins/admin/tiny_mce/plugins/advimage/images
+   A /plugins/admin/tiny_mce/plugins/advimage/images/sample.gif
+   A /plugins/admin/tiny_mce/plugins/advimage/jscripts
+   A /plugins/admin/tiny_mce/plugins/advimage/jscripts/functions.js
+   A /plugins/admin/tiny_mce/plugins/advimage/langs
+   A /plugins/admin/tiny_mce/plugins/advimage/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/advimage/readme.txt
+   A /plugins/admin/tiny_mce/plugins/advlink
+   A /plugins/admin/tiny_mce/plugins/advlink/css
+   A /plugins/admin/tiny_mce/plugins/advlink/css/advlink.css
+   A /plugins/admin/tiny_mce/plugins/advlink/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/advlink/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/advlink/jscripts
+   A /plugins/admin/tiny_mce/plugins/advlink/jscripts/functions.js
+   A /plugins/admin/tiny_mce/plugins/advlink/langs
+   A /plugins/admin/tiny_mce/plugins/advlink/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/advlink/link.htm
+   A /plugins/admin/tiny_mce/plugins/advlink/readme.txt
+   A /plugins/admin/tiny_mce/plugins/autosave
+   A /plugins/admin/tiny_mce/plugins/autosave/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/autosave/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/autosave/langs
+   A /plugins/admin/tiny_mce/plugins/autosave/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/autosave/readme.txt
+   A /plugins/admin/tiny_mce/plugins/bbcode
+   A /plugins/admin/tiny_mce/plugins/bbcode/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/bbcode/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/cleanup
+   A /plugins/admin/tiny_mce/plugins/cleanup/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/cleanup/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/cleanup/readme.txt
+   A /plugins/admin/tiny_mce/plugins/contextmenu
+   A /plugins/admin/tiny_mce/plugins/contextmenu/css
+   A /plugins/admin/tiny_mce/plugins/contextmenu/css/contextmenu.css
+   A /plugins/admin/tiny_mce/plugins/contextmenu/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/contextmenu/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/contextmenu/images
+   A /plugins/admin/tiny_mce/plugins/contextmenu/images/spacer.gif
+   A /plugins/admin/tiny_mce/plugins/contextmenu/readme.txt
+   A /plugins/admin/tiny_mce/plugins/devkit
+   A /plugins/admin/tiny_mce/plugins/devkit/css
+   A /plugins/admin/tiny_mce/plugins/devkit/css/devkit.css
+   A /plugins/admin/tiny_mce/plugins/devkit/css/devkit_ui.css
+   A /plugins/admin/tiny_mce/plugins/devkit/devkit.htm
+   A /plugins/admin/tiny_mce/plugins/devkit/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/devkit/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/devkit/images
+   A /plugins/admin/tiny_mce/plugins/devkit/images/flip_down.gif
+   A /plugins/admin/tiny_mce/plugins/devkit/images/flip_up.gif
+   A /plugins/admin/tiny_mce/plugins/devkit/jscripts
+   A /plugins/admin/tiny_mce/plugins/devkit/jscripts/devkit.js
+   A /plugins/admin/tiny_mce/plugins/devkit/jscripts/diff.js
+   A /plugins/admin/tiny_mce/plugins/devkit/langs
+   A /plugins/admin/tiny_mce/plugins/devkit/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/directionality
+   A /plugins/admin/tiny_mce/plugins/directionality/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/directionality/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/directionality/images
+   A /plugins/admin/tiny_mce/plugins/directionality/images/ltr.gif
+   A /plugins/admin/tiny_mce/plugins/directionality/images/rtl.gif
+   A /plugins/admin/tiny_mce/plugins/directionality/langs
+   A /plugins/admin/tiny_mce/plugins/directionality/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/directionality/readme.txt
+   A /plugins/admin/tiny_mce/plugins/emotions
+   A /plugins/admin/tiny_mce/plugins/emotions/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/emotions/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/emotions/emotions.htm
+   A /plugins/admin/tiny_mce/plugins/emotions/images
+   A /plugins/admin/tiny_mce/plugins/emotions/images/emotions.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/readme.txt
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-cool.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-cry.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-embarassed.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-foot-in-mouth.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-frown.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-innocent.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-kiss.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-laughing.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-money-mouth.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-sealed.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-smile.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-surprised.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-tongue-out.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-undecided.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-wink.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/images/smiley-yell.gif
+   A /plugins/admin/tiny_mce/plugins/emotions/jscripts
+   A /plugins/admin/tiny_mce/plugins/emotions/jscripts/functions.js
+   A /plugins/admin/tiny_mce/plugins/emotions/langs
+   A /plugins/admin/tiny_mce/plugins/emotions/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/emotions/readme.txt
+   A /plugins/admin/tiny_mce/plugins/flash
+   A /plugins/admin/tiny_mce/plugins/flash/css
+   A /plugins/admin/tiny_mce/plugins/flash/css/content.css
+   A /plugins/admin/tiny_mce/plugins/flash/css/flash.css
+   A /plugins/admin/tiny_mce/plugins/flash/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/flash/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/flash/flash.htm
+   A /plugins/admin/tiny_mce/plugins/flash/images
+   A /plugins/admin/tiny_mce/plugins/flash/images/flash.gif
+   A /plugins/admin/tiny_mce/plugins/flash/jscripts
+   A /plugins/admin/tiny_mce/plugins/flash/jscripts/flash.js
+   A /plugins/admin/tiny_mce/plugins/flash/langs
+   A /plugins/admin/tiny_mce/plugins/flash/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/flash/readme.txt
+   A /plugins/admin/tiny_mce/plugins/fullpage
+   A /plugins/admin/tiny_mce/plugins/fullpage/blank.htm
+   A /plugins/admin/tiny_mce/plugins/fullpage/css
+   A /plugins/admin/tiny_mce/plugins/fullpage/css/fullpage.css
+   A /plugins/admin/tiny_mce/plugins/fullpage/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/fullpage/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/fullpage/fullpage.htm
+   A /plugins/admin/tiny_mce/plugins/fullpage/images
+   A /plugins/admin/tiny_mce/plugins/fullpage/images/add.gif
+   A /plugins/admin/tiny_mce/plugins/fullpage/images/fullpage.gif
+   A /plugins/admin/tiny_mce/plugins/fullpage/images/move_down.gif
+   A /plugins/admin/tiny_mce/plugins/fullpage/images/move_up.gif
+   A /plugins/admin/tiny_mce/plugins/fullpage/images/remove.gif
+   A /plugins/admin/tiny_mce/plugins/fullpage/jscripts
+   A /plugins/admin/tiny_mce/plugins/fullpage/jscripts/fullpage.js
+   A /plugins/admin/tiny_mce/plugins/fullpage/langs
+   A /plugins/admin/tiny_mce/plugins/fullpage/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/fullscreen
+   A /plugins/admin/tiny_mce/plugins/fullscreen/css
+   A /plugins/admin/tiny_mce/plugins/fullscreen/css/page.css
+   A /plugins/admin/tiny_mce/plugins/fullscreen/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/fullscreen/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/fullscreen/fullscreen.htm
+   A /plugins/admin/tiny_mce/plugins/fullscreen/images
+   A /plugins/admin/tiny_mce/plugins/fullscreen/images/fullscreen.gif
+   A /plugins/admin/tiny_mce/plugins/fullscreen/langs
+   A /plugins/admin/tiny_mce/plugins/fullscreen/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/fullscreen/readme.txt
+   A /plugins/admin/tiny_mce/plugins/iespell
+   A /plugins/admin/tiny_mce/plugins/iespell/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/iespell/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/iespell/images
+   A /plugins/admin/tiny_mce/plugins/iespell/images/iespell.gif
+   A /plugins/admin/tiny_mce/plugins/iespell/langs
+   A /plugins/admin/tiny_mce/plugins/iespell/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/iespell/readme.txt
+   A /plugins/admin/tiny_mce/plugins/inlinepopups
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/css
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/css/inlinepopup.css
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/images
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/images/spacer.gif
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/images/window_close.gif
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/images/window_maximize.gif
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/images/window_minimize.gif
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/images/window_resize.gif
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/jscripts
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/jscripts/mcwindows.js
+   A /plugins/admin/tiny_mce/plugins/inlinepopups/readme.txt
+   A /plugins/admin/tiny_mce/plugins/insertdatetime
+   A /plugins/admin/tiny_mce/plugins/insertdatetime/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/insertdatetime/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/insertdatetime/images
+   A /plugins/admin/tiny_mce/plugins/insertdatetime/images/insertdate.gif
+   A /plugins/admin/tiny_mce/plugins/insertdatetime/images/inserttime.gif
+   A /plugins/admin/tiny_mce/plugins/insertdatetime/langs
+   A /plugins/admin/tiny_mce/plugins/insertdatetime/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/insertdatetime/readme.txt
+   A /plugins/admin/tiny_mce/plugins/layer
+   A /plugins/admin/tiny_mce/plugins/layer/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/layer/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/layer/images
+   A /plugins/admin/tiny_mce/plugins/layer/images/absolute.gif
+   A /plugins/admin/tiny_mce/plugins/layer/images/backward.gif
+   A /plugins/admin/tiny_mce/plugins/layer/images/forward.gif
+   A /plugins/admin/tiny_mce/plugins/layer/images/insert_layer.gif
+   A /plugins/admin/tiny_mce/plugins/layer/images/insertlayer.gif
+   A /plugins/admin/tiny_mce/plugins/layer/images/movebackward.gif
+   A /plugins/admin/tiny_mce/plugins/layer/images/moveforward.gif
+   A /plugins/admin/tiny_mce/plugins/layer/langs
+   A /plugins/admin/tiny_mce/plugins/layer/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/layer/readme.txt
+   A /plugins/admin/tiny_mce/plugins/media
+   A /plugins/admin/tiny_mce/plugins/media/css
+   A /plugins/admin/tiny_mce/plugins/media/css/content.css
+   A /plugins/admin/tiny_mce/plugins/media/css/media.css
+   A /plugins/admin/tiny_mce/plugins/media/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/media/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/media/images
+   A /plugins/admin/tiny_mce/plugins/media/images/flash.gif
+   A /plugins/admin/tiny_mce/plugins/media/images/media.gif
+   A /plugins/admin/tiny_mce/plugins/media/images/quicktime.gif
+   A /plugins/admin/tiny_mce/plugins/media/images/realmedia.gif
+   A /plugins/admin/tiny_mce/plugins/media/images/shockwave.gif
+   A /plugins/admin/tiny_mce/plugins/media/images/windowsmedia.gif
+   A /plugins/admin/tiny_mce/plugins/media/jscripts
+   A /plugins/admin/tiny_mce/plugins/media/jscripts/embed.js
+   A /plugins/admin/tiny_mce/plugins/media/jscripts/media.js
+   A /plugins/admin/tiny_mce/plugins/media/langs
+   A /plugins/admin/tiny_mce/plugins/media/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/media/media.htm
+   A /plugins/admin/tiny_mce/plugins/nonbreaking
+   A /plugins/admin/tiny_mce/plugins/nonbreaking/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/nonbreaking/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/nonbreaking/images
+   A /plugins/admin/tiny_mce/plugins/nonbreaking/images/nonbreaking.gif
+   A /plugins/admin/tiny_mce/plugins/nonbreaking/langs
+   A /plugins/admin/tiny_mce/plugins/nonbreaking/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/noneditable
+   A /plugins/admin/tiny_mce/plugins/noneditable/css
+   A /plugins/admin/tiny_mce/plugins/noneditable/css/noneditable.css
+   A /plugins/admin/tiny_mce/plugins/noneditable/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/noneditable/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/noneditable/readme.txt
+   A /plugins/admin/tiny_mce/plugins/paste
+   A /plugins/admin/tiny_mce/plugins/paste/blank.htm
+   A /plugins/admin/tiny_mce/plugins/paste/css
+   A /plugins/admin/tiny_mce/plugins/paste/css/blank.css
+   A /plugins/admin/tiny_mce/plugins/paste/css/pasteword.css
+   A /plugins/admin/tiny_mce/plugins/paste/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/paste/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/paste/images
+   A /plugins/admin/tiny_mce/plugins/paste/images/pastetext.gif
+   A /plugins/admin/tiny_mce/plugins/paste/images/pasteword.gif
+   A /plugins/admin/tiny_mce/plugins/paste/images/selectall.gif
+   A /plugins/admin/tiny_mce/plugins/paste/jscripts
+   A /plugins/admin/tiny_mce/plugins/paste/jscripts/pastetext.js
+   A /plugins/admin/tiny_mce/plugins/paste/jscripts/pasteword.js
+   A /plugins/admin/tiny_mce/plugins/paste/langs
+   A /plugins/admin/tiny_mce/plugins/paste/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/paste/pastetext.htm
+   A /plugins/admin/tiny_mce/plugins/paste/pasteword.htm
+   A /plugins/admin/tiny_mce/plugins/paste/readme.txt
+   A /plugins/admin/tiny_mce/plugins/preview
+   A /plugins/admin/tiny_mce/plugins/preview/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/preview/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/preview/example.html
+   A /plugins/admin/tiny_mce/plugins/preview/images
+   A /plugins/admin/tiny_mce/plugins/preview/images/preview.gif
+   A /plugins/admin/tiny_mce/plugins/preview/jscripts
+   A /plugins/admin/tiny_mce/plugins/preview/jscripts/embed.js
+   A /plugins/admin/tiny_mce/plugins/preview/langs
+   A /plugins/admin/tiny_mce/plugins/preview/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/preview/readme.txt
+   A /plugins/admin/tiny_mce/plugins/print
+   A /plugins/admin/tiny_mce/plugins/print/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/print/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/print/images
+   A /plugins/admin/tiny_mce/plugins/print/images/print.gif
+   A /plugins/admin/tiny_mce/plugins/print/langs
+   A /plugins/admin/tiny_mce/plugins/print/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/print/readme.txt
+   A /plugins/admin/tiny_mce/plugins/readme.txt
+   A /plugins/admin/tiny_mce/plugins/save
+   A /plugins/admin/tiny_mce/plugins/save/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/save/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/save/images
+   A /plugins/admin/tiny_mce/plugins/save/images/cancel.gif
+   A /plugins/admin/tiny_mce/plugins/save/images/save.gif
+   A /plugins/admin/tiny_mce/plugins/save/langs
+   A /plugins/admin/tiny_mce/plugins/save/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/save/readme.txt
+   A /plugins/admin/tiny_mce/plugins/searchreplace
+   A /plugins/admin/tiny_mce/plugins/searchreplace/css
+   A /plugins/admin/tiny_mce/plugins/searchreplace/css/searchreplace.css
+   A /plugins/admin/tiny_mce/plugins/searchreplace/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/searchreplace/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/searchreplace/images
+   A /plugins/admin/tiny_mce/plugins/searchreplace/images/replace.gif
+   A /plugins/admin/tiny_mce/plugins/searchreplace/images/replace_all_button_bg.gif
+   A /plugins/admin/tiny_mce/plugins/searchreplace/images/replace_button_bg.gif
+   A /plugins/admin/tiny_mce/plugins/searchreplace/images/search.gif
+   A /plugins/admin/tiny_mce/plugins/searchreplace/jscripts
+   A /plugins/admin/tiny_mce/plugins/searchreplace/jscripts/searchreplace.js
+   A /plugins/admin/tiny_mce/plugins/searchreplace/langs
+   A /plugins/admin/tiny_mce/plugins/searchreplace/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/searchreplace/readme.txt
+   A /plugins/admin/tiny_mce/plugins/searchreplace/searchreplace.htm
+   A /plugins/admin/tiny_mce/plugins/style
+   A /plugins/admin/tiny_mce/plugins/style/css
+   A /plugins/admin/tiny_mce/plugins/style/css/props.css
+   A /plugins/admin/tiny_mce/plugins/style/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/style/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/style/images
+   A /plugins/admin/tiny_mce/plugins/style/images/apply_button_bg.gif
+   A /plugins/admin/tiny_mce/plugins/style/images/style_info.gif
+   A /plugins/admin/tiny_mce/plugins/style/images/styleprops.gif
+   A /plugins/admin/tiny_mce/plugins/style/jscripts
+   A /plugins/admin/tiny_mce/plugins/style/jscripts/props.js
+   A /plugins/admin/tiny_mce/plugins/style/langs
+   A /plugins/admin/tiny_mce/plugins/style/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/style/props.htm
+   A /plugins/admin/tiny_mce/plugins/style/readme.txt
+   A /plugins/admin/tiny_mce/plugins/table
+   A /plugins/admin/tiny_mce/plugins/table/cell.htm
+   A /plugins/admin/tiny_mce/plugins/table/css
+   A /plugins/admin/tiny_mce/plugins/table/css/cell.css
+   A /plugins/admin/tiny_mce/plugins/table/css/row.css
+   A /plugins/admin/tiny_mce/plugins/table/css/table.css
+   A /plugins/admin/tiny_mce/plugins/table/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/table/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/table/images
+   A /plugins/admin/tiny_mce/plugins/table/images/buttons.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_cell_props.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_delete.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_delete_col.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_delete_row.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_insert_col_after.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_insert_col_before.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_insert_row_after.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_insert_row_before.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_merge_cells.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_row_props.gif
+   A /plugins/admin/tiny_mce/plugins/table/images/table_split_cells.gif
+   A /plugins/admin/tiny_mce/plugins/table/jscripts
+   A /plugins/admin/tiny_mce/plugins/table/jscripts/cell.js
+   A /plugins/admin/tiny_mce/plugins/table/jscripts/merge_cells.js
+   A /plugins/admin/tiny_mce/plugins/table/jscripts/row.js
+   A /plugins/admin/tiny_mce/plugins/table/jscripts/table.js
+   A /plugins/admin/tiny_mce/plugins/table/langs
+   A /plugins/admin/tiny_mce/plugins/table/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/table/merge_cells.htm
+   A /plugins/admin/tiny_mce/plugins/table/readme.txt
+   A /plugins/admin/tiny_mce/plugins/table/row.htm
+   A /plugins/admin/tiny_mce/plugins/table/table.htm
+   A /plugins/admin/tiny_mce/plugins/template
+   A /plugins/admin/tiny_mce/plugins/template/blank.htm
+   A /plugins/admin/tiny_mce/plugins/template/css
+   A /plugins/admin/tiny_mce/plugins/template/css/template.css
+   A /plugins/admin/tiny_mce/plugins/template/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/template/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/template/images
+   A /plugins/admin/tiny_mce/plugins/template/images/template.gif
+   A /plugins/admin/tiny_mce/plugins/template/jscripts
+   A /plugins/admin/tiny_mce/plugins/template/jscripts/template.js
+   A /plugins/admin/tiny_mce/plugins/template/langs
+   A /plugins/admin/tiny_mce/plugins/template/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/template/template.htm
+   A /plugins/admin/tiny_mce/plugins/visualchars
+   A /plugins/admin/tiny_mce/plugins/visualchars/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/visualchars/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/visualchars/images
+   A /plugins/admin/tiny_mce/plugins/visualchars/images/visualchars.gif
+   A /plugins/admin/tiny_mce/plugins/visualchars/langs
+   A /plugins/admin/tiny_mce/plugins/visualchars/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/abbr.htm
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/acronym.htm
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/attributes.htm
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/cite.htm
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/css
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/css/attributes.css
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/css/popup.css
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/css/xhtmlxtras.css
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/del.htm
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images/abbr.gif
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images/acronym.gif
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images/attribs.gif
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images/cite.gif
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images/date_time.gif
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images/del.gif
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images/ins.gif
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/images/remove_button_bg.gif
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/ins.htm
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/jscripts
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/jscripts/abbr.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/jscripts/acronym.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/jscripts/attributes.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/jscripts/cite.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/jscripts/del.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/jscripts/element_common.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/jscripts/ins.js
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/langs
+   A /plugins/admin/tiny_mce/plugins/xhtmlxtras/langs/en.js
+   A /plugins/admin/tiny_mce/plugins/zoom
+   A /plugins/admin/tiny_mce/plugins/zoom/editor_plugin.js
+   A /plugins/admin/tiny_mce/plugins/zoom/editor_plugin_src.js
+   A /plugins/admin/tiny_mce/plugins/zoom/readme.txt
+   A /plugins/admin/tiny_mce/themes
+   A /plugins/admin/tiny_mce/themes/advanced
+   A /plugins/admin/tiny_mce/themes/advanced/about.htm
+   A /plugins/admin/tiny_mce/themes/advanced/anchor.htm
+   A /plugins/admin/tiny_mce/themes/advanced/charmap.htm
+   A /plugins/admin/tiny_mce/themes/advanced/color_picker.htm
+   A /plugins/admin/tiny_mce/themes/advanced/css
+   A /plugins/admin/tiny_mce/themes/advanced/css/colorpicker.css
+   A /plugins/admin/tiny_mce/themes/advanced/css/editor_content.css
+   A /plugins/admin/tiny_mce/themes/advanced/css/editor_popup.css
+   A /plugins/admin/tiny_mce/themes/advanced/css/editor_ui.css
+   A /plugins/admin/tiny_mce/themes/advanced/docs
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/about.htm
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/common_buttons.htm
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/create_accessible_content.htm
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/images
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/images/insert_anchor_window.gif
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/images/insert_image_window.gif
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/images/insert_link_window.gif
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/images/insert_table_window.gif
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/index.htm
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/insert_anchor_button.htm
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/insert_image_button.htm
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/insert_link_button.htm
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/insert_table_button.htm
+   A /plugins/admin/tiny_mce/themes/advanced/docs/en/style.css
+   A /plugins/admin/tiny_mce/themes/advanced/editor_template.js
+   A /plugins/admin/tiny_mce/themes/advanced/editor_template_src.js
+   A /plugins/admin/tiny_mce/themes/advanced/image.htm
+   A /plugins/admin/tiny_mce/themes/advanced/images
+   A /plugins/admin/tiny_mce/themes/advanced/images/anchor.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/anchor_symbol.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/backcolor.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/bold.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/bold_de_se.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/bold_es.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/bold_fr.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/bold_ru.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/bold_tw.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/browse.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/bullist.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/button_menu.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/buttons.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/cancel_button_bg.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/charmap.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/cleanup.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/close.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/code.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/color.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/colors.jpg
+   A /plugins/admin/tiny_mce/themes/advanced/images/copy.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/custom_1.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/cut.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/forecolor.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/help.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/hr.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/image.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/indent.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/insert_button_bg.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/italic.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/italic_de_se.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/italic_es.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/italic_ru.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/italic_tw.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/justifycenter.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/justifyfull.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/justifyleft.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/justifyright.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/link.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/menu_check.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/newdocument.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/numlist.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/opacity.png
+   A /plugins/admin/tiny_mce/themes/advanced/images/outdent.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/paste.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/redo.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/removeformat.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/separator.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/spacer.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/statusbar_resize.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/strikethrough.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/sub.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/sup.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/underline.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/underline_es.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/underline_fr.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/underline_ru.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/underline_tw.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/undo.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/unlink.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/visualaid.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/xp
+   A /plugins/admin/tiny_mce/themes/advanced/images/xp/tab_bg.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/xp/tab_end.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/xp/tab_sel_bg.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/xp/tab_sel_end.gif
+   A /plugins/admin/tiny_mce/themes/advanced/images/xp/tabs_bg.gif
+   A /plugins/admin/tiny_mce/themes/advanced/jscripts
+   A /plugins/admin/tiny_mce/themes/advanced/jscripts/about.js
+   A /plugins/admin/tiny_mce/themes/advanced/jscripts/anchor.js
+   A /plugins/admin/tiny_mce/themes/advanced/jscripts/charmap.js
+   A /plugins/admin/tiny_mce/themes/advanced/jscripts/color_picker.js
+   A /plugins/admin/tiny_mce/themes/advanced/jscripts/image.js
+   A /plugins/admin/tiny_mce/themes/advanced/jscripts/link.js
+   A /plugins/admin/tiny_mce/themes/advanced/jscripts/source_editor.js
+   A /plugins/admin/tiny_mce/themes/advanced/langs
+   A /plugins/admin/tiny_mce/themes/advanced/langs/en.js
+   A /plugins/admin/tiny_mce/themes/advanced/link.htm
+   A /plugins/admin/tiny_mce/themes/advanced/source_editor.htm
+   A /plugins/admin/tiny_mce/themes/simple
+   A /plugins/admin/tiny_mce/themes/simple/css
+   A /plugins/admin/tiny_mce/themes/simple/css/editor_content.css
+   A /plugins/admin/tiny_mce/themes/simple/css/editor_popup.css
+   A /plugins/admin/tiny_mce/themes/simple/css/editor_ui.css
+   A /plugins/admin/tiny_mce/themes/simple/editor_template.js
+   A /plugins/admin/tiny_mce/themes/simple/editor_template_src.js
+   A /plugins/admin/tiny_mce/themes/simple/images
+   A /plugins/admin/tiny_mce/themes/simple/images/bold.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/bold_de_se.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/bold_fr.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/bold_ru.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/bold_tw.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/bullist.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/buttons.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/cleanup.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/italic.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/italic_de_se.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/italic_ru.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/italic_tw.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/numlist.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/redo.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/separator.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/spacer.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/strikethrough.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/underline.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/underline_fr.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/underline_ru.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/underline_tw.gif
+   A /plugins/admin/tiny_mce/themes/simple/images/undo.gif
+   A /plugins/admin/tiny_mce/tiny_mce.js
+   A /plugins/admin/tiny_mce/tiny_mce_dev.js
+   A /plugins/admin/tiny_mce/tiny_mce_popup.js
+   A /plugins/admin/tiny_mce/tiny_mce_src.js
+   A /plugins/admin/tiny_mce/utils
+   A /plugins/admin/tiny_mce/utils/editable_selects.js
+   A /plugins/admin/tiny_mce/utils/form_utils.js
+   A /plugins/admin/tiny_mce/utils/mclayer.js
+   A /plugins/admin/tiny_mce/utils/mctabs.js
+   A /plugins/admin/tiny_mce/utils/validate.js
+
+added wysiwyg editor support (tinymce)
+
+------------------------------------------------------------------------
+r124 | palidhar | 2008-01-14 00:04:20 +0100 (Mo, 14. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+continued
+
+------------------------------------------------------------------------
+r123 | palidhar | 2008-01-11 14:49:56 +0100 (Fr, 11. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+added plugin list
+
+------------------------------------------------------------------------
+r122 | palidhar | 2008-01-10 00:19:19 +0100 (Do, 10. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+
+fix
+
+------------------------------------------------------------------------
+r121 | palidhar | 2008-01-09 15:58:55 +0100 (Mi, 09. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+
+fx
+
+------------------------------------------------------------------------
+r120 | palidhar | 2008-01-09 15:32:33 +0100 (Mi, 09. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+hook_send_header were moved to the top of engine() so that it will be called before loading postings.
+
+------------------------------------------------------------------------
+r119 | palidhar | 2008-01-09 00:32:28 +0100 (Mi, 09. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+fixes
+
+------------------------------------------------------------------------
+r118 | palidhar | 2008-01-08 16:06:18 +0100 (Di, 08. Jan 2008) | 2 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+re-orga of most code, added highlighted menu
+
+------------------------------------------------------------------------
+r117 | palidhar | 2007-08-29 12:32:19 +0200 (Mi, 29. Aug 2007) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+fetch uri path from ORIG_PATH_INFO if PATH_INFO not available (we were redirected)
+
+------------------------------------------------------------------------
+r116 | palidhar | 2007-08-17 14:48:46 +0200 (Fr, 17. Aug 2007) | 4 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+
+- added userdelete support
+- prepared plugin uri hooks
+- added fetch of plugin list
+
+------------------------------------------------------------------------
+r115 | palidhar | 2007-08-17 14:48:02 +0200 (Fr, 17. Aug 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin/admin.nfo
+   A /plugins/categories/categories.nfo
+   A /plugins/feed/feed.nfo
+   A /plugins/links/links.nfo
+   A /plugins/page/page.nfo
+   A /plugins/technorati/technorati.nfo
+   A /plugins/youtube/youtube.nfo
+
+added .nfo files for plugins (required by admin plugin)
+
+------------------------------------------------------------------------
+r114 | palidhar | 2007-08-16 21:42:52 +0200 (Do, 16. Aug 2007) | 3 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.css
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+- added error handlin
+- added user management
+
+------------------------------------------------------------------------
+r113 | palidhar | 2007-08-15 12:51:50 +0200 (Mi, 15. Aug 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin/TODO
+
+added todo
+
+------------------------------------------------------------------------
+r112 | palidhar | 2007-08-15 12:50:43 +0200 (Mi, 15. Aug 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin/admin.css
+   M /plugins/admin/admin.tpl
+
+added css stylesheet, some finetuning herer and there
+
+------------------------------------------------------------------------
+r111 | palidhar | 2007-08-13 16:38:32 +0200 (Mo, 13. Aug 2007) | 6 lines
+Geänderte Pfade:
+   M /plugins/admin/admin.php
+   M /plugins/admin/admin.tpl
+
+- fixed category selection javascript
+- fixed filename creation
+- fixed save function
+- fixed category move handling
+- added pragma nocache to template
+
+------------------------------------------------------------------------
+r110 | palidhar | 2007-08-09 15:41:16 +0200 (Do, 09. Aug 2007) | 2 lines
+Geänderte Pfade:
+   M /src/plugins/standard.php
+
+added field "raw" to $post in ::getfile() which contains the unaltered data from source file and which wont be passed to content manipulation plugins.
+
+------------------------------------------------------------------------
+r109 | palidhar | 2007-08-09 15:40:02 +0200 (Do, 09. Aug 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/admin
+   A /plugins/admin/admin.php
+   A /plugins/admin/admin.tpl
+
+started with basic admin backend based on the one once I wrote for phplosxom.
+
+------------------------------------------------------------------------
+r108 | palidhar | 2007-08-08 14:33:57 +0200 (Mi, 08. Aug 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/youtube/youtube.php
+
+fixed video id recognization bug
+
+------------------------------------------------------------------------
+r107 | palidhar | 2007-08-08 13:42:50 +0200 (Mi, 08. Aug 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/youtube/youtube.php
+
+added alternative function name "video"
+
+------------------------------------------------------------------------
+r106 | palidhar | 2007-08-08 13:31:31 +0200 (Mi, 08. Aug 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/youtube/youtube.php
+   M /plugins/youtube/youtube.tpl
+
+added sevenload support
+
+------------------------------------------------------------------------
+r105 | palidhar | 2007-08-02 15:07:51 +0200 (Do, 02. Aug 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/youtube/youtube.php
+   M /plugins/youtube/youtube.tpl
+
+added google video support too and enhanced plugin documentation
+
+------------------------------------------------------------------------
+r104 | palidhar | 2007-08-02 01:51:09 +0200 (Do, 02. Aug 2007) | 3 lines
+Geänderte Pfade:
+   M /src/MANIFEST
+   M /src/RELEASENOTES
+   M /src/VERSION
+   M /src/templates/blogtxt/page.tpl
+   M /src/templates/blogtxt/post.tpl
+   M /src/templates/crystalx/page.tpl
+   M /src/templates/crystalx/post.tpl
+   M /src/templates/default/page.tpl
+   M /src/templates/default/post.tpl
+
+- increased version to 1.06
+- changed templates (page and post) to use smartys eval() function
+
+------------------------------------------------------------------------
+r103 | palidhar | 2007-08-02 01:43:48 +0200 (Do, 02. Aug 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/youtube
+   A /plugins/youtube/VERSION
+   A /plugins/youtube/youtube.php
+   A /plugins/youtube/youtube.tpl
+
+added youtube plugin
+
+------------------------------------------------------------------------
+r102 | palidhar | 2007-06-27 21:21:47 +0200 (Mi, 27. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/more
+   A /plugins/more/more.conf
+   A /plugins/more/more.php
+
+Added ReadMore plugin
+
+------------------------------------------------------------------------
+r101 | palidhar | 2007-06-27 21:14:31 +0200 (Mi, 27. Jun 2007) | 3 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+- API change (it's still alpha so I can do it): the plugin function hook_content() now gets the whole post instead of just the post text. It also has to return the whole post array.
+- added input->["posting"] and input->["category"] (also available to plugins) in single post mode, which could be used to distinguish between post listing or single post mode.
+
+------------------------------------------------------------------------
+r100 | palidhar | 2007-06-23 23:20:10 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r99 | palidhar | 2007-06-23 23:19:39 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/PluginLinks.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r98 | palidhar | 2007-06-23 23:18:18 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/PluginLinks.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r97 | palidhar | 2007-06-23 23:15:07 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/PluginLog.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r96 | palidhar | 2007-06-23 23:10:43 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/PluginAccess.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r95 | palidhar | 2007-06-23 23:07:02 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/PluginTagCloud.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r94 | palidhar | 2007-06-23 23:01:00 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/PluginTechnorati.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r93 | palidhar | 2007-06-23 23:00:16 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r92 | palidhar | 2007-06-23 22:57:07 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Templates.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r91 | palidhar | 2007-06-23 22:54:13 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Templates.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r90 | palidhar | 2007-06-23 22:24:29 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/templates/crystalx/nav.tpl
+
+fixed blogroll link for crystalx
+
+------------------------------------------------------------------------
+r89 | palidhar | 2007-06-23 22:24:09 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   D /src/data/example.txt
+   A /src/data/testing
+   A /src/data/testing/example.txt (von /src/data/example.txt:84)
+
+add test category
+
+------------------------------------------------------------------------
+r88 | palidhar | 2007-06-23 22:17:04 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/MANIFEST
+   M /src/Makefile
+
+updated
+
+------------------------------------------------------------------------
+r87 | palidhar | 2007-06-23 22:15:28 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /src/templates/blogtxt/.htaccess
+   A /src/templates/crystalx/.htaccess
+   M /src/templates/default/.htaccess
+
+fixed .htaccess typo
+
+------------------------------------------------------------------------
+r86 | palidhar | 2007-06-23 21:56:55 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/CHANGELOG
+   A /src/RELEASENOTES
+
+updated
+
+------------------------------------------------------------------------
+r85 | palidhar | 2007-06-23 21:52:32 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/access/VERSION
+   A /plugins/feed/VERSION
+   A /plugins/links/VERSION
+   A /plugins/log/VERSION
+   A /plugins/tagcloud/VERSION
+   A /plugins/technorati/VERSION
+
+added version files for new plugins, or incremented version for changed plugins
+
+------------------------------------------------------------------------
+r84 | palidhar | 2007-06-23 21:48:38 +0200 (Sa, 23. Jun 2007) | 3 lines
+Geänderte Pfade:
+   M /src/MANIFEST
+   M /src/Makefile
+   M /src/README
+   M /src/VERSION
+   A /src/data/example.txt
+   A /src/etc/blogroll.conf
+   A /src/etc/page.conf
+   A /src/pages
+   A /src/pages/about.txt
+   M /src/templates/blogtxt/index.tpl
+   A /src/templates/blogtxt/page.tpl
+   M /src/templates/blogtxt/sidebar.tpl
+   M /src/templates/crystalx/index.tpl
+   M /src/templates/crystalx/nav.tpl
+   A /src/templates/crystalx/page.tpl
+   M /src/templates/default/footer.tpl
+   M /src/templates/default/index.tpl
+   A /src/templates/default/page.tpl
+
+- added some plugins to the core (hard-linked here, so they make it into the tarball)
+- updated readme
+
+------------------------------------------------------------------------
+r83 | palidhar | 2007-06-23 01:55:19 +0200 (Sa, 23. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/templates/crystalx/header.tpl
+
+fixed header
+
+------------------------------------------------------------------------
+r82 | palidhar | 2007-06-22 23:38:35 +0200 (Fr, 22. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/technorati/technorati.php
+
+fixed xhtml format error
+
+------------------------------------------------------------------------
+r81 | palidhar | 2007-06-22 23:38:13 +0200 (Fr, 22. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /src/templates/crystalx
+   A /src/templates/crystalx/footer.tpl
+   A /src/templates/crystalx/header.tpl
+   A /src/templates/crystalx/images
+   A /src/templates/crystalx/images/bg.gif
+   A /src/templates/crystalx/images/bg_page.gif
+   A /src/templates/crystalx/images/bg_page_in.jpg
+   A /src/templates/crystalx/images/btn_more.gif
+   A /src/templates/crystalx/images/btn_morehover.gif
+   A /src/templates/crystalx/images/col_bg.gif
+   A /src/templates/crystalx/images/col_title_bg.gif
+   A /src/templates/crystalx/images/col_top.gif
+   A /src/templates/crystalx/images/content_article_bg.jpg
+   A /src/templates/crystalx/images/content_title_bg.gif
+   A /src/templates/crystalx/images/footer.jpg
+   A /src/templates/crystalx/images/header.jpg
+   A /src/templates/crystalx/images/ico_archive.gif
+   A /src/templates/crystalx/images/ico_cat.gif
+   A /src/templates/crystalx/images/ico_date.gif
+   A /src/templates/crystalx/images/ico_top.gif
+   A /src/templates/crystalx/images/ico_user.gif
+   A /src/templates/crystalx/images/search_input.gif
+   A /src/templates/crystalx/images/search_submit_blue.gif
+   A /src/templates/crystalx/images/tab_link.gif
+   A /src/templates/crystalx/index.tpl
+   A /src/templates/crystalx/nav.tpl
+   A /src/templates/crystalx/post.tpl
+   A /src/templates/crystalx/style.css
+
+added new template crystalx
+
+------------------------------------------------------------------------
+r80 | palidhar | 2007-06-22 23:37:01 +0200 (Fr, 22. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/templates/blogtxt/index.tpl
+   M /src/templates/blogtxt/sidebar.tpl
+
+fixed various typos
+
+------------------------------------------------------------------------
+r79 | palidhar | 2007-06-22 18:16:18 +0200 (Fr, 22. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/access
+   A /plugins/access/access.conf
+   A /plugins/access/access.php
+
+added ip access module
+
+------------------------------------------------------------------------
+r78 | palidhar | 2007-06-22 17:52:43 +0200 (Fr, 22. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/links/links.php
+   M /plugins/log/log.php
+
+added docs to links and log module
+
+------------------------------------------------------------------------
+r77 | palidhar | 2007-06-22 17:40:32 +0200 (Fr, 22. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/log
+   A /plugins/log/log.conf
+   A /plugins/log/log.php
+
+added log module
+
+------------------------------------------------------------------------
+r76 | palidhar | 2007-06-22 16:57:48 +0200 (Fr, 22. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/technorati/technorati.php
+
+bigfix: the filter returned empty arrayelements if filtered posts is less than $postings
+
+------------------------------------------------------------------------
+r75 | palidhar | 2007-06-22 12:56:21 +0200 (Fr, 22. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/tagcloud
+   A /plugins/tagcloud/tagcloud.php
+   A /plugins/tagcloud/tags.pl
+
+added tagcloud plugin
+
+------------------------------------------------------------------------
+r74 | palidhar | 2007-06-21 01:15:26 +0200 (Do, 21. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/links/links.php
+
+added sort feature
+
+------------------------------------------------------------------------
+r73 | palidhar | 2007-06-20 17:50:21 +0200 (Mi, 20. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/links
+   A /plugins/links/links.php
+
+added link list plugin
+
+------------------------------------------------------------------------
+r72 | palidhar | 2007-06-20 12:46:31 +0200 (Mi, 20. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+added ini_set("display_errors", "on"); so that errors will be displayed not suppressed.
+
+------------------------------------------------------------------------
+r71 | palidhar | 2007-06-19 20:44:13 +0200 (Di, 19. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /src/etc/.htaccess
+   A /src/lib/.htaccess
+   A /src/plugins/.htaccess
+   A /src/templates/default/.htaccess
+
+added .htaccess files to protect backend directories
+
+------------------------------------------------------------------------
+r70 | palidhar | 2007-06-17 00:32:05 +0200 (So, 17. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/technorati/technorati.php
+
+fixed getfile call to standard plugin
+
+------------------------------------------------------------------------
+r69 | palidhar | 2007-06-16 23:35:32 +0200 (Sa, 16. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+- fixed: hook_content were not called on single post display
+
+------------------------------------------------------------------------
+r68 | palidhar | 2007-06-16 03:18:18 +0200 (Sa, 16. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Templates.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r67 | palidhar | 2007-06-16 03:04:12 +0200 (Sa, 16. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /src/templates/blogtxt
+   A /src/templates/blogtxt/footer.tpl
+   A /src/templates/blogtxt/header.tpl
+   A /src/templates/blogtxt/images
+   A /src/templates/blogtxt/images/blockquote.png
+   A /src/templates/blogtxt/images/comments.png
+   A /src/templates/blogtxt/images/current.png
+   A /src/templates/blogtxt/images/feed.png
+   A /src/templates/blogtxt/images/file-download.png
+   A /src/templates/blogtxt/images/file-html.png
+   A /src/templates/blogtxt/images/file-pdf.png
+   A /src/templates/blogtxt/images/file-zip.png
+   A /src/templates/blogtxt/images/important.png
+   A /src/templates/blogtxt/images/trackbacks.png
+   A /src/templates/blogtxt/index.tpl
+   A /src/templates/blogtxt/post.tpl
+   A /src/templates/blogtxt/print.css
+   A /src/templates/blogtxt/sidebar.tpl
+   A /src/templates/blogtxt/style.css
+
+added new template "blog.txt"
+
+------------------------------------------------------------------------
+r66 | palidhar | 2007-06-14 23:59:57 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/CategoriesPlugin.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r65 | palidhar | 2007-06-14 23:58:21 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/PluginStaticPage.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r64 | palidhar | 2007-06-14 23:57:23 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/CategoriesPlugin.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r63 | palidhar | 2007-06-14 23:55:03 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r62 | palidhar | 2007-06-14 23:41:25 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/categories
+   A /plugins/categories/VERSION
+   A /plugins/categories/categories.php
+
+added
+
+------------------------------------------------------------------------
+r61 | palidhar | 2007-06-14 23:40:34 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/CHANGELOG
+   M /src/MANIFEST
+   M /src/plugins/standard.php
+
+ added fetch_categories()
+
+------------------------------------------------------------------------
+r60 | palidhar | 2007-06-14 18:17:27 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/templates/default/index.tpl
+
+fixed blogdate spec, added link to archive of blogdate
+
+------------------------------------------------------------------------
+r59 | palidhar | 2007-06-14 17:43:22 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/PluginStaticPage.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r58 | palidhar | 2007-06-14 17:39:48 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r57 | palidhar | 2007-06-14 17:26:15 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/page
+   A /plugins/page/VERSION
+   A /plugins/page/page.conf
+   A /plugins/page/page.php
+   A /plugins/page/page.tpl
+
+added new plugin for static pages
+
+------------------------------------------------------------------------
+r56 | palidhar | 2007-06-14 17:25:30 +0200 (Do, 14. Jun 2007) | 3 lines
+Geänderte Pfade:
+   M /src/VERSION
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+
+- getfile() in standard plugin moved into the class
+- minor bugfixes
+
+------------------------------------------------------------------------
+r55 | palidhar | 2007-06-14 12:51:31 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/PluginFeed.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r54 | palidhar | 2007-06-14 12:50:49 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/PluginTechnorati.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r53 | palidhar | 2007-06-14 12:30:19 +0200 (Do, 14. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/technorati/technorati.php
+
+fixed invalid regex
+
+------------------------------------------------------------------------
+r52 | palidhar | 2007-06-13 20:47:37 +0200 (Mi, 13. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/CHANGELOG
+   M /src/Makefile
+   M /src/VERSION
+
+-
+
+------------------------------------------------------------------------
+r51 | palidhar | 2007-06-13 15:28:59 +0200 (Mi, 13. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/plugins/standard.php
+
+- 
+
+------------------------------------------------------------------------
+r50 | palidhar | 2007-06-13 15:28:32 +0200 (Mi, 13. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/technorati/technorati.php
+
+fixed performance problem, now if content_filter active only read as less files as possible to make past parsing happy
+
+------------------------------------------------------------------------
+r49 | palidhar | 2007-06-13 13:54:17 +0200 (Mi, 13. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/technorati/technorati.php
+
+- fixed filter_plugin registering
+
+------------------------------------------------------------------------
+r48 | palidhar | 2007-06-13 13:13:40 +0200 (Mi, 13. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/plugins/standard.php
+
+-fixed title generation, title were not correctly shifted out of posting and appeared two times
+
+------------------------------------------------------------------------
+r47 | palidhar | 2007-06-13 13:11:20 +0200 (Mi, 13. Jun 2007) | 4 lines
+Geänderte Pfade:
+   A /src/etc/lang.conf
+   M /src/etc/plosxom.conf
+   M /src/plosxom.php
+   A /src/templates/default/footer.tpl
+   M /src/templates/default/index.tpl
+   A /src/templates/default/post.tpl
+
+- added lang support to default template
+- default is now english
+- separated post display out into separate sub template
+
+------------------------------------------------------------------------
+r46 | palidhar | 2007-06-13 10:12:51 +0200 (Mi, 13. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/feed/atom.tpl
+   M /plugins/feed/feed.php
+   M /plugins/feed/rss.tpl
+
+fixed validation errors
+
+------------------------------------------------------------------------
+r45 | palidhar | 2007-06-12 22:39:54 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/PluginFeed.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r44 | palidhar | 2007-06-12 22:39:31 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/PluginFeed.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r43 | palidhar | 2007-06-12 22:37:07 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r42 | palidhar | 2007-06-12 22:25:13 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/MANIFEST
+   M /src/Makefile
+
+-
+
+------------------------------------------------------------------------
+r41 | palidhar | 2007-06-12 22:23:45 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /src/CHANGELOG
+
+added changelog
+
+------------------------------------------------------------------------
+r40 | palidhar | 2007-06-12 22:22:32 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/Makefile
+
+-
+
+------------------------------------------------------------------------
+r39 | palidhar | 2007-06-12 22:21:18 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /src/Makefile
+   A /src/stresstest.pl
+
+added maintenance files, not intended for blog production
+
+------------------------------------------------------------------------
+r38 | palidhar | 2007-06-12 22:19:54 +0200 (Di, 12. Jun 2007) | 3 lines
+Geänderte Pfade:
+   M /src/templates/default/header.tpl
+   M /src/templates/default/index.tpl
+
+- added message which will be shown if no filter matched
+- replaced hard coded rss meta with generated meta by feed plugin
+
+------------------------------------------------------------------------
+r37 | palidhar | 2007-06-12 22:18:27 +0200 (Di, 12. Jun 2007) | 3 lines
+Geänderte Pfade:
+   M /src/plugins/standard.php
+
+- fixed archive date filtering
+- fixed single post fetch
+
+------------------------------------------------------------------------
+r36 | palidhar | 2007-06-12 22:17:14 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+
+-
+
+------------------------------------------------------------------------
+r35 | palidhar | 2007-06-12 20:21:21 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /src/diff.pl
+
+automated the creation of patch distribution files
+
+------------------------------------------------------------------------
+r34 | palidhar | 2007-06-12 17:36:24 +0200 (Di, 12. Jun 2007) | 4 lines
+Geänderte Pfade:
+   M /src/etc/plosxom.conf
+   M /src/plosxom.php
+
+- define lastmodified here now
+- moved the runinit() before parse_input so that content-type can be overwritten
+- added new config variable author_email (required for rss2 feed)
+
+------------------------------------------------------------------------
+r33 | palidhar | 2007-06-12 17:34:43 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/feed/feed.php
+   M /plugins/feed/rss2.tpl
+
+fixed rss2 feed (feedvalidator now tells it is valid)
+
+------------------------------------------------------------------------
+r32 | palidhar | 2007-06-12 17:34:17 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /plugins/technorati/technorati.php
+
+define filter_plugin so it gets called later
+
+------------------------------------------------------------------------
+r31 | palidhar | 2007-06-12 16:34:11 +0200 (Di, 12. Jun 2007) | 4 lines
+Geänderte Pfade:
+   M /src/VERSION
+   M /src/etc/plosxom.conf
+   M /src/templates/default/header.tpl
+
+- incremented version
+- added lang config variable
+- removed hardcoded urls left in the header template
+
+------------------------------------------------------------------------
+r30 | palidhar | 2007-06-12 16:32:02 +0200 (Di, 12. Jun 2007) | 3 lines
+Geänderte Pfade:
+   A /plugins/feed/atom.tpl
+   M /plugins/feed/feed.php
+   A /plugins/feed/rss.tpl
+   A /plugins/feed/rss2.tpl
+
+- added feed templates
+- added lastmodified date support
+
+------------------------------------------------------------------------
+r29 | palidhar | 2007-06-12 15:39:55 +0200 (Di, 12. Jun 2007) | 3 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+
+- added $this->posts to Plugin class, so plugins can access the parsed posts anytime
+- added "contenttype" internal config variable, plugins may change it to overwrite it
+
+------------------------------------------------------------------------
+r28 | palidhar | 2007-06-12 15:37:57 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins/feed
+   A /plugins/feed/feed.php
+
+added feed plugin
+
+------------------------------------------------------------------------
+r27 | palidhar | 2007-06-12 02:10:31 +0200 (Di, 12. Jun 2007) | 3 lines
+Geänderte Pfade:
+   A /wiki/PluginTechnorati.wiki
+
+Created wiki page through web user interface.
+
+
+------------------------------------------------------------------------
+r26 | palidhar | 2007-06-12 02:07:07 +0200 (Di, 12. Jun 2007) | 4 lines
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+
+
+
+------------------------------------------------------------------------
+r25 | palidhar | 2007-06-12 01:55:35 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   D /plugins/technorati/Makefile
+
+removed Makefile
+
+------------------------------------------------------------------------
+r24 | palidhar | 2007-06-12 01:53:52 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /plugins
+   A /plugins/technorati
+   A /plugins/technorati/Makefile
+   A /plugins/technorati/technorati.php
+
+Initial inport
+
+------------------------------------------------------------------------
+r23 | palidhar | 2007-06-12 01:52:27 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/VERSION
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+   M /src/templates/default/default.css
+
+- standard plugin: fixed getfile() function
+
+------------------------------------------------------------------------
+r22 | palidhar | 2007-06-12 00:14:45 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Plugins.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r21 | palidhar | 2007-06-12 00:10:28 +0200 (Di, 12. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Installation.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r20 | palidhar | 2007-06-11 23:09:19 +0200 (Mo, 11. Jun 2007) | 3 lines
+Geänderte Pfade:
+   A /src/LICENSE
+   A /src/MANIFEST
+   A /src/README
+   A /src/VERSION
+
+- added manifest
+- forgot license and readme file at last commit
+
+------------------------------------------------------------------------
+r19 | palidhar | 2007-06-11 23:00:56 +0200 (Mo, 11. Jun 2007) | 8 lines
+Geänderte Pfade:
+   M /src/etc/plosxom.conf
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+   M /src/templates/default/index.tpl
+
+- added Id keyword
+- outsourced file reading in plugin/standard.php into standalone functions,
+  so that they can also be used outside of the standard plugin by other file
+  based plugins, which have to read in a posting file.
+- added Makefile for building tarball
+- added comments to plosxom.php
+- added README
+
+------------------------------------------------------------------------
+r18 | palidhar | 2007-06-11 22:07:26 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Installation.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r17 | palidhar | 2007-06-11 22:04:44 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Installation.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r16 | palidhar | 2007-06-11 22:02:19 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Installation.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r15 | palidhar | 2007-06-11 22:00:52 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Installation.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r14 | palidhar | 2007-06-11 21:55:32 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Installation.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r13 | palidhar | 2007-06-11 21:42:43 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /wiki/Installation.wiki
+
+Edited wiki page through web user interface.
+
+------------------------------------------------------------------------
+r12 | palidhar | 2007-06-11 21:34:50 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/Templates.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r11 | palidhar | 2007-06-11 21:30:25 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/Plugins.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r10 | palidhar | 2007-06-11 21:03:46 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   M /src/plosxom.php
+   M /src/plugins/standard.php
+   D /src/svn-commit.2.tmp
+   D /src/svn-commit.tmp
+
+fixed license, removes old logs
+
+------------------------------------------------------------------------
+r9 | palidhar | 2007-06-11 20:54:14 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /src
+   A /src/data
+   A /src/etc
+   A /src/etc/plosxom.conf
+   A /src/lib
+   A /src/lib/Config_File.class.php
+   A /src/lib/Smarty.class.php
+   A /src/lib/Smarty_Compiler.class.php
+   A /src/lib/debug.tpl
+   A /src/lib/internals
+   A /src/lib/internals/core.assemble_plugin_filepath.php
+   A /src/lib/internals/core.assign_smarty_interface.php
+   A /src/lib/internals/core.create_dir_structure.php
+   A /src/lib/internals/core.display_debug_console.php
+   A /src/lib/internals/core.get_include_path.php
+   A /src/lib/internals/core.get_microtime.php
+   A /src/lib/internals/core.get_php_resource.php
+   A /src/lib/internals/core.is_secure.php
+   A /src/lib/internals/core.is_trusted.php
+   A /src/lib/internals/core.load_plugins.php
+   A /src/lib/internals/core.load_resource_plugin.php
+   A /src/lib/internals/core.process_cached_inserts.php
+   A /src/lib/internals/core.process_compiled_include.php
+   A /src/lib/internals/core.read_cache_file.php
+   A /src/lib/internals/core.rm_auto.php
+   A /src/lib/internals/core.rmdir.php
+   A /src/lib/internals/core.run_insert_handler.php
+   A /src/lib/internals/core.smarty_include_php.php
+   A /src/lib/internals/core.write_cache_file.php
+   A /src/lib/internals/core.write_compiled_include.php
+   A /src/lib/internals/core.write_compiled_resource.php
+   A /src/lib/internals/core.write_file.php
+   A /src/lib/plugins
+   A /src/lib/plugins/block.textformat.php
+   A /src/lib/plugins/compiler.assign.php
+   A /src/lib/plugins/function.assign_debug_info.php
+   A /src/lib/plugins/function.config_load.php
+   A /src/lib/plugins/function.counter.php
+   A /src/lib/plugins/function.cycle.php
+   A /src/lib/plugins/function.debug.php
+   A /src/lib/plugins/function.eval.php
+   A /src/lib/plugins/function.fetch.php
+   A /src/lib/plugins/function.html_checkboxes.php
+   A /src/lib/plugins/function.html_image.php
+   A /src/lib/plugins/function.html_options.php
+   A /src/lib/plugins/function.html_radios.php
+   A /src/lib/plugins/function.html_select_date.php
+   A /src/lib/plugins/function.html_select_time.php
+   A /src/lib/plugins/function.html_table.php
+   A /src/lib/plugins/function.mailto.php
+   A /src/lib/plugins/function.math.php
+   A /src/lib/plugins/function.popup.php
+   A /src/lib/plugins/function.popup_init.php
+   A /src/lib/plugins/modifier.capitalize.php
+   A /src/lib/plugins/modifier.cat.php
+   A /src/lib/plugins/modifier.count_characters.php
+   A /src/lib/plugins/modifier.count_paragraphs.php
+   A /src/lib/plugins/modifier.count_sentences.php
+   A /src/lib/plugins/modifier.count_words.php
+   A /src/lib/plugins/modifier.date_format.php
+   A /src/lib/plugins/modifier.debug_print_var.php
+   A /src/lib/plugins/modifier.default.php
+   A /src/lib/plugins/modifier.escape.php
+   A /src/lib/plugins/modifier.indent.php
+   A /src/lib/plugins/modifier.lower.php
+   A /src/lib/plugins/modifier.nl2br.php
+   A /src/lib/plugins/modifier.regex_replace.php
+   A /src/lib/plugins/modifier.replace.php
+   A /src/lib/plugins/modifier.spacify.php
+   A /src/lib/plugins/modifier.string_format.php
+   A /src/lib/plugins/modifier.strip.php
+   A /src/lib/plugins/modifier.strip_tags.php
+   A /src/lib/plugins/modifier.truncate.php
+   A /src/lib/plugins/modifier.upper.php
+   A /src/lib/plugins/modifier.wordwrap.php
+   A /src/lib/plugins/outputfilter.trimwhitespace.php
+   A /src/lib/plugins/shared.escape_special_chars.php
+   A /src/lib/plugins/shared.make_timestamp.php
+   A /src/plosxom.php
+   A /src/plugins
+   A /src/plugins/standard.php
+   A /src/svn-commit.2.tmp
+   A /src/svn-commit.tmp
+   A /src/templates
+   A /src/templates/default
+   A /src/templates/default/default.css
+   A /src/templates/default/header.tpl
+   A /src/templates/default/index.tpl
+
+Initial Import
+
+------------------------------------------------------------------------
+r8 | palidhar | 2007-06-11 20:48:39 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /trunk/data
+   A /trunk/etc
+   A /trunk/etc/plosxom.conf
+   A /trunk/lib
+   A /trunk/lib/Config_File.class.php
+   A /trunk/lib/Smarty.class.php
+   A /trunk/lib/Smarty_Compiler.class.php
+   A /trunk/lib/debug.tpl
+   A /trunk/lib/internals
+   A /trunk/lib/internals/core.assemble_plugin_filepath.php
+   A /trunk/lib/internals/core.assign_smarty_interface.php
+   A /trunk/lib/internals/core.create_dir_structure.php
+   A /trunk/lib/internals/core.display_debug_console.php
+   A /trunk/lib/internals/core.get_include_path.php
+   A /trunk/lib/internals/core.get_microtime.php
+   A /trunk/lib/internals/core.get_php_resource.php
+   A /trunk/lib/internals/core.is_secure.php
+   A /trunk/lib/internals/core.is_trusted.php
+   A /trunk/lib/internals/core.load_plugins.php
+   A /trunk/lib/internals/core.load_resource_plugin.php
+   A /trunk/lib/internals/core.process_cached_inserts.php
+   A /trunk/lib/internals/core.process_compiled_include.php
+   A /trunk/lib/internals/core.read_cache_file.php
+   A /trunk/lib/internals/core.rm_auto.php
+   A /trunk/lib/internals/core.rmdir.php
+   A /trunk/lib/internals/core.run_insert_handler.php
+   A /trunk/lib/internals/core.smarty_include_php.php
+   A /trunk/lib/internals/core.write_cache_file.php
+   A /trunk/lib/internals/core.write_compiled_include.php
+   A /trunk/lib/internals/core.write_compiled_resource.php
+   A /trunk/lib/internals/core.write_file.php
+   A /trunk/lib/plugins
+   A /trunk/lib/plugins/block.textformat.php
+   A /trunk/lib/plugins/compiler.assign.php
+   A /trunk/lib/plugins/function.assign_debug_info.php
+   A /trunk/lib/plugins/function.config_load.php
+   A /trunk/lib/plugins/function.counter.php
+   A /trunk/lib/plugins/function.cycle.php
+   A /trunk/lib/plugins/function.debug.php
+   A /trunk/lib/plugins/function.eval.php
+   A /trunk/lib/plugins/function.fetch.php
+   A /trunk/lib/plugins/function.html_checkboxes.php
+   A /trunk/lib/plugins/function.html_image.php
+   A /trunk/lib/plugins/function.html_options.php
+   A /trunk/lib/plugins/function.html_radios.php
+   A /trunk/lib/plugins/function.html_select_date.php
+   A /trunk/lib/plugins/function.html_select_time.php
+   A /trunk/lib/plugins/function.html_table.php
+   A /trunk/lib/plugins/function.mailto.php
+   A /trunk/lib/plugins/function.math.php
+   A /trunk/lib/plugins/function.popup.php
+   A /trunk/lib/plugins/function.popup_init.php
+   A /trunk/lib/plugins/modifier.capitalize.php
+   A /trunk/lib/plugins/modifier.cat.php
+   A /trunk/lib/plugins/modifier.count_characters.php
+   A /trunk/lib/plugins/modifier.count_paragraphs.php
+   A /trunk/lib/plugins/modifier.count_sentences.php
+   A /trunk/lib/plugins/modifier.count_words.php
+   A /trunk/lib/plugins/modifier.date_format.php
+   A /trunk/lib/plugins/modifier.debug_print_var.php
+   A /trunk/lib/plugins/modifier.default.php
+   A /trunk/lib/plugins/modifier.escape.php
+   A /trunk/lib/plugins/modifier.indent.php
+   A /trunk/lib/plugins/modifier.lower.php
+   A /trunk/lib/plugins/modifier.nl2br.php
+   A /trunk/lib/plugins/modifier.regex_replace.php
+   A /trunk/lib/plugins/modifier.replace.php
+   A /trunk/lib/plugins/modifier.spacify.php
+   A /trunk/lib/plugins/modifier.string_format.php
+   A /trunk/lib/plugins/modifier.strip.php
+   A /trunk/lib/plugins/modifier.strip_tags.php
+   A /trunk/lib/plugins/modifier.truncate.php
+   A /trunk/lib/plugins/modifier.upper.php
+   A /trunk/lib/plugins/modifier.wordwrap.php
+   A /trunk/lib/plugins/outputfilter.trimwhitespace.php
+   A /trunk/lib/plugins/shared.escape_special_chars.php
+   A /trunk/lib/plugins/shared.make_timestamp.php
+   A /trunk/plosxom.php
+   A /trunk/plugins
+   A /trunk/plugins/standard.php
+   A /trunk/svn-commit.2.tmp
+   A /trunk/svn-commit.tmp
+   A /trunk/templates
+   A /trunk/templates/default
+   A /trunk/templates/default/default.css
+   A /trunk/templates/default/header.tpl
+   A /trunk/templates/default/index.tpl
+
+Initial Import
+
+------------------------------------------------------------------------
+r7 | palidhar | 2007-06-11 20:26:52 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/PluginAPI.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r6 | palidhar | 2007-06-11 20:26:14 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki/Installation.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r5 | palidhar | 2007-06-11 20:24:34 +0200 (Mo, 11. Jun 2007) | 1 line
+Geänderte Pfade:
+   D /wiki/WelcomePlosxom.wiki
+
+Deleting wiki page WelcomePlosxom.
+------------------------------------------------------------------------
+r4 | palidhar | 2007-06-11 20:24:01 +0200 (Mo, 11. Jun 2007) | 1 line
+Geänderte Pfade:
+   D /wiki/PageName.wiki
+
+Deleting wiki page PageName.
+------------------------------------------------------------------------
+r3 | palidhar | 2007-06-11 20:22:20 +0200 (Mo, 11. Jun 2007) | 3 lines
+Geänderte Pfade:
+   A /wiki/WelcomePlosxom.wiki
+
+Created wiki page through web user interface.
+
+
+------------------------------------------------------------------------
+r2 | palidhar | 2007-06-11 20:20:26 +0200 (Mo, 11. Jun 2007) | 2 lines
+Geänderte Pfade:
+   A /wiki
+   A /wiki/PageName.wiki
+
+Created wiki page through web user interface.
+
+------------------------------------------------------------------------
+r1 | (kein Autor) | 2007-06-11 19:52:50 +0200 (Mo, 11. Jun 2007) | 1 line
+Geänderte Pfade:
+   A /branches
+   A /tags
+   A /trunk
+
+Initial directory structure.
+------------------------------------------------------------------------

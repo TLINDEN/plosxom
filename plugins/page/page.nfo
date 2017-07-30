@@ -1,0 +1,5 @@
+version = 1.00
+description = Add static pages to your blog.
+author = Pali Dhar
+author_email = nobrain AT bk DOT ru
+url = http://code.google.com/p/plosxom/wiki/PluginStaticPage

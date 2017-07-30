@@ -1,0 +1,6 @@
+version = 1.00
+description = create backups of content and restore content
+author = Pali Dhar
+author_email = nobrain AT bk DOT ru
+url = http://code.google.com/p/plosxom/wiki/Plugins
+
