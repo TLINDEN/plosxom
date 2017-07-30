@@ -422,7 +422,8 @@ Thanks for using plosxom and keeping the opensource movement alive!
 
 =head1 COPYRIGHT AND LICENSE
 
-Plosxom is copyright (c) 2007-2008 Pali Dhar <nobrain@bk.ru>.
+Copyright (c) 2007-2008 Pali Dhar <nobrain@bk.ru>.
+Copyright (c) 2009-2017 T.v.Dein <tlinden@cpan.org>
 
 Licensed under the terms of the "Artistic License" (see LICENSE).
 
